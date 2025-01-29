@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!--
+        8-Character HEX Colors (#AARRGGBB)
+            AA = Alpha (Opacity)
+            RR = Red
+            GG = Green
+            BB = Blue
+
+            FF (255 in decimal) = 100% opacity (fully visible).
+            80 (128 in decimal) = 50% opacity (semi-transparent).
+            00 (0 in decimal) = 0% opacity (fully transparent).
+    -->
+    <color name="background_light">#FFFAFAFA</color>
+    <color name="background_dark">#FF121212</color>
+    <color name="text_light">#FFFAFAFA</color>
+    <color name="text_dark">#FF121212</color>
+    <color name="dark_green">#FF00DB4D</color>
+    <color name="light_green">#FF1DD360</color>
+    <color name="light_green_200">#FFB9F9CF</color>
+    <color name="light_green_600">#FF11A849</color>
+    <color name="light_green_700">#FF11843C</color>
+    <color name="dark_green_200">#FFAEFFCB</color>
+    <color name="dark_green_600">#FF00C03F</color>
+    <color name="dark_green_700">#FF009635</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

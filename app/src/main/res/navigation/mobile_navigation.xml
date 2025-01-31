@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.achordpany.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_bookmark"
+        android:name="com.example.achordpany.ui.bookmark.BookmarkFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 

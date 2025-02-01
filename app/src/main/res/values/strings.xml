@@ -4,7 +4,12 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_bookmark">Bookmark</string>
+    <string name="title_history">History</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_searchSong">Search</string>
+
+    <string name="fab_search">Search or Main Action</string>
+
     <string name="image_description">Return</string>
 
 </resources>
-

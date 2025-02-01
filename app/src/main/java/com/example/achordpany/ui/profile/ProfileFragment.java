@@ -1,4 +1,4 @@
-package com.example.achordpany.ui.bookmark;
+package com.example.achordpany.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.achordpany.databinding.FragmentBookmarkBinding;
+import com.example.achordpany.databinding.FragmentProfileBinding;
 
-public class BookmarkFragment extends Fragment {
-
-    private FragmentBookmarkBinding binding;
+public class ProfileFragment extends Fragment {
+    private FragmentProfileBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BookmarkViewModel bookmarkViewModel =
-                new ViewModelProvider(this).get(BookmarkViewModel.class);
+        ProfileViewModel profileViewModel =
+                new ViewModelProvider(this).get(ProfileViewModel.class);
 
-        binding = FragmentBookmarkBinding.inflate(inflater, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textBookmark;
-        bookmarkViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textProfile;
+        profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

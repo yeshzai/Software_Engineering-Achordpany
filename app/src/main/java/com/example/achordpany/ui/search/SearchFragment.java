@@ -1,4 +1,4 @@
-package com.example.achordpany.ui.bookmark;
+package com.example.achordpany.ui.search;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.achordpany.databinding.FragmentBookmarkBinding;
+import com.example.achordpany.databinding.FragmentSearchBinding;
 
-public class BookmarkFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    private FragmentBookmarkBinding binding;
+    private FragmentSearchBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BookmarkViewModel bookmarkViewModel =
-                new ViewModelProvider(this).get(BookmarkViewModel.class);
+        SearchViewModel searchViewModel =
+                new ViewModelProvider(this).get(SearchViewModel.class);
 
-        binding = FragmentBookmarkBinding.inflate(inflater, container, false);
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textBookmark;
-        bookmarkViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textSearch;
+        searchViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

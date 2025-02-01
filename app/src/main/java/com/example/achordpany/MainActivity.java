@@ -1,5 +1,6 @@
 package com.example.achordpany;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,8 +15,14 @@ import com.example.achordpany.databinding.ActivityMainBinding;
 
 import com.bumptech.glide.Glide;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,12 +36,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setContentView(R.layout.activity_main);
-        ImageView imageView = findViewById(R.id.imageView4);
-
-        Glide.with(this)
-                .asGif()
-                .load(R.drawable.sound)  // Reference to the gif in drawable folder
-                .into(imageView);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

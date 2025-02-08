@@ -10,4 +10,13 @@
         <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextColor">@color/bottom_nav_color</item>
     </style>
+
+    <style name="RoundedButtonStyle">
+        <item name="android:background">@drawable/btn_login_light</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- White text color -->
+        <item name="android:textSize">16sp</item> <!-- Text size -->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

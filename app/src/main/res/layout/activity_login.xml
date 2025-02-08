@@ -12,107 +12,6 @@
     <!-- Password EditText -->
 
 
-    <TextView
-        android:id="@+id/heading1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:text="WELCOME BACK"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/heading2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Everything starts from here"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heading1"
-        android:layout_marginTop="5dp"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteY="220dp" />
-
-    <EditText
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:text=" Username"
-        android:textColor="#737373"
-        android:textSize="15sp"
-        android:inputType="text"
-        android:drawableStart="@drawable/ic_user_black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="288dp"
-        android:layout_marginStart="30dp"
-        tools:ignore="HardcodedText" />
-
-    <EditText
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:text=" Password"
-        android:textColor="#737373"
-        android:textSize="15sp"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="340dp"
-        android:drawableStart="@drawable/ic_lock_black"
-        android:drawableEnd="@drawable/ic_eye_black"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:background="@drawable/btn_login_light"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintStart_toTopOf="parent"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteY="424dp" />
-
-    <TextView
-        android:id="@+id/textNoAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:text="Don't have an account? Sign Up"
-        android:textColor="#FF11843C"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textForgotPassword"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/textForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Forgot Password?"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
-        tools:ignore="HardcodedText" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="25dp"
@@ -128,10 +27,115 @@
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="36dp"
+        android:contentDescription="Logo"
+        app:layout_constraintBottom_toTopOf="@+id/heading1"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo_light"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-10dp" />
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/heading1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:text="WELCOME BACK"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/heading2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick up where you left off"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading1"
+        android:layout_marginTop="5dp"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="200dp"
+        android:drawableStart="@drawable/ic_user_black"
+        android:hint=" Username"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="#737373"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="272dp"
+        android:drawableStart="@drawable/ic_lock_black"
+        android:drawableEnd="@drawable/ic_eye_black"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:text=" Password"
+        android:textColor="#737373"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        style="@style/RoundedButtonStyle"
+        android:layout_marginBottom="324dp"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textNoAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="228dp"
+        android:text="Don't have an account? Sign Up"
+        android:textColor="#FF11843C"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textForgotPassword"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Forgot Password?"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

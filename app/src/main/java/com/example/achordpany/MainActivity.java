@@ -15,6 +15,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.achordpany.databinding.ActivityMainBinding;
 
+import android.app.DatePickerDialog;
+import java.util.Calendar;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Views
         bottomNavigationView = findViewById(R.id.nav_view);
         activeTabIndicator = findViewById(R.id.active_tab_indicator);
+        setContentView(R.layout.fragment_signup_step1);
 
         /* Initialize fields
         private View activeTabIndicator;
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     // Set up Navigation
     private void setupNavigation() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_bookmark, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_bookmark, R.id.navigation_searchSong, R.id.navigation_history, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

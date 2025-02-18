@@ -34,4 +34,10 @@
         android:name="com.example.achordpany.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_chords"
+        android:name="com.example.achordpany.ui.chords.ChordsFragment"
+        android:label="Chords" />
+
 </navigation>

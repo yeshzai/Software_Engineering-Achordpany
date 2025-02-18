@@ -8,8 +8,31 @@
     <string name="title_profile">Profile</string>
     <string name="title_searchSong">Search</string>
 
+    <string name="dropdown_description">Dropdown Menu</string>
+    <string name="title_settings">General Settings</string>
+    <string name="title_profile_settings">Profile Settings</string>
+    <string name="title_logout">Log Out</string>
+
     <string name="fab_search">Search or Main Action</string>
 
+    <string name="profile_picture">User Profile</string>
+    <string name="profile_placeholder">Default Profile Picture</string>
     <string name="image_description">Return</string>
 
+    <string name="logo">Logo</string>
+    <string name="subtext_home">Navigation Section</string>
+    <string name="subtext_bookmark">Bookmarked Songs</string>
+    <string name="subtext_history">Recent Searches</string>
+    <string name="subtext_profile">Account Section</string>
+
+    <string name="back">Back</string>
+    <string name="restart">Restart</string>
+    <string name="stop">Stop</string>
+    <string name="restart_listening">Restart</string>
+    <string name="stop_listening">Stop</string>
+    <string name="search_a_song">Search a song</string>
+    <string name="play_a_song">Play a song…</string>
+    <string name="listening">Listening…</string>
+    <string name="please_wait">Please wait</string>
+    <string name="redirecting">Redirecting</string>
 </resources>

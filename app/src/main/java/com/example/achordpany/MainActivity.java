@@ -1,35 +1,42 @@
 package com.example.achordpany;
 
+import android.os.Handler;
 import android.os.Bundle;
+import android.os.Looper;
+import android.content.Intent;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
+import androidx.lifecycle.ViewModelProvider;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.achordpany.ui.SharedViewModel;
+import com.example.achordpany.ui.search.SongSearchActivity;
 import com.example.achordpany.databinding.ActivityMainBinding;
-
-import android.app.DatePickerDialog;
-import java.util.Calendar;
-
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private View activeTabIndicator; // The moving line above the active navbar item
+    private View activeTabIndicator;
     private BottomNavigationView bottomNavigationView;
     private int tabWidth;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,83 +49,193 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Views
         bottomNavigationView = findViewById(R.id.nav_view);
         activeTabIndicator = findViewById(R.id.active_tab_indicator);
-        setContentView(R.layout.fragment_signup_step1);
+        ImageView profileImage = findViewById(R.id.profile_image);
+        ImageButton dropdownButton = findViewById(R.id.profile_dropdown);
+        TextView headerTitle = findViewById(R.id.header_title);
+        TextView subtextView = findViewById(R.id.subtext);
 
-        /* Initialize fields
-        private View activeTabIndicator;
-        private BottomNavigationView bottomNavigationView;
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        View activeTabIndicator = findViewById(R.id.active_tab_indicator);*/
+        // Observe the title LiveData and update the UI whenever it changes
+        sharedViewModel.getTitle().observe(this, newTitle -> {
+            if (headerTitle != null) {
+                headerTitle.setText(newTitle);
+            }
+        });
 
+        // Observe the subtext LiveData and update the subtext
+        sharedViewModel.getSubtext().observe(this, newSubtext -> {
+            Log.d("MainActivity", "Subtext updated: " + newSubtext);
+            if (subtextView != null) {
+                subtextView.setText(newSubtext);
+            }
+        });
+
+        // Load Profile Image using Glide
+        Glide.with(this)
+                .load("file:///android_asset/profile_images/horse.png")
+                .placeholder(R.drawable.profile_placeholder)
+                .error(R.drawable.profile_placeholder)
+                .into(profileImage);
+
+        // Set up navigation & tab indicator
         setupNavigation();
         setupTabIndicator();
 
-        // Find FloatingActionButton and set click listener
+        // Ensure Home is the default selected tab
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        headerTitle.setText("Dashboard");
+        subtextView.setText("Navigation section");
+
+        // FloatingActionButton click listener
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-            // Handle the search or main action
-            Toast.makeText(this, "Search Clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, SongSearchActivity.class);
+            startActivity(intent);
         });
+
+        // Dropdown button click listener
+        dropdownButton.setOnClickListener(this::showProfileMenu);
+
+        // Handle Bottom Navigation Item Clicks
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+
+            if (handled) {
+                updateTabIndicator(item.getItemId());
+                updateHeaderTitle(item.getItemId());
+                updateSubText(item.getItemId());
+            }
+
+            return handled;
+        });
+
+
+        // Handle direct navigation to chords screen
+        /*if (getIntent().getBooleanExtra("openChords", false)) {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            navController.navigate(R.id.navigation_chords);
+        }*/
+        if (getIntent().getBooleanExtra("openChords", false)) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                NavHostFragment navHostFragment =
+                        (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
+                if (navHostFragment != null) {
+                    NavController navController = navHostFragment.getNavController();
+                    navController.navigate(R.id.navigation_chords);
+                } else {
+                    Log.e("MainActivity", "NavHostFragment is NULL! Cannot navigate.");
+                }
+            }, 500); // Small delay to ensure UI is fully loaded
+        }
+
     }
-        // Find BottomNavigationView
-        //BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+    // Show Profile Dropdown Menu
+    private void showProfileMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(this::onMenuItemClick);
+        popup.show();
+    }
+
+    // Handle Menu Item Clicks
+    private boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.menu_general_settings) {
+            Toast.makeText(this, "General Settings Clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (item.getItemId() == R.id.menu_profile_settings) {
+            Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (item.getItemId() == R.id.menu_logout) {
+            Toast.makeText(this, "Log Out Clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
 
     // Set up Navigation
     private void setupNavigation() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            NavigationUI.setupWithNavController(binding.navView, navController);
+        } else {
+            Log.e("MainActivity", "NavHostFragment is NULL! Check activity_main.xml");
+            Toast.makeText(this, "Navigation setup failed", Toast.LENGTH_SHORT).show();
+        }
+
+        /*if (navHostFragment == null) {
+            Toast.makeText(this, "NavHostFragment not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        NavController navController = navHostFragment.getNavController();
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_bookmark, R.id.navigation_searchSong, R.id.navigation_history, R.id.navigation_profile)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+
+        NavigationUI.setupWithNavController(binding.navView, navController);*/
     }
 
     // Set up Tab Indicator (Moving Line)
     private void setupTabIndicator() {
         bottomNavigationView.post(() -> {
-            // Ensure the indicator starts at the first tab
+            // Calculate tab width
             tabWidth = bottomNavigationView.getWidth() / bottomNavigationView.getMenu().size();
-            activeTabIndicator.setTranslationX(0); // Start at first tab
+            updateTabIndicator(R.id.navigation_home);
         });
-
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-                int position = -1;
-
-                if (item.getItemId() == R.id.navigation_home) {
-                    position = 0;
-                } else if (item.getItemId() == R.id.navigation_bookmark) {
-                    position = 1;
-                } else if (item.getItemId() == R.id.navigation_searchSong) {
-                    position = 2;
-                } else if (item.getItemId() == R.id.navigation_history) {
-                    position = 3;
-                } else if (item.getItemId() == R.id.navigation_profile) {
-                    position = 4;
-                }
-
-                if (position != -1) {
-                    activeTabIndicator.animate().translationX(position * tabWidth).setDuration(200).start();
-                }
-
-                return true;
-        });
-
-        // Set initial indicator position (for the first tab)
-        View firstMenuItemView = bottomNavigationView.getChildAt(0); // Get the first menu item view
-        if (firstMenuItemView != null) {
-            firstMenuItemView.post(() -> {
-                int tabWidth = firstMenuItemView.getWidth();
-                int tabLeft = firstMenuItemView.getLeft();
-
-                // Center the indicator on the first tab
-                float indicatorPosition = tabLeft + ((float)(tabWidth - activeTabIndicator.getWidth())) / 2;
-                activeTabIndicator.setTranslationX(indicatorPosition);
-            });
-        }
-
     }
 
+    // Update Tab Indicator Position
+    private void updateTabIndicator(int itemId) {
+        View selectedView = bottomNavigationView.findViewById(itemId);
+        if (selectedView == null) return; // Prevent crashes
+
+        selectedView.post(() -> {
+            int tabLeft = selectedView.getLeft();
+            int tabWidth = selectedView.getWidth();
+            float indicatorPosition = tabLeft + ((float) (tabWidth - activeTabIndicator.getWidth())) / 2;
+
+            activeTabIndicator.animate().translationX(indicatorPosition).setDuration(200).start();
+        });
+    }
+
+    // Update Header Title Based on Selected Tab
+    private void updateHeaderTitle(int itemId) {
+        TextView headerTitle = findViewById(R.id.header_title);
+        if (itemId == R.id.navigation_home) {
+            headerTitle.setText("Home");
+        } else if (itemId == R.id.navigation_bookmark) {
+            headerTitle.setText("Bookmarks");
+        } else if (itemId == R.id.navigation_searchSong) {
+            headerTitle.setText("Search");
+        } else if (itemId == R.id.navigation_history) {
+            headerTitle.setText("History");
+        } else if (itemId == R.id.navigation_profile) {
+            headerTitle.setText("Profile");
+        }
+    }
+
+    private void updateSubText(int itemId) {
+        TextView subtextView = findViewById(R.id.subtext);
+        if (itemId == R.id.navigation_home) {
+            subtextView.setText("Navigation section");
+        } else if (itemId == R.id.navigation_bookmark) {
+            subtextView.setText("Bookmarked songs");
+        } else if (itemId == R.id.navigation_searchSong) {
+            subtextView.setText("Search a song");
+        } else if (itemId == R.id.navigation_history) {
+            subtextView.setText("Recent history");
+        } else if (itemId == R.id.navigation_profile) {
+            subtextView.setText("Account section");
+        }
+    }
 }

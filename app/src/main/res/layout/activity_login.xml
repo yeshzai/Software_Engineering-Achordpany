@@ -65,6 +65,7 @@
 
     <!-- Username EditText -->
     <EditText
+        android:id="@+id/editTextUsername"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -81,6 +82,7 @@
 
     <!-- Password EditText -->
     <EditText
+        android:id="@+id/editTextPassword"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"

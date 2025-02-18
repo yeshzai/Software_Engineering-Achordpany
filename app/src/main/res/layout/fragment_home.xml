@@ -49,7 +49,8 @@
                         android:textStyle="bold"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText" />
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -60,7 +61,8 @@
                         android:text="All"
                         android:textSize="14sp"
                         android:layout_marginEnd="25dp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="#424242"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
 
                 <!-- Row of Bookmark Cards -->
@@ -68,7 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false" >
 
                     <!-- First Bookmark Card -->
                     <LinearLayout
@@ -87,7 +90,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights" >
 
                             <!-- Title -->
                             <TextView
@@ -96,23 +100,26 @@
                                 android:text="Title"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
 
                             <!-- Artist -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Artist"
-                                android:textColor="@android:color/darker_gray"
-                                android:textSize="10sp" />
+                                android:text="artist"
+                                android:textColor="#424242"
+                                android:textSize="10sp"
+                                tools:ignore="HardcodedText,SmallSp,TextSizeCheck" />
 
                             <!-- Genre -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Genre"
-                                android:textColor="@android:color/darker_gray"
-                                android:textSize="12sp" />
+                                android:textColor="#424242"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <!-- Right section: Arrow/Share icon -->
@@ -122,10 +129,8 @@
                             android:layout_marginStart="8dp"
                             android:src="@drawable/ic_redirect"
                             android:contentDescription="redirect"
-                            android:tint="@android:color/holo_green_dark" />
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
-
-
 
                     <!-- Second Bookmark Card -->
                     <LinearLayout
@@ -144,7 +149,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights">
 
                             <!-- Title -->
                             <TextView
@@ -153,23 +159,26 @@
                                 android:text="Title"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
 
                             <!-- Artist -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Artist"
-                                android:textColor="@android:color/darker_gray"
-                                android:textSize="10sp" />
+                                android:textColor="#424242"
+                                android:textSize="10sp"
+                                tools:ignore="HardcodedText, smallSp" />
 
                             <!-- Genre -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Genre"
-                                android:textColor="@android:color/darker_gray"
-                                android:textSize="12sp" />
+                                android:textColor="#424242"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <!-- Right section: Arrow/Share icon -->
@@ -179,7 +188,7 @@
                             android:layout_marginStart="8dp"
                             android:src="@drawable/ic_redirect"
                             android:contentDescription="redirect"
-                            android:tint="@android:color/holo_green_dark" />
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -208,7 +217,8 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"
-                        android:layout_marginStart="33dp"/>
+                        android:layout_marginStart="33dp"
+                        tools:ignore="HardcodedText" />
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -218,8 +228,9 @@
                         android:layout_height="wrap_content"
                         android:text="All"
                         android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:layout_marginEnd="40dp"/>
+                        android:textColor="#424242"
+                        android:layout_marginEnd="40dp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
 
                 <!-- Recent Searches Cards Container -->
@@ -244,7 +255,8 @@
                             android:layout_height="40dp"
                             android:layout_marginEnd="10dp"
                             android:src="@drawable/ic_music_note"
-                            android:contentDescription="Music note" />
+                            android:contentDescription="Music note"
+                            tools:ignore="HardcodedText" />
                         <!-- Song Info -->
                         <LinearLayout
                             android:layout_width="0dp"
@@ -259,19 +271,22 @@
                                 android:text="Title"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Artist - Genre"
-                                android:textColor="#757575"
-                                android:textSize="14sp" />
+                                android:textColor="#424242"
+                                android:textSize="14sp"
+                                tools:ignore="HardcodedText" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="site | time"
-                                android:textColor="#757575"
-                                android:textSize="12sp" />
+                                android:textColor="#424242"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
                         <!-- Bookmark Icon -->
                         <ImageView
@@ -279,7 +294,8 @@
                             android:layout_height="24dp"
                             android:layout_marginEnd="10dp"
                             android:src="@drawable/ic_bookmark"
-                            android:contentDescription="Bookmark" />
+                            android:contentDescription="Bookmark"
+                            tools:ignore="HardcodedText" />
                         <!-- Arrow Icon -->
                         <ImageView
                             android:layout_width="15dp"
@@ -287,7 +303,8 @@
                             android:layout_marginStart="8dp"
                             android:src="@drawable/ic_arrow"
                             android:layout_marginEnd="10dp"
-                            android:contentDescription="Arrow" />
+                            android:contentDescription="Arrow"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- "Let Her Go" Item -->
@@ -307,7 +324,8 @@
                             android:layout_height="40dp"
                             android:layout_marginEnd="10dp"
                             android:src="@drawable/ic_music_note"
-                            android:contentDescription="Music note" />
+                            android:contentDescription="Music note"
+                            tools:ignore="HardcodedText" />
                         <!-- Song Info -->
                         <LinearLayout
                             android:layout_width="0dp"
@@ -322,27 +340,31 @@
                                 android:text="Title"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Artist - Genre"
-                                android:textColor="#757575"
-                                android:textSize="14sp" />
+                                android:textColor="#424242"
+                                android:textSize="14sp"
+                                tools:ignore="HardcodedText" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="site | time"
-                                android:textColor="#757575"
-                                android:textSize="12sp" />
+                                android:textColor="#424242"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
                         <!-- Bookmark Icon -->
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginEnd="10dp"
+                            android:contentDescription="Bookmark"
                             android:src="@drawable/ic_bookmark_active"
-                            android:contentDescription="Bookmark" />
+                            tools:ignore="HardcodedText,ImageContrastCheck" />
                         <!-- Arrow Icon -->
                         <ImageView
                             android:layout_width="15dp"
@@ -350,7 +372,8 @@
                             android:layout_marginStart="8dp"
                             android:src="@drawable/ic_arrow"
                             android:layout_marginEnd="10dp"
-                            android:contentDescription="Arrow" />
+                            android:contentDescription="Arrow"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -381,7 +404,8 @@
                     android:textStyle="bold"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText" />
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -392,7 +416,8 @@
                     android:text="All"
                     android:textSize="14sp"
                     android:layout_marginEnd="25dp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="#424242"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <!-- Row of Recommendation Cards -->
@@ -400,7 +425,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:baselineAligned="false" >
 
                 <!-- First Recommendation Card -->
                 <LinearLayout
@@ -419,7 +445,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        tools:ignore="NestedWeights">
 
                         <!-- Title -->
                         <TextView
@@ -428,23 +455,26 @@
                             android:text="Title"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <!-- Artist -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp" />
+                            android:textColor="#424242"
+                            android:textSize="10sp"
+                            tools:ignore="HardcodedText, smallSp" />
 
                         <!-- Genre -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="12sp" />
+                            android:textColor="#424242"
+                            android:textSize="12sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Right section: Arrow/Share icon -->
@@ -454,10 +484,9 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginBottom="12dp"
                         android:src="@drawable/ic_recommendation"
-                        android:contentDescription="recommended1" />
+                        android:contentDescription="recommended1"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
-
-
 
                 <!-- Second Recommendation Card -->
                 <LinearLayout
@@ -476,7 +505,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        tools:ignore="NestedWeights">
 
                         <!-- Title -->
                         <TextView
@@ -485,23 +515,26 @@
                             android:text="Title"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <!-- Artist -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp" />
+                            android:textColor="#424242"
+                            android:textSize="10sp"
+                            tools:ignore="HardcodedText, smallSp" />
 
                         <!-- Genre -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="12sp" />
+                            android:textColor="#424242"
+                            android:textSize="12sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Right section: Arrow/Share icon -->
@@ -511,7 +544,8 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginBottom="12dp"
                         android:src="@drawable/ic_recommendation"
-                        android:contentDescription="recommended2" />
+                        android:contentDescription="recommended2"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

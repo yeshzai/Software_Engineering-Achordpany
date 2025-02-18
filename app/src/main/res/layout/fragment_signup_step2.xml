@@ -11,7 +11,6 @@
 
     <!-- Password EditText -->
 
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="25dp"
@@ -28,42 +27,56 @@
         android:id="@+id/logoImageView"
         android:layout_width="150dp"
         android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="520dp"
+        android:contentDescription="Logo"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo_light"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:ignore="HardcodedText" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="320dp"
         android:layout_height="400dp"
         android:layout_marginBottom="184dp"
         app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#f1f1f1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="45dp">
-
     </androidx.cardview.widget.CardView>
-
 
     <Button
         android:id="@+id/buttonLogin"
         style="@style/RoundedButtonStyle"
-        android:text="Login"
+        android:layout_marginBottom="92dp"
+        android:text="Continue"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteY="596dp" />
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textNoAccount"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Sign Up"
+        android:layout_marginBottom="36dp"
+        android:text="Already a member? Log In"
         android:textColor="#FF11843C"
         android:textSize="14sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteY="696dp" />
+        tools:ignore="HardcodedText,TextSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

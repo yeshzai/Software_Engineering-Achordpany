@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Heading1">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+    </style>
+
+    <style name="RoundedButtonStyle">
+        <item name="android:background">@drawable/btn_login_light</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- White text color -->
+        <item name="android:textSize">16sp</item> <!-- Text size -->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="GenreStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">#E5E6E9</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

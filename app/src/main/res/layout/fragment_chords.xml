@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- ✅ Header Layout with Back Button, Title, and Link -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginTop="10dp">
+
+        <!-- ✅ Back Button (Top-Left) -->
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:src="@drawable/ic_return_black_36dp"
+            android:layout_alignParentStart="true"/>
+
+        <!-- ✅ Centered Title -->
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder Title"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_centerHorizontal="true"/>
+
+        <!-- ✅ Placeholder Link (Under Title) -->
+        <TextView
+            android:id="@+id/txtLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="www.example.com"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_below="@id/txtTitle"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <!-- ✅ WebView Placeholder
+    <FrameLayout
+        android:id="@+id/webview_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray"/>-->
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray"/>
+
+    <!-- ✅ FAB and Bottom Navigation in a FrameLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"> -->
+
+        <!-- ✅ Floating Action Button (FAB)
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_searchsong_black_64dp"
+            android:backgroundTint="@color/light_green"
+            android:tint="@android:color/white"
+            android:layout_marginBottom="64dp"/>--> <!-- Adjust height to avoid overlap -->
+
+        <!-- ✅ Bottom Navigation Bar
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/bottom_nav_menu"/>
+    </FrameLayout>-->
+</LinearLayout>

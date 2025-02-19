@@ -34,6 +34,18 @@
     </fragment>-->
 
     <!-- 🟣 Signup Flow -->
+    <!--
+    <fragment
+        android:id="@+id/signup_Fragment"
+        android:name="com.example.achordpany.ui.signup.SignUpActivity"
+        android:label="Sign Up"
+        tools:layout="@layout/activity_signup">
+        <action
+            android:id="@+id/action_signup_to_signup2"
+            app:destination="@id/signupFragment2" />
+    </fragment>
+    -->
+
     <fragment
         android:id="@+id/signupFragment1"
         android:name="com.example.achordpany.ui.auth.SignupStep1Fragment"

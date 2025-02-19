@@ -1,6 +1,7 @@
 package com.example.achordpany.ui.auth;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
+import com.example.achordpany.ui.signup.SignUpActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,12 +27,16 @@ public class WelcomeActivity extends AppCompatActivity {
         findViewById(R.id.signUpBtn).setOnClickListener(v -> {
             //Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
             //startActivity(intent);
-            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-            intent.putExtra("navigateToSignup", true); // Extra to tell MainActivity to open SignupFragment
-            startActivity(intent);
-            finish();
+//            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+//            intent.putExtra("navigateToSignup", true); // Extra to tell MainActivity to open SignupFragment
+//            startActivity(intent);
+//            finish();
             //NavController navController = Navigation.findNavController(WelcomeActivity.this, R.id.nav_host_fragment);
             //navController.navigate(R.id.signupFragment1);
+
+            // NEW CODE
+            Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
 
         ImageView logoImageView = findViewById(R.id.logoImageView);

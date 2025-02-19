@@ -39,10 +39,10 @@ public class SignupStep4Fragment extends Fragment {
         });
 
         // Handle Continue Button Click
-        btnSignupEnd.setOnClickListener(v -> {
+        /*btnSignupEnd.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_signup4_to_home);
-        });
+        });*/
 
         // If user clicks signup, navigate to MainActivity and open SignupFragment1
         textHaveAccount.setOnClickListener(v -> {

@@ -5,34 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-    <!-- 🟢 Welcome Screen
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.example.achordpany.ui.welcome.WelcomeFragment"
-        android:label="Welcome"
-        tools:layout="@layout/fragment_welcome">
-        <action
-            android:id="@+id/action_welcome_to_login"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_welcome_to_signup"
-            app:destination="@id/signupFragment1" />
-    </fragment>
-
-     🔵 Login Screen
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.achordpany.ui.login.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_login_to_home"
-            app:destination="@id/navigation_home" />
-        <action
-            android:id="@+id/action_login_to_signup"
-            app:destination="@id/signupFragment1" />
-    </fragment>-->
-
     <!-- 🟣 Signup Flow -->
     <fragment
         android:id="@+id/signupFragment1"
@@ -52,6 +24,9 @@
         <action
             android:id="@+id/action_signup2_to_signup3"
             app:destination="@id/signupFragment3" />
+        <action
+            android:id="@+id/action_signup2_to_signup1"
+            app:destination="@id/signupFragment1" />
     </fragment>
 
     <fragment
@@ -62,6 +37,9 @@
         <action
             android:id="@+id/action_signup3_to_signup4"
             app:destination="@id/signupFragment4" />
+        <action
+            android:id="@+id/action_signup3_to_signup2"
+            app:destination="@id/signupFragment2" />
     </fragment>
 
     <fragment
@@ -69,9 +47,12 @@
         android:name="com.example.achordpany.ui.auth.SignupStep4Fragment"
         android:label="Signup Step 4"
         tools:layout="@layout/fragment_signup_step4">
-        <action
+        <!--<action
             android:id="@+id/action_signup4_to_home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home" />-->
+        <action
+            android:id="@+id/action_signup4_to_signup3"
+            app:destination="@id/signupFragment3" />
     </fragment>
 
     <!-- 🏠 Main App Screens -->
@@ -108,6 +89,7 @@
     <fragment
         android:id="@+id/navigation_chords"
         android:name="com.example.achordpany.ui.chords.ChordsFragment"
-        android:label="Chords" />
+        android:label="Chords"
+        tools:layout="@layout/fragment_chords"/>
 
 </navigation>

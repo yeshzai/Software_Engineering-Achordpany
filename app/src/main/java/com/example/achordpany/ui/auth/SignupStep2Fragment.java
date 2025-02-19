@@ -33,9 +33,11 @@ public class SignupStep2Fragment extends Fragment {
 
         // Handle Back Button Click - Navigate to WelcomeActivity
         btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear previous activities
-            startActivity(intent);
+            //Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear previous activities
+            //startActivity(intent);
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_signup2_to_signup1);
         });
 
         // Handle Continue Button Click

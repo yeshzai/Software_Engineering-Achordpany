@@ -111,27 +111,154 @@ public class MainActivity extends AppCompatActivity {
             return handled;
         });
 
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            NavController navController = getNavController();
+            if (navController == null) return; // Exit if null to prevent crashes
 
-        // Handle direct navigation to chords screen
-        /*if (getIntent().getBooleanExtra("openChords", false)) {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            navController.navigate(R.id.navigation_chords);
-        }*/
+            // ✅ Add listener to hide/show UI elements
+            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                boolean isSignupFlow = destination.getId() == R.id.signupFragment1 ||
+                        destination.getId() == R.id.signupFragment2 ||
+                        destination.getId() == R.id.signupFragment3 ||
+                        destination.getId() == R.id.signupFragment4;
+
+                findViewById(R.id.header_layout).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
+                findViewById(R.id.fab).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
+                findViewById(R.id.fab_background).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
+                findViewById(R.id.active_tab_indicator).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
+            });
+
+            // ✅ Navigate to Signup Step 1 if needed
+            if (getIntent().getBooleanExtra("navigateToSignup", false)) {
+                navController.navigate(R.id.signupFragment1);
+            }
+
+            // ✅ Navigate to Chords if needed
+            //if (getIntent().getBooleanExtra("openChords", false)) {
+            //    navController.navigate(R.id.navigation_chords);
+            //}
+
+        }, 500); // ✅ Small delay to ensure UI is fully loaded before navigation
+
+
+        /*new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            // ✅ Get NavController inside the delay to avoid null errors
+            //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            NavHostFragment navHostFragment = (NavHostFragment)
+                    getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
+            if (navHostFragment != null) {
+                NavController navController = navHostFragment.getNavController();
+
+                navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                    if (destination.getId() == R.id.signupFragment1 ||
+                            destination.getId() == R.id.signupFragment2 ||
+                            destination.getId() == R.id.signupFragment3 ||
+                            destination.getId() == R.id.signupFragment4) {
+
+                        // ✅ Hide header & FAB
+                        findViewById(R.id.header_layout).setVisibility(View.GONE);
+                        findViewById(R.id.fab).setVisibility(View.GONE);
+                        findViewById(R.id.fab_background).setVisibility(View.GONE);
+                        findViewById(R.id.active_tab_indicator).setVisibility(View.GONE);
+                    } else {
+                        // ✅ Show header & FAB for other fragments
+                        findViewById(R.id.header_layout).setVisibility(View.VISIBLE);
+                        findViewById(R.id.fab).setVisibility(View.VISIBLE);
+                        findViewById(R.id.fab_background).setVisibility(View.VISIBLE);
+                        findViewById(R.id.active_tab_indicator).setVisibility(View.VISIBLE);
+                    }
+                });
+
+                // ✅ Navigate to Signup Step 1 if needed
+                if (getIntent().getBooleanExtra("navigateToSignup", false)) {
+                    navController.navigate(R.id.signupFragment1);
+                }
+
+                // ✅ Navigate to Chords if needed
+                if (getIntent().getBooleanExtra("openChords", false)) {
+                    navController.navigate(R.id.navigation_chords);
+                }
+
+            } else {
+                Log.e("MainActivity", "NavHostFragment is NULL! Cannot add destination listener.");
+            }
+        }, 500); // ✅ Small delay to ensure UI is fully loaded before navigation*/
+
+
+
+        /*NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.signupFragment1 ||
+                    destination.getId() == R.id.signupFragment2 ||
+                    destination.getId() == R.id.signupFragment3 ||
+                    destination.getId() == R.id.signupFragment4) {
+
+                // Hide header and FAB
+                findViewById(R.id.header_layout).setVisibility(View.GONE);
+                findViewById(R.id.fab).setVisibility(View.GONE);
+            } else {
+                // Show them on other fragments
+                findViewById(R.id.header_layout).setVisibility(View.VISIBLE);
+                findViewById(R.id.fab).setVisibility(View.VISIBLE);
+            }
+        });
+
+
+        // Check if LoginActivity sent "openSignup"
+        if (getIntent().getBooleanExtra("navigateToSignup", false)) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                navController.navigate(R.id.signupFragment1);
+            }, 500); // Small delay to ensure UI is fully loaded
+        }
+
         if (getIntent().getBooleanExtra("openChords", false)) {
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 NavHostFragment navHostFragment =
                         (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
                 if (navHostFragment != null) {
-                    NavController navController = navHostFragment.getNavController();
                     navController.navigate(R.id.navigation_chords);
                 } else {
                     Log.e("MainActivity", "NavHostFragment is NULL! Cannot navigate.");
                 }
             }, 500); // Small delay to ensure UI is fully loaded
-        }
+        }*/
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        NavController navController = getNavController();
+        if (navController == null) return;
+
+        // Navigate to Chords fragment if needed
+        if (getIntent().getBooleanExtra("openChords", false)) {
+            if (navController.getCurrentDestination() != null &&
+                    navController.getCurrentDestination().getId() != R.id.navigation_chords) {
+
+                navController.navigate(R.id.navigation_chords);
+            }
+
+            getIntent().removeExtra("openChords"); // Prevents multiple navigations
+        }
+    }
+
+
+    private NavController getNavController() {
+        NavHostFragment navHostFragment = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
+        if (navHostFragment != null) {
+            return navHostFragment.getNavController();
+        } else {
+            Log.e("MainActivity", "NavHostFragment is NULL! Cannot get NavController.");
+            return null;
+        }
+    }
+
 
     // Show Profile Dropdown Menu
     private void showProfileMenu(View view) {

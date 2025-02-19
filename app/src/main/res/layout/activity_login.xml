@@ -10,7 +10,7 @@
 
     <!-- Back Button -->
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/btnBack"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="24dp"
@@ -66,9 +66,8 @@
     <!-- Username EditText -->
     <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="200dp"
         android:drawableStart="@drawable/ic_user_black"
         android:hint=" Email Address"
@@ -76,6 +75,7 @@
         android:inputType="textEmailAddress"
         android:textColor="#737373"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
@@ -83,9 +83,8 @@
     <!-- Password EditText -->
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="270dp"
         android:drawableStart="@drawable/ic_lock_black"
         android:drawableEnd="@drawable/ic_eye_black"
@@ -94,6 +93,7 @@
         android:text=" Password"
         android:textColor="#737373"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
@@ -138,7 +138,6 @@
         android:textColor="#FF11843C"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textForgotPassword"
         tools:ignore="HardcodedText" />

@@ -7,76 +7,83 @@
     android:background="@color/background_light"
     tools:context="com.example.achordpany.MainActivity">
 
-    <!-- Username EditText -->
+    <!-- Header Layout with Back Button and Logo Image -->
+    <RelativeLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Password EditText -->
+        <!-- Logo Image -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo_light"
+            tools:ignore="HardcodedText" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/image_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_return_black_24dp" />
-
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="520dp"
-        android:contentDescription="Logo"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logo_light"
-        tools:ignore="HardcodedText" />
+        <!-- Back Button -->
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="9dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:src="@drawable/ic_return_black_36dp"/>
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="320dp"
         android:layout_height="400dp"
-        android:layout_marginBottom="184dp"
-        app:cardCornerRadius="20dp"
         app:cardBackgroundColor="#f1f1f1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="45dp">
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout">
+
     </androidx.cardview.widget.CardView>
 
+    <!-- Continue Button -->
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/btnContinue"
         style="@style/RoundedButtonStyle"
-        android:layout_marginBottom="92dp"
-        android:text="Continue"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="100dp"
+        android:text=" Continue"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="HardcodedText" />
 
+    <!-- Log In Link -->
     <TextView
-        android:id="@+id/textNoAccount"
-        android:layout_width="200dp"
+        android:id="@+id/textHaveAccount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:importantForAccessibility="yes"
         android:text="Already a member? Log In"
         android:textColor="#FF11843C"
         android:textSize="14sp"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText,TextSizeCheck" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnContinue"
+        tools:ignore="HardcodedText,ContentDescription,LabelFor,TextSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

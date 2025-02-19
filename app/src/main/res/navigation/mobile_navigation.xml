@@ -5,6 +5,76 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+    <!-- 🟢 Welcome Screen
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.achordpany.ui.welcome.WelcomeFragment"
+        android:label="Welcome"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcome_to_signup"
+            app:destination="@id/signupFragment1" />
+    </fragment>
+
+     🔵 Login Screen
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.achordpany.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_login_to_signup"
+            app:destination="@id/signupFragment1" />
+    </fragment>-->
+
+    <!-- 🟣 Signup Flow -->
+    <fragment
+        android:id="@+id/signupFragment1"
+        android:name="com.example.achordpany.ui.auth.SignupStep1Fragment"
+        android:label="Signup Step 1"
+        tools:layout="@layout/fragment_signup_step1">
+        <action
+            android:id="@+id/action_signup1_to_signup2"
+            app:destination="@id/signupFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment2"
+        android:name="com.example.achordpany.ui.auth.SignupStep2Fragment"
+        android:label="Signup Step 2"
+        tools:layout="@layout/fragment_signup_step2">
+        <action
+            android:id="@+id/action_signup2_to_signup3"
+            app:destination="@id/signupFragment3" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment3"
+        android:name="com.example.achordpany.ui.auth.SignupStep3Fragment"
+        android:label="Signup Step 3"
+        tools:layout="@layout/fragment_signup_step3">
+        <action
+            android:id="@+id/action_signup3_to_signup4"
+            app:destination="@id/signupFragment4" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment4"
+        android:name="com.example.achordpany.ui.auth.SignupStep4Fragment"
+        android:label="Signup Step 4"
+        tools:layout="@layout/fragment_signup_step4">
+        <action
+            android:id="@+id/action_signup4_to_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
+    <!-- 🏠 Main App Screens -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.achordpany.ui.home.HomeFragment"
@@ -12,14 +82,32 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.achordpany.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_bookmark"
+        android:name="com.example.achordpany.ui.bookmark.BookmarkFragment"
+        android:label="@string/title_bookmark"
+        tools:layout="@layout/fragment_bookmark" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.achordpany.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_searchSong"
+        android:name="com.example.achordpany.ui.search.SearchFragment"
+        android:label="@string/title_searchSong"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.example.achordpany.ui.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.achordpany.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_chords"
+        android:name="com.example.achordpany.ui.chords.ChordsFragment"
+        android:label="Chords" />
+
 </navigation>

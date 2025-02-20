@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             if (navController == null) return; // Exit if null to prevent crashes
 
             // ✅ Add listener to hide/show UI elements
-            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            /*navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
                 boolean isSignupFlow = destination.getId() == R.id.signupFragment1 ||
                         destination.getId() == R.id.signupFragment2 ||
                         destination.getId() == R.id.signupFragment3 ||
@@ -126,12 +126,12 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.fab).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
                 findViewById(R.id.fab_background).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
                 findViewById(R.id.active_tab_indicator).setVisibility(isSignupFlow ? View.GONE : View.VISIBLE);
-            });
+            });*///REMOVED OLD SIGNUP CODE - KAYTOKIDD
 
             // ✅ Navigate to Signup Step 1 if needed
-            if (getIntent().getBooleanExtra("navigateToSignup", false)) {
+            /*if (getIntent().getBooleanExtra("navigateToSignup", false)) {
                 navController.navigate(R.id.signupFragment1);
-            }
+            }*/// REMOVED OLD SIGNUP CODE - KAYTOKIDD
 
             // ✅ Navigate to Chords if needed
             //if (getIntent().getBooleanExtra("openChords", false)) {

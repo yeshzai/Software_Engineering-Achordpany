@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
+import com.example.achordpany.ui.signup.SignUpActivity;
 
 public class LoginActivity extends AppCompatActivity {
     @Override
@@ -36,12 +37,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // If user clicks signup, navigate to MainActivity and open SignupFragment1
         findViewById(R.id.textNoAccount).setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("navigateToSignup", true); // Extra to tell MainActivity to open SignupFragment
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(intent);
             finish();
-            //NavController navController = Navigation.findNavController(LoginActivity.this, R.id.nav_host_fragment);
-            //navController.navigate(R.id.signupFragment1);
         });
 
         // Find the TextView

@@ -5,68 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-    <!-- 🟣 Signup Flow -->
-    <!--
-    <fragment
-        android:id="@+id/signup_Fragment"
-        android:name="com.example.achordpany.ui.signup.SignUpActivity"
-        android:label="Sign Up"
-        tools:layout="@layout/activity_signup">
-        <action
-            android:id="@+id/action_signup_to_signup2"
-            app:destination="@id/signupFragment2" />
-    </fragment>
-    -->
-
-    <fragment
-        android:id="@+id/signupFragment1"
-        android:name="com.example.achordpany.ui.auth.SignupStep1Fragment"
-        android:label="Signup Step 1"
-        tools:layout="@layout/fragment_signup_step1">
-        <action
-            android:id="@+id/action_signup1_to_signup2"
-            app:destination="@id/signupFragment2" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/signupFragment2"
-        android:name="com.example.achordpany.ui.auth.SignupStep2Fragment"
-        android:label="Signup Step 2"
-        tools:layout="@layout/fragment_signup_step2">
-        <action
-            android:id="@+id/action_signup2_to_signup3"
-            app:destination="@id/signupFragment3" />
-        <action
-            android:id="@+id/action_signup2_to_signup1"
-            app:destination="@id/signupFragment1" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/signupFragment3"
-        android:name="com.example.achordpany.ui.auth.SignupStep3Fragment"
-        android:label="Signup Step 3"
-        tools:layout="@layout/fragment_signup_step3">
-        <action
-            android:id="@+id/action_signup3_to_signup4"
-            app:destination="@id/signupFragment4" />
-        <action
-            android:id="@+id/action_signup3_to_signup2"
-            app:destination="@id/signupFragment2" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/signupFragment4"
-        android:name="com.example.achordpany.ui.auth.SignupStep4Fragment"
-        android:label="Signup Step 4"
-        tools:layout="@layout/fragment_signup_step4">
-        <!--<action
-            android:id="@+id/action_signup4_to_home"
-            app:destination="@id/navigation_home" />-->
-        <action
-            android:id="@+id/action_signup4_to_signup3"
-            app:destination="@id/signupFragment3" />
-    </fragment>
-
     <!-- 🏠 Main App Screens -->
     <fragment
         android:id="@+id/navigation_home"

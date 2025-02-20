@@ -25,16 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Go to Signup (MainActivity hosting Signup Fragments)
         findViewById(R.id.signUpBtn).setOnClickListener(v -> {
-            //Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-            //startActivity(intent);
-//            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-//            intent.putExtra("navigateToSignup", true); // Extra to tell MainActivity to open SignupFragment
-//            startActivity(intent);
-//            finish();
-            //NavController navController = Navigation.findNavController(WelcomeActivity.this, R.id.nav_host_fragment);
-            //navController.navigate(R.id.signupFragment1);
 
-            // NEW CODE
             Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
             startActivity(intent);
         });

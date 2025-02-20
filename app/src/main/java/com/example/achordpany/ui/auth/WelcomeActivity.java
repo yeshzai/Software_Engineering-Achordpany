@@ -25,6 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Go to Signup (MainActivity hosting Signup Fragments)
         findViewById(R.id.signUpBtn).setOnClickListener(v -> {
+
             Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
             startActivity(intent);
         });

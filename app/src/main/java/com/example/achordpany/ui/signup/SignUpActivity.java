@@ -42,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
 
+
     }
 
 }

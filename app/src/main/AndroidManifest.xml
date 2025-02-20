@@ -49,9 +49,11 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
+
         <activity android:name=".ui.signup.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
+
 
     </application>
 

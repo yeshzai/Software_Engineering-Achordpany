@@ -70,14 +70,14 @@
         android:layout_height="50dp"
         android:layout_marginTop="200dp"
         android:drawableStart="@drawable/ic_user_black"
-        android:hint=" Email Address"
+        android:hint="  Email Address"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        android:textColor="#737373"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/EditTextStyle"
         tools:ignore="HardcodedText" />
 
     <!-- Password EditText -->
@@ -90,8 +90,8 @@
         android:drawableEnd="@drawable/ic_eye_black"
         android:importantForAutofill="no"
         android:inputType="textVisiblePassword"
-        android:text=" Password"
-        android:textColor="#737373"
+        android:hint="  Password"
+        style="@style/EditTextStyle"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

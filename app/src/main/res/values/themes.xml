@@ -15,6 +15,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigationView</item>
+        <item name="colorControlNormal">#121212</item>
+        <item name="colorControlActivated">#11A849</item>
+        <item name="colorControlHighlight">#11A849</item>
 
     </style>
 </resources>

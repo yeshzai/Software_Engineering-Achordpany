@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light"
-    tools:context="com.example.achordpany.MainActivity">
+    android:background="@color/background_light">
+
 
     <!-- Header Layout with Back Button and Logo Image -->
     <RelativeLayout
-        android:id="@+id/headerLayout"
+        android:id="@+id/headerLayout_new4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="6dp"
@@ -18,7 +18,7 @@
 
         <!-- Logo Image -->
         <ImageView
-            android:id="@+id/logoImageView"
+            android:id="@+id/logoImageView_new4"
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
@@ -29,7 +29,7 @@
 
         <!-- Back Button -->
         <ImageButton
-            android:id="@+id/btnBack"
+            android:id="@+id/btnBack_new4"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="9dp"
@@ -44,7 +44,7 @@
 
     <!-- Headings -->
     <TextView
-        android:id="@+id/heading1"
+        android:id="@+id/heading1_new4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
@@ -58,7 +58,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/heading2"
+        android:id="@+id/heading2_new4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile preview"
@@ -66,7 +66,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heading1"
+        app:layout_constraintTop_toBottomOf="@id/heading1_new4"
         android:layout_marginTop="5dp"
         tools:ignore="HardcodedText" />
 
@@ -88,7 +88,7 @@
 
             <!-- Profile Image -->
             <ImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/profileImage_new4"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="16dp"
@@ -102,7 +102,7 @@
 
             <!-- Profile Name -->
             <TextView
-                android:id="@+id/profileName"
+                android:id="@+id/profileName_new4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -110,14 +110,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@id/profileImage"
-                app:layout_constraintTop_toTopOf="@id/profileImage"
-                app:layout_constraintBottom_toBottomOf="@id/profileImage"
+                app:layout_constraintStart_toEndOf="@id/profileImage_new4"
+                app:layout_constraintTop_toTopOf="@id/profileImage_new4"
+                app:layout_constraintBottom_toBottomOf="@id/profileImage_new4"
                 tools:ignore="HardcodedText" />
 
             <!-- Password Label -->
             <TextView
-                android:id="@+id/passwordLabel"
+                android:id="@+id/passwordLabel_new4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -126,25 +126,25 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profileImage"
+                app:layout_constraintTop_toBottomOf="@id/profileImage_new4"
                 tools:ignore="HardcodedText" />
 
             <!-- Password Value -->
             <TextView
-                android:id="@+id/passwordValue"
+                android:id="@+id/passwordValue_new4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="********"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@id/passwordLabel"
-                app:layout_constraintTop_toTopOf="@id/passwordLabel"
+                app:layout_constraintStart_toEndOf="@id/passwordLabel_new4"
+                app:layout_constraintTop_toTopOf="@id/passwordLabel_new4"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="HardcodedText" />
 
             <!-- Genres Label -->
             <TextView
-                android:id="@+id/genresLabel"
+                android:id="@+id/genresLabel_new4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -153,19 +153,19 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/passwordLabel"
+                app:layout_constraintTop_toBottomOf="@id/passwordLabel_new4"
                 tools:ignore="HardcodedText" />
 
             <!-- Genres Value -->
             <TextView
-                android:id="@+id/genresValue"
+                android:id="@+id/genresValue_new4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rock, Jazz"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@id/passwordValue"
-                app:layout_constraintTop_toTopOf="@id/genresLabel"
+                app:layout_constraintStart_toStartOf="@id/passwordValue_new4"
+                app:layout_constraintTop_toTopOf="@id/genresLabel_new4"
                 tools:ignore="HardcodedText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -175,19 +175,19 @@
 
     <!-- Agreement Checkbox -->
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox_new4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I Agree to Terms &amp; Conditions and Privacy Policy"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/btnSignupEnd"
+        app:layout_constraintBottom_toTopOf="@id/btnSignupEnd_new4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
     <!-- Login Redirect Text -->
     <TextView
-        android:id="@+id/textHaveAccount"
+        android:id="@+id/textHaveAccount_new4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
@@ -203,7 +203,7 @@
 
     <!-- Sign Up Button -->
     <Button
-        android:id="@+id/btnSignupEnd"
+        android:id="@+id/btnSignupEnd_new4"
         style="@style/RoundedButtonStyle"
         android:layout_marginBottom="92dp"
         android:text="Sign Up"
@@ -214,4 +214,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

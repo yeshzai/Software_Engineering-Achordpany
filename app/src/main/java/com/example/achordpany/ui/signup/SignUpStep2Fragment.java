@@ -97,6 +97,8 @@ public class SignUpStep2Fragment extends Fragment {
         }
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
@@ -177,4 +179,16 @@ public class SignUpStep2Fragment extends Fragment {
             //requireActivity().runOnUiThread(() -> fab.setImageResource(R.drawable.default_avatar)); // Set placeholder
         }
     }
+
+    private void resetSignUpCredentials() {
+
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+        signUpCredentials.set_credential_usernameText("");
+        signUpCredentials.set_credential_emailAddressText("");
+        signUpCredentials.set_credential_passwordText("");
+        signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_genre(new ArrayList<>());
+
+    }
+
 }

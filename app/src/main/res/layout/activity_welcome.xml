@@ -7,24 +7,23 @@
     android:background="#FF11A849">
 
     <!-- Logo Image -->
-
-    <!-- CardView containing UI elements -->
-
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="280dp"
         android:layout_height="100dp"
         android:layout_marginBottom="88dp"
         android:contentDescription="Logo"
-        android:elevation="10dp"
+        android:translationZ="10dp"
+        android:elevation="20dp"
         android:src="@drawable/logo_white"
+        android:scaleType="fitCenter"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
+    <!-- CardView containing UI elements -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"

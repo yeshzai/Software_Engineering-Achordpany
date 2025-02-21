@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.achordpany.R;
+import com.example.achordpany.ui.auth.LoginActivity;
 import com.example.achordpany.ui.auth.WelcomeActivity;
 
 public class SignUpStep1Fragment extends Fragment {
@@ -36,10 +37,16 @@ public class SignUpStep1Fragment extends Fragment {
         passwordText = view.findViewById(R.id.passwordText);
         confirmPasswordText = view.findViewById(R.id.confirmPasswordText);
 
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), LoginActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
+
         Button btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(v -> {
             // CODE HERE - Store credentials in SignUpCredentials class.
-            SignUpCredentials signUpCredentials = new SignUpCredentials();
+            SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
 
             String user_usernameText = usernameText.getText().toString();
             String user_emailAddressText = emailAddressText.getText().toString();

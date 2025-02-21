@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.achordpany.R;
 import com.example.achordpany.ui.adapters.AvatarAdapter;
+import com.example.achordpany.ui.auth.LoginActivity;
 import com.example.achordpany.ui.auth.WelcomeActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,6 +51,12 @@ public class SignUpStep2Fragment extends Fragment {
             loadImageFromAssets(avatarPath, avatarImageView); // Set selected avatar to FAB
         });
         recyclerViewAvatars.setAdapter(adapter);
+
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), LoginActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         Button btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(v -> {

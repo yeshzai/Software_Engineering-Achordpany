@@ -8,11 +8,22 @@ import java.util.ArrayList;
 
 public class SignUpCredentials {
 
+    private static SignUpCredentials instance;
     private String credential_usernameText;
     private String credential_emailAddressText;
     private String credential_passwordText;
     private String credential_confirmPasswordText;
     private ArrayList<String> credential_genre = new ArrayList<>();
+
+    private SignUpCredentials() {
+    }
+
+    public static SignUpCredentials getInstance() {
+        if (instance == null) {
+            instance = new SignUpCredentials();
+        }
+        return instance;
+    }
 
     // SETTER
     public void set_credential_usernameText(String credential_usernameText) {

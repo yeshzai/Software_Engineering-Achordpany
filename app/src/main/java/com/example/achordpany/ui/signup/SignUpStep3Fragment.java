@@ -22,6 +22,13 @@ import java.util.ArrayList;
 
 public class SignUpStep3Fragment extends Fragment {
 
+    private Button genreButton_Rock;
+    private Button genreButton_Blues;
+    private Button genreButton_Jazz;
+    private Button genreButton_Classical;
+    private Button genreButton_Pop;
+    private Button genreButton_Reggae;
+
     private ArrayList<String> genres;
     private boolean genreButton_Rock_Clicked = false;
     private boolean genreButton_Blues_Clicked = false;
@@ -35,15 +42,22 @@ public class SignUpStep3Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_signup_3, container, false);
-        genres = new ArrayList<>();
+
+        genreButton_Rock = view.findViewById(R.id.genreButton_Rock);
+        genreButton_Blues = view.findViewById(R.id.genreButton_Blues);
+        genreButton_Jazz = view.findViewById(R.id.genreButton_Jazz);
+        genreButton_Classical = view.findViewById(R.id.genreButton_Classical);
+        genreButton_Pop = view.findViewById(R.id.genreButton_Pop);
+        genreButton_Reggae = view.findViewById(R.id.genreButton_Reggae);
+        backtrackContent();
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
         });
 
-        Button genreButton_Rock = view.findViewById(R.id.genreButton_Rock);
         genreButton_Rock.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Rock")) {
@@ -63,7 +77,6 @@ public class SignUpStep3Fragment extends Fragment {
 
         });
 
-        Button genreButton_Blues = view.findViewById(R.id.genreButton_Blues);
         genreButton_Blues.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Blues")) {
@@ -83,7 +96,6 @@ public class SignUpStep3Fragment extends Fragment {
 
         });
 
-        Button genreButton_Jazz = view.findViewById(R.id.genreButton_Jazz);
         genreButton_Jazz.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Jazz")) {
@@ -103,7 +115,6 @@ public class SignUpStep3Fragment extends Fragment {
 
         });
 
-        Button genreButton_Classical = view.findViewById(R.id.genreButton_Classical);
         genreButton_Classical.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Classical")) {
@@ -123,7 +134,6 @@ public class SignUpStep3Fragment extends Fragment {
 
         });
 
-        Button genreButton_Pop = view.findViewById(R.id.genreButton_Pop);
         genreButton_Pop.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Pop")) {
@@ -143,7 +153,6 @@ public class SignUpStep3Fragment extends Fragment {
 
         });
 
-        Button genreButton_Reggae = view.findViewById(R.id.genreButton_Reggae);
         genreButton_Reggae.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Reggae")) {
@@ -186,4 +195,53 @@ public class SignUpStep3Fragment extends Fragment {
         return view;
 
     }
+
+    private void backtrackContent() {
+
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+        ArrayList<String> backtrack_genre = signUpCredentials.get_credential_genre();
+        genres = signUpCredentials.get_credential_genre();
+
+        for(String i : backtrack_genre) {
+            switch(i) {
+                case "Rock":
+                    genreButton_Rock_Clicked = true;
+                    genreButton_Rock.setBackgroundColor(Color.GREEN);
+                    break;
+                case "Blues":
+                    genreButton_Blues_Clicked = true;
+                    genreButton_Blues.setBackgroundColor(Color.GREEN);
+                    break;
+                case "Jazz":
+                    genreButton_Jazz_Clicked = true;
+                    genreButton_Jazz.setBackgroundColor(Color.GREEN);
+                    break;
+                case "Classical":
+                    genreButton_Classical_Clicked = true;
+                    genreButton_Classical.setBackgroundColor(Color.GREEN);
+                    break;
+                case "Pop":
+                    genreButton_Pop_Clicked = true;
+                    genreButton_Pop.setBackgroundColor(Color.GREEN);
+                    break;
+                case "Reggae":
+                    genreButton_Reggae_Clicked = true;
+                    genreButton_Reggae.setBackgroundColor(Color.GREEN);
+                    break;
+            }
+        }
+
+    }
+
+    private void resetSignUpCredentials() {
+
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+        signUpCredentials.set_credential_usernameText("");
+        signUpCredentials.set_credential_emailAddressText("");
+        signUpCredentials.set_credential_passwordText("");
+        signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_genre(new ArrayList<>());
+
+    }
+
 }

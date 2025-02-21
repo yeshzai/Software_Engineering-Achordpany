@@ -37,10 +37,6 @@ public class SignUpStep4Fragment extends Fragment {
     private TextView genresValue;
 
     private ImageView profileImage;
-    private TextView profileName;
-    private TextView passwordValue;
-    private TextView genresValue;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,64 +45,19 @@ public class SignUpStep4Fragment extends Fragment {
         SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), LoginActivity.class);
-            startActivity(intent);
-            requireActivity().finish();
-        });
 
-        // Sign Up button logic
-        profileImageView = view.findViewById(R.id.profileImage);
-        profileName = view.findViewById(R.id.profileName);
-        passwordValue = view.findViewById(R.id.passwordValue);
-        genresValue = view.findViewById(R.id.genresValue);
-        CheckBox checkBox_Terms = view.findViewById(R.id.checkBox_Terms);
-
-        Log.d("SignUpCredentials Username", signUpCredentials.get_credential_usernameText());
-        Log.d("SignUpCredentials Password", signUpCredentials.get_credential_passwordText());
-        Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().toString());
-
-        profileName.setText(signUpCredentials.get_credential_usernameText());
-        passwordValue.setText(signUpCredentials.get_credential_passwordText());
-        genresValue.setText(signUpCredentials.get_credential_genre().toString());
-
-        // Sign Up button logic
-        Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
-        btnSignUpEnd.setOnClickListener(v -> {
-            Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();
-
-            if (selectedImageUri != null) {
-                SharedPreferences prefs = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                prefs.edit().putString("profile_image_uri", selectedImageUri.toString()).apply();
-            }
-
-            if(checkBox_Terms.isChecked()) {
-                Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
-                startActivity(intent);
-                requireActivity().finish();
-            } else {
-                Toast.makeText(getContext(), "Please accept the Terms and Conditions!", Toast.LENGTH_SHORT).show();
-            }
-
-            // Navigate to MainActivity
-            Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
             resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
-            requireActivity().finish(); // Close SignUpActivity
+            requireActivity().finish();
+
         });
 
-        // Back button logic
         profileImage = view.findViewById(R.id.profileImage);
         profileName = view.findViewById(R.id.profileName);
         passwordValue = view.findViewById(R.id.passwordValue);
         genresValue = view.findViewById(R.id.genresValue);
         CheckBox checkBox_Terms = view.findViewById(R.id.checkBox_Terms);
-
-        Log.d("SignUpCredentials Username", signUpCredentials.get_credential_usernameText());
-        Log.d("SignUpCredentials Password", signUpCredentials.get_credential_passwordText());
-        Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().toString());
 
         profileName.setText(signUpCredentials.get_credential_usernameText());
         passwordValue.setText(signUpCredentials.get_credential_passwordText());
@@ -124,6 +75,7 @@ public class SignUpStep4Fragment extends Fragment {
                 Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
                 startActivity(intent);
                 requireActivity().finish();
+
             } else {
                 Toast.makeText(getContext(), "Please accept the Terms and Conditions!", Toast.LENGTH_SHORT).show();
             }
@@ -176,6 +128,8 @@ public class SignUpStep4Fragment extends Fragment {
         } catch (IOException e) {
             Log.e("SignUpStep4", "Error loading avatar: " + e.getMessage(), e);
         }
+    }
+
     private void saveToFirebaseDatabase() {
 
 

@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +25,11 @@ public class SignUpStep4Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_signup_4, container, false);
 
-        Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
+        //CheckBox checkBox_Terms = view.findViewById(R.id.checkBox_Terms);
 
+        Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
         btnSignUpEnd.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
             startActivity(intent);
             requireActivity().finish();

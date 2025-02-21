@@ -1,8 +1,10 @@
 package com.example.achordpany.ui.signup;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -31,6 +35,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SignUpStep2Fragment extends Fragment {
+    //private static final int IMAGE_PICK_CODE = 1000; // Any unique number
+    private ImageView profileImageView;
+
+    private final ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Uri imageUri = result.getData().getData();
+                    profileImageView.setImageURI(imageUri); // Display selected image
+                    ((SignUpActivity) requireActivity()).setSelectedProfileImageUri(imageUri); // Save URI
+
+                    if (imageUri != null) {
+                        Log.d("SignUpStep2", "Saved Image URI: " + imageUri);
+                    }
+
+                }
+            }
+    );
+
 
     @Nullable
     @Override
@@ -39,7 +62,7 @@ public class SignUpStep2Fragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_signup_2, container, false);
 
         //FloatingActionButton fabProfile = view.findViewById(R.id.fab_profile);
-        ImageView avatarImageView = view.findViewById(R.id.avatarImageView);
+        profileImageView = view.findViewById(R.id.avatarImageView);
         RecyclerView recyclerViewAvatars = view.findViewById(R.id.recyclerViewAvatars);
 
         // Load avatar list from assets
@@ -48,10 +71,32 @@ public class SignUpStep2Fragment extends Fragment {
         // Setup RecyclerView
         recyclerViewAvatars.setLayoutManager(new GridLayoutManager(requireContext(), 4));
         AvatarAdapter adapter = new AvatarAdapter(requireContext(), avatarList, avatarPath -> {
-            loadImageFromAssets(avatarPath, avatarImageView); // Set selected avatar to FAB
+            loadImageFromAssets(avatarPath, profileImageView); // Set selected avatar to ImageView
+
+            // Convert avatar filename to a URI-like string and store it
+            Uri avatarUri = Uri.parse("file:///android_asset/profile_images/" + avatarPath);
+            ((SignUpActivity) requireActivity()).setSelectedProfileImageUri(avatarUri);
+            //((SignUpActivity) requireActivity()).setSelectedProfileImageUri(Uri.parse("file:///android_asset/profile_images/" + avatarPath)); // Save in Activity
+
+            Log.d("SignUpStep2", "Saved Avatar URI: " + avatarUri);
         });
         recyclerViewAvatars.setAdapter(adapter);
 
+        // Trigger image picker when user clicks profile image
+        profileImageView.setOnClickListener(v -> openImagePicker());
+
+        // Restore previously selected image if available
+        Uri savedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();
+        if (savedImageUri != null) {
+            if (savedImageUri.toString().startsWith("file:///android_asset/profile_images/")) {
+                String filePath = savedImageUri.toString().replace("file:///android_asset/profile_images/", "");
+                loadImageFromAssets(filePath, profileImageView);
+            } else {
+                profileImageView.setImageURI(savedImageUri);
+            }
+        }
+
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
             resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
@@ -73,6 +118,13 @@ public class SignUpStep2Fragment extends Fragment {
 
     }
 
+    // Function to open image picker
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        imagePickerLauncher.launch(intent);
+    }
+
     // Load avatar images from assets
     private List<String> getAvatarFiles() {
         List<String> fileList = new ArrayList<>();
@@ -91,8 +143,10 @@ public class SignUpStep2Fragment extends Fragment {
     // Load selected avatar into ImageView
     private void loadImageFromAssets(String filePath, ImageView imageView) {
         try {
+            String cleanedFilePath = filePath.replace("profile_images/", ""); // Remove extra prefix if present
+
             Log.d("SignUpStep2Fragment", "Loading avatar: " + filePath);
-            InputStream inputStream = requireContext().getAssets().open("profile_images/" + filePath);
+            InputStream inputStream = requireContext().getAssets().open("profile_images/" + cleanedFilePath);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             //fab.setImageBitmap(bitmap); // Set the image on FloatingActionButton
             inputStream.close();

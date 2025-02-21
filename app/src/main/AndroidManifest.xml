@@ -49,12 +49,15 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
-
+        <!-- Signup Activity -->
         <activity android:name=".ui.signup.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
-
+        <!-- Chords Display Activity -->
+        <activity android:name=".ui.chords.ChordsDisplayActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 package com.example.achordpany;
 
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.Looper;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import androidx.lifecycle.ViewModelProvider;
 import android.util.Log;
 
+import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.bumptech.glide.Glide;
@@ -29,6 +32,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.ui.search.SongSearchActivity;
 import com.example.achordpany.databinding.ActivityMainBinding;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Views
         bottomNavigationView = findViewById(R.id.nav_view);
         activeTabIndicator = findViewById(R.id.active_tab_indicator);
-        ImageView profileImage = findViewById(R.id.profile_image);
+        //ImageView profileImage = findViewById(R.id.profile_image);
+        CircleImageView profileImageView = findViewById(R.id.profile_image);
         ImageButton dropdownButton = findViewById(R.id.profile_dropdown);
         TextView headerTitle = findViewById(R.id.header_title);
         TextView subtextView = findViewById(R.id.subtext);
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 .load("file:///android_asset/profile_images/horse.png")
                 .placeholder(R.drawable.profile_placeholder)
                 .error(R.drawable.profile_placeholder)
-                .into(profileImage);
+                .into(profileImageView);
 
         // Set up navigation & tab indicator
         setupNavigation();
@@ -118,18 +124,36 @@ public class MainActivity extends AppCompatActivity {
         }, 500); // Small delay to ensure UI is fully loaded before navigation
 
 
+        // Load saved profile image from SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String imageUriString = prefs.getString("profile_image_uri", null);
+
+        if (imageUriString != null) {
+            Uri imageUri = Uri.parse(imageUriString);
+            //profileImageView.setImageURI(imageUri);
+            Glide.with(this).load(imageUri).into(profileImageView);
+        }
+
         // Hide the header layout of activity_main when chord display is navigated
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        /*NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
             navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
                 if (destination.getId() == R.id.navigation_chords) {
                     findViewById(R.id.header_layout).setVisibility(View.GONE);
+
+                    //if (activeTabIndicator != null) {
+                    //    activeTabIndicator.setVisibility(View.INVISIBLE);
+                    //}
                 } else {
                     findViewById(R.id.header_layout).setVisibility(View.VISIBLE);
+
+                    //if (activeTabIndicator != null) {
+                    //    activeTabIndicator.setVisibility(View.VISIBLE);
+                    //}
                 }
             });
-        }
+        }*/
 
     }
 
@@ -137,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        NavController navController = getNavController();
+        /*NavController navController = getNavController();
         if (navController == null) return;
 
         // Navigate to Chords fragment if needed
@@ -149,6 +173,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             getIntent().removeExtra("openChords"); // Prevents multiple navigations
+        }*/
+        if (getIntent().getBooleanExtra("openChords", false)) {
+            Intent intent = new Intent(this, ChordsDisplayActivity.class);
+            startActivity(intent);
+
+            getIntent().removeExtra("openChords"); // Prevents multiple openings
         }
     }
 

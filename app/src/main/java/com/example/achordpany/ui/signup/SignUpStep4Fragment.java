@@ -29,8 +29,15 @@ import com.example.achordpany.ui.auth.WelcomeActivity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpStep4Fragment extends Fragment {
+
+    private FirebaseAuth auth;
+    FirebaseHelper firebaseHelper;
+
     private ImageView profileImageView;
     private TextView profileName;
     private TextView passwordValue;
@@ -42,6 +49,9 @@ public class SignUpStep4Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_signup_4, container, false);
         SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+
+        auth = FirebaseAuth.getInstance();
+        firebaseHelper = new FirebaseHelper(getContext());
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
 
@@ -67,7 +77,7 @@ public class SignUpStep4Fragment extends Fragment {
 
             if(checkBox_Terms.isChecked()) {
 
-                saveToFirebaseDatabase();   // New User saved to Firebase (Authentication) Database
+                saveToFirebaseDatabase();   // New User saved to Firebase (Authentication and Realtime) Database
                 resetSignUpCredentials();   // Ready for next new Sign-Up
 
                 Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
@@ -131,7 +141,36 @@ public class SignUpStep4Fragment extends Fragment {
 
     private void saveToFirebaseDatabase() {
 
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+        String new_username = signUpCredentials.get_credential_usernameText();
+        String new_emailAddress = signUpCredentials.get_credential_emailAddressText();
+        String new_password = signUpCredentials.get_credential_passwordText();
+        ArrayList<String> new_genres = signUpCredentials.get_credential_genre();
 
+        // Firebase Authentication
+        auth.createUserWithEmailAndPassword(new_emailAddress, new_password).addOnCompleteListener(task -> {
+
+            if(task.isSuccessful()) {
+                Log.d("SignUpStep4Fragment", "[SUCCESS] Sign Up Successful!");
+            } else {
+                Log.e("SignUpStep4Fragment", "[FAILED] Sign Up Error: " + Objects.requireNonNull(task.getException()).getMessage());
+            }
+
+        });
+
+        // Firebase Realtime Database
+        ArrayList<String> new_history = new ArrayList<>();
+        new_history.add("EMPTY - History1");
+        new_history.add("EMPTY - History2");
+        new_history.add("EMPTY - History3");
+
+        ArrayList<String> new_bookmarks = new ArrayList<>();
+        new_bookmarks.add("EMPTY - Bookmark1");
+        new_bookmarks.add("EMPTY - Bookmark2");
+        new_bookmarks.add("EMPTY - Bookmark3");
+
+        //                          USERNAME          EMAIL         GENRES      HISTORY      BOOKMARKS
+        firebaseHelper.addNewUser(new_username, new_emailAddress, new_genres, new_history, new_bookmarks);
 
     }
 

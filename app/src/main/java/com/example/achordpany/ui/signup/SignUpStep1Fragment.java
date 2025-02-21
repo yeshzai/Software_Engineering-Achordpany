@@ -30,13 +30,6 @@ import java.util.ArrayList;
 
 public class SignUpStep1Fragment extends Fragment {
 
-
-    public TextView usernameText;
-    public TextView emailAddressText;
-    public TextView passwordText;
-    public TextView confirmPasswordText;
-
-
     private boolean isPasswordVisible = false;
     private boolean isConfirmPasswordVisible = false;
     public TextView usernameText;
@@ -56,41 +49,32 @@ public class SignUpStep1Fragment extends Fragment {
         emailAddressText = view.findViewById(R.id.emailAddressText);
         passwordText = view.findViewById(R.id.passwordText);
         confirmPasswordText = view.findViewById(R.id.confirmPasswordText);
-
-
-        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
-
         backtrackContent();
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
-            resetSignUpCredentials();
 
+            resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
+
         });
 
 
         // PASSWORD HIDE/VISIBLE
         passwordText.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                // Get the width of the EditText, including padding
                 int width = passwordText.getWidth();
                 int paddingRight = passwordText.getPaddingRight();
-
-                // Get the X-coordinate of the touch event
                 float touchX = event.getX();
 
-                // Check if the touch is on the drawableEnd (right drawable)
                 if (touchX > width - paddingRight - passwordText.getCompoundDrawables()[2].getBounds().width()) {
 
                     if(!passwordText.isFocused()) {
                         passwordText.requestFocus();
                     }
 
-                    // Toggle password visibility
-                    if (isPasswordVisible) {
-                        // Hide password (show asterisks)
+                    if (isPasswordVisible) {    // HIDE
                         passwordText.setTransformationMethod(new PasswordTransformationMethod());
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
@@ -98,8 +82,7 @@ public class SignUpStep1Fragment extends Fragment {
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
                                 null  // drawableBottom
                         );
-                    } else {
-                        // Show password (plain text)
+                    } else {    // SHOW
                         passwordText.setTransformationMethod(null);
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
@@ -108,37 +91,29 @@ public class SignUpStep1Fragment extends Fragment {
                                 null  // drawableBottom
                         );
                     }
-                    // Toggle the flag
-                    isPasswordVisible = !isPasswordVisible;
 
-                    // Keep the cursor at the end of the text
+                    isPasswordVisible = !isPasswordVisible;
                     passwordText.setSelection(passwordText.getText().length());
-                    return true; // Consume the touch event
+                    return true;
                 }
             }
-            return false; // Let other events (like text input) occur
+            return false;
         });
 
         // CONFIRM PASSWORD HIDE/VISIBLE
         confirmPasswordText.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                // Get the width of the EditText, including padding
                 int width = confirmPasswordText.getWidth();
                 int paddingRight = confirmPasswordText.getPaddingRight();
-
-                // Get the X-coordinate of the touch event
                 float touchX = event.getX();
 
-                // Check if the touch is on the drawableEnd (right drawable)
                 if (touchX > width - paddingRight - confirmPasswordText.getCompoundDrawables()[2].getBounds().width()) {
 
                     if(!confirmPasswordText.isFocused()) {
                         confirmPasswordText.requestFocus();
                     }
 
-                    // Toggle password visibility
-                    if (isConfirmPasswordVisible) {
-                        // Hide password (show asterisks)
+                    if (isConfirmPasswordVisible) { // HIDE
                         confirmPasswordText.setTransformationMethod(new PasswordTransformationMethod());
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
@@ -146,8 +121,7 @@ public class SignUpStep1Fragment extends Fragment {
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
                                 null  // drawableBottom
                         );
-                    } else {
-                        // Show password (plain text)
+                    } else {    // SHOW
                         confirmPasswordText.setTransformationMethod(null);
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
@@ -156,21 +130,19 @@ public class SignUpStep1Fragment extends Fragment {
                                 null  // drawableBottom
                         );
                     }
-                    // Toggle the flag
-                    isConfirmPasswordVisible = !isConfirmPasswordVisible;
 
-                    // Keep the cursor at the end of the text
+                    isConfirmPasswordVisible = !isConfirmPasswordVisible;
                     confirmPasswordText.setSelection(confirmPasswordText.getText().length());
-                    return true; // Consume the touch event
+                    return true;
                 }
             }
-            return false; // Let other events (like text input) occur
+            return false;
         });
 
 
         Button btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(v -> {
-            // CODE HERE - Store credentials in SignUpCredentials class.
+
             SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
 
             String user_usernameText = usernameText.getText().toString();
@@ -212,13 +184,11 @@ public class SignUpStep1Fragment extends Fragment {
         ImageButton btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> {
 
-            // Reset (to Default) - SignUpCredentials
             resetSignUpCredentials();
-
-            // Open Welcome
             Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
             startActivity(intent);
             requireActivity().finish();
+
         });
 
         return view;

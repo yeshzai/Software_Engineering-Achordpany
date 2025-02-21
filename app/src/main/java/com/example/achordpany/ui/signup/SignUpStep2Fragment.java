@@ -97,11 +97,12 @@ public class SignUpStep2Fragment extends Fragment {
         }
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
-        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+
             resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
+
         });
 
         Button btnContinue = view.findViewById(R.id.btnContinue);

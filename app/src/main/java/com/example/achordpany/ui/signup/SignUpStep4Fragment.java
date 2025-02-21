@@ -63,6 +63,7 @@ public class SignUpStep4Fragment extends Fragment {
         passwordValue.setText(signUpCredentials.get_credential_passwordText());
         genresValue.setText(signUpCredentials.get_credential_genre().toString());
 
+        // Sign Up button logic
         Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
         btnSignUpEnd.setOnClickListener(v -> {
             Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();

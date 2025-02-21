@@ -1,6 +1,8 @@
 package com.example.achordpany.ui.signup;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.example.achordpany.R;
 
 public class SignUpActivity extends AppCompatActivity {
+    private Uri selectedProfileImageUri;  // Store the selected image
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +45,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
 
+    }
 
+    public void setSelectedProfileImageUri(Uri uri) {
+        this.selectedProfileImageUri = uri;
+        Log.d("SignUpActivity", "Stored Image URI: " + uri);
+    }
+
+    public Uri getSelectedProfileImageUri() {
+        Log.d("SignUpActivity", "Retrieving Image URI: " + selectedProfileImageUri);
+        return selectedProfileImageUri;
     }
 
 }

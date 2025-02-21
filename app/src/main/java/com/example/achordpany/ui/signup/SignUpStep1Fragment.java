@@ -3,7 +3,9 @@ package com.example.achordpany.ui.signup;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.text.method.PasswordTransformationMethod;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,6 +30,13 @@ import java.util.ArrayList;
 
 public class SignUpStep1Fragment extends Fragment {
 
+
+    public TextView usernameText;
+    public TextView emailAddressText;
+    public TextView passwordText;
+    public TextView confirmPasswordText;
+
+
     private boolean isPasswordVisible = false;
     private boolean isConfirmPasswordVisible = false;
     public TextView usernameText;
@@ -36,6 +45,7 @@ public class SignUpStep1Fragment extends Fragment {
     public EditText confirmPasswordText;
 
     @SuppressLint("ClickableViewAccessibility")
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,14 +56,20 @@ public class SignUpStep1Fragment extends Fragment {
         emailAddressText = view.findViewById(R.id.emailAddressText);
         passwordText = view.findViewById(R.id.passwordText);
         confirmPasswordText = view.findViewById(R.id.confirmPasswordText);
+
+
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+
         backtrackContent();
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
             resetSignUpCredentials();
+
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
         });
+
 
         // PASSWORD HIDE/VISIBLE
         passwordText.setOnTouchListener((v, event) -> {
@@ -150,6 +166,7 @@ public class SignUpStep1Fragment extends Fragment {
             }
             return false; // Let other events (like text input) occur
         });
+
 
         Button btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(v -> {

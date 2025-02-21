@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1041044240973",
+    "firebase_url": "https://achordpany-a0423-default-rtdb.firebaseio.com",
+    "project_id": "achordpany-a0423",
+    "storage_bucket": "achordpany-a0423.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041044240973:android:d0725914de3eae670a7a04",
+        "android_client_info": {
+          "package_name": "com.example.achordpany"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtQuVrk6viqqsy_q_Z6dHsqkfiB6JqfTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

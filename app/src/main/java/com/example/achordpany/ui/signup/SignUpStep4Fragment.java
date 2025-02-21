@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -45,6 +47,7 @@ public class SignUpStep4Fragment extends Fragment {
             }
 
             // Navigate to MainActivity
+            Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
             startActivity(intent);
             requireActivity().finish(); // Close SignUpActivity

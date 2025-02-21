@@ -175,7 +175,7 @@
 
     <!-- Agreement Checkbox -->
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox_Terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I Agree to Terms &amp; Conditions and Privacy Policy"

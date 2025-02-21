@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.net.Uri;
 
@@ -22,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.achordpany.R;
+import com.example.achordpany.ui.auth.LoginActivity;
 import com.example.achordpany.ui.auth.WelcomeActivity;
 
 import java.io.IOException;
@@ -29,14 +31,38 @@ import java.io.InputStream;
 
 public class SignUpStep4Fragment extends Fragment {
     private ImageView profileImageView;
+    private TextView profileName;
+    private TextView passwordValue;
+    private TextView genresValue;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_signup_4, container, false);
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), LoginActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         // Sign Up button logic
+        profileImageView = view.findViewById(R.id.profileImage);
+        profileName = view.findViewById(R.id.profileName);
+        passwordValue = view.findViewById(R.id.passwordValue);
+        genresValue = view.findViewById(R.id.genresValue);
+        CheckBox checkBox_Terms = view.findViewById(R.id.checkBox_Terms);
+
+        Log.d("SignUpCredentials Username", signUpCredentials.get_credential_usernameText());
+        Log.d("SignUpCredentials Password", signUpCredentials.get_credential_passwordText());
+        Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().toString());
+
+        profileName.setText(signUpCredentials.get_credential_usernameText());
+        passwordValue.setText(signUpCredentials.get_credential_passwordText());
+        genresValue.setText(signUpCredentials.get_credential_genre().toString());
+
         Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
         btnSignUpEnd.setOnClickListener(v -> {
             Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();
@@ -44,6 +70,15 @@ public class SignUpStep4Fragment extends Fragment {
             if (selectedImageUri != null) {
                 SharedPreferences prefs = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                 prefs.edit().putString("profile_image_uri", selectedImageUri.toString()).apply();
+            }
+
+            if(checkBox_Terms.isChecked()) {
+                Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
+                startActivity(intent);
+                requireActivity().finish();
+            } else {
+                Toast.makeText(getContext(), "Please accept the Terms and Conditions!", Toast.LENGTH_SHORT).show();
             }
 
             // Navigate to MainActivity
@@ -58,9 +93,6 @@ public class SignUpStep4Fragment extends Fragment {
         btnBack.setOnClickListener(v -> {
             ((SignUpActivity) requireActivity()).navigateToStep(3);
         });
-
-        // Get ImageView reference
-        profileImageView = view.findViewById(R.id.profileImage);
 
         // Get the selected image URI from SignUpActivity
         Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();

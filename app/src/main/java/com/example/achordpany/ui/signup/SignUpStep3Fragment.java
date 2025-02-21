@@ -1,5 +1,6 @@
 package com.example.achordpany.ui.signup;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.achordpany.R;
+import com.example.achordpany.ui.auth.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,12 @@ public class SignUpStep3Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_signup_3, container, false);
         genres = new ArrayList<>();
+
+        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), LoginActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         Button genreButton_Rock = view.findViewById(R.id.genreButton_Rock);
         genreButton_Rock.setOnClickListener(v -> {
@@ -159,12 +167,9 @@ public class SignUpStep3Fragment extends Fragment {
         btnContinue.setOnClickListener(v -> {
 
             if(genres.size() == 3) {
-                SignUpCredentials signUpCredentials = new SignUpCredentials();
+                SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
                 signUpCredentials.set_credential_genre(genres);
-
-                for(int i = 0; i < signUpCredentials.get_credential_genre().size(); i++) {
-                    Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().get(i));
-                }
+                Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().toString());
 
                 ((SignUpActivity) requireActivity()).navigateToStep(4);
             } else {

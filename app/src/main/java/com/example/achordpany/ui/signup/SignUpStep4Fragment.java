@@ -21,6 +21,8 @@ import com.example.achordpany.R;
 import com.example.achordpany.ui.auth.LoginActivity;
 import com.example.achordpany.ui.auth.WelcomeActivity;
 
+import java.util.ArrayList;
+
 public class SignUpStep4Fragment extends Fragment {
 
     private ImageView profileImage;
@@ -36,6 +38,7 @@ public class SignUpStep4Fragment extends Fragment {
         SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+            resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
@@ -59,6 +62,10 @@ public class SignUpStep4Fragment extends Fragment {
         btnSignUpEnd.setOnClickListener(v -> {
 
             if(checkBox_Terms.isChecked()) {
+
+                saveToFirebaseDatabase();   // New User saved to Firebase (Authentication) Database
+                resetSignUpCredentials();   // Ready for next new Sign-Up
+
                 Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
                 startActivity(intent);
@@ -77,4 +84,22 @@ public class SignUpStep4Fragment extends Fragment {
         return view;
 
     }
+
+    private void saveToFirebaseDatabase() {
+
+
+
+    }
+
+    private void resetSignUpCredentials() {
+
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+        signUpCredentials.set_credential_usernameText("");
+        signUpCredentials.set_credential_emailAddressText("");
+        signUpCredentials.set_credential_passwordText("");
+        signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_genre(new ArrayList<>());
+
+    }
+
 }

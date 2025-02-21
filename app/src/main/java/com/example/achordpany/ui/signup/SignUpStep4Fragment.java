@@ -36,7 +36,6 @@ public class SignUpStep4Fragment extends Fragment {
     private TextView passwordValue;
     private TextView genresValue;
 
-    private ImageView profileImage;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class SignUpStep4Fragment extends Fragment {
 
         });
 
-        profileImage = view.findViewById(R.id.profileImage);
+        profileImageView = view.findViewById(R.id.profileImage);
         profileName = view.findViewById(R.id.profileName);
         passwordValue = view.findViewById(R.id.passwordValue);
         genresValue = view.findViewById(R.id.genresValue);

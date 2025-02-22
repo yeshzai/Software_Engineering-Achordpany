@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.achordpany.MainActivity;
+import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.signup.SignUpActivity;
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login); // Ensure this matches your Login layout file
 
+        auth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
 
@@ -95,29 +97,43 @@ public class LoginActivity extends AppCompatActivity {
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
-            // LogIn using Firebase Database
-            auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
+            if(!email.isEmpty() && !password.isEmpty()) {
 
-                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    Log.d("Login", "[SUCCESS] Login Successful!");
+                // Add restrictions for email (gmail.com, bicol-u.edu.ph, yahoo.com, etc).
 
-                    // Go to Main Page
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                // LogIn using Firebase Database
+                auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                        Log.d("Login", "[SUCCESS] Login Successful!");
 
-                    Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
-                    Log.d("Login", "[FAILED] Login Failed!");
+                        // Invoke Firebase Database to Local Database
+                        // However, we need first an algorithm to get the USERNAME from USER_CREDENTIALS in database.
+                        // Main_EverythingLocalDatabase main_EverythingLocalDatabase = new Main_EverythingLocalDatabase();
 
-                }
-            });
+                        // Go to Main Page
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
+                        Log.d("Login", "[FAILED] Login Failed!");
+
+                    }
+                });
+
+            } else {
+
+                Toast.makeText(LoginActivity.this, "Please Fill In All Fields!", Toast.LENGTH_SHORT).show();
+
+            }
 
         });
 

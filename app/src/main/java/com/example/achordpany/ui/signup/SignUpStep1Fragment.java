@@ -150,32 +150,40 @@ public class SignUpStep1Fragment extends Fragment {
             String user_passwordText = passwordText.getText().toString();
             String user_confirmPasswordText = confirmPasswordText.getText().toString();
 
-            if(!user_usernameText.isEmpty() && !user_emailAddressText.isEmpty()
-                    && !user_passwordText.isEmpty() && !user_confirmPasswordText.isEmpty())
-            {
-                if (user_passwordText.equals(user_confirmPasswordText)) {
+            if(username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
 
-                    signUpCredentials.set_credential_usernameText(user_usernameText);
-                    signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
-                    signUpCredentials.set_credential_passwordText(user_passwordText);
-                    signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
+                if(!user_usernameText.isEmpty() && !user_emailAddressText.isEmpty()
+                        && !user_passwordText.isEmpty() && !user_confirmPasswordText.isEmpty())
+                {
+                    if (user_passwordText.equals(user_confirmPasswordText)) {
 
-                    // Testing purposes - Logcat
-                    Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
-                    Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
-                    Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
-                    Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
+                        signUpCredentials.set_credential_usernameText(user_usernameText);
+                        signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
+                        signUpCredentials.set_credential_passwordText(user_passwordText);
+                        signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
 
-                    ((SignUpActivity) requireActivity()).navigateToStep(2);
+                        // Testing purposes - Logcat
+                        Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
+                        Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
+                        Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
+                        Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
 
+                        ((SignUpActivity) requireActivity()).navigateToStep(2);
+
+                    } else {
+
+                        Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+
+                    }
                 } else {
 
-                    Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
                 }
-            } else {
 
-                Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
+            } else {  // [KEY - CHILD_NAME] Username Contain Invalid Character(s)
+
+                Toast.makeText(requireActivity(), "Username Invalid! Remove [., $, #, [, ], /]", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -218,6 +226,22 @@ public class SignUpStep1Fragment extends Fragment {
         signUpCredentials.set_credential_passwordText("");
         signUpCredentials.set_credential_confirmPasswordText("");
         signUpCredentials.set_credential_genre(new ArrayList<>());
+
+    }
+
+    private boolean username_valid(String check_username) {
+
+        String[] forbidden_keys = {".", "$", "#", "[", "]", "/"};
+        boolean the_result = false;
+
+        for(String i : forbidden_keys) {
+            if(check_username.contains(i)) {
+                the_result = true;
+                break;
+            }
+        }
+
+        return the_result;
 
     }
 

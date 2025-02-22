@@ -65,7 +65,7 @@
 
     <!-- Username EditText -->
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextEmail"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="200dp"

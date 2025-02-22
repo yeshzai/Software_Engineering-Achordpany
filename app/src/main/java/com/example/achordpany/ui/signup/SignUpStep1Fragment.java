@@ -150,7 +150,7 @@ public class SignUpStep1Fragment extends Fragment {
             String user_passwordText = passwordText.getText().toString();
             String user_confirmPasswordText = confirmPasswordText.getText().toString();
 
-            if(username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
+            if(!username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
 
                 if(!user_usernameText.isEmpty() && !user_emailAddressText.isEmpty()
                         && !user_passwordText.isEmpty() && !user_confirmPasswordText.isEmpty())

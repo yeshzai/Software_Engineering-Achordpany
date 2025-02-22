@@ -7,9 +7,13 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.PasswordTransformationMethod;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -17,10 +21,17 @@ import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.signup.SignUpActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
 
+    private FirebaseAuth auth;
+
     private boolean isPasswordVisible = false;
-    private EditText editTextUsername;
+    private EditText editTextEmail;
     private EditText editTextPassword;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -29,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login); // Ensure this matches your Login layout file
 
-        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
 
         // PASSWORD HIDE/VISIBLE
@@ -81,11 +92,32 @@ public class LoginActivity extends AppCompatActivity {
         // If login is successful, navigate to MainActivity (which hosts HomeFragment)
         findViewById(R.id.buttonLogin).setOnClickListener(v -> {
 
-            // LogIn using Firebase Database
+            String email = editTextEmail.getText().toString();
+            String password = editTextPassword.getText().toString();
 
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            // LogIn using Firebase Database
+            auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+
+                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    Log.d("Login", "[SUCCESS] Login Successful!");
+
+                    // Go to Main Page
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
+                    Log.d("Login", "[FAILED] Login Failed!");
+
+                }
+            });
 
         });
 
@@ -112,5 +144,6 @@ public class LoginActivity extends AppCompatActivity {
         // Set the styled text to the TextView
         textNoAccount.setText(spannable);
     }
+
 }
 

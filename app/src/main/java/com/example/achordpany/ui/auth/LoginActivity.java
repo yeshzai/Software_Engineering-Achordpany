@@ -27,6 +27,18 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.concurrent.TimeUnit;
+
+interface UsernameCallBack {
+    void onUsernameReceived(String username);
+}
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -109,14 +121,35 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                         Log.d("Login", "[SUCCESS] Login Successful!");
 
-                        // Invoke Firebase Database to Local Database
-                        // However, we need first an algorithm to get the USERNAME from USER_CREDENTIALS in database.
-                        // Main_EverythingLocalDatabase main_EverythingLocalDatabase = new Main_EverythingLocalDatabase();
+                        // Load Firebase to Local Database
+                        findUsernameByEmail(email, new UsernameCallBack() {
+                            @Override
+                            public void onUsernameReceived(String username) {
 
-                        // Go to Main Page
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                                if(username != null) {
+
+                                    Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
+                                    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
+                                    main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
+                                    try {
+                                        TimeUnit.MILLISECONDS.sleep(500);   // Make sure that database is fully loaded (half a second)
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                    // Go to Main Page
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+
+                                } else {
+
+                                    Log.d("USERNAME SEARCH", "[FAILED] Username Not Found!");
+
+                                }
+
+                            }
+                        });
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -159,6 +192,41 @@ public class LoginActivity extends AppCompatActivity {
 
         // Set the styled text to the TextView
         textNoAccount.setText(spannable);
+    }
+
+    // Getting Username by Email Logged In
+    private void findUsernameByEmail(String the_email, UsernameCallBack callBack) {
+
+        DatabaseReference userCredentials = FirebaseDatabase.getInstance().getReference("Users_Credentials");
+
+        userCredentials.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap_shot : snapshot.getChildren()) {
+
+                    String emailFromDB = snap_shot.child("email").getValue(String.class);
+                    if(emailFromDB != null && emailFromDB.equals(the_email)) {
+
+                        String return_username = snap_shot.child("username").getValue(String.class);
+                        callBack.onUsernameReceived(return_username);
+                        return; // Stop searching once found.
+
+                    }
+
+                }
+                callBack.onUsernameReceived(null);  // No email is found.
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                callBack.onUsernameReceived(null);
+
+            }
+        });
+
     }
 
 }

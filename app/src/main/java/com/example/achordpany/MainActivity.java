@@ -1,5 +1,6 @@
 package com.example.achordpany;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
@@ -33,6 +34,9 @@ import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.ui.search.SongSearchActivity;
 import com.example.achordpany.databinding.ActivityMainBinding;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private int tabWidth;
     private SharedViewModel sharedViewModel;
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Load Profile Image using Glide
+        Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
+        Uri avatarUID_Path = Uri.parse(main_EverythingLocalDatabase.get_AvatarUID());
+
         Glide.with(this)
-                .load("file:///android_asset/profile_images/horse.png")
+                .load(avatarUID_Path)
                 .placeholder(R.drawable.profile_placeholder)
                 .error(R.drawable.profile_placeholder)
                 .into(profileImageView);

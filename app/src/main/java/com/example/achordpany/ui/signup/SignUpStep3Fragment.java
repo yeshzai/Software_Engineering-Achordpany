@@ -242,6 +242,7 @@ public class SignUpStep3Fragment extends Fragment {
         signUpCredentials.set_credential_emailAddressText("");
         signUpCredentials.set_credential_passwordText("");
         signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_avatarUID("");
         signUpCredentials.set_credential_genre(new ArrayList<>());
 
     }

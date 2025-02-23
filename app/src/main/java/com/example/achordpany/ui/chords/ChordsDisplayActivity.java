@@ -1,6 +1,7 @@
 package com.example.achordpany.ui.chords;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -10,15 +11,30 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.achordpany.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChordsDisplayActivity extends AppCompatActivity {
+
+    private String song_TITLE;
+    private String song_ARTIST;
+    private String song_URL;
     private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chords);
+
+        // Process Recorded Lyrics
+        SongTitleProcessing songTitleProcessing = SongTitleProcessing.getInstance();
+        get_SongTitleArtist(songTitleProcessing.get_SongLyrics());
+        get_ChordsURL(song_TITLE, song_ARTIST); // We have now the URL inside song_URL.
 
         btnBack = findViewById(R.id.btnBack);
 
@@ -59,6 +75,70 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         // Load URL (Ensure it’s HTTPS)
-        webView.loadUrl("https://tabs.ultimate-guitar.com/");
+        webView.loadUrl(song_URL);
+
     }
+
+    private void get_SongTitleArtist(String songLyrics) {
+
+        Python python = Python.getInstance();
+
+        PyObject pyModule = python.getModule("search_songtitleauthor");
+        if(pyModule == null) {
+            Log.d("SONG TITLE ARTIST", "Python Module Not Found");
+            return;
+        }
+
+        PyObject pyObjectResult = pyModule.callAttr("get_song_by_lyrics", songLyrics);
+        if(pyObjectResult == null || pyObjectResult.toString().equals("None")) {
+            Log.d("SONG TITLE ARTIST", "Python Module Not Found");
+            return;
+        }
+
+        List<PyObject> pyList = pyObjectResult.asList();
+        List<String> songTitleArtistList = new ArrayList<>();
+
+        for (PyObject obj : pyList) {
+
+            List<PyObject> tuple = obj.asList();  // Convert tuple to List
+            String songTitle = tuple.get(0).toString();
+            String artist = tuple.get(1).toString();
+            songTitleArtistList.add(songTitle + "|||||" + artist);  // ||||| is the separator to be used later
+
+        }
+
+        for(String i : songTitleArtistList) {
+            Log.d("SONG TITLE ARTIST", i);
+        }
+
+        Log.d("[TITLE/ARTIST CHOSEN]", songTitleArtistList.get(0));
+
+        String song_TITLEARTIST = songTitleArtistList.get(0);
+        String[] parts = song_TITLEARTIST.split("\\|\\|\\|\\|\\|");
+
+        song_TITLE = parts[0];
+        song_ARTIST = parts.length > 1 ? parts[1] : ""; // Avoid index errors
+
+    }
+
+    private void get_ChordsURL(String search_SongTitle, String search_SongArtist) {
+
+        Python python = Python.getInstance();
+
+        PyObject pyModule = python.getModule("search_chordswebsite");
+        if(pyModule == null) {
+            Log.d("CHORDS WEBSITE", "Python Module Not Found");
+            return;
+        }
+
+        PyObject pyObjectResult = pyModule.callAttr("find_chords", search_SongTitle.trim(), search_SongArtist.trim());
+        if(pyObjectResult == null || pyObjectResult.toString().equals("None")) {
+            Log.d("CHORDS WEBSITE", "Python Module Not Found");
+            return;
+        }
+
+        song_URL = pyObjectResult.toString();
+
+    }
+
 }

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light"
-    tools:context="com.example.achordpany.MainActivity">
+    android:background="@color/background_light">
+
 
     <!-- Header Layout with Back Button and Logo Image -->
     <RelativeLayout
@@ -201,5 +201,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnContinue"
         tools:ignore="HardcodedText,ContentDescription,LabelFor,TextSizeCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

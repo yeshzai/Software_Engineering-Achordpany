@@ -13,6 +13,8 @@ navigationUi = "2.8.2"
 glide = "4.16.0"
 cardview = "1.0.0"
 lottie = "6.1.0"
+firebaseDatabase = "21.0.0"
+firebaseAuth = "23.2.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,6 +32,8 @@ glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "
 cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version = "3.1.0" }
 lottie = {module = "com.airbnb.android:lottie", version.ref = "lottie" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <queries>
+        <package android:name="com.google.android.googlequicksearchbox"/>
+    </queries>
 
     <application
+        android:name=".PythonApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -47,6 +53,16 @@
         <activity android:name=".ui.search.SongSearchActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Signup Activity -->
+        <activity android:name=".ui.signup.SignUpActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Chords Display Activity -->
+        <activity android:name=".ui.chords.ChordsDisplayActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
     </application>
 
 </manifest>

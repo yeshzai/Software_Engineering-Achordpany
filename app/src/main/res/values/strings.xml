@@ -35,4 +35,15 @@
     <string name="listening">Listening…</string>
     <string name="please_wait">Please wait</string>
     <string name="redirecting">Redirecting</string>
+
+    <string name="top_avatar">Top Avatar</string>
+    <string name="selected_avatar">Selected Avatar</string>
+    <string name="select_your_avatar">Select your avatar</string>
+
+    <string name="ic_music_desc">Music note</string>
+    <string name="ic_bookmark_desc">Bookmark</string>
+    <string name="ic_arrow_desc">Arrow</string>
+    <string name="title_text">Title</string>
+    <string name="song_desc">Artist - Genre</string>
+    <string name="item_desc">site | time</string>
 </resources>

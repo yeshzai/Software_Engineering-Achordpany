@@ -66,7 +66,7 @@
                         <TextView
                             android:id="@+id/username"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="USERNAME"
                             android:textColor="@color/black"
                             android:textSize="18sp"
@@ -303,6 +303,7 @@
                         tools:ignore="NestedWeights">
 
                         <TextView
+                            android:id="@+id/recommendations_1_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Title"
@@ -312,6 +313,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
+                            android:id="@+id/recommendations_1_1_artist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
@@ -320,6 +322,7 @@
                             tools:ignore="HardcodedText,SmallSp" />
 
                         <TextView
+                            android:id="@+id/recommendations_1_1_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
@@ -360,6 +363,7 @@
                         tools:ignore="NestedWeights">
 
                         <TextView
+                            android:id="@+id/recommendations_1_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Title"
@@ -369,6 +373,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
+                            android:id="@+id/recommendations_1_2_artist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
@@ -377,6 +382,7 @@
                             tools:ignore="HardcodedText,SmallSp" />
 
                         <TextView
+                            android:id="@+id/recommendations_1_2_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
@@ -427,6 +433,7 @@
                         tools:ignore="NestedWeights">
 
                         <TextView
+                            android:id="@+id/recommendations_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Title"
@@ -436,6 +443,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
+                            android:id="@+id/recommendations_2_artist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
@@ -444,6 +452,7 @@
                             tools:ignore="HardcodedText,SmallSp" />
 
                         <TextView
+                            android:id="@+id/recommendations_2_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
@@ -484,6 +493,7 @@
                         tools:ignore="NestedWeights">
 
                         <TextView
+                            android:id="@+id/recommendations_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Title"
@@ -493,6 +503,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
+                            android:id="@+id/recommendations_3_artist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
@@ -501,6 +512,7 @@
                             tools:ignore="HardcodedText,SmallSp" />
 
                         <TextView
+                            android:id="@+id/recommendations_3_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"

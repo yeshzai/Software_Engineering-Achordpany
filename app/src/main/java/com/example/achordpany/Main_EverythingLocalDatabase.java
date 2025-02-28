@@ -113,17 +113,13 @@ public class Main_EverythingLocalDatabase {
                 this.set_Username(usersCredentials.username);
                 this.set_Email(usersCredentials.email);
                 this.set_AvatarUID(usersCredentials.avatarUID);
-
-                Log.d("Firebase Retrieve", "Username: " + this.get_Username());
-                Log.d("Firebase Retrieve", "Email: " + this.get_Email());
-                Log.d("Firebase Retrieve", "AvatarUID: " + this.get_AvatarUID());
-                Log.d("Firebase Retrieve", "[" + passed_username + "] [SUCCESS] USER CREDENTIALS");
+                Log.d("[FIREBASE RETRIEVE]", "[" + passed_username + "] [SUCCESS] USER CREDENTIALS");
 
             }
 
         }).addOnFailureListener(e -> {
 
-            Log.e("Firebase Retrieve", "[" + passed_username + "] [FAILED] CREDENTIALS: " + e.getMessage());
+            Log.e("[FIREBASE RETRIEVE]", "[" + passed_username + "] [FAILED] CREDENTIALS: " + e.getMessage());
 
         });
 
@@ -136,19 +132,27 @@ public class Main_EverythingLocalDatabase {
                 this.set_Genre((ArrayList<String>) userRecommendationData.Genre);
                 this.set_History((ArrayList<String>) userRecommendationData.History);
                 this.set_Bookmark((ArrayList<String>) userRecommendationData.Bookmarks);
+                Log.d("[FIREBASE RETRIEVE]", "[" + passed_username + "] [SUCCESS] RECOMMENDATION DATA");
 
-                Log.d("Firebase Retrieve", "Genre: " + this.get_Genre());
-                Log.d("Firebase Retrieve", "History: " + this.get_History());
-                Log.d("Firebase Retrieve", "Bookmarks: " + this.get_Bookmark());
-                Log.d("Firebase Retrieve", "[" + passed_username + "] [SUCCESS] RECOMMENDATION DATA");
+                ChordsRecommendations chordsRecommendations = ChordsRecommendations.getInstance();
+                chordsRecommendations.initialize_SongRecommendations(
+                        get_Genre().get(0),
+                        get_Genre().get(1),
+                        get_Genre().get(2));
 
             }
 
         }).addOnFailureListener(e -> {
 
-            Log.e("Firebase Retrieve", "[" + passed_username + "] [FAILED] RECOMMENDATION DATA: " + e.getMessage());
+            Log.e("[FIREBASE RETRIEVE]", "[" + passed_username + "] [FAILED] RECOMMENDATION DATA: " + e.getMessage());
 
         });
+
+    }
+
+    public void mainPage_UpdateFirebase(String passed_username) {
+
+
 
     }
 

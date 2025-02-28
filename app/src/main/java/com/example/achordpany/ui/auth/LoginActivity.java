@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.achordpany.ChordsRecommendations;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
@@ -129,15 +130,18 @@ public class LoginActivity extends AppCompatActivity {
                                 if(username != null) {
 
                                     Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
+
                                     Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
                                     main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
+
                                     try {
-                                        TimeUnit.MILLISECONDS.sleep(500);   // Make sure that database is fully loaded (half a second)
+                                        TimeUnit.MILLISECONDS.sleep(2000);   // Make sure that database is fully loaded.
                                     } catch (InterruptedException e) {
                                         throw new RuntimeException(e);
                                     }
 
                                     // Go to Main Page
+
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();

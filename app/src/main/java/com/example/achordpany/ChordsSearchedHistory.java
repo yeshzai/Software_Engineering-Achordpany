@@ -1,18 +1,22 @@
-package com.example.achordpany.ui.chords;
+package com.example.achordpany;
 
 import java.util.ArrayList;
 
 public class ChordsSearchedHistory {
 
-    // Used for fragment_home
-    // Used for HomeFragment.java
+    /*
+        THIS WILL BE USED BY THE FF. JAVA CLASSES:
+
+        1. HomeFragment.java - Show two(2) latest/recent history content.
+        2. HistoryFragment.java - Show all history content.
+        3. Main_EverythingLocalDatabase.java - Save all history content to Firebase.
+    */
 
     private static ChordsSearchedHistory instance;
     private ArrayList<String> title = new ArrayList<>();
     private ArrayList<String> artist = new ArrayList<>();
     private ArrayList<String> genre = new ArrayList<>();
     private ArrayList<String> site = new ArrayList<>();
-    private ArrayList<String> time = new ArrayList<>();
     private ArrayList<String> url = new ArrayList<>();
 
     public static ChordsSearchedHistory getInstance() {
@@ -34,9 +38,6 @@ public class ChordsSearchedHistory {
     public void set_Site(String site) {
         this.site.add(site);
     }
-    public void set_Time(String time) {
-        this.time.add(time);
-    }
     public void set_URL(String url) {
         this.url.add(url);
     }
@@ -52,9 +53,6 @@ public class ChordsSearchedHistory {
     }
     public ArrayList<String> get_Site() {
         return site;
-    }
-    public ArrayList<String> get_Time() {
-        return time;
     }
     public ArrayList<String> get_URL() {
         return url;

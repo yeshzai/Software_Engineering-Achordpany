@@ -20,6 +20,7 @@ import com.chaquo.python.Python;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentProfileBinding;
+import com.example.achordpany.ui.home.ChordsRecommendations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ProfileFragment extends Fragment {
         String avatar_UID = main_EverythingLocalDatabase.get_AvatarUID();
         ArrayList<String> genre = main_EverythingLocalDatabase.get_Genre();
         Uri avatarUID_Path = Uri.parse(main_EverythingLocalDatabase.get_AvatarUID());
-        get_SongRecommendations(genre.get(0), genre.get(1), genre.get(2));
+        get_SongRecommendations();
 
         binding.username.setText(username);
         binding.emailPlaceholder.setText(email);
@@ -64,22 +65,6 @@ public class ProfileFragment extends Fragment {
         binding.genrePlaceholder2.setText(genre.get(1));
         binding.genrePlaceholder3.setText(genre.get(2));
         Glide.with(this).load(avatar_UID).into(binding.profileImage);
-
-        binding.recommendations11.setText(songRecommendation_TITLE1_1);
-        binding.recommendations11Artist.setText(songRecommendation_ARTIST1_1);
-        binding.recommendations11Genre.setText(genre.get(0));
-
-        binding.recommendations12.setText(songRecommendation_TITLE1_2);
-        binding.recommendations12Artist.setText(songRecommendation_ARTIST1_2);
-        binding.recommendations12Genre.setText(genre.get(0));
-
-        binding.recommendations2.setText(songRecommendation_TITLE2);
-        binding.recommendations2Artist.setText(songRecommendation_ARTIST2);
-        binding.recommendations2Genre.setText(genre.get(1));
-
-        binding.recommendations3.setText(songRecommendation_TITLE3);
-        binding.recommendations3Artist.setText(songRecommendation_ARTIST3);
-        binding.recommendations3Genre.setText(genre.get(2));
 
         // Get the SharedViewModel instance
         SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
@@ -101,71 +86,17 @@ public class ProfileFragment extends Fragment {
         binding = null;
     }
 
-    private void get_SongRecommendations(String genre1, String genre2, String genre3) {
+    private void get_SongRecommendations() {
 
-        Python python = Python.getInstance();
+        ChordsRecommendations chordsRecommendations = ChordsRecommendations.getInstance();
 
-        PyObject pyModule = python.getModule("search_recommendations");
-        if(pyModule == null) {
-            Log.d("SONG RECOMMENDATIONS", "Python Module Not Found");
-            return;
-        }
-
-        PyObject pyObjectResultGenre1 = pyModule.callAttr("get_songs_by_genre", genre1);
-        PyObject pyObjectResultGenre2 = pyModule.callAttr("get_songs_by_genre", genre2);
-        PyObject pyObjectResultGenre3 = pyModule.callAttr("get_songs_by_genre", genre3);
-        if(pyObjectResultGenre1 == null || pyObjectResultGenre1.toString().equals("None")) {
-            Log.d("SONG RECOMMENDATIONS [1]", "Python Module Not Found");
-            return;
-        }
-        if(pyObjectResultGenre2 == null || pyObjectResultGenre2.toString().equals("None")) {
-            Log.d("SONG RECOMMENDATIONS [2]", "Python Module Not Found");
-            return;
-        }
-        if(pyObjectResultGenre3 == null || pyObjectResultGenre3.toString().equals("None")) {
-            Log.d("SONG RECOMMENDATIONS [3]", "Python Module Not Found");
-            return;
-        }
-
-        List<PyObject> pyListGenre1 = pyObjectResultGenre1.asList();
-        List<PyObject> pyListGenre2 = pyObjectResultGenre2.asList();
-        List<PyObject> pyListGenre3 = pyObjectResultGenre3.asList();
-
-        List<String> songRecommendationListGenre1 = new ArrayList<>();
-        List<String> songRecommendationListGenre2 = new ArrayList<>();
-        List<String> songRecommendationListGenre3 = new ArrayList<>();
-
-        for(PyObject obj : pyListGenre1) {
-
-            List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            songRecommendationListGenre1.add(songTitle + "|||||" + artist); // ||||| is the separator to be used later
-
-        }
-
-        for(PyObject obj : pyListGenre2) {
-
-            List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            songRecommendationListGenre2.add(songTitle + "|||||" + artist); // ||||| is the separator to be used later
-
-        }
-
-        for(PyObject obj : pyListGenre3) {
-
-            List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            songRecommendationListGenre3.add(songTitle + "|||||" + artist); // ||||| is the separator to be used later
-
-        }
-
-        String[] songTITLEARTIST_Genre1_1 = songRecommendationListGenre1.get(0).split("\\|\\|\\|\\|\\|");
-        String[] songTITLEARTIST_Genre1_2 = songRecommendationListGenre1.get(1).split("\\|\\|\\|\\|\\|");
-        String[] songTITLEARTIST_Genre2 = songRecommendationListGenre2.get(0).split("\\|\\|\\|\\|\\|");
-        String[] songTITLEARTIST_Genre3 = songRecommendationListGenre3.get(0).split("\\|\\|\\|\\|\\|");
+        String[] songTITLEARTIST_Genre1_1 = chordsRecommendations.get_RecommendationsGenre1().get(0).split("\\|\\|\\|\\|\\|");
+        String[] songTITLEARTIST_Genre1_2 = chordsRecommendations.get_RecommendationsGenre1().get(1).split("\\|\\|\\|\\|\\|");
+        String[] songTITLEARTIST_Genre2 = chordsRecommendations.get_RecommendationsGenre2().get(0).split("\\|\\|\\|\\|\\|");
+        String[] songTITLEARTIST_Genre3 = chordsRecommendations.get_RecommendationsGenre3().get(0).split("\\|\\|\\|\\|\\|");
+        String genre1 = chordsRecommendations.get_Genres().get(0);
+        String genre2 = chordsRecommendations.get_Genres().get(1);
+        String genre3 = chordsRecommendations.get_Genres().get(2);
 
         songRecommendation_TITLE1_1 = songTITLEARTIST_Genre1_1[0];
         songRecommendation_ARTIST1_1 = songTITLEARTIST_Genre1_1.length > 1 ? songTITLEARTIST_Genre1_1[1] : ""; // Avoid index errors
@@ -175,6 +106,22 @@ public class ProfileFragment extends Fragment {
         songRecommendation_ARTIST2 = songTITLEARTIST_Genre2.length > 1 ? songTITLEARTIST_Genre2[1] : ""; // Avoid index errors
         songRecommendation_TITLE3 = songTITLEARTIST_Genre3[0];
         songRecommendation_ARTIST3 = songTITLEARTIST_Genre3.length > 1 ? songTITLEARTIST_Genre3[1] : ""; // Avoid index errors
+
+        binding.recommendations11.setText(songRecommendation_TITLE1_1);
+        binding.recommendations11Artist.setText(songRecommendation_ARTIST1_1);
+        binding.recommendations11Genre.setText(genre1);
+
+        binding.recommendations12.setText(songRecommendation_TITLE1_2);
+        binding.recommendations12Artist.setText(songRecommendation_ARTIST1_2);
+        binding.recommendations12Genre.setText(genre1);
+
+        binding.recommendations2.setText(songRecommendation_TITLE2);
+        binding.recommendations2Artist.setText(songRecommendation_ARTIST2);
+        binding.recommendations2Genre.setText(genre2);
+
+        binding.recommendations3.setText(songRecommendation_TITLE3);
+        binding.recommendations3Artist.setText(songRecommendation_ARTIST3);
+        binding.recommendations3Genre.setText(genre3);
 
     }
 

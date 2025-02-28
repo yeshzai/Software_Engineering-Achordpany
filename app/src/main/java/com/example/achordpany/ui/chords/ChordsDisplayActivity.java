@@ -14,10 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
+import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
-import com.example.achordpany.ui.auth.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +152,6 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         chordsSearchedHistory.set_Artist(search_SongArtist);
         chordsSearchedHistory.set_Genre("No Genre");
         chordsSearchedHistory.set_Site("Ultimate Guitar");
-        chordsSearchedHistory.set_Time("No Time");  // Get current time. Format: dd/MM/yyyy HH:mm
         chordsSearchedHistory.set_URL(song_URL);
 
     }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.util.Log;
 
 
@@ -15,15 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.chaquo.python.PyObject;
-import com.chaquo.python.Python;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentProfileBinding;
-import com.example.achordpany.ui.home.ChordsRecommendations;
+import com.example.achordpany.ChordsRecommendations;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
@@ -51,12 +47,10 @@ public class ProfileFragment extends Fragment {
 
         // Data Insertion
         Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
-
         String username = main_EverythingLocalDatabase.get_Username();
         String email = main_EverythingLocalDatabase.get_Email();
         String avatar_UID = main_EverythingLocalDatabase.get_AvatarUID();
         ArrayList<String> genre = main_EverythingLocalDatabase.get_Genre();
-        Uri avatarUID_Path = Uri.parse(main_EverythingLocalDatabase.get_AvatarUID());
         get_SongRecommendations();
 
         binding.username.setText(username);

@@ -43,7 +43,7 @@ public class SongSearchActivity extends AppCompatActivity {
     private Handler handler = new Handler(Looper.getMainLooper());
     private Runnable listeningTimeoutRunnable;
     private int step = 0;
-    private int timeRemaining = 15; // Countdown from 15 seconds
+    private int timeRemaining = 8; // Countdown from 15 seconds
 
     // [BANDAID] - SPEECH RECOGNIZER
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 1;
@@ -233,7 +233,7 @@ public class SongSearchActivity extends AppCompatActivity {
     private void restartListening() {
         btnRestart.setEnabled(false);
         handler.removeCallbacks(listeningTimeoutRunnable);
-        timeRemaining = 15;
+        timeRemaining = 8;
         step = 1;
         nextStep(); // Restart Listening
 

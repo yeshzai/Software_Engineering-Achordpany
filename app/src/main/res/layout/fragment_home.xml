@@ -55,13 +55,15 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_weight="1" />
+
                     <TextView
+                        android:id="@+id/bookmarks_OpenAllButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="All"
-                        android:textSize="14sp"
                         android:layout_marginEnd="25dp"
+                        android:text="All"
                         android:textColor="#424242"
+                        android:textSize="14sp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
@@ -223,13 +225,15 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_weight="1" />
+
                     <TextView
+                        android:id="@+id/recentSearches_OpenAllButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="All"
-                        android:textSize="14sp"
-                        android:textColor="#424242"
                         android:layout_marginEnd="40dp"
+                        android:text="All"
+                        android:textColor="#424242"
+                        android:textSize="14sp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
@@ -288,7 +292,7 @@
                                 tools:ignore="HardcodedText" />
 
                             <TextView
-                                android:id="@+id/recentSearch1_SiteTime"
+                                android:id="@+id/recentSearch1_Site"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="site | time"
@@ -298,6 +302,7 @@
                         </LinearLayout>
                         <!-- Bookmark Icon -->
                         <ImageView
+                            android:id="@+id/recentSearch1_BookmarkButton"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginEnd="10dp"
@@ -306,6 +311,7 @@
                             tools:ignore="HardcodedText" />
                         <!-- Arrow Icon -->
                         <ImageView
+                            android:id="@+id/recentSearch1_OpenButton"
                             android:layout_width="15dp"
                             android:layout_height="15dp"
                             android:layout_marginStart="8dp"
@@ -365,7 +371,7 @@
                                 tools:ignore="HardcodedText" />
 
                             <TextView
-                                android:id="@+id/recentSearch2_SiteTime"
+                                android:id="@+id/recentSearch2_Site"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="site | time"
@@ -375,14 +381,16 @@
                         </LinearLayout>
                         <!-- Bookmark Icon -->
                         <ImageView
+                            android:id="@+id/recentSearch2_BookmarkButton"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginEnd="10dp"
                             android:contentDescription="Bookmark"
-                            android:src="@drawable/ic_bookmark_active"
+                            android:src="@drawable/ic_bookmark"
                             tools:ignore="HardcodedText,ImageContrastCheck" />
                         <!-- Arrow Icon -->
                         <ImageView
+                            android:id="@+id/recentSearch2_OpenButton"
                             android:layout_width="15dp"
                             android:layout_height="15dp"
                             android:layout_marginStart="8dp"
@@ -427,13 +435,15 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
+
                 <TextView
+                    android:id="@+id/recommendations_OpenAllButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="All"
-                    android:textSize="14sp"
                     android:layout_marginEnd="25dp"
+                    android:text="All"
                     android:textColor="#424242"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 

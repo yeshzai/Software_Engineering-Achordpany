@@ -65,7 +65,7 @@
 
     <!-- Username EditText -->
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextEmail"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="200dp"
@@ -87,7 +87,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="270dp"
         android:drawableStart="@drawable/ic_lock_black"
-        android:drawableEnd="@drawable/ic_eye_black"
+        android:drawableEnd="@drawable/ic_eyehide_black"
         android:importantForAutofill="no"
         android:inputType="textVisiblePassword"
         android:hint="  Password"

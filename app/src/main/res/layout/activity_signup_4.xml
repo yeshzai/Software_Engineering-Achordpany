@@ -180,7 +180,6 @@
         android:layout_height="wrap_content"
         android:text="I Agree to Terms &amp; Conditions and Privacy Policy"
         android:textSize="12sp"
-        android:textColor="@android:color/black"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/btnSignupEnd"
         app:layout_constraintEnd_toEndOf="parent"

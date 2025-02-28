@@ -29,14 +29,16 @@ import com.example.achordpany.ui.auth.WelcomeActivity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpStep4Fragment extends Fragment {
-    private ImageView profileImageView;
-    private TextView profileName;
-    private TextView passwordValue;
-    private TextView genresValue;
 
-    private ImageView profileImage;
+    private FirebaseAuth auth;
+    FirebaseHelper firebaseHelper;
+
+    private ImageView profileImageView;
     private TextView profileName;
     private TextView passwordValue;
     private TextView genresValue;
@@ -48,66 +50,24 @@ public class SignUpStep4Fragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_signup_4, container, false);
         SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
 
+        auth = FirebaseAuth.getInstance();
+        firebaseHelper = new FirebaseHelper(getContext());
+
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+
+            resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
+
         });
 
-        // Sign Up button logic
         profileImageView = view.findViewById(R.id.profileImage);
         profileName = view.findViewById(R.id.profileName);
         passwordValue = view.findViewById(R.id.passwordValue);
         genresValue = view.findViewById(R.id.genresValue);
         CheckBox checkBox_Terms = view.findViewById(R.id.checkBox_Terms);
 
-        Log.d("SignUpCredentials Username", signUpCredentials.get_credential_usernameText());
-        Log.d("SignUpCredentials Password", signUpCredentials.get_credential_passwordText());
-        Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().toString());
-
-        profileName.setText(signUpCredentials.get_credential_usernameText());
-        passwordValue.setText(signUpCredentials.get_credential_passwordText());
-        genresValue.setText(signUpCredentials.get_credential_genre().toString());
-
-        // Sign Up button logic
-        Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
-        btnSignUpEnd.setOnClickListener(v -> {
-            Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();
-
-            if (selectedImageUri != null) {
-                SharedPreferences prefs = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                prefs.edit().putString("profile_image_uri", selectedImageUri.toString()).apply();
-            }
-
-            if(checkBox_Terms.isChecked()) {
-                Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
-                startActivity(intent);
-                requireActivity().finish();
-            } else {
-                Toast.makeText(getContext(), "Please accept the Terms and Conditions!", Toast.LENGTH_SHORT).show();
-            }
-
-            // Navigate to MainActivity
-            Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
-            resetSignUpCredentials();
-            Intent intent = new Intent(requireActivity(), LoginActivity.class);
-            startActivity(intent);
-            requireActivity().finish(); // Close SignUpActivity
-        });
-
-        // Back button logic
-        profileImage = view.findViewById(R.id.profileImage);
-        profileName = view.findViewById(R.id.profileName);
-        passwordValue = view.findViewById(R.id.passwordValue);
-        genresValue = view.findViewById(R.id.genresValue);
-        CheckBox checkBox_Terms = view.findViewById(R.id.checkBox_Terms);
-
-        Log.d("SignUpCredentials Username", signUpCredentials.get_credential_usernameText());
-        Log.d("SignUpCredentials Password", signUpCredentials.get_credential_passwordText());
-        Log.d("SignUpCredentials Genre", signUpCredentials.get_credential_genre().toString());
-
         profileName.setText(signUpCredentials.get_credential_usernameText());
         passwordValue.setText(signUpCredentials.get_credential_passwordText());
         genresValue.setText(signUpCredentials.get_credential_genre().toString());
@@ -117,13 +77,14 @@ public class SignUpStep4Fragment extends Fragment {
 
             if(checkBox_Terms.isChecked()) {
 
-                saveToFirebaseDatabase();   // New User saved to Firebase (Authentication) Database
+                saveToFirebaseDatabase();   // New User saved to Firebase (Authentication and Realtime) Database
                 resetSignUpCredentials();   // Ready for next new Sign-Up
 
                 Toast.makeText(getContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(requireActivity(), WelcomeActivity.class);
                 startActivity(intent);
                 requireActivity().finish();
+
             } else {
                 Toast.makeText(getContext(), "Please accept the Terms and Conditions!", Toast.LENGTH_SHORT).show();
             }
@@ -139,11 +100,13 @@ public class SignUpStep4Fragment extends Fragment {
         Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();
 
         Log.d("SignUpStep4", "Retrieved Image URI: " + selectedImageUri);
+        signUpCredentials.set_credential_avatarUID(selectedImageUri.toString());        // Path to Profile Avatar
 
         // If an image was selected in Step 2, set it to the ImageView
         if (selectedImageUri != null) {
             String uriString = selectedImageUri.toString();
             Log.d("SignUpStep4", "Retrieved Image URI: " + uriString);
+            // avatar path
 
             if (uriString.startsWith("file:///android_asset/")) {
                 // Load from assets
@@ -176,9 +139,37 @@ public class SignUpStep4Fragment extends Fragment {
         } catch (IOException e) {
             Log.e("SignUpStep4", "Error loading avatar: " + e.getMessage(), e);
         }
+    }
+
     private void saveToFirebaseDatabase() {
 
+        SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
+        String new_username = signUpCredentials.get_credential_usernameText();
+        String new_emailAddress = signUpCredentials.get_credential_emailAddressText();
+        String new_password = signUpCredentials.get_credential_passwordText();
+        String new_avatarUID = signUpCredentials.get_credential_avatarUID();
+        ArrayList<String> new_genres = signUpCredentials.get_credential_genre();
 
+        // Firebase Authentication
+        auth.createUserWithEmailAndPassword(new_emailAddress, new_password).addOnCompleteListener(task -> {
+
+            if(task.isSuccessful()) {
+                Log.d("SignUpStep4Fragment", "[SUCCESS] Sign Up Successful!");
+            } else {
+                Log.e("SignUpStep4Fragment", "[FAILED] Sign Up Error: " + Objects.requireNonNull(task.getException()).getMessage());
+            }
+
+        });
+
+        // Firebase Realtime Database
+        ArrayList<String> new_history = new ArrayList<>();
+        new_history.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL"); // FORMAT
+
+        ArrayList<String> new_bookmarks = new ArrayList<>();
+        new_bookmarks.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL"); // FORMAT
+
+        //                          USERNAME          EMAIL          AVATAR        GENRES      HISTORY      BOOKMARKS
+        firebaseHelper.addNewUser(new_username, new_emailAddress, new_avatarUID, new_genres, new_history, new_bookmarks);
 
     }
 
@@ -189,6 +180,7 @@ public class SignUpStep4Fragment extends Fragment {
         signUpCredentials.set_credential_emailAddressText("");
         signUpCredentials.set_credential_passwordText("");
         signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_avatarUID("");
         signUpCredentials.set_credential_genre(new ArrayList<>());
 
     }

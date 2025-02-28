@@ -78,7 +78,7 @@ public class SignUpStep2Fragment extends Fragment {
             ((SignUpActivity) requireActivity()).setSelectedProfileImageUri(avatarUri);
             //((SignUpActivity) requireActivity()).setSelectedProfileImageUri(Uri.parse("file:///android_asset/profile_images/" + avatarPath)); // Save in Activity
 
-            Log.d("SignUpStep2", "Saved Avatar URI: " + avatarUri);
+            Log.d("SignUpStep2", "Saved Avatar URI: " + avatarUri); // here we go
         });
         recyclerViewAvatars.setAdapter(adapter);
 
@@ -97,11 +97,12 @@ public class SignUpStep2Fragment extends Fragment {
         }
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
-        view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
+
             resetSignUpCredentials();
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
             requireActivity().finish();
+
         });
 
         Button btnContinue = view.findViewById(R.id.btnContinue);
@@ -158,7 +159,7 @@ public class SignUpStep2Fragment extends Fragment {
             }*/
 
             requireActivity().runOnUiThread(() -> { // Ensure UI updates on main thread
-                Log.d("SignUpStep2Fragment", "Setting FAB image for: " + filePath);
+                Log.d("SignUpStep2Fragment", "Setting FAB image for: " + filePath);// here we go
                 imageView.setImageBitmap(bitmap);
                 imageView.invalidate(); // Force UI refresh
                 //fab.requestLayout(); // Ensure layout updates
@@ -187,6 +188,7 @@ public class SignUpStep2Fragment extends Fragment {
         signUpCredentials.set_credential_emailAddressText("");
         signUpCredentials.set_credential_passwordText("");
         signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_avatarUID("");
         signUpCredentials.set_credential_genre(new ArrayList<>());
 
     }

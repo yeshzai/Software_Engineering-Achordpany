@@ -1,5 +1,6 @@
 package com.example.achordpany.ui.chords;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebChromeClient;
@@ -14,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
+import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
+import com.example.achordpany.ui.auth.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,12 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
 
         // Handle Back Button Click
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(v -> {
+            finish();
+            Intent intent = new Intent(ChordsDisplayActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         // Find WebView
         WebView webView = findViewById(R.id.webView);
@@ -138,6 +146,15 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         }
 
         song_URL = pyObjectResult.toString();
+
+        // Add to ChordsSearchedHistory
+        ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsSearchedHistory.set_Title(search_SongTitle);
+        chordsSearchedHistory.set_Artist(search_SongArtist);
+        chordsSearchedHistory.set_Genre("No Genre");
+        chordsSearchedHistory.set_Site("Ultimate Guitar");
+        chordsSearchedHistory.set_Time("No Time");  // Get current time. Format: dd/MM/yyyy HH:mm
+        chordsSearchedHistory.set_URL(song_URL);
 
     }
 

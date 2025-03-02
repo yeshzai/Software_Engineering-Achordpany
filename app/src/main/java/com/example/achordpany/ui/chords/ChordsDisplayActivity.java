@@ -16,6 +16,7 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.MainActivity;
+import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 
 import java.util.ArrayList;
@@ -146,13 +147,36 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         song_URL = pyObjectResult.toString();
 
-        // Add to ChordsSearchedHistory
+        // Add to ChordsSearchedHistory (Local database)
+        Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
         ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
-        chordsSearchedHistory.set_Title(search_SongTitle);
-        chordsSearchedHistory.set_Artist(search_SongArtist);
-        chordsSearchedHistory.set_Genre("No Genre");
-        chordsSearchedHistory.set_Site("Ultimate Guitar");
-        chordsSearchedHistory.set_URL(song_URL);
+
+        if(chordsSearchedHistory.get_Title().size() < 5) {
+
+            chordsSearchedHistory.set_Title(search_SongTitle);
+            chordsSearchedHistory.set_Artist(search_SongArtist);
+            chordsSearchedHistory.set_Genre("No Genre");
+            chordsSearchedHistory.set_Site("Ultimate Guitar");
+            chordsSearchedHistory.set_URL(song_URL);
+
+        } else {
+
+            chordsSearchedHistory.get_Title().remove(0);
+            chordsSearchedHistory.get_Artist().remove(0);
+            chordsSearchedHistory.get_Genre().remove(0);
+            chordsSearchedHistory.get_Site().remove(0);
+            chordsSearchedHistory.get_URL().remove(0);
+
+            chordsSearchedHistory.set_Title(search_SongTitle);
+            chordsSearchedHistory.set_Artist(search_SongArtist);
+            chordsSearchedHistory.set_Genre("No Genre");
+            chordsSearchedHistory.set_Site("Ultimate Guitar");
+            chordsSearchedHistory.set_URL(song_URL);
+
+        }
+
+        // Update Firebase Database for History
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
 
     }
 

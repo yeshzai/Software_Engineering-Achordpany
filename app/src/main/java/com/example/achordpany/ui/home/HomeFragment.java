@@ -43,17 +43,15 @@ public class HomeFragment extends Fragment {
 
         Log.d("[FRAGMENT]", "[CREATED] HOME FRAGMENT");
 
+        load_Bookmarks();
+        load_RecentSearches();
+        load_Recommendations();
+
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        // Recent Search Functionalities
-
-        load_Bookmarks();
-        load_RecentSearches();
-        load_Recommendations();
 
         // Get the SharedViewModel instance
         SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
@@ -81,7 +79,12 @@ public class HomeFragment extends Fragment {
 
     public void load_RecentSearches() {
 
-        // Note: Load only 2 items in the List
+        //  Note: Load only 2 items in the List
+        /*  ALGORITHM:
+            Upper Board - history.get(history.size() - 1) | Latest Added
+            Lower Board - history.get(history.size() - 2) | Second Latest Added
+        */
+
         recentTitle = chordsSearchedHistory.get_Title();
         recentArtist = chordsSearchedHistory.get_Artist();
         recentGenre = chordsSearchedHistory.get_Genre();
@@ -98,25 +101,25 @@ public class HomeFragment extends Fragment {
             binding.recentSearchBoard1.setVisibility(View.VISIBLE);
             binding.recentSearchBoard2.setVisibility(View.INVISIBLE);
 
-            artist_genre = recentArtist.get(0) + " - " + recentGenre.get(0);
-            binding.recentSearch1Title.setText(recentTitle.get(0));
+            artist_genre = recentArtist.get(recentArtist.size() - 1) + " - " + recentGenre.get(recentArtist.size() - 1);
+            binding.recentSearch1Title.setText(recentTitle.get(recentTitle.size() - 1));
             binding.recentSearch1ArtistGenre.setText(artist_genre);
-            binding.recentSearch1Site.setText(recentSite.get(0));
+            binding.recentSearch1Site.setText(recentSite.get(recentSite.size() - 1));
 
         } else {
 
             binding.recentSearchBoard1.setVisibility(View.VISIBLE);
             binding.recentSearchBoard2.setVisibility(View.VISIBLE);
 
-            artist_genre = recentArtist.get(0) + " - " + recentGenre.get(0);
-            binding.recentSearch1Title.setText(recentTitle.get(0));
+            artist_genre = recentArtist.get(recentArtist.size() - 1) + " - " + recentGenre.get(recentGenre.size() - 1);
+            binding.recentSearch1Title.setText(recentTitle.get(recentTitle.size() - 1));
             binding.recentSearch1ArtistGenre.setText(artist_genre);
-            binding.recentSearch1Site.setText(recentSite.get(0));
+            binding.recentSearch1Site.setText(recentSite.get(recentSite.size() - 1));
 
-            artist_genre = recentArtist.get(1) + " - " + recentGenre.get(1);
-            binding.recentSearch2Title.setText(recentTitle.get(1));
+            artist_genre = recentArtist.get(recentArtist.size() - 2) + " - " + recentGenre.get(recentGenre.size() - 2);
+            binding.recentSearch2Title.setText(recentTitle.get(recentTitle.size() - 2));
             binding.recentSearch2ArtistGenre.setText(artist_genre);
-            binding.recentSearch2Site.setText(recentSite.get(1));
+            binding.recentSearch2Site.setText(recentSite.get(recentSite.size() - 2));
 
         }
 

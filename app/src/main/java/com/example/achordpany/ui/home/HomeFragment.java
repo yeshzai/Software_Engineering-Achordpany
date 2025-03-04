@@ -43,14 +43,17 @@ public class HomeFragment extends Fragment {
 
         Log.d("[FRAGMENT]", "[CREATED] HOME FRAGMENT");
 
-        load_Bookmarks();
-        load_RecentSearches();
-        load_Recommendations();
-
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        // Load Page
+        load_Bookmarks();
+        load_RecentSearches();
+        load_Recommendations();
+        // Load Page
+
         View root = binding.getRoot();
 
         // Get the SharedViewModel instance

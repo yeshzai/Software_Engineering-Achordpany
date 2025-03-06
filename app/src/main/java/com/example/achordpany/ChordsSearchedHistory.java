@@ -29,6 +29,7 @@ public class ChordsSearchedHistory {
     private ArrayList<String> genre = new ArrayList<>();
     private ArrayList<String> site = new ArrayList<>();
     private ArrayList<String> url = new ArrayList<>();
+    private ArrayList<String> isBookmarked = new ArrayList<>();
 
     public static ChordsSearchedHistory getInstance() {
         if (instance == null) {
@@ -52,6 +53,9 @@ public class ChordsSearchedHistory {
     public void set_URL(String url) {
         this.url.add(url);
     }
+    public void set_isBookmarked(String isBookmarked) {
+        this.isBookmarked.add(isBookmarked);
+    }
 
     public ArrayList<String> get_Title() {
         return title;
@@ -67,6 +71,9 @@ public class ChordsSearchedHistory {
     }
     public ArrayList<String> get_URL() {
         return url;
+    }
+    public ArrayList<String> get_isBookmarked() {
+        return isBookmarked;
     }
 
     public void initialize_SongHistory(ArrayList<String> from_database_history) {
@@ -91,13 +98,16 @@ public class ChordsSearchedHistory {
                 String database_history_site = from_database_history.get(i).substring(
                         from_database_history.get(i).indexOf("|HS|") + 4, from_database_history.get(i).indexOf("|HU|"));
                 String database_history_url = from_database_history.get(i).substring(
-                        from_database_history.get(i).indexOf("|HU|") + 4);
+                        from_database_history.get(i).indexOf("|HU|") + 4, from_database_history.get(i).indexOf("|HB|"));
+                String database_history_isBookmarked = from_database_history.get(i).substring(
+                        from_database_history.get(i).indexOf("|HB|") + 4);
 
                 this.set_Title(database_history_title);
                 this.set_Artist(database_history_artist);
                 this.set_Genre(database_history_genre);
                 this.set_Site(database_history_site);
                 this.set_URL(database_history_url);
+                this.set_isBookmarked(database_history_isBookmarked);
 
             }
 
@@ -110,7 +120,7 @@ public class ChordsSearchedHistory {
 
         // FORMAT: |HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL
         ArrayList<String> updated_HistoryList = new ArrayList<>();
-        updated_HistoryList.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL");
+        updated_HistoryList.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL|HB|HistoryIsBookmarked");
 
         for(int i = 0; i < this.get_Title().size(); i++) {
 
@@ -119,7 +129,8 @@ public class ChordsSearchedHistory {
                             "|HA|" + this.get_Artist().get(i) +
                             "|HG|" + this.get_Genre().get(i) +
                             "|HS|" + this.get_Site().get(i) +
-                            "|HU|" + this.get_URL().get(i);
+                            "|HU|" + this.get_URL().get(i) +
+                            "|HB|" + this.get_isBookmarked().get(i);
             updated_HistoryList.add(history_node);
 
         }

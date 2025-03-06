@@ -22,7 +22,7 @@ public class BookmarkFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        Log.d("Fragment", "BookmarkFragment is created");
+        Log.d("[FRAGMENT]", "[CREATED] BOOKMARK FRAGMENT");
 
         BookmarkViewModel bookmarkViewModel =
                 new ViewModelProvider(this).get(BookmarkViewModel.class);

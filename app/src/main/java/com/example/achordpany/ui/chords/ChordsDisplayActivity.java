@@ -158,6 +158,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
             chordsSearchedHistory.set_Genre("No Genre");
             chordsSearchedHistory.set_Site("Ultimate Guitar");
             chordsSearchedHistory.set_URL(song_URL);
+            chordsSearchedHistory.set_isBookmarked("false");
 
         } else {
 
@@ -166,12 +167,14 @@ public class ChordsDisplayActivity extends AppCompatActivity {
             chordsSearchedHistory.get_Genre().remove(0);
             chordsSearchedHistory.get_Site().remove(0);
             chordsSearchedHistory.get_URL().remove(0);
+            chordsSearchedHistory.get_isBookmarked().remove(0);
 
             chordsSearchedHistory.set_Title(search_SongTitle);
             chordsSearchedHistory.set_Artist(search_SongArtist);
             chordsSearchedHistory.set_Genre("No Genre");
             chordsSearchedHistory.set_Site("Ultimate Guitar");
             chordsSearchedHistory.set_URL(song_URL);
+            chordsSearchedHistory.set_isBookmarked("false");
 
         }
 

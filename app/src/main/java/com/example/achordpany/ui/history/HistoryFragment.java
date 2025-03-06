@@ -12,15 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHistoryBinding;
+import com.example.achordpany.ui.bookmark.BookmarkFragment;
 
 import java.util.ArrayList;
 
 public class HistoryFragment extends Fragment {
 
+    ChordsSearchedHistory chordsSearchedHistory;
+    ChordsBookmarks chordsBookmarks;
     private FragmentHistoryBinding binding;
 
     ArrayList<String> recentTitle;
@@ -41,7 +45,8 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
 
         // Page Functions
-        ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsBookmarks = ChordsBookmarks.getInstance();
 
         recentTitle = chordsSearchedHistory.get_Title();
         recentArtist = chordsSearchedHistory.get_Artist();
@@ -77,15 +82,46 @@ public class HistoryFragment extends Fragment {
 
         int bookmark_status_icon = 0;
 
+        /*
+            ALGORITHM:
+            1. We will only be able to add to bookmarks everytime bookmark button for history board is "false".
+            2. We will only be able to remove from bookmarks everytime bookmark button for history board is:
+                2.1. TRUE
+                2.2. Still in History (if gone, then only way to remove is through bookmarks page
+        */
+
         switch (recentIsBookmarked.get(whichHistoryIndex)) {
+
             case "false":
                 bookmark_status_icon = R.drawable.ic_bookmark_active;
                 recentIsBookmarked.set(whichHistoryIndex, "true");
+
+                // Add to bookmarks
+                if(chordsBookmarks.get_Title().size() >= 5) {
+
+                    chordsBookmarks.get_Title().remove(0);
+                    chordsBookmarks.get_Artist().remove(0);
+                    chordsBookmarks.get_Genre().remove(0);
+                    chordsBookmarks.get_Site().remove(0);
+                    chordsBookmarks.get_URL().remove(0);
+
+                }
+
+                chordsBookmarks.set_Title(recentTitle.get(whichHistoryIndex));
+                chordsBookmarks.set_Artist(recentArtist.get(whichHistoryIndex));
+                chordsBookmarks.set_Genre(recentGenre.get(whichHistoryIndex));
+                chordsBookmarks.set_Site(recentSite.get(whichHistoryIndex));
+                chordsBookmarks.set_URL(recentURL.get(whichHistoryIndex));
                 break;
+
             case "true":
                 bookmark_status_icon = R.drawable.ic_bookmark;
                 recentIsBookmarked.set(whichHistoryIndex, "false");
+
+                // Remove from bookmarks
+                delete_Bookmarked(recentURL.get(whichHistoryIndex));
                 break;
+
         }
 
         switch (whichBoard) {
@@ -104,6 +140,27 @@ public class HistoryFragment extends Fragment {
             case 5:
                 binding.historyBoard5BookmarkButton.setImageResource(bookmark_status_icon);
                 break;
+        }
+
+    }
+
+    private void delete_Bookmarked(String to_remove_url) {
+
+        ArrayList<String> all_BookmarkedURL = chordsBookmarks.get_URL();
+
+        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
+
+            if(all_BookmarkedURL.get(i).equals(to_remove_url)) {
+
+                chordsBookmarks.get_Title().remove(i);
+                chordsBookmarks.get_Artist().remove(i);
+                chordsBookmarks.get_Genre().remove(i);
+                chordsBookmarks.get_Site().remove(i);
+                chordsBookmarks.get_URL().remove(i);
+                break;
+
+            }
+
         }
 
     }

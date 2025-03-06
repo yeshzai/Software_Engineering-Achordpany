@@ -151,16 +151,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
         ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
 
-        if(chordsSearchedHistory.get_Title().size() < 5) {
-
-            chordsSearchedHistory.set_Title(search_SongTitle);
-            chordsSearchedHistory.set_Artist(search_SongArtist);
-            chordsSearchedHistory.set_Genre("No Genre");
-            chordsSearchedHistory.set_Site("Ultimate Guitar");
-            chordsSearchedHistory.set_URL(song_URL);
-            chordsSearchedHistory.set_isBookmarked("false");
-
-        } else {
+        if(chordsSearchedHistory.get_Title().size() >= 5) {
 
             chordsSearchedHistory.get_Title().remove(0);
             chordsSearchedHistory.get_Artist().remove(0);
@@ -169,14 +160,14 @@ public class ChordsDisplayActivity extends AppCompatActivity {
             chordsSearchedHistory.get_URL().remove(0);
             chordsSearchedHistory.get_isBookmarked().remove(0);
 
-            chordsSearchedHistory.set_Title(search_SongTitle);
-            chordsSearchedHistory.set_Artist(search_SongArtist);
-            chordsSearchedHistory.set_Genre("No Genre");
-            chordsSearchedHistory.set_Site("Ultimate Guitar");
-            chordsSearchedHistory.set_URL(song_URL);
-            chordsSearchedHistory.set_isBookmarked("false");
-
         }
+
+        chordsSearchedHistory.set_Title(search_SongTitle);
+        chordsSearchedHistory.set_Artist(search_SongArtist);
+        chordsSearchedHistory.set_Genre("No Genre");
+        chordsSearchedHistory.set_Site("Ultimate Guitar");
+        chordsSearchedHistory.set_URL(song_URL);
+        chordsSearchedHistory.set_isBookmarked("false");
 
         // Update Firebase Database for History
         chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());

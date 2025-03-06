@@ -146,6 +146,11 @@ public class Main_EverythingLocalDatabase {
                         this.get_History()
                 );
 
+                ChordsBookmarks chordsBookmarks = ChordsBookmarks.getInstance();
+                chordsBookmarks.initialize_Bookmarks(
+                        this.get_Bookmark()
+                );
+
             }
 
         }).addOnFailureListener(e -> {

@@ -163,7 +163,7 @@ public class SignUpStep4Fragment extends Fragment {
 
         // Firebase Realtime Database
         ArrayList<String> new_history = new ArrayList<>();
-        new_history.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL"); // FORMAT
+        new_history.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL|HB|HistoryIsBookmarked"); // FORMAT
 
         ArrayList<String> new_bookmarks = new ArrayList<>();
         new_bookmarks.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL"); // FORMAT

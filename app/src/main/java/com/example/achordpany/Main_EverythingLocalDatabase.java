@@ -138,7 +138,13 @@ public class Main_EverythingLocalDatabase {
                 chordsRecommendations.initialize_SongRecommendations(
                         get_Genre().get(0),
                         get_Genre().get(1),
-                        get_Genre().get(2));
+                        get_Genre().get(2)
+                );
+
+                ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+                chordsSearchedHistory.initialize_SongHistory(
+                        this.get_History()
+                );
 
             }
 

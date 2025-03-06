@@ -6,7 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.util.Log;
+import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +27,7 @@ import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHomeBinding;
 import com.example.achordpany.ui.history.HistoryFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +97,38 @@ public class HomeFragment extends Fragment {
         //final TextView textView = binding.textHome;
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Find BottomNavigationView
+        BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
+
+        // Open "All" Bookmarks → Go to Bookmark Fragment
+        TextView openBookmarksButton = view.findViewById(R.id.bookmarks_OpenAllButton);
+        openBookmarksButton.setOnClickListener(v -> {
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_bookmark);
+            }
+        });
+
+        // Open "All" Recent Searches → Go to History Fragment
+        TextView openRecentSearchesButton = view.findViewById(R.id.recentSearches_OpenAllButton);
+        openRecentSearchesButton.setOnClickListener(v -> {
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_history);
+            }
+        });
+
+        // Open "All" Recommendations → Go to Profile Fragment
+        TextView openRecommendationsButton = view.findViewById(R.id.recommendations_OpenAllButton);
+        openRecommendationsButton.setOnClickListener(v -> {
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_profile);
+            }
+        });
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.util.Log;
 
+import androidx.appcompat.widget.TooltipCompat;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -117,6 +118,11 @@ public class ProfileFragment extends Fragment {
         binding.recommendations3Artist.setText(songRecommendation_ARTIST3);
         binding.recommendations3Genre.setText(genre3);
 
+        // Set tooltip to show full text on long press
+        TooltipCompat.setTooltipText(binding.recommendations11, songRecommendation_TITLE1_1);
+        TooltipCompat.setTooltipText(binding.recommendations12, songRecommendation_TITLE1_2);
+        TooltipCompat.setTooltipText(binding.recommendations2, songRecommendation_TITLE2);
+        TooltipCompat.setTooltipText(binding.recommendations3, songRecommendation_TITLE3);
     }
 
 }

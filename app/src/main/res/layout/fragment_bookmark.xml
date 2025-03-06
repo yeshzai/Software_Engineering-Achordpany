@@ -32,6 +32,7 @@
 
             <!-- First Song Item -->
             <LinearLayout
+                android:id="@+id/bookmark_Board1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -58,6 +59,7 @@
                     android:paddingEnd="8dp">
 
                     <TextView
+                        android:id="@+id/bookmark_Board1_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
@@ -66,6 +68,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/bookmark_Board1_ArtistGenre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
@@ -73,6 +76,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/bookmark_Board1_Site"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
@@ -82,13 +86,15 @@
 
                 <!-- Bookmark & Arrow Icons -->
                 <ImageView
+                    android:id="@+id/bookmark_Board1_BookmarkButton"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark_active" />
+                    android:src="@drawable/ic_bookmark" />
 
                 <ImageView
+                    android:id="@+id/bookmark_Board1_OpenButton"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginEnd="10dp"
@@ -98,8 +104,10 @@
 
             <!-- Second Song Item (Stacked Below the First One) -->
             <LinearLayout
+                android:id="@+id/bookmark_Board2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/rounded_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -123,6 +131,7 @@
                     android:paddingEnd="8dp">
 
                     <TextView
+                        android:id="@+id/bookmark_Board2_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
@@ -131,6 +140,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/bookmark_Board2_ArtistGenre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
@@ -138,6 +148,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/bookmark_Board2_Site"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
@@ -147,13 +158,231 @@
 
                 <!-- Bookmark & Arrow Icons -->
                 <ImageView
+                    android:id="@+id/bookmark_Board2_BookmarkButton"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark_active" />
+                    android:src="@drawable/ic_bookmark" />
 
                 <ImageView
+                    android:id="@+id/bookmark_Board2_OpenButton"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_arrow_desc"
+                    android:src="@drawable/ic_arrow" />
+            </LinearLayout>
+
+            <!-- Third Song Item (Stacked Below the Second One) -->
+            <LinearLayout
+                android:id="@+id/bookmark_Board3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <!-- Music Icon -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_music_desc"
+                    android:src="@drawable/ic_music_note" />
+
+                <!-- Song Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/bookmark_Board3_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_text"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bookmark_Board3_ArtistGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/song_desc"
+                        android:textColor="#757575"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bookmark_Board3_Site"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_desc"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Bookmark & Arrow Icons -->
+                <ImageView
+                    android:id="@+id/bookmark_Board3_BookmarkButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_bookmark_desc"
+                    android:src="@drawable/ic_bookmark" />
+
+                <ImageView
+                    android:id="@+id/bookmark_Board3_OpenButton"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_arrow_desc"
+                    android:src="@drawable/ic_arrow" />
+            </LinearLayout>
+
+            <!-- Fourth Song Item (Stacked Below the Third One) -->
+            <LinearLayout
+                android:id="@+id/bookmark_Board4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <!-- Music Icon -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_music_desc"
+                    android:src="@drawable/ic_music_note" />
+
+                <!-- Song Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/bookmark_Board4_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_text"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bookmark_Board4_ArtistGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/song_desc"
+                        android:textColor="#757575"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bookmark_Board4_Site"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_desc"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Bookmark & Arrow Icons -->
+                <ImageView
+                    android:id="@+id/bookmark_Board4_BookmarkButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_bookmark_desc"
+                    android:src="@drawable/ic_bookmark" />
+
+                <ImageView
+                    android:id="@+id/bookmark_Board4_OpenButton"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_arrow_desc"
+                    android:src="@drawable/ic_arrow" />
+            </LinearLayout>
+
+            <!-- Fifth Song Item (Stacked Below the Fourth One) -->
+            <LinearLayout
+                android:id="@+id/bookmark_Board5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <!-- Music Icon -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_music_desc"
+                    android:src="@drawable/ic_music_note" />
+
+                <!-- Song Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/bookmark_Board5_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_text"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bookmark_Board5_ArtistGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/song_desc"
+                        android:textColor="#757575"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bookmark_Board5_Site"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_desc"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Bookmark & Arrow Icons -->
+                <ImageView
+                    android:id="@+id/bookmark_Board5_BookmarkButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ic_bookmark_desc"
+                    android:src="@drawable/ic_bookmark" />
+
+                <ImageView
+                    android:id="@+id/bookmark_Board5_OpenButton"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginEnd="10dp"

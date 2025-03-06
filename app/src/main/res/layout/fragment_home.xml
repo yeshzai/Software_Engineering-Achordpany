@@ -77,74 +77,16 @@
 
                     <!-- First Bookmark Card -->
                     <LinearLayout
+                        android:id="@+id/bookmarkBoard1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="10dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/rounded_background_home">
-
-                        <!-- Left section: Text info -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            tools:ignore="NestedWeights" >
-
-                            <!-- Title -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Title"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                tools:ignore="HardcodedText" />
-
-                            <!-- Artist -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="artist"
-                                android:textColor="#424242"
-                                android:textSize="10sp"
-                                tools:ignore="HardcodedText,SmallSp,TextSizeCheck" />
-
-                            <!-- Genre -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Genre"
-                                android:textColor="#424242"
-                                android:textSize="12sp"
-                                tools:ignore="HardcodedText" />
-                        </LinearLayout>
-
-                        <!-- Right section: Arrow/Share icon -->
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="8dp"
-                            android:src="@drawable/ic_redirect"
-                            android:contentDescription="redirect"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-
-                    <!-- Second Bookmark Card -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
+                        android:background="@drawable/rounded_background_home"
                         android:gravity="center_vertical"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/rounded_background_home">
+                        android:orientation="horizontal"
+                        android:padding="10dp">
 
                         <!-- Left section: Text info -->
                         <LinearLayout
@@ -156,6 +98,7 @@
 
                             <!-- Title -->
                             <TextView
+                                android:id="@+id/bookmarkBoard1_Title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Title"
@@ -166,15 +109,17 @@
 
                             <!-- Artist -->
                             <TextView
+                                android:id="@+id/bookmarkBoard1_Artist"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Artist"
+                                android:text="artist"
                                 android:textColor="#424242"
                                 android:textSize="10sp"
-                                tools:ignore="HardcodedText, smallSp" />
+                                tools:ignore="HardcodedText,SmallSp,TextSizeCheck" />
 
                             <!-- Genre -->
                             <TextView
+                                android:id="@+id/bookmarkBoard1_Genre"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Genre"
@@ -185,11 +130,76 @@
 
                         <!-- Right section: Arrow/Share icon -->
                         <ImageView
+                            android:id="@+id/bookmarkBoard1_OpenButton"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:src="@drawable/ic_redirect"
                             android:contentDescription="redirect"
+                            android:src="@drawable/ic_redirect"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                    <!-- Second Bookmark Card -->
+                    <LinearLayout
+                        android:id="@+id/bookmarkBoard2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_background_home"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <!-- Left section: Text info -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights">
+
+                            <!-- Title -->
+                            <TextView
+                                android:id="@+id/bookmarkBoard2_Title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Title"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <!-- Artist -->
+                            <TextView
+                                android:id="@+id/bookmarkBoard2_Artist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Artist"
+                                android:textColor="#424242"
+                                android:textSize="10sp"
+                                tools:ignore="HardcodedText, smallSp" />
+
+                            <!-- Genre -->
+                            <TextView
+                                android:id="@+id/bookmarkBoard2_Genre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Genre"
+                                android:textColor="#424242"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <!-- Right section: Arrow/Share icon -->
+                        <ImageView
+                            android:id="@+id/bookmarkBoard2_OpenButton"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:contentDescription="redirect"
+                            android:src="@drawable/ic_redirect"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </LinearLayout>
@@ -295,7 +305,7 @@
                                 android:id="@+id/recentSearch1_Site"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="site | time"
+                                android:text="site"
                                 android:textColor="#424242"
                                 android:textSize="12sp"
                                 tools:ignore="HardcodedText" />
@@ -374,7 +384,7 @@
                                 android:id="@+id/recentSearch2_Site"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="site | time"
+                                android:text="site"
                                 android:textColor="#424242"
                                 android:textSize="12sp"
                                 tools:ignore="HardcodedText" />

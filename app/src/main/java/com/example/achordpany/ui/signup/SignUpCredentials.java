@@ -13,6 +13,7 @@ public class SignUpCredentials {
     private String credential_emailAddressText;
     private String credential_passwordText;
     private String credential_confirmPasswordText;
+    private String credential_avatarUID;
     private ArrayList<String> credential_genre = new ArrayList<>();
 
     private SignUpCredentials() {
@@ -45,6 +46,9 @@ public class SignUpCredentials {
     public void set_credential_genre(ArrayList<String> credential_genre) {
         this.credential_genre = credential_genre;
     }
+    public void set_credential_avatarUID(String credential_avatarUID) {
+        this.credential_avatarUID = credential_avatarUID;
+    }
 
     // GETTER
     public String get_credential_usernameText() {
@@ -65,6 +69,10 @@ public class SignUpCredentials {
 
     public ArrayList<String> get_credential_genre() {
         return credential_genre;
+    }
+
+    public String get_credential_avatarUID() {
+        return credential_avatarUID;
     }
 
 }

@@ -36,24 +36,27 @@ public class Main_EverythingLocalDatabase {
 
     */
 
+    private static Main_EverythingLocalDatabase instance;
+
+    // Firebase
     private DatabaseReference users_Credentials;
     private DatabaseReference users_RecommendationData;
 
     // User Credentials
     private String username;
     private String email;
+    private String avatarUID;
 
     // User Data
     private ArrayList<String> genre;
     private ArrayList<String> history;
     private ArrayList<String> bookmark;
 
-    public Main_EverythingLocalDatabase(String the_username) {
-
-        this.users_Credentials = FirebaseDatabase.getInstance().getReference("Users_Credentials");
-        this.users_RecommendationData = FirebaseDatabase.getInstance().getReference("Users_RecommendationData");
-        this.mainPage_RetrieveFirebase(the_username);
-
+    public static Main_EverythingLocalDatabase getInstance() {
+        if (instance == null) {
+            instance = new Main_EverythingLocalDatabase();
+        }
+        return instance;
     }
 
     // Setter
@@ -62,6 +65,9 @@ public class Main_EverythingLocalDatabase {
     }
     public void set_Email(String email) {       // No Feature for Edit yet.
         this.email = email;
+    }
+    public void set_AvatarUID(String avatarUID) {
+        this.avatarUID = avatarUID;
     }
     public void set_Genre(ArrayList<String> genre) {
         this.genre = genre;
@@ -80,6 +86,9 @@ public class Main_EverythingLocalDatabase {
     public String get_Email() {     // No Feature for Edit yet.
         return email;
     }
+    public String get_AvatarUID() {
+        return avatarUID;
+    }
     public ArrayList<String> get_Genre() {
         return genre;
     }
@@ -92,6 +101,9 @@ public class Main_EverythingLocalDatabase {
 
     public void mainPage_RetrieveFirebase(String passed_username) {
 
+        users_Credentials = FirebaseDatabase.getInstance().getReference("Users_Credentials");
+        users_RecommendationData = FirebaseDatabase.getInstance().getReference("Users_RecommendationData");
+
         // Credentials
         users_Credentials.child(passed_username).get().addOnSuccessListener(dataSnapshot -> {
 
@@ -100,14 +112,14 @@ public class Main_EverythingLocalDatabase {
                 UsersCredentials usersCredentials = dataSnapshot.getValue(UsersCredentials.class);
                 this.set_Username(usersCredentials.username);
                 this.set_Email(usersCredentials.email);
-
-                Log.d("Firebase", "[" + passed_username + "] CREDENTIALS Retrieve SUCCESS");
+                this.set_AvatarUID(usersCredentials.avatarUID);
+                Log.d("[FIREBASE RETRIEVE]", "[" + passed_username + "] [SUCCESS] USER CREDENTIALS");
 
             }
 
         }).addOnFailureListener(e -> {
 
-            Log.e("Firebase", "[" + passed_username + "] CREDENTIALS Retrieve FAIL: " + e.getMessage());
+            Log.e("[FIREBASE RETRIEVE]", "[" + passed_username + "] [FAILED] CREDENTIALS: " + e.getMessage());
 
         });
 
@@ -120,16 +132,38 @@ public class Main_EverythingLocalDatabase {
                 this.set_Genre((ArrayList<String>) userRecommendationData.Genre);
                 this.set_History((ArrayList<String>) userRecommendationData.History);
                 this.set_Bookmark((ArrayList<String>) userRecommendationData.Bookmarks);
+                Log.d("[FIREBASE RETRIEVE]", "[" + passed_username + "] [SUCCESS] RECOMMENDATION DATA");
 
-                Log.d("Firebase", "[" + passed_username + "] RECOMMENDATION DATA Retrieve SUCCESS");
+                ChordsRecommendations chordsRecommendations = ChordsRecommendations.getInstance();
+                chordsRecommendations.initialize_SongRecommendations(
+                        get_Genre().get(0),
+                        get_Genre().get(1),
+                        get_Genre().get(2)
+                );
+
+                ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+                chordsSearchedHistory.initialize_SongHistory(
+                        this.get_History()
+                );
+
+                ChordsBookmarks chordsBookmarks = ChordsBookmarks.getInstance();
+                chordsBookmarks.initialize_Bookmarks(
+                        this.get_Bookmark()
+                );
 
             }
 
         }).addOnFailureListener(e -> {
 
-            Log.e("Firebase", "[" + passed_username + "] RECOMMENDATION DATA Retrieve FAIL: " + e.getMessage());
+            Log.e("[FIREBASE RETRIEVE]", "[" + passed_username + "] [FAILED] RECOMMENDATION DATA: " + e.getMessage());
 
         });
+
+    }
+
+    public void mainPage_UpdateFirebase(String passed_username) {
+
+
 
     }
 

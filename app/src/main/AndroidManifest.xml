@@ -63,6 +63,11 @@
         <activity android:name=".ui.chords.ChordsDisplayActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | HISTORY -->
+        <activity android:name=".ui.history.HistoryWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
     </application>
 
 </manifest>

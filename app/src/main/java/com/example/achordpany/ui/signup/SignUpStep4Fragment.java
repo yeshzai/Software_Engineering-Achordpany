@@ -100,11 +100,13 @@ public class SignUpStep4Fragment extends Fragment {
         Uri selectedImageUri = ((SignUpActivity) requireActivity()).getSelectedProfileImageUri();
 
         Log.d("SignUpStep4", "Retrieved Image URI: " + selectedImageUri);
+        signUpCredentials.set_credential_avatarUID(selectedImageUri.toString());        // Path to Profile Avatar
 
         // If an image was selected in Step 2, set it to the ImageView
         if (selectedImageUri != null) {
             String uriString = selectedImageUri.toString();
             Log.d("SignUpStep4", "Retrieved Image URI: " + uriString);
+            // avatar path
 
             if (uriString.startsWith("file:///android_asset/")) {
                 // Load from assets
@@ -145,6 +147,7 @@ public class SignUpStep4Fragment extends Fragment {
         String new_username = signUpCredentials.get_credential_usernameText();
         String new_emailAddress = signUpCredentials.get_credential_emailAddressText();
         String new_password = signUpCredentials.get_credential_passwordText();
+        String new_avatarUID = signUpCredentials.get_credential_avatarUID();
         ArrayList<String> new_genres = signUpCredentials.get_credential_genre();
 
         // Firebase Authentication
@@ -160,17 +163,13 @@ public class SignUpStep4Fragment extends Fragment {
 
         // Firebase Realtime Database
         ArrayList<String> new_history = new ArrayList<>();
-        new_history.add("[EMPTY] - History1");
-        new_history.add("[EMPTY] - History2");
-        new_history.add("[EMPTY] - History3");
+        new_history.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL|HB|HistoryIsBookmarked"); // FORMAT
 
         ArrayList<String> new_bookmarks = new ArrayList<>();
-        new_bookmarks.add("[EMPTY] - Bookmark1");
-        new_bookmarks.add("[EMPTY] - Bookmark2");
-        new_bookmarks.add("[EMPTY] - Bookmark3");
+        new_bookmarks.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL"); // FORMAT
 
-        //                          USERNAME          EMAIL         GENRES      HISTORY      BOOKMARKS
-        firebaseHelper.addNewUser(new_username, new_emailAddress, new_genres, new_history, new_bookmarks);
+        //                          USERNAME          EMAIL          AVATAR        GENRES      HISTORY      BOOKMARKS
+        firebaseHelper.addNewUser(new_username, new_emailAddress, new_avatarUID, new_genres, new_history, new_bookmarks);
 
     }
 
@@ -181,6 +180,7 @@ public class SignUpStep4Fragment extends Fragment {
         signUpCredentials.set_credential_emailAddressText("");
         signUpCredentials.set_credential_passwordText("");
         signUpCredentials.set_credential_confirmPasswordText("");
+        signUpCredentials.set_credential_avatarUID("");
         signUpCredentials.set_credential_genre(new ArrayList<>());
 
     }

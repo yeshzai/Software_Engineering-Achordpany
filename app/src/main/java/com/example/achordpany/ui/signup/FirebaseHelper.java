@@ -25,9 +25,9 @@ public class FirebaseHelper {
 
     }
 
-    public void addNewUser(String username, String email, List<String> genre, List<String> history, List<String> bookmarks) {
+    public void addNewUser(String username, String email, String avatarUID, List<String> genre, List<String> history, List<String> bookmarks) {
 
-        UsersCredentials users_Credentials_Class = new UsersCredentials(username, email);
+        UsersCredentials users_Credentials_Class = new UsersCredentials(username, email, avatarUID);
         UsersRecommendationData users_RecommendationData_Class = new UsersRecommendationData(genre, history, bookmarks);
 
         // Add to Users_Credentials in Firebase (Realtime Database)

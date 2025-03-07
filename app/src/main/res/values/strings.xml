@@ -45,5 +45,5 @@
     <string name="ic_arrow_desc">Arrow</string>
     <string name="title_text">Title</string>
     <string name="song_desc">Artist - Genre</string>
-    <string name="item_desc">site | time</string>
+    <string name="item_desc">site</string>
 </resources>

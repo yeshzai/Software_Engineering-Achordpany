@@ -1,9 +1,11 @@
 package com.example.achordpany.ui.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -14,10 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
+import com.example.achordpany.ChordsWebView;
+import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHistoryBinding;
 import com.example.achordpany.ui.bookmark.BookmarkFragment;
+import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 
 import java.util.ArrayList;
 
@@ -62,6 +67,12 @@ public class HistoryFragment extends Fragment {
         binding.historyBoard3BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(3, recentIsBookmarked.size() - 3); } );
         binding.historyBoard4BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(4, recentIsBookmarked.size() - 4); } );
         binding.historyBoard5BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(5, recentIsBookmarked.size() - 5); } );
+
+        binding.historyBoard1OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 1) );
+        binding.historyBoard2OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 2) );
+        binding.historyBoard3OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 3) );
+        binding.historyBoard4OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 4) );
+        binding.historyBoard5OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 5) );
         // Page Functions
 
         View root = binding.getRoot();
@@ -228,6 +239,24 @@ public class HistoryFragment extends Fragment {
                         ? R.drawable.ic_bookmark : R.drawable.ic_bookmark_active );
                 break;
         }
+
+    }
+
+    private void open_Website(int whichIndex) {
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        String the_Title = recentTitle.get(whichIndex);
+        String the_Artist = recentArtist.get(whichIndex);
+        String the_Genre = recentGenre.get(whichIndex);
+        String the_URL = recentURL.get(whichIndex);
+
+        chordsWebView.set_Title(the_Title);
+        chordsWebView.set_Artist(the_Artist);
+        chordsWebView.set_Genre(the_Genre);
+        chordsWebView.set_Url(the_URL);
+
+        Intent intent = new Intent(requireActivity(), HistoryWebViewActivity.class);
+        startActivity(intent);
 
     }
 

@@ -81,25 +81,15 @@ public class BookmarkFragment extends Fragment {
 
     private void bookmarked_functions(int whichIndex) {
 
-        //Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
-        ArrayList<String> all_BookmarkedURL = chordsSearchedHistory.get_URL();
-
-        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
-
-            if(all_BookmarkedURL.get(i).equals(chordsBookmarks.get_URL().get(whichIndex))) {
-
-                chordsSearchedHistory.get_isBookmarked().set(i, "false");
-                break;
-
-            }
-
-        }
+        int index_ToChange = chordsSearchedHistory.get_UID().indexOf(chordsBookmarks.get_UID().get(whichIndex));
+        chordsSearchedHistory.get_isBookmarked().set(index_ToChange, "false");
 
         chordsBookmarks.get_Title().remove(whichIndex);
         chordsBookmarks.get_Artist().remove(whichIndex);
         chordsBookmarks.get_Genre().remove(whichIndex);
         chordsBookmarks.get_Site().remove(whichIndex);
         chordsBookmarks.get_URL().remove(whichIndex);
+        chordsBookmarks.get_UID().remove(whichIndex);
 
         // Refresh Page
         load_BookmarkFragment();

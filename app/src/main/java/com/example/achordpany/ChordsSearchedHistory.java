@@ -30,6 +30,7 @@ public class ChordsSearchedHistory {
     private ArrayList<String> site = new ArrayList<>();
     private ArrayList<String> url = new ArrayList<>();
     private ArrayList<String> isBookmarked = new ArrayList<>();
+    private ArrayList<String> uid = new ArrayList<>();
 
     public static ChordsSearchedHistory getInstance() {
         if (instance == null) {
@@ -56,6 +57,9 @@ public class ChordsSearchedHistory {
     public void set_isBookmarked(String isBookmarked) {
         this.isBookmarked.add(isBookmarked);
     }
+    public void set_UID(String uid) {
+        this.uid.add(uid);
+    }
 
     public ArrayList<String> get_Title() {
         return title;
@@ -75,11 +79,12 @@ public class ChordsSearchedHistory {
     public ArrayList<String> get_isBookmarked() {
         return isBookmarked;
     }
+    public ArrayList<String> get_UID() { return uid; }
 
     public void initialize_SongHistory(ArrayList<String> from_database_history) {
 
         /*
-            [EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL - Always at the beginning
+            [EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL|HB|HistoryIsBookmarked|HUID|HistoryUID - Always at the beginning
 
             Hence if from_database_history.size() == 1, then it is empty. So, no need to do anything.
             If from_database_history.size() > 1, then we proceed with retrieving from database.
@@ -100,7 +105,9 @@ public class ChordsSearchedHistory {
                 String database_history_url = from_database_history.get(i).substring(
                         from_database_history.get(i).indexOf("|HU|") + 4, from_database_history.get(i).indexOf("|HB|"));
                 String database_history_isBookmarked = from_database_history.get(i).substring(
-                        from_database_history.get(i).indexOf("|HB|") + 4);
+                        from_database_history.get(i).indexOf("|HB|") + 4, from_database_history.get(i).indexOf("|HUID|"));
+                String database_history_uid = from_database_history.get(i).substring(
+                        from_database_history.get(i).indexOf("|HUID|") + 4);
 
                 this.set_Title(database_history_title);
                 this.set_Artist(database_history_artist);
@@ -108,6 +115,7 @@ public class ChordsSearchedHistory {
                 this.set_Site(database_history_site);
                 this.set_URL(database_history_url);
                 this.set_isBookmarked(database_history_isBookmarked);
+                this.set_UID(database_history_uid);
 
             }
 
@@ -120,17 +128,18 @@ public class ChordsSearchedHistory {
 
         // FORMAT: |HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL
         ArrayList<String> updated_HistoryList = new ArrayList<>();
-        updated_HistoryList.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL|HB|HistoryIsBookmarked");
+        updated_HistoryList.add("[EMPTY]|HT|HistoryTitle|HA|HistoryArtist|HG|HistoryGenre|HS|HistorySite|HU|HistoryURL|HB|HistoryIsBookmarked|HUID|HistoryUID");
 
         for(int i = 0; i < this.get_Title().size(); i++) {
 
             String history_node =
-                            "|HT|" + this.get_Title().get(i) +
+                    "|HT|" + this.get_Title().get(i) +
                             "|HA|" + this.get_Artist().get(i) +
                             "|HG|" + this.get_Genre().get(i) +
                             "|HS|" + this.get_Site().get(i) +
                             "|HU|" + this.get_URL().get(i) +
-                            "|HB|" + this.get_isBookmarked().get(i);
+                            "|HB|" + this.get_isBookmarked().get(i) +
+                            "|HUID|" + this.get_UID().get(i);
             updated_HistoryList.add(history_node);
 
         }

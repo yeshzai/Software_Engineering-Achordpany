@@ -159,6 +159,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
             chordsSearchedHistory.get_Site().remove(0);
             chordsSearchedHistory.get_URL().remove(0);
             chordsSearchedHistory.get_isBookmarked().remove(0);
+            chordsSearchedHistory.get_UID().remove(0);
 
         }
 
@@ -168,6 +169,16 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         chordsSearchedHistory.set_Site("Ultimate Guitar");
         chordsSearchedHistory.set_URL(song_URL);
         chordsSearchedHistory.set_isBookmarked("false");
+
+        while(true) {
+
+            int create_UID = (int)(Math.random() * 5) + 1;
+            if(!chordsSearchedHistory.get_UID().contains(Integer.toString(create_UID))) {
+                chordsSearchedHistory.set_UID(Integer.toString(create_UID));
+                break;
+            }
+
+        }
 
         // Update Firebase Database for History
         chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());

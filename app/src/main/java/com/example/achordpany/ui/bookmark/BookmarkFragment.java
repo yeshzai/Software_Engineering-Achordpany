@@ -12,12 +12,26 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.achordpany.ChordsBookmarks;
+import com.example.achordpany.ChordsSearchedHistory;
+import com.example.achordpany.Main_EverythingLocalDatabase;
+import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentBookmarkBinding;
 
+import java.util.ArrayList;
+
 public class BookmarkFragment extends Fragment {
 
+    ChordsSearchedHistory chordsSearchedHistory;
+    ChordsBookmarks chordsBookmarks;
     private FragmentBookmarkBinding binding;
+
+    ArrayList<String> bookmarkTitle;
+    ArrayList<String> bookmarkArtist;
+    ArrayList<String> bookmarkGenre;
+    ArrayList<String> bookmarkSite;
+    ArrayList<String> bookmarkURL;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +42,29 @@ public class BookmarkFragment extends Fragment {
                 new ViewModelProvider(this).get(BookmarkViewModel.class);
 
         binding = FragmentBookmarkBinding.inflate(inflater, container, false);
+
+        // Page Functions
+
+        chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsBookmarks = ChordsBookmarks.getInstance();
+
+        bookmarkTitle = chordsBookmarks.get_Title();
+        bookmarkArtist = chordsBookmarks.get_Artist();
+        bookmarkGenre = chordsBookmarks.get_Genre();
+        bookmarkSite = chordsBookmarks.get_Site();
+        bookmarkURL = chordsBookmarks.get_URL();
+
+        load_BookmarkFragment();
+
+        // Remove bookmarked
+        binding.bookmarkBoard1BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 1); }); // 4
+        binding.bookmarkBoard2BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 2); }); // 3
+        binding.bookmarkBoard3BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 3); }); // 2
+        binding.bookmarkBoard4BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 4); }); // 1
+        binding.bookmarkBoard5BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 5); }); // 0
+
+        // Page Functions
+
         View root = binding.getRoot();
 
         // Get the SharedViewModel instance
@@ -40,6 +77,94 @@ public class BookmarkFragment extends Fragment {
         //final TextView textView = binding.textBookmark;
         //bookmarkViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    private void bookmarked_functions(int whichIndex) {
+
+        //Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
+        ArrayList<String> all_BookmarkedURL = chordsSearchedHistory.get_URL();
+
+        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
+
+            if(all_BookmarkedURL.get(i).equals(chordsBookmarks.get_URL().get(whichIndex))) {
+
+                chordsSearchedHistory.get_isBookmarked().set(i, "false");
+                break;
+
+            }
+
+        }
+
+        chordsBookmarks.get_Title().remove(whichIndex);
+        chordsBookmarks.get_Artist().remove(whichIndex);
+        chordsBookmarks.get_Genre().remove(whichIndex);
+        chordsBookmarks.get_Site().remove(whichIndex);
+        chordsBookmarks.get_URL().remove(whichIndex);
+
+        // Refresh Page
+        load_BookmarkFragment();
+
+        // Update Firebase
+        // This a good solution? NO.
+        // Might as well save user preferences (bookmarks) once closed ang program?
+        //chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+
+    }
+
+    private void load_BookmarkFragment() {
+
+        binding.bookmarkBoard1.setVisibility(!bookmarkTitle.isEmpty() ? View.VISIBLE : View.INVISIBLE);
+        binding.bookmarkBoard2.setVisibility(bookmarkTitle.size() > 1 ? View.VISIBLE : View.INVISIBLE);
+        binding.bookmarkBoard3.setVisibility(bookmarkTitle.size() > 2 ? View.VISIBLE : View.INVISIBLE);
+        binding.bookmarkBoard4.setVisibility(bookmarkTitle.size() > 3 ? View.VISIBLE : View.INVISIBLE);
+        binding.bookmarkBoard5.setVisibility(bookmarkTitle.size() > 4 ? View.VISIBLE : View.INVISIBLE);
+        int historySize = bookmarkTitle.size();
+
+        if(historySize > 0)
+            updater_BookmarkFragment(1, historySize - 1);
+        if(historySize > 1)
+            updater_BookmarkFragment(2, historySize - 2);
+        if(historySize > 2)
+            updater_BookmarkFragment(3, historySize - 3);
+        if(historySize > 3)
+            updater_BookmarkFragment(4, historySize - 4);
+        if(historySize > 4)
+            updater_BookmarkFragment(5, historySize - 5);
+
+    }
+
+    private void updater_BookmarkFragment(int boardNumber, int historyIndex) {
+
+        String artist_genre = bookmarkArtist.get(historyIndex) + " - " + bookmarkGenre.get(historyIndex);
+
+        switch (boardNumber) {
+            case 1:
+                binding.bookmarkBoard1Title.setText(bookmarkTitle.get(historyIndex));
+                binding.bookmarkBoard1ArtistGenre.setText(artist_genre);
+                binding.bookmarkBoard1Site.setText(bookmarkSite.get(historyIndex));
+                break;
+            case 2:
+                binding.bookmarkBoard2Title.setText(bookmarkTitle.get(historyIndex));
+                binding.bookmarkBoard2ArtistGenre.setText(artist_genre);
+                binding.bookmarkBoard2Site.setText(bookmarkSite.get(historyIndex));
+                break;
+            case 3:
+                binding.bookmarkBoard3Title.setText(bookmarkTitle.get(historyIndex));
+                binding.bookmarkBoard3ArtistGenre.setText(artist_genre);
+                binding.bookmarkBoard3Site.setText(bookmarkSite.get(historyIndex));
+                break;
+            case 4:
+                binding.bookmarkBoard4Title.setText(bookmarkTitle.get(historyIndex));
+                binding.bookmarkBoard4ArtistGenre.setText(artist_genre);
+                binding.bookmarkBoard4Site.setText(bookmarkSite.get(historyIndex));
+                break;
+            case 5:
+                binding.bookmarkBoard5Title.setText(bookmarkTitle.get(historyIndex));
+                binding.bookmarkBoard5ArtistGenre.setText(artist_genre);
+                binding.bookmarkBoard5Site.setText(bookmarkSite.get(historyIndex));
+                break;
+        }
+
     }
 
     @Override

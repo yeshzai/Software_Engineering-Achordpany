@@ -1,9 +1,11 @@
 package com.example.achordpany.ui.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -12,15 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
+import com.example.achordpany.ChordsWebView;
+import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHistoryBinding;
+import com.example.achordpany.ui.bookmark.BookmarkFragment;
+import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 
 import java.util.ArrayList;
 
 public class HistoryFragment extends Fragment {
 
+    ChordsSearchedHistory chordsSearchedHistory;
+    ChordsBookmarks chordsBookmarks;
     private FragmentHistoryBinding binding;
 
     ArrayList<String> recentTitle;
@@ -41,7 +50,8 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
 
         // Page Functions
-        ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsBookmarks = ChordsBookmarks.getInstance();
 
         recentTitle = chordsSearchedHistory.get_Title();
         recentArtist = chordsSearchedHistory.get_Artist();
@@ -57,6 +67,12 @@ public class HistoryFragment extends Fragment {
         binding.historyBoard3BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(3, recentIsBookmarked.size() - 3); } );
         binding.historyBoard4BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(4, recentIsBookmarked.size() - 4); } );
         binding.historyBoard5BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(5, recentIsBookmarked.size() - 5); } );
+
+        binding.historyBoard1OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 1) );
+        binding.historyBoard2OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 2) );
+        binding.historyBoard3OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 3) );
+        binding.historyBoard4OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 4) );
+        binding.historyBoard5OpenButton.setOnClickListener(v -> open_Website( recentURL.size() - 5) );
         // Page Functions
 
         View root = binding.getRoot();
@@ -77,15 +93,46 @@ public class HistoryFragment extends Fragment {
 
         int bookmark_status_icon = 0;
 
+        /*
+            ALGORITHM:
+            1. We will only be able to add to bookmarks everytime bookmark button for history board is "false".
+            2. We will only be able to remove from bookmarks everytime bookmark button for history board is:
+                2.1. TRUE
+                2.2. Still in History (if gone, then only way to remove is through bookmarks page
+        */
+
         switch (recentIsBookmarked.get(whichHistoryIndex)) {
+
             case "false":
                 bookmark_status_icon = R.drawable.ic_bookmark_active;
                 recentIsBookmarked.set(whichHistoryIndex, "true");
+
+                // Add to bookmarks
+                if(chordsBookmarks.get_Title().size() >= 5) {
+
+                    chordsBookmarks.get_Title().remove(0);
+                    chordsBookmarks.get_Artist().remove(0);
+                    chordsBookmarks.get_Genre().remove(0);
+                    chordsBookmarks.get_Site().remove(0);
+                    chordsBookmarks.get_URL().remove(0);
+
+                }
+
+                chordsBookmarks.set_Title(recentTitle.get(whichHistoryIndex));
+                chordsBookmarks.set_Artist(recentArtist.get(whichHistoryIndex));
+                chordsBookmarks.set_Genre(recentGenre.get(whichHistoryIndex));
+                chordsBookmarks.set_Site(recentSite.get(whichHistoryIndex));
+                chordsBookmarks.set_URL(recentURL.get(whichHistoryIndex));
                 break;
+
             case "true":
                 bookmark_status_icon = R.drawable.ic_bookmark;
                 recentIsBookmarked.set(whichHistoryIndex, "false");
+
+                // Remove from bookmarks
+                delete_Bookmarked(recentURL.get(whichHistoryIndex));
                 break;
+
         }
 
         switch (whichBoard) {
@@ -104,6 +151,27 @@ public class HistoryFragment extends Fragment {
             case 5:
                 binding.historyBoard5BookmarkButton.setImageResource(bookmark_status_icon);
                 break;
+        }
+
+    }
+
+    private void delete_Bookmarked(String to_remove_url) {
+
+        ArrayList<String> all_BookmarkedURL = chordsBookmarks.get_URL();
+
+        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
+
+            if(all_BookmarkedURL.get(i).equals(to_remove_url)) {
+
+                chordsBookmarks.get_Title().remove(i);
+                chordsBookmarks.get_Artist().remove(i);
+                chordsBookmarks.get_Genre().remove(i);
+                chordsBookmarks.get_Site().remove(i);
+                chordsBookmarks.get_URL().remove(i);
+                break;
+
+            }
+
         }
 
     }
@@ -171,6 +239,24 @@ public class HistoryFragment extends Fragment {
                         ? R.drawable.ic_bookmark : R.drawable.ic_bookmark_active );
                 break;
         }
+
+    }
+
+    private void open_Website(int whichIndex) {
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        String the_Title = recentTitle.get(whichIndex);
+        String the_Artist = recentArtist.get(whichIndex);
+        String the_Genre = recentGenre.get(whichIndex);
+        String the_URL = recentURL.get(whichIndex);
+
+        chordsWebView.set_Title(the_Title);
+        chordsWebView.set_Artist(the_Artist);
+        chordsWebView.set_Genre(the_Genre);
+        chordsWebView.set_Url(the_URL);
+
+        Intent intent = new Intent(requireActivity(), HistoryWebViewActivity.class);
+        startActivity(intent);
 
     }
 

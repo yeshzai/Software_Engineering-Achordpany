@@ -20,6 +20,7 @@ import androidx.navigation.Navigation;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
+import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsRecommendations;
 import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.Main_EverythingLocalDatabase;
@@ -34,9 +35,10 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
-    ChordsRecommendations chordsRecommendations = ChordsRecommendations.getInstance();
-    ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+    Main_EverythingLocalDatabase main_EverythingLocalDatabase;
+    ChordsRecommendations chordsRecommendations;
+    ChordsSearchedHistory chordsSearchedHistory;
+    ChordsBookmarks chordsBookmarks;
 
     private FragmentHomeBinding binding;
     ArrayList<String> recentTitle;
@@ -46,6 +48,12 @@ public class HomeFragment extends Fragment {
     ArrayList<String> recentURL;
     ArrayList<String> recentIsBookmarked;
     String artist_genre;
+
+    ArrayList<String> bookmarkTitle;
+    ArrayList<String> bookmarkArtist;
+    ArrayList<String> bookmarkGenre;
+    ArrayList<String> bookmarkSite;
+    ArrayList<String> bookmarkURL;
 
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,6 +67,12 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         // Home Page Functions
+
+        main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
+        chordsRecommendations = ChordsRecommendations.getInstance();
+        chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        chordsBookmarks = ChordsBookmarks.getInstance();
+
         recentTitle = chordsSearchedHistory.get_Title();
         recentArtist = chordsSearchedHistory.get_Artist();
         recentGenre = chordsSearchedHistory.get_Genre();
@@ -66,21 +80,37 @@ public class HomeFragment extends Fragment {
         recentURL = chordsSearchedHistory.get_URL();
         recentIsBookmarked = chordsSearchedHistory.get_isBookmarked();
 
+        bookmarkTitle = chordsBookmarks.get_Title();
+        bookmarkArtist = chordsBookmarks.get_Artist();
+        bookmarkGenre = chordsBookmarks.get_Genre();
+        bookmarkSite = chordsBookmarks.get_Site();
+        bookmarkURL = chordsBookmarks.get_URL();
+
         load_Bookmarks();
         load_RecentSearches();
         load_Recommendations();
 
         binding.recentSearch1BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(1, recentIsBookmarked.size() - 1); });
         binding.recentSearch2BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(2, recentIsBookmarked.size() - 2); });
-        binding.recentSearchesOpenAllButton.setOnClickListener(v -> {
 
-            // Code here when OpenAll for recent search is clicked.
-
+        // Open Button - Bookmarks
+        binding.bookmarkBoard1OpenButton.setOnClickListener(v -> {
+            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
+            // Open website gotoURL
         });
-        binding.bookmarksOpenAllButton.setOnClickListener(v -> {
+        binding.bookmarkBoard2OpenButton.setOnClickListener(v -> {
+            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
+            // Open website gotoURL
+        });
 
-            // Code here when OpenAll for bookmark is clicked.
-
+        // Open Button - Recent Searches
+        binding.recentSearch1OpenButton.setOnClickListener(v -> {
+            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
+            // Open website gotoURL
+        });
+        binding.recentSearch2OpenButton.setOnClickListener(v -> {
+            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
+            // Open website gotoURL
         });
 
         // Home Page Functions
@@ -142,14 +172,37 @@ public class HomeFragment extends Fragment {
         int bookmark_status_icon = 0;
 
         switch (recentIsBookmarked.get(whichHistoryIndex)) {
+
             case "false":
                 bookmark_status_icon = R.drawable.ic_bookmark_active;
                 recentIsBookmarked.set(whichHistoryIndex, "true");
+
+                // Add to bookmarks
+                if(chordsBookmarks.get_Title().size() >= 5) {
+
+                    chordsBookmarks.get_Title().remove(0);
+                    chordsBookmarks.get_Artist().remove(0);
+                    chordsBookmarks.get_Genre().remove(0);
+                    chordsBookmarks.get_Site().remove(0);
+                    chordsBookmarks.get_URL().remove(0);
+
+                }
+
+                chordsBookmarks.set_Title(recentTitle.get(whichHistoryIndex));
+                chordsBookmarks.set_Artist(recentArtist.get(whichHistoryIndex));
+                chordsBookmarks.set_Genre(recentGenre.get(whichHistoryIndex));
+                chordsBookmarks.set_Site(recentSite.get(whichHistoryIndex));
+                chordsBookmarks.set_URL(recentURL.get(whichHistoryIndex));
                 break;
+
             case "true":
                 bookmark_status_icon = R.drawable.ic_bookmark;
                 recentIsBookmarked.set(whichHistoryIndex, "false");
+
+                // Remove from bookmarks
+                delete_Bookmarked(recentURL.get(whichHistoryIndex));
                 break;
+
         }
 
         switch (whichBoard) {
@@ -161,11 +214,55 @@ public class HomeFragment extends Fragment {
                 break;
         }
 
+        load_Bookmarks();
+
+    }
+
+    private void delete_Bookmarked(String to_remove_url) {
+
+        ArrayList<String> all_BookmarkedURL = chordsBookmarks.get_URL();
+
+        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
+
+            if(all_BookmarkedURL.get(i).equals(to_remove_url)) {
+
+                chordsBookmarks.get_Title().remove(i);
+                chordsBookmarks.get_Artist().remove(i);
+                chordsBookmarks.get_Genre().remove(i);
+                chordsBookmarks.get_Site().remove(i);
+                chordsBookmarks.get_URL().remove(i);
+                break;
+
+            }
+
+        }
+
     }
 
     public void load_Bookmarks() {
 
+        binding.bookmarkBoard1.setVisibility(!bookmarkTitle.isEmpty() ? View.VISIBLE : View.INVISIBLE);
+        binding.bookmarkBoard2.setVisibility(bookmarkTitle.size() > 1 ? View.VISIBLE : View.INVISIBLE);
 
+        if(!bookmarkTitle.isEmpty()) {
+
+            binding.bookmarkBoard1Title.setText(bookmarkTitle.get(bookmarkTitle.size() - 1));
+            binding.bookmarkBoard1Artist.setText(bookmarkArtist.get(bookmarkArtist.size() - 1));
+            binding.bookmarkBoard1Genre.setText(bookmarkGenre.get(bookmarkGenre.size() - 1));
+
+            // URL: bookmarkURL.get(bookmarkURL.size() - 1)
+
+            if(bookmarkTitle.size() > 1) {
+
+                binding.bookmarkBoard2Title.setText(bookmarkTitle.get(bookmarkTitle.size() - 2));
+                binding.bookmarkBoard2Artist.setText(bookmarkArtist.get(bookmarkArtist.size() - 2));
+                binding.bookmarkBoard2Genre.setText(bookmarkGenre.get(bookmarkGenre.size() - 2));
+
+                // URL: bookmarkURL.get(bookmarkURL.size() - 2)
+
+            }
+
+        }
 
     }
 

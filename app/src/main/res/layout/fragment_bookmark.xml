@@ -91,7 +91,7 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark" />
+                    android:src="@drawable/ic_bookmark_active" />
 
                 <ImageView
                     android:id="@+id/bookmark_Board1_OpenButton"
@@ -163,7 +163,7 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark" />
+                    android:src="@drawable/ic_bookmark_active" />
 
                 <ImageView
                     android:id="@+id/bookmark_Board2_OpenButton"
@@ -235,7 +235,7 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark" />
+                    android:src="@drawable/ic_bookmark_active" />
 
                 <ImageView
                     android:id="@+id/bookmark_Board3_OpenButton"
@@ -307,7 +307,7 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark" />
+                    android:src="@drawable/ic_bookmark_active" />
 
                 <ImageView
                     android:id="@+id/bookmark_Board4_OpenButton"
@@ -379,7 +379,7 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/ic_bookmark_desc"
-                    android:src="@drawable/ic_bookmark" />
+                    android:src="@drawable/ic_bookmark_active" />
 
                 <ImageView
                     android:id="@+id/bookmark_Board5_OpenButton"

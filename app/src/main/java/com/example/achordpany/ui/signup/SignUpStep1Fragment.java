@@ -2,6 +2,7 @@ package com.example.achordpany.ui.signup;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.text.method.PasswordTransformationMethod;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 
 public class SignUpStep1Fragment extends Fragment {
 
+    private Drawable defaultBackground;
     private boolean isPasswordVisible = false;
     private boolean isConfirmPasswordVisible = false;
     public TextView usernameText;
@@ -49,6 +51,7 @@ public class SignUpStep1Fragment extends Fragment {
         emailAddressText = view.findViewById(R.id.emailAddressText);
         passwordText = view.findViewById(R.id.passwordText);
         confirmPasswordText = view.findViewById(R.id.confirmPasswordText);
+        defaultBackground = usernameText.getBackground();
         backtrackContent();
 
         view.findViewById(R.id.textHaveAccount).setOnClickListener(v -> {
@@ -63,6 +66,9 @@ public class SignUpStep1Fragment extends Fragment {
 
         // PASSWORD HIDE/VISIBLE
         passwordText.setOnTouchListener((v, event) -> {
+
+            returnWhich_DefaultBackground(1234);
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = passwordText.getWidth();
                 int paddingRight = passwordText.getPaddingRight();
@@ -102,6 +108,9 @@ public class SignUpStep1Fragment extends Fragment {
 
         // CONFIRM PASSWORD HIDE/VISIBLE
         confirmPasswordText.setOnTouchListener((v, event) -> {
+
+            returnWhich_DefaultBackground(1234);
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = confirmPasswordText.getWidth();
                 int paddingRight = confirmPasswordText.getPaddingRight();
@@ -139,6 +148,15 @@ public class SignUpStep1Fragment extends Fragment {
             return false;
         });
 
+        usernameText.setOnTouchListener((v, event) -> {
+            returnWhich_DefaultBackground(1234);
+            return false;
+        });
+
+        emailAddressText.setOnTouchListener((v, event) -> {
+            returnWhich_DefaultBackground(1234);
+            return false;
+        });
 
         Button btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(v -> {
@@ -151,11 +169,17 @@ public class SignUpStep1Fragment extends Fragment {
             String user_confirmPasswordText = confirmPasswordText.getText().toString();
 
             if(!username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
+                returnWhich_DefaultBackground(1234);
 
                 if(!user_usernameText.isEmpty() && !user_emailAddressText.isEmpty()
                         && !user_passwordText.isEmpty() && !user_confirmPasswordText.isEmpty())
                 {
+                    returnWhich_DefaultBackground(1234);
+
                     if (user_passwordText.equals(user_confirmPasswordText)) {
+
+                        passwordText.setBackground(defaultBackground);
+                        confirmPasswordText.setBackground(defaultBackground);
 
                         signUpCredentials.set_credential_usernameText(user_usernameText);
                         signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
@@ -173,17 +197,36 @@ public class SignUpStep1Fragment extends Fragment {
                     } else {
 
                         Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+                        passwordText.setBackgroundResource(R.drawable.edittext_error);
+                        confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
+                        returnWhich_DefaultBackground(12);
 
                     }
                 } else {
 
                     Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
+                    returnWhich_DefaultBackground(1234);
+                    if(usernameText.getText().toString().isEmpty()) {
+                        usernameText.setBackgroundResource(R.drawable.edittext_error);
+                    }
+                    if(emailAddressText.getText().toString().isEmpty()) {
+                        emailAddressText.setBackgroundResource(R.drawable.edittext_error);
+                    }
+                    if(passwordText.getText().toString().isEmpty()) {
+                        passwordText.setBackgroundResource(R.drawable.edittext_error);
+                    }
+                    if(confirmPasswordText.getText().toString().isEmpty()) {
+                        confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
+                    }
+
                 }
 
             } else {  // [KEY - CHILD_NAME] Username Contain Invalid Character(s)
 
                 Toast.makeText(requireActivity(), "Username Invalid! Remove [., $, #, [, ], /]", Toast.LENGTH_SHORT).show();
+                usernameText.setBackgroundResource(R.drawable.edittext_error);
+                returnWhich_DefaultBackground(234);
 
             }
 
@@ -200,6 +243,28 @@ public class SignUpStep1Fragment extends Fragment {
         });
 
         return view;
+
+    }
+
+    private void returnWhich_DefaultBackground(int which) {
+
+        switch (which) {
+            case (1234):
+                usernameText.setBackground(defaultBackground);
+                emailAddressText.setBackground(defaultBackground);
+                passwordText.setBackground(defaultBackground);
+                confirmPasswordText.setBackground(defaultBackground);
+                break;
+            case (234):
+                emailAddressText.setBackground(defaultBackground);
+                passwordText.setBackground(defaultBackground);
+                confirmPasswordText.setBackground(defaultBackground);
+                break;
+            case (12):
+                usernameText.setBackground(defaultBackground);
+                emailAddressText.setBackground(defaultBackground);
+                break;
+        }
 
     }
 

@@ -30,10 +30,10 @@
     <string name="stop">Stop</string>
     <string name="restart_listening">Restart</string>
     <string name="stop_listening">Stop</string>
-    <string name="search_a_song">Search a song</string>
-    <string name="play_a_song">Play a song…</string>
-    <string name="listening">Listening…</string>
-    <string name="please_wait">Please wait</string>
+    <string name="search_a_song">Search A Song</string>
+    <string name="play_a_song">Preparing To Record…</string>
+    <string name="listening">Listening Now…</string>
+    <string name="please_wait">Please Wait</string>
     <string name="redirecting">Redirecting</string>
 
     <string name="top_avatar">Top Avatar</string>

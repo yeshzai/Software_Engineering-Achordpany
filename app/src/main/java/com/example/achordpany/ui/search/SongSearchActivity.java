@@ -87,6 +87,13 @@ public class SongSearchActivity extends AppCompatActivity {
             @Override
             public void onError(int error) {
                 Log.d("SPEECH RECOGNIZER", "Error: " + error);
+
+                if (error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT ||
+                        error == SpeechRecognizer.ERROR_NO_MATCH ||
+                        error == SpeechRecognizer.ERROR_RECOGNIZER_BUSY) {
+                    continue_Listening();
+                }
+
             }
 
             @Override
@@ -95,10 +102,9 @@ public class SongSearchActivity extends AppCompatActivity {
                 ArrayList<String> recognized_speech = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if(recognized_speech != null && !recognized_speech.isEmpty()) {
 
-                    SongTitleProcessing songTitleProcessing = SongTitleProcessing.getInstance();
-                    recognizedLyrics = recognized_speech.get(0);
-                    songTitleProcessing.set_SongLyrics(recognizedLyrics);
-                    Log.d("SPEECH RECOGNIZER [OUTPUT]", recognizedLyrics);
+                    recognizedLyrics = recognizedLyrics + " " + recognized_speech.get(0);
+                    Log.d("SPEECH RECOGNIZER [CONTINUED]", recognized_speech.get(0));
+                    continue_Listening();
 
                 }
 
@@ -150,6 +156,15 @@ public class SongSearchActivity extends AppCompatActivity {
 
     }
 
+    private void continue_Listening() {
+
+        if(timeRemaining > 1) {
+            speechRecognizer.stopListening();
+            speechRecognizer.startListening(speechRecognizerIntent);
+        }
+
+    }
+
     private void nextStep() {
         step++;
         switch (step) {
@@ -190,7 +205,7 @@ public class SongSearchActivity extends AppCompatActivity {
 
                 // Start Listening Timer (1 Minute)
                 listeningTimeoutRunnable = () -> nextStep(); // Move to "Please Wait"
-                handler.postDelayed(listeningTimeoutRunnable, 15000);
+                handler.postDelayed(listeningTimeoutRunnable, 9000);
 
                 break;
             case 3: // Please Wait
@@ -219,6 +234,11 @@ public class SongSearchActivity extends AppCompatActivity {
                 btnStopRedirecting.setVisibility(View.VISIBLE);
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
+
+                    SongTitleProcessing songTitleProcessing = SongTitleProcessing.getInstance();
+                    recognizedLyrics = recognizedLyrics.trim();
+                    songTitleProcessing.set_SongLyrics(recognizedLyrics);
+                    Log.d("SPEECH RECOGNIZER [OUTPUT]", recognizedLyrics);
 
                     Intent intent = new Intent(SongSearchActivity.this, MainActivity.class);
                     intent.putExtra("openChords", true); // Pass data to indicate navigation
@@ -262,7 +282,9 @@ public class SongSearchActivity extends AppCompatActivity {
                     timeRemaining--;
                     handler.postDelayed(this, 1000);
                 } else {
-                    txtCountdown.setText("Time Remaining: 0s");
+                    //txtCountdown.setText("Time Remaining: 0s");
+                    txtAboveWave.setText("Recording Done!");
+                    txtCountdown.setText("");
                 }
             }
         });
@@ -275,7 +297,7 @@ public class SongSearchActivity extends AppCompatActivity {
         // Simulate 5 seconds of listening (Replace with real audio processing)
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             nextStep(); // Move to Step 2
-        }, 1000);   // Changed from 5000 (5 seconds) to 1000 (1 second) - KaytoKidd
+        }, 2000);   // Changed from 5000 (5 seconds) to 500 (2 second) - KaytoKidd
     }
 
     // [BANDAID] - SPEECH RECOGNIZER

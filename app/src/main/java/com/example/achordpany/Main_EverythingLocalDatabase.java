@@ -1,8 +1,11 @@
 package com.example.achordpany;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.example.achordpany.ui.signup.UsersCredentials;
 import com.example.achordpany.ui.signup.UsersRecommendationData;
@@ -52,11 +55,24 @@ public class Main_EverythingLocalDatabase {
     private ArrayList<String> history;
     private ArrayList<String> bookmark;
 
-    public static Main_EverythingLocalDatabase getInstance() {
+    private Context context;
+
+    public static Main_EverythingLocalDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = new Main_EverythingLocalDatabase();
+            instance = new Main_EverythingLocalDatabase(context);
         }
         return instance;
+    }
+
+    public static Main_EverythingLocalDatabase getInstance() {
+        if (instance == null) {
+            instance = new Main_EverythingLocalDatabase(null);
+        }
+        return instance;
+    }
+
+    private Main_EverythingLocalDatabase(Context context) {
+        this.context = context;
     }
 
     // Setter
@@ -104,6 +120,9 @@ public class Main_EverythingLocalDatabase {
         users_Credentials = FirebaseDatabase.getInstance().getReference("Users_Credentials");
         users_RecommendationData = FirebaseDatabase.getInstance().getReference("Users_RecommendationData");
 
+        AtomicBoolean credentialsLoaded = new AtomicBoolean(false);
+        AtomicBoolean recommendationDataLoaded = new AtomicBoolean(false);
+
         // Credentials
         users_Credentials.child(passed_username).get().addOnSuccessListener(dataSnapshot -> {
 
@@ -117,9 +136,14 @@ public class Main_EverythingLocalDatabase {
 
             }
 
+            credentialsLoaded.set(true);
+            checkAndProceed(credentialsLoaded, recommendationDataLoaded);
+
         }).addOnFailureListener(e -> {
 
             Log.e("[FIREBASE RETRIEVE]", "[" + passed_username + "] [FAILED] CREDENTIALS: " + e.getMessage());
+            credentialsLoaded.set(true);
+            checkAndProceed(credentialsLoaded, recommendationDataLoaded);
 
         });
 
@@ -153,12 +177,28 @@ public class Main_EverythingLocalDatabase {
 
             }
 
+            recommendationDataLoaded.set(true);
+            checkAndProceed(credentialsLoaded, recommendationDataLoaded);
+
         }).addOnFailureListener(e -> {
 
             Log.e("[FIREBASE RETRIEVE]", "[" + passed_username + "] [FAILED] RECOMMENDATION DATA: " + e.getMessage());
+            recommendationDataLoaded.set(true);
+            checkAndProceed(credentialsLoaded, recommendationDataLoaded);
 
         });
 
+    }
+
+    private void checkAndProceed(AtomicBoolean credentialsLoaded, AtomicBoolean recommendationDataLoaded) {
+        if (credentialsLoaded.get() && recommendationDataLoaded.get()) {
+            Log.d("[FIREBASE RETRIEVE]", "[SUCCESS] All data retrieved. Navigating to MainActivity.");
+
+            // Start MainActivity using stored context
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+        }
     }
 
     public void mainPage_UpdateFirebase(String passed_username) {

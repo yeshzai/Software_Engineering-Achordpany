@@ -39,6 +39,7 @@ public class ChordsSearchedHistory {
         return instance;
     }
 
+    // Individual Transfer (String > add > ArrayList)
     public void set_Title(String title) {
         this.title.add(title);
     }
@@ -59,6 +60,29 @@ public class ChordsSearchedHistory {
     }
     public void set_UID(String uid) {
         this.uid.add(uid);
+    }
+
+    // One Time Transfer (ArrayList > ArrayList)
+    public void set_Title(ArrayList<String> title) {
+        this.title = title;
+    }
+    public void set_Artist(ArrayList<String> artist) {
+        this.artist = artist;
+    }
+    public void set_Genre(ArrayList<String> genre) {
+        this.genre = genre;
+    }
+    public void set_Site(ArrayList<String> site) {
+        this.site = site;
+    }
+    public void set_URL(ArrayList<String> url) {
+        this.url = url;
+    }
+    public void set_isBookmarked(ArrayList<String> isBookmarked) {
+        this.isBookmarked = isBookmarked;
+    }
+    public void set_UID(ArrayList<String> uid) {
+        this.uid = uid;
     }
 
     public ArrayList<String> get_Title() {

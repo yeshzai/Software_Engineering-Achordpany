@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 int paddingRight = editTextPassword.getPaddingRight();
                 float touchX = event.getX();
 
-                if (touchX > width - paddingRight - editTextPassword.getCompoundDrawables()[2].getBounds().width()) {
+                if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[2].getBounds().width())) {
 
                     if(!editTextPassword.isFocused()) {
                         editTextPassword.requestFocus();

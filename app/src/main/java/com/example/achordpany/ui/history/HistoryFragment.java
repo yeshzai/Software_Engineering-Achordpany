@@ -18,6 +18,7 @@ import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.ChordsWebView;
 import com.example.achordpany.MainActivity;
+import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHistoryBinding;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 public class HistoryFragment extends Fragment {
 
+    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
     ChordsSearchedHistory chordsSearchedHistory;
     ChordsBookmarks chordsBookmarks;
     private FragmentHistoryBinding binding;
@@ -157,6 +159,10 @@ public class HistoryFragment extends Fragment {
                 break;
         }
 
+        update_ChordsSearchedHistory();
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+
     }
 
     private void delete_Bookmarked(String to_remove_UID) {
@@ -238,6 +244,18 @@ public class HistoryFragment extends Fragment {
                         ? R.drawable.ic_bookmark : R.drawable.ic_bookmark_active );
                 break;
         }
+
+    }
+
+    private void update_ChordsSearchedHistory() {
+
+        chordsSearchedHistory.set_Title(recentTitle);
+        chordsSearchedHistory.set_Artist(recentArtist);
+        chordsSearchedHistory.set_Genre(recentGenre);
+        chordsSearchedHistory.set_Site(recentSite);
+        chordsSearchedHistory.set_URL(recentURL);
+        chordsSearchedHistory.set_isBookmarked(recentIsBookmarked);
+        chordsSearchedHistory.set_UID(recentUID);
 
     }
 

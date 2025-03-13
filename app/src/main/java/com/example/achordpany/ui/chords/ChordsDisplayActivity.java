@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
+import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
@@ -21,6 +22,7 @@ import com.example.achordpany.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ChordsDisplayActivity extends AppCompatActivity {
 
@@ -150,6 +152,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         // Add to ChordsSearchedHistory (Local database)
         Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
         ChordsSearchedHistory chordsSearchedHistory = ChordsSearchedHistory.getInstance();
+        ChordsBookmarks chordsBookmarks = ChordsBookmarks.getInstance();
 
         if(chordsSearchedHistory.get_Title().size() >= 5) {
 
@@ -170,11 +173,18 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         chordsSearchedHistory.set_URL(song_URL);
         chordsSearchedHistory.set_isBookmarked("false");
 
+        Random random = new Random();
+        char[] letters = {'a', 'b', 'c', 'd', 'e'};
+
         while(true) {
 
-            int create_UID = (int)(Math.random() * 5) + 1;
-            if(!chordsSearchedHistory.get_UID().contains(Integer.toString(create_UID))) {
-                chordsSearchedHistory.set_UID(Integer.toString(create_UID));
+            String newUID = "" +
+                    letters[random.nextInt(5)] +
+                    letters[random.nextInt(5)] +
+                    letters[random.nextInt(5)];
+
+            if(!chordsSearchedHistory.get_UID().contains(newUID) && !chordsBookmarks.get_UID().contains(newUID)) {
+                chordsSearchedHistory.set_UID(newUID);
                 break;
             }
 

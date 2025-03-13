@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class BookmarkFragment extends Fragment {
 
+    Main_EverythingLocalDatabase main_EverythingLocalDatabase;
     ChordsSearchedHistory chordsSearchedHistory;
     ChordsBookmarks chordsBookmarks;
     private FragmentBookmarkBinding binding;
@@ -45,6 +46,7 @@ public class BookmarkFragment extends Fragment {
 
         // Page Functions
 
+        main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
         chordsSearchedHistory = ChordsSearchedHistory.getInstance();
         chordsBookmarks = ChordsBookmarks.getInstance();
 
@@ -82,7 +84,9 @@ public class BookmarkFragment extends Fragment {
     private void bookmarked_functions(int whichIndex) {
 
         int index_ToChange = chordsSearchedHistory.get_UID().indexOf(chordsBookmarks.get_UID().get(whichIndex));
-        chordsSearchedHistory.get_isBookmarked().set(index_ToChange, "false");
+
+        if(index_ToChange != -1)
+            chordsSearchedHistory.get_isBookmarked().set(index_ToChange, "false");
 
         chordsBookmarks.get_Title().remove(whichIndex);
         chordsBookmarks.get_Artist().remove(whichIndex);
@@ -120,6 +124,9 @@ public class BookmarkFragment extends Fragment {
             updater_BookmarkFragment(4, historySize - 4);
         if(historySize > 4)
             updater_BookmarkFragment(5, historySize - 5);
+
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
 
     }
 

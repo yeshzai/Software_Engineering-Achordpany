@@ -221,6 +221,21 @@ public class HomeFragment extends Fragment {
         }
 
         load_Bookmarks();
+        update_ChordsSearchedHistory();
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+
+    }
+
+    private void update_ChordsSearchedHistory() {
+
+        chordsSearchedHistory.set_Title(recentTitle);
+        chordsSearchedHistory.set_Artist(recentArtist);
+        chordsSearchedHistory.set_Genre(recentGenre);
+        chordsSearchedHistory.set_Site(recentSite);
+        chordsSearchedHistory.set_URL(recentURL);
+        chordsSearchedHistory.set_isBookmarked(recentIsBookmarked);
+        chordsSearchedHistory.set_UID(recentUID);
 
     }
 

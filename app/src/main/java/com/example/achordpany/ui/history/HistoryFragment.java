@@ -18,6 +18,7 @@ import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
 import com.example.achordpany.ChordsWebView;
 import com.example.achordpany.MainActivity;
+import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHistoryBinding;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 public class HistoryFragment extends Fragment {
 
+    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
     ChordsSearchedHistory chordsSearchedHistory;
     ChordsBookmarks chordsBookmarks;
     private FragmentHistoryBinding binding;
@@ -38,6 +40,7 @@ public class HistoryFragment extends Fragment {
     ArrayList<String> recentSite;
     ArrayList<String> recentURL;
     ArrayList<String> recentIsBookmarked;
+    ArrayList<String> recentUID;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class HistoryFragment extends Fragment {
         recentSite = chordsSearchedHistory.get_Site();
         recentURL = chordsSearchedHistory.get_URL();
         recentIsBookmarked = chordsSearchedHistory.get_isBookmarked();
+        recentUID = chordsSearchedHistory.get_UID();
 
         load_HistoryFragment();
 
@@ -115,6 +119,7 @@ public class HistoryFragment extends Fragment {
                     chordsBookmarks.get_Genre().remove(0);
                     chordsBookmarks.get_Site().remove(0);
                     chordsBookmarks.get_URL().remove(0);
+                    chordsBookmarks.get_UID().remove(0);
 
                 }
 
@@ -123,6 +128,7 @@ public class HistoryFragment extends Fragment {
                 chordsBookmarks.set_Genre(recentGenre.get(whichHistoryIndex));
                 chordsBookmarks.set_Site(recentSite.get(whichHistoryIndex));
                 chordsBookmarks.set_URL(recentURL.get(whichHistoryIndex));
+                chordsBookmarks.set_UID(recentUID.get(whichHistoryIndex));
                 break;
 
             case "true":
@@ -130,7 +136,7 @@ public class HistoryFragment extends Fragment {
                 recentIsBookmarked.set(whichHistoryIndex, "false");
 
                 // Remove from bookmarks
-                delete_Bookmarked(recentURL.get(whichHistoryIndex));
+                delete_Bookmarked(recentUID.get(whichHistoryIndex));
                 break;
 
         }
@@ -153,24 +159,23 @@ public class HistoryFragment extends Fragment {
                 break;
         }
 
+        update_ChordsSearchedHistory();
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+
     }
 
-    private void delete_Bookmarked(String to_remove_url) {
+    private void delete_Bookmarked(String to_remove_UID) {
 
-        ArrayList<String> all_BookmarkedURL = chordsBookmarks.get_URL();
+        int index_ToRemove = chordsBookmarks.get_UID().indexOf(to_remove_UID);
+        if(index_ToRemove != -1) {
 
-        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
-
-            if(all_BookmarkedURL.get(i).equals(to_remove_url)) {
-
-                chordsBookmarks.get_Title().remove(i);
-                chordsBookmarks.get_Artist().remove(i);
-                chordsBookmarks.get_Genre().remove(i);
-                chordsBookmarks.get_Site().remove(i);
-                chordsBookmarks.get_URL().remove(i);
-                break;
-
-            }
+            chordsBookmarks.get_Title().remove(index_ToRemove);
+            chordsBookmarks.get_Artist().remove(index_ToRemove);
+            chordsBookmarks.get_Genre().remove(index_ToRemove);
+            chordsBookmarks.get_Site().remove(index_ToRemove);
+            chordsBookmarks.get_URL().remove(index_ToRemove);
+            chordsBookmarks.get_UID().remove(index_ToRemove);
 
         }
 
@@ -239,6 +244,18 @@ public class HistoryFragment extends Fragment {
                         ? R.drawable.ic_bookmark : R.drawable.ic_bookmark_active );
                 break;
         }
+
+    }
+
+    private void update_ChordsSearchedHistory() {
+
+        chordsSearchedHistory.set_Title(recentTitle);
+        chordsSearchedHistory.set_Artist(recentArtist);
+        chordsSearchedHistory.set_Genre(recentGenre);
+        chordsSearchedHistory.set_Site(recentSite);
+        chordsSearchedHistory.set_URL(recentURL);
+        chordsSearchedHistory.set_isBookmarked(recentIsBookmarked);
+        chordsSearchedHistory.set_UID(recentUID);
 
     }
 

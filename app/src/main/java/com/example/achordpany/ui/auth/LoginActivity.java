@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 int paddingRight = editTextPassword.getPaddingRight();
                 float touchX = event.getX();
 
-                if (touchX > width - paddingRight - editTextPassword.getCompoundDrawables()[2].getBounds().width()) {
+                if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[2].getBounds().width())) {
 
                     if(!editTextPassword.isFocused()) {
                         editTextPassword.requestFocus();
@@ -131,20 +131,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
 
-                                    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
+                                    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance(LoginActivity.this);
                                     main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
-
-                                    try {
-                                        TimeUnit.MILLISECONDS.sleep(2000);   // Make sure that database is fully loaded.
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-
-                                    // Go to Main Page
-
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
 
                                 } else {
 

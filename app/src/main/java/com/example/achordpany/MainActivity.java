@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import androidx.lifecycle.ViewModelProvider;
 import android.util.Log;
 
+import com.example.achordpany.ui.auth.WelcomeActivity;
 import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +34,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.ui.search.SongSearchActivity;
 import com.example.achordpany.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -100,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         headerTitle.setText("Dashboard");
         subtextView.setText("Navigation section");
+
+        // Open Profile - When profile image is clicked.
+        profileImageView.setOnClickListener(v -> {
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_profile);
+            }
+        });
 
         // FloatingActionButton click listener
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -223,7 +232,25 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (item.getItemId() == R.id.menu_logout) {
-            Toast.makeText(this, "Log Out Clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logout Successful!", Toast.LENGTH_SHORT).show();
+
+            // Logout Firebase
+            FirebaseAuth current_user = FirebaseAuth.getInstance();
+            current_user.signOut();
+
+            if(current_user.getCurrentUser() == null)
+                Log.d("[FIREBASE LOGOUT]", "SUCCESS");
+            else
+                Log.d("[FIREBASE LOGOUT]", "FAILED");
+
+            // Restart application
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                Runtime.getRuntime().exit(0); // Kill & restart app
+            }, 300); // Delay prevents abrupt black screen
+
             return true;
         }
         return false;

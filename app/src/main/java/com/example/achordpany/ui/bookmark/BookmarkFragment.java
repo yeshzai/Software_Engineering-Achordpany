@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class BookmarkFragment extends Fragment {
 
+    Main_EverythingLocalDatabase main_EverythingLocalDatabase;
     ChordsSearchedHistory chordsSearchedHistory;
     ChordsBookmarks chordsBookmarks;
     private FragmentBookmarkBinding binding;
@@ -45,6 +46,7 @@ public class BookmarkFragment extends Fragment {
 
         // Page Functions
 
+        main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
         chordsSearchedHistory = ChordsSearchedHistory.getInstance();
         chordsBookmarks = ChordsBookmarks.getInstance();
 
@@ -81,25 +83,17 @@ public class BookmarkFragment extends Fragment {
 
     private void bookmarked_functions(int whichIndex) {
 
-        //Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
-        ArrayList<String> all_BookmarkedURL = chordsSearchedHistory.get_URL();
+        int index_ToChange = chordsSearchedHistory.get_UID().indexOf(chordsBookmarks.get_UID().get(whichIndex));
 
-        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
-
-            if(all_BookmarkedURL.get(i).equals(chordsBookmarks.get_URL().get(whichIndex))) {
-
-                chordsSearchedHistory.get_isBookmarked().set(i, "false");
-                break;
-
-            }
-
-        }
+        if(index_ToChange != -1)
+            chordsSearchedHistory.get_isBookmarked().set(index_ToChange, "false");
 
         chordsBookmarks.get_Title().remove(whichIndex);
         chordsBookmarks.get_Artist().remove(whichIndex);
         chordsBookmarks.get_Genre().remove(whichIndex);
         chordsBookmarks.get_Site().remove(whichIndex);
         chordsBookmarks.get_URL().remove(whichIndex);
+        chordsBookmarks.get_UID().remove(whichIndex);
 
         // Refresh Page
         load_BookmarkFragment();
@@ -130,6 +124,9 @@ public class BookmarkFragment extends Fragment {
             updater_BookmarkFragment(4, historySize - 4);
         if(historySize > 4)
             updater_BookmarkFragment(5, historySize - 5);
+
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
 
     }
 

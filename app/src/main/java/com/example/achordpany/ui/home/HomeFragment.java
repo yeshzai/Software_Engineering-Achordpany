@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
     ArrayList<String> recentSite;
     ArrayList<String> recentURL;
     ArrayList<String> recentIsBookmarked;
+    ArrayList<String> recentUID;
     String artist_genre;
 
     ArrayList<String> bookmarkTitle;
@@ -54,6 +55,7 @@ public class HomeFragment extends Fragment {
     ArrayList<String> bookmarkGenre;
     ArrayList<String> bookmarkSite;
     ArrayList<String> bookmarkURL;
+    ArrayList<String> bookmarkUID;
 
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -79,12 +81,14 @@ public class HomeFragment extends Fragment {
         recentSite = chordsSearchedHistory.get_Site();
         recentURL = chordsSearchedHistory.get_URL();
         recentIsBookmarked = chordsSearchedHistory.get_isBookmarked();
+        recentUID = chordsSearchedHistory.get_UID();
 
         bookmarkTitle = chordsBookmarks.get_Title();
         bookmarkArtist = chordsBookmarks.get_Artist();
         bookmarkGenre = chordsBookmarks.get_Genre();
         bookmarkSite = chordsBookmarks.get_Site();
         bookmarkURL = chordsBookmarks.get_URL();
+        bookmarkUID = chordsBookmarks.get_UID();
 
         load_Bookmarks();
         load_RecentSearches();
@@ -185,6 +189,7 @@ public class HomeFragment extends Fragment {
                     chordsBookmarks.get_Genre().remove(0);
                     chordsBookmarks.get_Site().remove(0);
                     chordsBookmarks.get_URL().remove(0);
+                    chordsBookmarks.get_UID().remove(0);
 
                 }
 
@@ -193,6 +198,7 @@ public class HomeFragment extends Fragment {
                 chordsBookmarks.set_Genre(recentGenre.get(whichHistoryIndex));
                 chordsBookmarks.set_Site(recentSite.get(whichHistoryIndex));
                 chordsBookmarks.set_URL(recentURL.get(whichHistoryIndex));
+                chordsBookmarks.set_UID(recentUID.get(whichHistoryIndex));
                 break;
 
             case "true":
@@ -200,7 +206,7 @@ public class HomeFragment extends Fragment {
                 recentIsBookmarked.set(whichHistoryIndex, "false");
 
                 // Remove from bookmarks
-                delete_Bookmarked(recentURL.get(whichHistoryIndex));
+                delete_Bookmarked(recentUID.get(whichHistoryIndex));
                 break;
 
         }
@@ -215,25 +221,35 @@ public class HomeFragment extends Fragment {
         }
 
         load_Bookmarks();
+        update_ChordsSearchedHistory();
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
 
     }
 
-    private void delete_Bookmarked(String to_remove_url) {
+    private void update_ChordsSearchedHistory() {
 
-        ArrayList<String> all_BookmarkedURL = chordsBookmarks.get_URL();
+        chordsSearchedHistory.set_Title(recentTitle);
+        chordsSearchedHistory.set_Artist(recentArtist);
+        chordsSearchedHistory.set_Genre(recentGenre);
+        chordsSearchedHistory.set_Site(recentSite);
+        chordsSearchedHistory.set_URL(recentURL);
+        chordsSearchedHistory.set_isBookmarked(recentIsBookmarked);
+        chordsSearchedHistory.set_UID(recentUID);
 
-        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
+    }
 
-            if(all_BookmarkedURL.get(i).equals(to_remove_url)) {
+    private void delete_Bookmarked(String to_remove_UID) {
 
-                chordsBookmarks.get_Title().remove(i);
-                chordsBookmarks.get_Artist().remove(i);
-                chordsBookmarks.get_Genre().remove(i);
-                chordsBookmarks.get_Site().remove(i);
-                chordsBookmarks.get_URL().remove(i);
-                break;
+        int index_ToRemove = chordsBookmarks.get_UID().indexOf(to_remove_UID);
+        if(index_ToRemove != -1) {
 
-            }
+            chordsBookmarks.get_Title().remove(index_ToRemove);
+            chordsBookmarks.get_Artist().remove(index_ToRemove);
+            chordsBookmarks.get_Genre().remove(index_ToRemove);
+            chordsBookmarks.get_Site().remove(index_ToRemove);
+            chordsBookmarks.get_URL().remove(index_ToRemove);
+            chordsBookmarks.get_UID().remove(index_ToRemove);
 
         }
 

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Achordpany</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -31,10 +31,10 @@
     <string name="restart_listening">Restart</string>
     <string name="stop_listening">Stop</string>
     <string name="search_a_song">Search A Song</string>
-    <string name="play_a_song">Preparing To Record…</string>
-    <string name="listening">Listening Now…</string>
-    <string name="please_wait">Please Wait</string>
-    <string name="redirecting">Redirecting</string>
+    <string name="play_a_song" tools:ignore="TypographyEllipsis">Preparing To Record ...</string>
+    <string name="listening" tools:ignore="TypographyEllipsis">Listening Now ...</string>
+    <string name="please_wait" tools:ignore="TypographyEllipsis">Please Wait ...</string>
+    <string name="redirecting" tools:ignore="TypographyEllipsis">Redirecting ...</string>
 
     <string name="top_avatar">Top Avatar</string>
     <string name="selected_avatar">Selected Avatar</string>

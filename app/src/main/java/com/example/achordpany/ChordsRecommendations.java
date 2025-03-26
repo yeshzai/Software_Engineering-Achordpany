@@ -114,4 +114,13 @@ public class ChordsRecommendations {
 
     }
 
+    public void reset_recommendations() {
+
+        this.genres.removeAll(this.genres);
+        this.recommendations_genre1.removeAll(this.recommendations_genre1);
+        this.recommendations_genre2.removeAll(this.recommendations_genre2);
+        this.recommendations_genre3.removeAll(this.recommendations_genre3);
+
+    }
+
 }

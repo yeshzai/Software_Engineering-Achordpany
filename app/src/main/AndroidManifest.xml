@@ -79,6 +79,11 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
+        <!-- PROFILE | Edit Genre Activity -->
+        <activity android:name=".ui.profile.EditGenreActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
     </application>
 
 </manifest>

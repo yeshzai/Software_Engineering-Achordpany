@@ -196,7 +196,7 @@ public class Main_EverythingLocalDatabase {
 
             // Start MainActivity using stored context
             Intent intent = new Intent(context, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
         }
     }
@@ -204,6 +204,12 @@ public class Main_EverythingLocalDatabase {
     public void mainPage_UpdateFirebase(String passed_username) {
 
 
+
+    }
+
+    public void mainPage_ResetGenres() {
+
+        this.genre.removeAll(this.genre);
 
     }
 

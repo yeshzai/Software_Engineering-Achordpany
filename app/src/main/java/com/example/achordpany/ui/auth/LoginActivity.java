@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private TextView textForgotPassword;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -57,6 +58,14 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        textForgotPassword = findViewById(R.id.textForgotPassword);
+
+        // If user clicks forgot password, navigate to RecoverAccountActivity
+        textForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RecoverAccountActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         // PASSWORD HIDE/VISIBLE
         editTextPassword.setOnTouchListener((v, event) -> {

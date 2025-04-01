@@ -70,6 +70,18 @@ public class ProfileFragment extends Fragment {
         sharedViewModel.setTitle("Profile");
         sharedViewModel.setSubtext("Account section");
 
+        TextView edit_username = binding.editUsername;
+        edit_username.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), EditUsernameActivity.class);
+            startActivity(intent);
+        });
+
+        TextView edit_email = binding.editEmail;
+        edit_email.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), EditEmailActivity.class);
+            startActivity(intent);
+        });
+
         TextView edit_genre = binding.editGenre;
         edit_genre.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), EditGenreActivity.class);

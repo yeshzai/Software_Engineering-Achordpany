@@ -24,6 +24,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
             android:src="@drawable/logo_light"
+            android:visibility="invisible"
             tools:ignore="HardcodedText" />
 
         <!-- Back Button -->

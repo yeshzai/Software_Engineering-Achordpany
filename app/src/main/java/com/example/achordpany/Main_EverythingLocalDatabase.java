@@ -207,4 +207,10 @@ public class Main_EverythingLocalDatabase {
 
     }
 
+    public void mainPage_ResetGenres() {
+
+        this.genre.removeAll(this.genre);
+
+    }
+
 }

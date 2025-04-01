@@ -46,6 +46,7 @@ public class EditGenreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editgenre);
 
+        genres = new ArrayList<>();
         editgenre_genreButton_Rock = findViewById(R.id.editgenre_genreButton_Rock);
         editgenre_genreButton_Blues = findViewById(R.id.editgenre_genreButton_Blues);
         editgenre_genreButton_Jazz = findViewById(R.id.editgenre_genreButton_Jazz);
@@ -182,7 +183,7 @@ public class EditGenreActivity extends AppCompatActivity {
         });
 
         ImageButton editgenre_btnBack = findViewById(R.id.editgenre_btnBack);
-        editgenre_btnContinue.setOnClickListener(v -> {
+        editgenre_btnBack.setOnClickListener(v -> {
 
             // Just go back to the Profile Page (No Changes)
             finish();
@@ -211,6 +212,9 @@ public class EditGenreActivity extends AppCompatActivity {
                 ChordsRecommendations chordsRecommendations = ChordsRecommendations.getInstance();
                 chordsRecommendations.reset_recommendations();
                 chordsRecommendations.initialize_SongRecommendations(genres.get(0), genres.get(1), genres.get(2));
+
+                main_EverythingLocalDatabase.mainPage_ResetGenres();
+                main_EverythingLocalDatabase.set_Genre(genres);
 
                 // We have to go back to MainActivity to refresh everything (esp. Recommendations)
                 Intent intent = new Intent(EditGenreActivity.this, MainActivity.class);

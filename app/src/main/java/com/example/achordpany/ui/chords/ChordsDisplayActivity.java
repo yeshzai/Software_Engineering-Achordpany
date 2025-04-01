@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +34,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
     private String song_TITLE;
     private String song_URL;
     private ImageButton btnBack;
+    private Boolean success_OPEN = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class ChordsDisplayActivity extends AppCompatActivity {
         // Process Recorded Lyrics
         SongTitleProcessing songTitleProcessing = SongTitleProcessing.getInstance();
         get_SongTitleArtist(songTitleProcessing.get_SongLyrics());
-        get_ChordsURL(song_TITLE); // We have now the URL inside song_URL.
 
         btnBack = findViewById(R.id.btnBack);
 
@@ -53,41 +55,56 @@ public class ChordsDisplayActivity extends AppCompatActivity {
             finish();
         });
 
-        // Find WebView
-        WebView webView = findViewById(R.id.webView);
-        WebSettings webSettings = webView.getSettings();
+        if(success_OPEN) {
 
-        // Securely Enable JavaScript
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setAllowFileAccess(false);  // Prevents file-based XSS attacks
-        webSettings.setAllowContentAccess(false); // Blocks unsafe content access
-        webSettings.setDomStorageEnabled(true);  // Enables local storage for modern sites
-        webSettings.setBlockNetworkLoads(false); // Allows network requests, but only to trusted URLs
-        webSettings.setBlockNetworkImage(false); // Allows image loading
-        //webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+            // Find WebView
+            WebView webView = findViewById(R.id.webView);
+            WebSettings webSettings = webView.getSettings();
 
-        // Secure WebViewClient (Prevents opening external browsers)
-        // Restrict URL Loading
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                String url = request.getUrl().toString();
+            // Securely Enable JavaScript
+            webSettings.setJavaScriptEnabled(true);
+            webSettings.setAllowFileAccess(false);  // Prevents file-based XSS attacks
+            webSettings.setAllowContentAccess(false); // Blocks unsafe content access
+            webSettings.setDomStorageEnabled(true);  // Enables local storage for modern sites
+            webSettings.setBlockNetworkLoads(false); // Allows network requests, but only to trusted URLs
+            webSettings.setBlockNetworkImage(false); // Allows image loading
+            //webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+
+            // Secure WebViewClient (Prevents opening external browsers)
+            // Restrict URL Loading
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                    String url = request.getUrl().toString();
                 /*if (url.startsWith("https://tabs.ultimate-guitar.com/")) { // Allow only trusted domain
                     view.loadUrl(url);
                 }*/
-                if (url.startsWith("https://")) { // Allow only HTTPS links
-                    view.loadUrl(url);
+                    if (url.startsWith("https://")) { // Allow only HTTPS links
+                        view.loadUrl(url);
+                    }
+                    return true; // Blocks other links
                 }
-                return true; // Blocks other links
-            }
-        });
+            });
 
-        // Optional: Improve WebView Performance
-        webView.setWebChromeClient(new WebChromeClient());
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+            // Optional: Improve WebView Performance
+            webView.setWebChromeClient(new WebChromeClient());
+            webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        // Load URL (Ensure it’s HTTPS)
-        webView.loadUrl(song_URL);
+            // Load URL (Ensure it’s HTTPS)
+            webView.loadUrl(song_URL);
+
+        } else {
+
+            TextView txtTitle = findViewById(R.id.txtTitle);
+            TextView txtLink = findViewById(R.id.txtLink);
+            txtTitle.setText("No Song Found");
+            txtLink.setText("");
+
+            // Add visibility of prompt here.
+
+            Toast.makeText(this, "Song cannot be found. Please try again.", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
@@ -97,13 +114,13 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         PyObject pyModule = python.getModule("search_songtitleauthor");
         if(pyModule == null) {
-            Log.d("SONG TITLE", "Python Module Not Found");
+            Log.d("SONG TITLE", "[ERROR] - PYMODULE");
             return;
         }
 
         PyObject pyObjectResult = pyModule.callAttr("get_song_by_lyrics", songLyrics);
         if(pyObjectResult == null || pyObjectResult.toString().equals("None")) {
-            Log.d("SONG TITLE", "Python Module Not Found");
+            Log.d("SONG TITLE", "[ERROR] - PYOBJECTRESULT");
             return;
         }
 
@@ -112,9 +129,8 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         for (PyObject obj : pyList) {
 
-            List<PyObject> tuple = obj.asList();  // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            songTitleList.add(songTitle);  // ||||| is the separator to be used later
+            String songTitle = obj.toString();
+            songTitleList.add(songTitle);
 
         }
 
@@ -124,6 +140,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         Log.d("[SONG TITLE CHOSEN]", songTitleList.get(0));
         song_TITLE = songTitleList.get(0);
+        get_ChordsURL(song_TITLE);
 
     }
 
@@ -133,13 +150,13 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         PyObject pyModule = python.getModule("search_chordswebsite");
         if(pyModule == null) {
-            Log.d("CHORDS WEBSITE", "Python Module Not Found");
+            Log.d("CHORDS WEBSITE", "[ERROR] - PYMODULE");
             return;
         }
 
         PyObject pyObjectResult = pyModule.callAttr("find_chords", search_SongTitle.trim());
         if(pyObjectResult == null || pyObjectResult.toString().equals("None")) {
-            Log.d("CHORDS WEBSITE", "Python Module Not Found");
+            Log.d("CHORDS WEBSITE", "[ERROR] - PYOBJECTRESULT");
             return;
         }
 
@@ -219,6 +236,12 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         // Update Firebase Database for History
         chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        success_OPEN = true;
+
+        TextView txtTitle = findViewById(R.id.txtTitle);
+        TextView txtLink = findViewById(R.id.txtLink);
+        txtTitle.setText(search_SongTitle);
+        txtLink.setText(song_ARTIST);
 
     }
 

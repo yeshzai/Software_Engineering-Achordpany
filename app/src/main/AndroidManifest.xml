@@ -84,6 +84,16 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
+        <!-- PROFILE | Edit Email Activity -->
+        <activity android:name=".ui.profile.EditEmailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Username Activity -->
+        <activity android:name=".ui.profile.EditUsernameActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
     </application>
 
 </manifest>

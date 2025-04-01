@@ -1,5 +1,6 @@
 package com.example.achordpany.ui.profile;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.TooltipCompat;
 
@@ -68,7 +70,23 @@ public class ProfileFragment extends Fragment {
         sharedViewModel.setTitle("Profile");
         sharedViewModel.setSubtext("Account section");
 
+        TextView edit_username = binding.editUsername;
+        edit_username.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), EditUsernameActivity.class);
+            startActivity(intent);
+        });
 
+        TextView edit_email = binding.editEmail;
+        edit_email.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), EditEmailActivity.class);
+            startActivity(intent);
+        });
+
+        TextView edit_genre = binding.editGenre;
+        edit_genre.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), EditGenreActivity.class);
+            startActivity(intent);
+        });
 
         //final TextView textView = binding.textProfile;
         //profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

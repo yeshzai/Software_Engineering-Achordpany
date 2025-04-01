@@ -91,14 +91,6 @@
                     </LinearLayout>
 
                     <!-- UID Row -->
-                    <TextView
-                        android:id="@+id/uid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="UID: 0000-0000-00000"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        tools:ignore="HardcodedText" />
                 </LinearLayout>
             </LinearLayout>
 

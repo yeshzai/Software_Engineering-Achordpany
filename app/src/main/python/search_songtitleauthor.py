@@ -6,7 +6,7 @@ def get_song_by_lyrics(lyrics):
 
     if response.status_code == 200:
         data = response.json()
-        songs = [(track["trackName"], track["artistName"]) for track in data.get("results", [])]
+        songs = [(track["trackName"]) for track in data.get("results", [])]
         return songs if songs else None
     else:
         return None

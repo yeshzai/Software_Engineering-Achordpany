@@ -69,6 +69,31 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
+        <!-- Change Password Activity | AUTH -->
+        <activity android:name=".ui.auth.ChangePasswordActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Forgot Password Activity | AUTH -->
+        <activity android:name=".ui.auth.RecoverAccountActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Genre Activity -->
+        <activity android:name=".ui.profile.EditGenreActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Email Activity -->
+        <activity android:name=".ui.profile.EditEmailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Username Activity -->
+        <activity android:name=".ui.profile.EditUsernameActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
     </application>
 
 </manifest>

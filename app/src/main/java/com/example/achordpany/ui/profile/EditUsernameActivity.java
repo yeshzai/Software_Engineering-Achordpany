@@ -1,6 +1,7 @@
 package com.example.achordpany.ui.profile;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.google.firebase.auth.AuthCredential;
@@ -34,7 +36,6 @@ public class EditUsernameActivity extends AppCompatActivity {
     private FirebaseUser user;
 
     private boolean isPasswordVisible = false;
-    EditText changeUsername_CurrentUsername;
     EditText changeUsername_NewUsername;
     EditText changeUsername_Password;
     private Drawable defaultBackground;
@@ -46,25 +47,25 @@ public class EditUsernameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changeusername);
 
-        changeUsername_CurrentUsername = findViewById(R.id.changeUsername_CurrentUsername);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
         changeUsername_NewUsername = findViewById(R.id.changeUsername_NewUsername);
         changeUsername_Password = findViewById(R.id.changeUsername_Password);
         Button changeUsername_ChangeButton = findViewById(R.id.changeUsername_ChangeButton);
         ImageButton changeUsername_btnBack = findViewById(R.id.changeUsername_btnBack);
-        defaultBackground = changeUsername_CurrentUsername.getBackground();
+        defaultBackground = changeUsername_NewUsername.getBackground();
 
-        changeUsername_CurrentUsername.setOnTouchListener((v, event) -> {
-            return_DefaultBackground();
-            return false;
-        });
         changeUsername_NewUsername.setOnTouchListener((v, event) -> {
             return_DefaultBackground();
             return false;
         });
 
-
         // PASSWORD HIDE/VISIBLE
         changeUsername_Password.setOnTouchListener((v, event) -> {
+
+            return_DefaultBackground();
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = changeUsername_Password.getWidth();
                 int paddingRight = changeUsername_Password.getPaddingRight();
@@ -104,15 +105,10 @@ public class EditUsernameActivity extends AppCompatActivity {
 
         changeUsername_ChangeButton.setOnClickListener(v -> {
 
-            if(changeUsername_CurrentUsername.getText().toString().isEmpty()
-                    || changeUsername_NewUsername.getText().toString().isEmpty()
-                    || changeUsername_Password.getText().toString().isEmpty()) {
+            if(changeUsername_NewUsername.getText().toString().isEmpty() || changeUsername_Password.getText().toString().isEmpty()) {
 
-                if(changeUsername_CurrentUsername.getText().toString().isEmpty()) {
-                    changeUsername_CurrentUsername.setBackgroundResource(R.drawable.edittext_error);
-                }
-                if(changeUsername_CurrentUsername.getText().toString().isEmpty()) {
-                    changeUsername_CurrentUsername.setBackgroundResource(R.drawable.edittext_error);
+                if(changeUsername_NewUsername.getText().toString().isEmpty()) {
+                    changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error);
                 }
                 if(changeUsername_Password.getText().toString().isEmpty()) {
                     changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
@@ -168,7 +164,7 @@ public class EditUsernameActivity extends AppCompatActivity {
         String oldUsername = main_EverythingLocalDatabase.get_Username();
 
         if (user == null) {
-            Log.d("[EDIT EMAIL]", "User not Logged In");
+            Log.d("[EDIT USERNAME]", "User Not Logged In");
             return;
         }
 
@@ -182,46 +178,85 @@ public class EditUsernameActivity extends AppCompatActivity {
                 main_EverythingLocalDatabase.set_Username(newUsername);
 
                 // We can now change/update new username
+                // Users_Credentials
                 database.child("Users_Credentials").child(oldUsername).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-
                         if (snapshot.exists()) {
 
-                            // 1. Get user's data from original user (oldUsername).
-                            // 2. Create new user (newUsername).
-                            // 2. Pass all original data to new user (Users_Credentials) then change "username" value to newUsername.
-                            Object userData = snapshot.getValue();
-                            DatabaseReference newUserRef = database.child("Users_Credentials").child(newUsername);
-                            newUserRef.setValue(userData).addOnCompleteListener(task -> {
+                            /*  [Users_Credentials]
+                                0. Get original oldUsername entry value
+                                1. Create new Users_Credentials entry (newUsername)
+                                2. Copy oldUsername value as newUsername value
+                                3. Delete oldUsername entry
+                            */
+                            Object userData = snapshot.getValue();  // [Users_Credentials] 0. Get
+                            DatabaseReference newUserRef = database.child("Users_Credentials").child(newUsername); // [Users_Credentials] 1. Create
+                            newUserRef.setValue(userData).addOnCompleteListener(task -> {   // [Users_Credentials] 2. Copy
 
                                 if (task.isSuccessful()) {
 
-                                    // Users_Credentials
-                                    newUserRef.child("username").setValue(newUsername);                     // Set same value to new
-                                    database.child("Users_Credentials").child(oldUsername).removeValue();   // Remove old
+                                    newUserRef.child("username").setValue(newUsername); // [Users_Credentials] Change original username to new username
 
-                                    // Users_UsernameList
-                                    database.child("Users_UsernameList").child(oldUsername).removeValue();  // Remove old
-                                    database.child("Users_UsernameList").child(newUsername).setValue("");   // Add new
+                                    // Users_RecommendationData & Users_UsernameList
+                                    database.child("Users_RecommendationData").child(oldUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot recSnapshot) {
+                                            if (recSnapshot.exists()) {
 
-                                    Toast.makeText(getApplicationContext(), "Username changed successfully!", Toast.LENGTH_SHORT).show();
+                                                /*  [Users_RecommendationData]
+                                                    0. Get original oldUsername entry value
+                                                    1. Create new Users_RecommendationData entry (newUsername)
+                                                    2. Copy oldUsername value as newUsername value
+                                                    3. Delete oldUsername entry
+                                                */
+                                                Object recData = recSnapshot.getValue(); // [Users_RecommendationData] 0. Get
+                                                database.child("Users_RecommendationData").child(newUsername).setValue(recData).addOnCompleteListener(recTask -> {  // [Users_RecommendationData] 1 & 2. Create & Copy
+                                                    if (recTask.isSuccessful()) {
+
+                                                        database.child("Users_Credentials").child(oldUsername).removeValue();           // [Users_Credentials]          3. Delete
+                                                        database.child("Users_RecommendationData").child(oldUsername).removeValue();    // [Users_RecommendationData]   3. Delete
+                                                        database.child("Users_UsernameList").child(oldUsername).removeValue();          // [Users_UsernameList]         3. Delete
+                                                        database.child("Users_UsernameList").child(newUsername).setValue("");           // [Users_RecommendationData]   Rename
+
+                                                        Toast.makeText(getApplicationContext(), "Username Changed Successfully!", Toast.LENGTH_SHORT).show();
+                                                        Log.d("[EDIT USERNAME]", "[SUCCESS] Username Changed Successfully!");
+                                                        main_EverythingLocalDatabase.set_Username(newUsername);
+
+                                                        // We have to go back to MainActivity to refresh everything
+                                                        Intent intent = new Intent(EditUsernameActivity.this, MainActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(), "There seems to be an error. Please try again later.", Toast.LENGTH_SHORT).show();
+                                                        Log.d("[EDIT USERNAME]", "[FAILED] Users_RecommendationData Username Failed!");
+                                                    }
+                                                });
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError error) {
+                                            Toast.makeText(getApplicationContext(), "Database Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                            Log.d("[Users_RecommendationData]", "[DATABASE ERROR]" + error.getMessage());
+                                        }
+                                    });
 
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Failed to update username!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Failed to Update Username!", Toast.LENGTH_SHORT).show();
+                                    Log.d("[EDIT USERNAME]", "[FAILED] Username Change Failed!");
                                 }
                             });
-
                         } else {
-
-                            Toast.makeText(getApplicationContext(), "Old username not found!", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getApplicationContext(), "There seems to be an error. Please try again later.", Toast.LENGTH_SHORT).show();
+                            Log.d("[EDIT USERNAME]", "[WARNING] Cannot Find Current Username in Firebase!");
                         }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError error) {
-                        Log.d("[DATABASE ERROR]", error.getMessage());
+                        Toast.makeText(getApplicationContext(), "Database error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.d("[Users_Credentials]", "[DATABASE ERROR]" + error.getMessage());
                     }
                 });
 
@@ -237,7 +272,6 @@ public class EditUsernameActivity extends AppCompatActivity {
 
     private void return_DefaultBackground() {
 
-        changeUsername_CurrentUsername.setBackground(defaultBackground);
         changeUsername_NewUsername.setBackground(defaultBackground);
         changeUsername_Password.setBackground(defaultBackground);
 
@@ -245,7 +279,6 @@ public class EditUsernameActivity extends AppCompatActivity {
 
     private void all_ErrorBackground() {
 
-        changeUsername_CurrentUsername.setBackgroundResource(R.drawable.edittext_error);
         changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
 
     }

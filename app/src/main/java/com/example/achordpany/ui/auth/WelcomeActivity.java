@@ -19,8 +19,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Go to Login Activity
         findViewById(R.id.loginBtn).setOnClickListener(v -> {
+
             Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
+
         });
 
         // Go to Signup (MainActivity hosting Signup Fragments)
@@ -28,6 +31,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
             Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
             startActivity(intent);
+            finish();
+
         });
 
         ImageView logoImageView = findViewById(R.id.logoImageView);

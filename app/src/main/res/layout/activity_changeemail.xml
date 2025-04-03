@@ -42,22 +42,6 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/changeEmail_CurrentEmail"
-        style="@style/EditTextStyle"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:drawableStart="@drawable/ic_user_black"
-        android:hint="  Current Email Address"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
-
-    <EditText
         android:id="@+id/changeEmail_NewEmail"
         style="@style/EditTextStyle"
         android:layout_width="300dp"

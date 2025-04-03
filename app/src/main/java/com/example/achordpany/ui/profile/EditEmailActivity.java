@@ -28,7 +28,6 @@ public class EditEmailActivity extends AppCompatActivity {
     private FirebaseUser user;
 
     private boolean isPasswordVisible = false;
-    EditText changeEmail_CurrentEmail;
     EditText changeEmail_NewEmail;
     EditText changeEmail_Password;
     private Drawable defaultBackground;
@@ -43,17 +42,12 @@ public class EditEmailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-        changeEmail_CurrentEmail = findViewById(R.id.changeEmail_CurrentEmail);
         changeEmail_NewEmail = findViewById(R.id.changeEmail_NewEmail);
         changeEmail_Password = findViewById(R.id.changeEmail_Password);
         Button changeEmail_ChangeButton = findViewById(R.id.changeEmail_ChangeButton);
         ImageButton changeEmail_btnBack = findViewById(R.id.changeEmail_btnBack);
-        defaultBackground = changeEmail_CurrentEmail.getBackground();
+        defaultBackground = changeEmail_NewEmail.getBackground();
 
-        changeEmail_CurrentEmail.setOnTouchListener((v, event) -> {
-            return_DefaultBackground();
-            return false;
-        });
         changeEmail_NewEmail.setOnTouchListener((v, event) -> {
             return_DefaultBackground();
             return false;
@@ -100,13 +94,9 @@ public class EditEmailActivity extends AppCompatActivity {
 
         changeEmail_ChangeButton.setOnClickListener(v -> {
 
-            if(changeEmail_CurrentEmail.getText().toString().isEmpty()
-                    || changeEmail_NewEmail.getText().toString().isEmpty()
+            if(changeEmail_NewEmail.getText().toString().isEmpty()
                     || changeEmail_Password.getText().toString().isEmpty()) {
 
-                if(changeEmail_CurrentEmail.getText().toString().isEmpty()) {
-                    changeEmail_CurrentEmail.setBackgroundResource(R.drawable.edittext_error);
-                }
                 if(changeEmail_NewEmail.getText().toString().isEmpty()) {
                     changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                 }
@@ -119,22 +109,10 @@ public class EditEmailActivity extends AppCompatActivity {
             } else {
 
                 Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
-                String currentEmail = main_EverythingLocalDatabase.get_Email();
                 String newEmail = changeEmail_NewEmail.getText().toString();
                 String password = changeEmail_Password.getText().toString();
 
-                if(changeEmail_CurrentEmail.getText().toString().equals(currentEmail)) {
-
-                    // Proceed to change.
-                    updateEmail(newEmail, password);
-
-                } else {
-
-                    // Incorrect Current Email.
-                    Toast.makeText(EditEmailActivity.this, "Incorrect Current Email!", Toast.LENGTH_SHORT).show();
-                    changeEmail_CurrentEmail.setBackgroundResource(R.drawable.edittext_error);
-
-                }
+                updateEmail(newEmail, password);
 
             }
 
@@ -152,13 +130,14 @@ public class EditEmailActivity extends AppCompatActivity {
     private void updateEmail(String newEmail, String password) {
 
         if (user == null) {
-            Log.d("[EDIT EMAIL]", "User not Logged In");
+            Log.d("[EDIT EMAIL]", "User Not Logged In");
             return;
         }
 
         // Re-authenticate the user
         AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), password);
         user.reauthenticate(credential).addOnCompleteListener(reauthTask -> {
+
             if (reauthTask.isSuccessful()) {
 
                 // Proceed with email update
@@ -183,7 +162,7 @@ public class EditEmailActivity extends AppCompatActivity {
                             Toast.makeText(EditEmailActivity.this, "Failed to update email: " + errorMessage, Toast.LENGTH_LONG).show();
                         }
                         changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
-                        Log.d("[EDIT EMAIL]", "[FAILED] Changed Email Failed!");
+                        Log.d("[EDIT EMAIL]", "[FAILED] Email Change Failed!");
 
                     }
                 });
@@ -200,7 +179,6 @@ public class EditEmailActivity extends AppCompatActivity {
 
     private void return_DefaultBackground() {
 
-        changeEmail_CurrentEmail.setBackground(defaultBackground);
         changeEmail_NewEmail.setBackground(defaultBackground);
         changeEmail_Password.setBackground(defaultBackground);
 
@@ -208,7 +186,6 @@ public class EditEmailActivity extends AppCompatActivity {
 
     private void all_ErrorBackground() {
 
-        changeEmail_CurrentEmail.setBackgroundResource(R.drawable.edittext_error);
         changeEmail_Password.setBackgroundResource(R.drawable.edittext_error);
 
     }

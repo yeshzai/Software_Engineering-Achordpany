@@ -24,9 +24,4 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="GenreStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">#E5E6E9</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
 </resources>

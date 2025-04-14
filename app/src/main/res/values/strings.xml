@@ -46,4 +46,77 @@
     <string name="title_text">Title</string>
     <string name="song_desc">Artist - Genre</string>
     <string name="item_desc">site</string>
+
+    <string name="terms_and_conditions"><![CDATA[
+    Welcome to Achordpany! By using our application, you agree to the following terms and conditions. Please read them carefully to understand your rights and obligations.<br/><br/>
+
+    <b>1. Purpose of the Application</b><br/>
+    Achordpany helps users search for song lyrics and guitar chords based on lyrics sung or heard. It streamlines the process by identifying the closest match without needing to enter song titles.<br/><br/>
+
+    <b>2. Key Features and Benefits</b><br/>
+    - Access to guitar chords and lyrics.<br/>
+    - One-click music identification.<br/>
+    - Real-time matching based on input melody or background audio.<br/><br/>
+
+    <b>3. Use of the Application</b><br/>
+    Achordpany is for personal, non-commercial use only.<br/>
+    Users are responsible for input accuracy. While we strive for the best match, we cannot guarantee perfection.<br/>
+    Some links may lead to external sites; we are not responsible for third-party content.<br/><br/>
+
+    <b>4. Intellectual Property</b><br/>
+    All content belongs to Achordpany LLC and is protected by law.<br/>
+    Unauthorized reproduction, distribution, or modification is prohibited.<br/><br/>
+
+    <b>5. Privacy and Data Collection</b><br/>
+    We may collect voice inputs and song data to enhance app performance.<br/>
+    All data is handled per applicable laws.<br/>
+    Refer to our Privacy Policy for full details.<br/><br/>
+
+    <b>6. Disclaimer and Limitations of Liability</b><br/>
+    We do not guarantee complete accuracy.<br/>
+    Achordpany LLC is not liable for any damages from app use.<br/><br/>
+
+    <b>7. Changes to Terms</b><br/>
+    These terms may change over time. Continued use means you accept any updates.<br/><br/>
+
+    <b>8. Contact Us</b><br/>
+    Questions or feedback?<br/>
+    Reach out: support@achordpany.com<br/><br/>
+
+    By using Achordpany, you acknowledge that you have read, understood, and agree to these Terms and Conditions.
+    ]]></string>
+
+    <string name="privacy_policy">
+        <![CDATA[
+        <b>Privacy Policy</b><br/><br/>
+        This Privacy Policy outlines how we collect, use, and protect your personal information when using our application. By using <b>Achordpany</b>, you consent to the practices described in this policy.<br/><br/>
+
+        <b>Information Collection and Use</b><br/>
+        Achordpany collects data necessary to provide an accurate and user-friendly experience. This may include:<br/>
+        <ul>
+            <li><b>Voice Inputs:</b> To identify songs and retrieve lyrics and chords, Achordpany may temporarily process your voice or audio data.</li>
+            <li><b>User Data:</b> We may collect general usage data to improve app performance, such as interaction frequency or features accessed. All information is processed to enhance your experience and is stored only as long as necessary.</li>
+        </ul><br/>
+
+        <b>Data Security</b><br/>
+        We prioritize protecting your information. Achordpany uses industry-standard measures to safeguard data against unauthorized access or misuse. However, while we strive to keep your data secure, please be aware that no method of transmission over the internet is 100% secure.<br/><br/>
+
+        <b>Third-Party Links</b><br/>
+        Achordpany may link to third-party websites for song lyrics and chords. We do not control these sites and are not responsible for their privacy practices. We encourage you to review the privacy policies of any third-party sites you access through our app.<br/><br/>
+
+        <b>Children’s Privacy</b><br/>
+        Achordpany is not intended for users under the age of 13, and we do not knowingly collect data from children. If we discover that we have inadvertently collected such information, we will promptly delete it.<br/><br/>
+
+        <b>Data Retention</b><br/>
+        Achordpany retains collected data only as long as necessary to fulfill the app’s purpose or comply with legal obligations. Once data is no longer needed, we ensure it is securely deleted.<br/><br/>
+
+        <b>Changes to This Privacy Policy</b><br/>
+        We may update our Privacy Policy periodically. We recommend checking this page for any changes. Continued use of Achordpany after modifications constitutes acceptance of the updated policy.<br/><br/>
+
+        <b>Contact Us</b><br/>
+        For questions about this Privacy Policy or data practices, please reach out to us at <a href="mailto:support@achordpany.com">support@achordpany.com</a>.<br/><br/>
+
+        By using Achordpany, you acknowledge that you have read and agree to this Privacy Policy.
+        ]]>
+    </string>
 </resources>

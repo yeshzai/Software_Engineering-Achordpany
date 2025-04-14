@@ -168,8 +168,8 @@ public class SignUpStep4Fragment extends Fragment {
         ArrayList<String> new_bookmarks = new ArrayList<>();
         new_bookmarks.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL|BUID|BookmarkUID"); // FORMAT
 
-        //                          USERNAME          EMAIL          AVATAR        GENRES      HISTORY      BOOKMARKS
-        firebaseHelper.addNewUser(new_username, new_emailAddress, new_avatarUID, new_genres, new_history, new_bookmarks);
+        //                          USERNAME                EMAIL                  AVATAR        GENRES      HISTORY      BOOKMARKS
+        firebaseHelper.addNewUser(new_username, new_emailAddress.toLowerCase(), new_avatarUID, new_genres, new_history, new_bookmarks);
 
     }
 

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
+
+    <!-- Genre Selection Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="340dp"
+        android:layout_height="390dp"
+        android:layout_marginBottom="170dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#fafafa"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <!-- Card Heading -->
+                <TextView
+                    android:id="@+id/cardHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="PASSWORD CHANGE"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Password Input Field -->
+                <EditText
+                    android:id="@+id/currentPassText"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:drawableStart="@drawable/ic_lock_black"
+                    android:drawableEnd="@drawable/ic_eyehide_black"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:hint="  Current Password"
+                    style="@style/EditTextStyle"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardHeading" />
+
+                <EditText
+                    android:id="@+id/newPassText"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:drawableStart="@drawable/ic_lock_black"
+                    android:drawableEnd="@drawable/ic_eyehide_black"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:hint="  New Password"
+                    style="@style/EditTextStyle"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/currentPassText" />
+
+                <!-- Confirm Password Input Field -->
+                <EditText
+                    android:id="@+id/confirmPasswordText"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:drawableStart="@drawable/ic_lock_black"
+                    android:drawableEnd="@drawable/ic_eyehide_black"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:hint="  Confirm Password"
+                    style="@style/EditTextStyle"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newPassText" />
+
+                <!-- Confirm Change Button -->
+                <Button
+                    android:id="@+id/btnConfirm"
+                    style="@style/RoundedButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Footer Layout with Logo Image and Copyright -->
+    <RelativeLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Logo Image -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo_light" />
+
+        <!-- Copyright -->
+        <TextView
+            android:id="@+id/copyright_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="All rights reserved."
+            android:textColor="@color/text_gray"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

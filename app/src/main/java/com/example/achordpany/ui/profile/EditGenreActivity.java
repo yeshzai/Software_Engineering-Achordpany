@@ -1,6 +1,7 @@
 package com.example.achordpany.ui.profile;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,12 +34,12 @@ public class EditGenreActivity extends AppCompatActivity {
     private Button editgenre_genreButton_Reggae;
 
     private ArrayList<String> genres;
-    private boolean genreButton_Rock_Clicked = false;
+    /*private boolean genreButton_Rock_Clicked = false;
     private boolean genreButton_Blues_Clicked = false;
     private boolean genreButton_Jazz_Clicked = false;
     private boolean genreButton_Classical_Clicked = false;
     private boolean genreButton_Pop_Clicked = false;
-    private boolean genreButton_Reggae_Clicked = false;
+    private boolean genreButton_Reggae_Clicked = false;*/
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +55,14 @@ public class EditGenreActivity extends AppCompatActivity {
         editgenre_genreButton_Pop = findViewById(R.id.editgenre_genreButton_Pop);
         editgenre_genreButton_Reggae = findViewById(R.id.editgenre_genreButton_Reggae);
 
-        editgenre_genreButton_Rock.setOnClickListener(v -> {
+        setupGenreButton(editgenre_genreButton_Rock, "Rock");
+        setupGenreButton(editgenre_genreButton_Blues, "Blues");
+        setupGenreButton(editgenre_genreButton_Jazz, "Jazz");
+        setupGenreButton(editgenre_genreButton_Classical, "Classical");
+        setupGenreButton(editgenre_genreButton_Pop, "Pop");
+        setupGenreButton(editgenre_genreButton_Reggae, "Reggae");
+
+        /*editgenre_genreButton_Rock.setOnClickListener(v -> {
 
             if(genres.size() != 3 || genres.contains("Rock")) {
 
@@ -166,7 +174,7 @@ public class EditGenreActivity extends AppCompatActivity {
                 Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
             }
 
-        });
+        });*/
 
         Button editgenre_btnContinue = findViewById(R.id.editgenre_btnContinue);
         editgenre_btnContinue.setOnClickListener(v -> {
@@ -190,6 +198,26 @@ public class EditGenreActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    private void setupGenreButton(Button button, String genreName) {
+        button.setOnClickListener(v -> {
+            if (genres.size() != 3 || genres.contains(genreName)) {
+                if (!button.isSelected()) {
+                    genres.add(genreName);
+                    button.setSelected(true);
+                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00C853"))); // green
+                    button.setTextColor(Color.WHITE);
+                } else {
+                    genres.remove(genreName);
+                    button.setSelected(false);
+                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF"))); // white
+                    button.setTextColor(Color.BLACK);
+                }
+            } else {
+                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void update_Database() {

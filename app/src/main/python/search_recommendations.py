@@ -7,7 +7,7 @@ def get_songs_by_genre(genre):
 
     if response.status_code == 200:
         data = response.json()
-        songs = [(track["trackName"], track["artistName"]) for track in data.get("results", [])]
+        songs = [(track["trackName"]) for track in data.get("results", [])]
         return random.sample(songs, min(5, len(songs))) if songs else None
     else:
         return None

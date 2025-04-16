@@ -82,27 +82,24 @@ public class ChordsRecommendations {
         for(PyObject obj : pyListGenre1) {
 
             List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            set_RecommendationsGenre1(songTitle + "|||||" + artist); // ||||| is the separator to be used later
+            String songTitle = tuple.toString();
+            set_RecommendationsGenre1(songTitle);
 
         }
 
         for(PyObject obj : pyListGenre2) {
 
             List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            set_RecommendationsGenre2(songTitle + "|||||" + artist); // ||||| is the separator to be used later
+            String songTitle = tuple.toString();
+            set_RecommendationsGenre2(songTitle);
 
         }
 
         for(PyObject obj : pyListGenre3) {
 
             List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            set_RecommendationsGenre3(songTitle + "|||||" + artist); // ||||| is the separator to be used later
+            String songTitle = tuple.toString();
+            set_RecommendationsGenre3(songTitle);
 
         }
 

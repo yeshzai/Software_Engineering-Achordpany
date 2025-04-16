@@ -225,11 +225,21 @@ public class MainActivity extends AppCompatActivity {
 
     // Handle Menu Item Clicks
     private boolean onMenuItemClick(MenuItem item) {
+        NavController navController = getNavController();
+        if (navController == null) {
+            Log.e("MainActivity", "NavController is null, navigation failed.");
+            return false;
+        }
+
         if (item.getItemId() == R.id.menu_general_settings) {
             Toast.makeText(this, "General Settings Clicked", Toast.LENGTH_SHORT).show();
+            navController.navigate(R.id.mainSettingsFragment); // Navigate to MainSettingsFragment
+            sharedViewModel.setTitle("SETTINGS");
+            sharedViewModel.setSubtext("Manage your preferences");
             return true;
         } else if (item.getItemId() == R.id.menu_profile_settings) {
             Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
+            navController.navigate(R.id.navigation_profile); // Navigate to MainSettingsFragment
             return true;
         } else if (item.getItemId() == R.id.menu_logout) {
             Toast.makeText(this, "Logout Successful!", Toast.LENGTH_SHORT).show();

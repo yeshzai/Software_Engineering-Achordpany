@@ -8,9 +8,9 @@
 
     <!-- Genre Selection Card -->
     <androidx.cardview.widget.CardView
-        android:layout_width="340dp"
-        android:layout_height="390dp"
-        android:layout_marginBottom="170dp"
+        android:layout_width="360dp"
+        android:layout_height="465dp"
+        android:layout_marginBottom="150dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="20dp"
         app:cardBackgroundColor="#fafafa"
@@ -20,107 +20,212 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Scrollable Content -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp">
+                android:layout_margin="15dp">
 
-                <!-- Genre Buttons -->
-                <Button
-                    android:id="@+id/genreButton_Rock"
-                    style="@style/Widget.MaterialComponents.Button"
+                <!-- DISPLAY SECTION -->
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
-                    android:text="Rock"
-                    android:backgroundTint="@color/genre_button_default" />
+                    android:text="DISPLAY"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="8dp"
+                    android:letterSpacing="0.1"
+                    android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/genreButton_Blues"
-                    style="@style/Widget.MaterialComponents.Button"
+                <LinearLayout
+                    android:id="@+id/theme_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="?attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_theme"
+                        android:contentDescription="Theme Icon" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Theme"
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+
+                <!-- PRIVACY SECTION -->
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
-                    android:text="Blues"
-                    android:backgroundTint="@color/genre_button_default" />
+                    android:text="PRIVACY"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="8dp"
+                    android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/genreButton_Jazz"
-                    style="@style/Widget.MaterialComponents.Button"
+                <LinearLayout
+                    android:id="@+id/change_password_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_lock_black"
+                        android:contentDescription="Password Icon" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Change password"
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:paddingStart="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_arrow"
+                        android:contentDescription="Arrow" />
+                </LinearLayout>
+
+                <!-- ABOUT SECTION -->
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
-                    android:text="Jazz"
-                    android:backgroundTint="@color/genre_button_default" />
+                    android:text="ABOUT"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="8dp"
+                    android:textStyle="bold" />
 
-
-                <Button
-                    android:id="@+id/genreButton_Classical"
-                    style="@style/Widget.MaterialComponents.Button"
+                <LinearLayout
+                    android:id="@+id/terms_conditions_option"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
-                    android:text="Classical"
-                    android:backgroundTint="@color/genre_button_default" />
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                <Button
-                    android:id="@+id/genreButton_Pop"
-                    style="@style/Widget.MaterialComponents.Button"
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_terms_light_24dp"
+                        android:contentDescription="Terms Icon" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Terms &amp; Conditions"
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:paddingStart="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_arrow"
+                        android:contentDescription="Arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/privacy_policy_option"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
-                    android:text="Pop"
-                    android:backgroundTint="@color/genre_button_default" />
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                <Button
-                    android:id="@+id/genreButton_Reggae"
-                    style="@style/Widget.MaterialComponents.Button"
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_policy"
+                        android:contentDescription="Policy Icon" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Privacy Policy"
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:paddingStart="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_arrow"
+                        android:contentDescription="Arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/about_app_option"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
-                    android:text="Reggae"
-                    android:backgroundTint="@color/genre_button_default" />
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_about_light_24dp"
+                        android:contentDescription="About Icon" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="About the App"
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:paddingStart="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_arrow"
+                        android:contentDescription="Arrow" />
+                </LinearLayout>
             </LinearLayout>
-        </ScrollView>
     </androidx.cardview.widget.CardView>
 
     <!-- Footer Layout with Logo Image and Copyright -->

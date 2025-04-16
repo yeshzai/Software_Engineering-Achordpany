@@ -36,4 +36,44 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
+
+    <!-- Settings Screens -->
+    <fragment
+        android:id="@+id/mainSettingsFragment"
+        android:name="com.example.achordpany.ui.settings.MainSettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_mainsettings">
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_changePassFragment"
+            app:destination="@id/changePassFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePassFragment"
+        android:name="com.example.achordpany.ui.settings.ChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_changepass" />
+
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.example.achordpany.ui.settings.PrivacyPolicyFragment"
+        android:label="Privacy Policy"
+        tools:layout="@layout/fragment_privacypolicy" />
+
+    <fragment
+        android:id="@+id/termsConditionsFragment"
+        android:name="com.example.achordpany.ui.settings.TermsConditionsFragment"
+        android:label="Terms &amp; Conditions"
+        tools:layout="@layout/fragment_termsconditions">
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_termsConditionsFragment"
+            app:destination="@id/termsConditionsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.example.achordpany.ui.settings.AboutAppFragment"
+        android:label="About App"
+        tools:layout="@layout/fragment_aboutapp" />
+
 </navigation>

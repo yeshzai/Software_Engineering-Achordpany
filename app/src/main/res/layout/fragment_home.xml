@@ -530,6 +530,7 @@
 
                     <!-- Right section: Arrow/Share icon -->
                     <ImageView
+                        android:id="@+id/recommendations1_OpenButton"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -596,6 +597,7 @@
 
                     <!-- Right section: Arrow/Share icon -->
                     <ImageView
+                        android:id="@+id/recommendations2_OpenButton"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"

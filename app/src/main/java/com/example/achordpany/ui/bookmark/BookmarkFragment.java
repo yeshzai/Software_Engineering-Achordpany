@@ -1,5 +1,6 @@
 package com.example.achordpany.ui.bookmark;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
+import com.example.achordpany.ChordsWebView;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentBookmarkBinding;
+import com.example.achordpany.ui.history.HistoryWebViewActivity;
 
 import java.util.ArrayList;
 
@@ -66,6 +69,11 @@ public class BookmarkFragment extends Fragment {
         binding.bookmarkBoard5BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 5); }); // 0
 
         // Page Functions
+        binding.bookmarkBoard1OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 1) );
+        binding.bookmarkBoard2OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 2) );
+        binding.bookmarkBoard3OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 3) );
+        binding.bookmarkBoard4OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 4) );
+        binding.bookmarkBoard5OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 5) );
 
         View root = binding.getRoot();
 
@@ -161,6 +169,24 @@ public class BookmarkFragment extends Fragment {
                 binding.bookmarkBoard5Site.setText(bookmarkSite.get(historyIndex));
                 break;
         }
+
+    }
+
+    private void open_Website(int whichIndex) {
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        String the_Title = bookmarkTitle.get(whichIndex);
+        String the_Artist = bookmarkArtist.get(whichIndex);
+        String the_Genre = bookmarkGenre.get(whichIndex);
+        String the_URL = bookmarkURL.get(whichIndex);
+
+        chordsWebView.set_Title(the_Title);
+        chordsWebView.set_Artist(the_Artist);
+        chordsWebView.set_Genre(the_Genre);
+        chordsWebView.set_Url(the_URL);
+
+        Intent intent = new Intent(requireActivity(), BookmarksWebViewActivity.class);
+        startActivity(intent);
 
     }
 

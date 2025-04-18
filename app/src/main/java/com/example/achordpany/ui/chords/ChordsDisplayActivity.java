@@ -148,7 +148,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
 
         Python python = Python.getInstance();
 
-        PyObject pyModule = python.getModule("search_chordswebsite");
+        PyObject pyModule = python.getModule("chordswebsite_generator");
         if(pyModule == null) {
             Log.d("CHORDS WEBSITE", "[ERROR] - PYMODULE");
             return;
@@ -190,7 +190,7 @@ public class ChordsDisplayActivity extends AppCompatActivity {
             Log.d("[SONG ARTIST CHOSEN]", song_ARTIST);
 
         } else {
-            System.out.println("No match found!");
+            Log.d("CHORDS WEBSITE", "[ERROR] - NO MATCH FOUND");
         }
 
         // Add to ChordsSearchedHistory (Local database)

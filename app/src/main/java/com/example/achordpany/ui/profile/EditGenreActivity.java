@@ -34,12 +34,6 @@ public class EditGenreActivity extends AppCompatActivity {
     private Button editgenre_genreButton_Reggae;
 
     private ArrayList<String> genres;
-    /*private boolean genreButton_Rock_Clicked = false;
-    private boolean genreButton_Blues_Clicked = false;
-    private boolean genreButton_Jazz_Clicked = false;
-    private boolean genreButton_Classical_Clicked = false;
-    private boolean genreButton_Pop_Clicked = false;
-    private boolean genreButton_Reggae_Clicked = false;*/
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,120 +55,6 @@ public class EditGenreActivity extends AppCompatActivity {
         setupGenreButton(editgenre_genreButton_Classical, "Classical");
         setupGenreButton(editgenre_genreButton_Pop, "Pop");
         setupGenreButton(editgenre_genreButton_Reggae, "Reggae");
-
-        /*editgenre_genreButton_Rock.setOnClickListener(v -> {
-
-            if(genres.size() != 3 || genres.contains("Rock")) {
-
-                if(!genreButton_Rock_Clicked) {
-                    genres.add("Rock");
-                    editgenre_genreButton_Rock.setBackgroundColor(Color.GREEN);
-                } else {
-                    genres.remove("Rock");
-                    editgenre_genreButton_Rock.setBackgroundColor(Color.WHITE);
-                }
-                genreButton_Rock_Clicked = !genreButton_Rock_Clicked;
-
-            } else {
-                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        editgenre_genreButton_Blues.setOnClickListener(v -> {
-
-            if(genres.size() != 3 || genres.contains("Blues")) {
-
-                if(!genreButton_Blues_Clicked) {
-                    genres.add("Blues");
-                    editgenre_genreButton_Blues.setBackgroundColor(Color.GREEN);
-                } else {
-                    genres.remove("Blues");
-                    editgenre_genreButton_Blues.setBackgroundColor(Color.WHITE);
-                }
-                genreButton_Blues_Clicked = !genreButton_Blues_Clicked;
-
-            } else {
-                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        editgenre_genreButton_Jazz.setOnClickListener(v -> {
-
-            if(genres.size() != 3 || genres.contains("Jazz")) {
-
-                if(!genreButton_Jazz_Clicked) {
-                    genres.add("Jazz");
-                    editgenre_genreButton_Jazz.setBackgroundColor(Color.GREEN);
-                } else {
-                    genres.remove("Jazz");
-                    editgenre_genreButton_Jazz.setBackgroundColor(Color.WHITE);
-                }
-                genreButton_Jazz_Clicked = !genreButton_Jazz_Clicked;
-
-            } else {
-                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        editgenre_genreButton_Classical.setOnClickListener(v -> {
-
-            if(genres.size() != 3 || genres.contains("Classical")) {
-
-                if(!genreButton_Classical_Clicked) {
-                    genres.add("Classical");
-                    editgenre_genreButton_Classical.setBackgroundColor(Color.GREEN);
-                } else {
-                    genres.remove("Classical");
-                    editgenre_genreButton_Classical.setBackgroundColor(Color.WHITE);
-                }
-                genreButton_Classical_Clicked = !genreButton_Classical_Clicked;
-
-            } else {
-                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        editgenre_genreButton_Pop.setOnClickListener(v -> {
-
-            if(genres.size() != 3 || genres.contains("Pop")) {
-
-                if(!genreButton_Pop_Clicked) {
-                    genres.add("Pop");
-                    editgenre_genreButton_Pop.setBackgroundColor(Color.GREEN);
-                } else {
-                    genres.remove("Pop");
-                    editgenre_genreButton_Pop.setBackgroundColor(Color.WHITE);
-                }
-                genreButton_Pop_Clicked = !genreButton_Pop_Clicked;
-
-            } else {
-                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        editgenre_genreButton_Reggae.setOnClickListener(v -> {
-
-            if(genres.size() != 3 || genres.contains("Reggae")) {
-
-                if(!genreButton_Reggae_Clicked) {
-                    genres.add("Reggae");
-                    editgenre_genreButton_Reggae.setBackgroundColor(Color.GREEN);
-                } else {
-                    genres.remove("Reggae");
-                    editgenre_genreButton_Reggae.setBackgroundColor(Color.WHITE);
-                }
-                genreButton_Reggae_Clicked = !genreButton_Reggae_Clicked;
-
-            } else {
-                Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();
-            }
-
-        });*/
 
         Button editgenre_btnContinue = findViewById(R.id.editgenre_btnContinue);
         editgenre_btnContinue.setOnClickListener(v -> {

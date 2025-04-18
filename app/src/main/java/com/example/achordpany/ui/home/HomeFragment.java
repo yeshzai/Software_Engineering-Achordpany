@@ -60,6 +60,19 @@ public class HomeFragment extends Fragment {
     ArrayList<String> bookmarkURL;
     ArrayList<String> bookmarkUID;
 
+    ArrayList<String> recommendationsTitle_1;
+    ArrayList<String> recommendationsArtist_1;
+    ArrayList<String> recommendationsURL_1;
+    String recommendationsGenre_1;
+    ArrayList<String> recommendationsTitle_2;
+    ArrayList<String> recommendationsArtist_2;
+    ArrayList<String> recommendationsURL_2;
+    String recommendationsGenre_2;
+    ArrayList<String> recommendationsTitle_3;
+    ArrayList<String> recommendationsArtist_3;
+    ArrayList<String> recommendationsURL_3;
+    String recommendationsGenre_3;
+
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,6 +106,19 @@ public class HomeFragment extends Fragment {
         bookmarkURL = chordsBookmarks.get_URL();
         bookmarkUID = chordsBookmarks.get_UID();
 
+        recommendationsTitle_1 = chordsRecommendations.get_RecommendationsGenre1Title();
+        recommendationsArtist_1 = chordsRecommendations.get_RecommendationsGenre1Artist();
+        recommendationsURL_1 = chordsRecommendations.get_RecommendationsGenre1URL();
+        recommendationsGenre_1 = chordsRecommendations.get_Genres().get(0);
+        recommendationsTitle_2 = chordsRecommendations.get_RecommendationsGenre2Title();
+        recommendationsArtist_2 = chordsRecommendations.get_RecommendationsGenre2Artist();
+        recommendationsURL_2 = chordsRecommendations.get_RecommendationsGenre2URL();
+        recommendationsGenre_2 = chordsRecommendations.get_Genres().get(1);
+        recommendationsTitle_3 = chordsRecommendations.get_RecommendationsGenre3Title();
+        recommendationsArtist_3 = chordsRecommendations.get_RecommendationsGenre3Artist();
+        recommendationsURL_3 = chordsRecommendations.get_RecommendationsGenre3URL();
+        recommendationsGenre_3 = chordsRecommendations.get_Genres().get(2);
+
         load_Bookmarks();
         load_RecentSearches();
         load_Recommendations();
@@ -102,7 +128,7 @@ public class HomeFragment extends Fragment {
 
         // Open Button - Bookmarks
         binding.bookmarkBoard1OpenButton.setOnClickListener(v -> open_Home_WebView( bookmarkURL.size() - 1,  1));
-        binding.bookmarkBoard1OpenButton.setOnClickListener(v -> open_Home_WebView( bookmarkURL.size() - 2,  1));
+        binding.bookmarkBoard2OpenButton.setOnClickListener(v -> open_Home_WebView( bookmarkURL.size() - 2,  1));
 
         // Open Button - Recent Searches
         binding.recentSearch1OpenButton.setOnClickListener(v -> open_Home_WebView( recentURL.size() - 1,  2));
@@ -110,13 +136,20 @@ public class HomeFragment extends Fragment {
 
         // Open Button - Recommendations
         binding.recommendations1OpenButton.setOnClickListener(v -> {
-
-            // Open website gotoURL
+            open_Home_WebView_Recommendations(
+                    recommendationsTitle_1.get(0),
+                    recommendationsArtist_1.get(0),
+                    recommendationsGenre_1,
+                    recommendationsURL_1.get(0)
+            );
         });
-
         binding.recommendations2OpenButton.setOnClickListener(v -> {
-
-            // Open website gotoURL
+            open_Home_WebView_Recommendations(
+                    recommendationsTitle_2.get(0),
+                    recommendationsArtist_2.get(0),
+                    recommendationsGenre_2,
+                    recommendationsURL_2.get(0)
+            );
         });
 
         // Home Page Functions
@@ -381,10 +414,20 @@ public class HomeFragment extends Fragment {
                 use_Genre = recentGenre.get(whichIndex);
                 use_URL = recentURL.get(whichIndex);
                 break;
-            case 3: // Recommendations
-
-                break;
         }
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        chordsWebView.set_Title(use_Title);
+        chordsWebView.set_Artist(use_Artist);
+        chordsWebView.set_Genre(use_Genre);
+        chordsWebView.set_Url(use_URL);
+
+        Intent intent = new Intent(requireActivity(), HomeWebViewActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void open_Home_WebView_Recommendations(String use_Title, String use_Artist, String use_Genre, String use_URL) {
 
         ChordsWebView chordsWebView = ChordsWebView.getInstance();
         chordsWebView.set_Title(use_Title);

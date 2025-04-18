@@ -43,7 +43,7 @@
 
                 <!-- Password Input Field -->
                 <EditText
-                    android:id="@+id/currentPassText"
+                    android:id="@+id/changePassword_CurrentPassword"
                     android:layout_width="280dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="15dp"
@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cardHeading" />
 
                 <EditText
-                    android:id="@+id/newPassText"
+                    android:id="@+id/changePassword_NewPassword"
                     android:layout_width="280dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="15dp"
@@ -72,11 +72,11 @@
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currentPassText" />
+                    app:layout_constraintTop_toBottomOf="@id/changePassword_CurrentPassword" />
 
                 <!-- Confirm Password Input Field -->
                 <EditText
-                    android:id="@+id/confirmPasswordText"
+                    android:id="@+id/changePassword_ConfirmPassword"
                     android:layout_width="280dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="15dp"
@@ -89,11 +89,11 @@
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/newPassText" />
+                    app:layout_constraintTop_toBottomOf="@id/changePassword_NewPassword" />
 
                 <!-- Confirm Change Button -->
                 <Button
-                    android:id="@+id/btnConfirm"
+                    android:id="@+id/changePassword_Button"
                     style="@style/RoundedButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="47dp"
@@ -123,6 +123,7 @@
             android:id="@+id/logoImageView"
             android:layout_width="150dp"
             android:layout_height="70dp"
+            android:visibility="invisible"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
             android:src="@drawable/logo_light" />

@@ -79,11 +79,6 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
-        <!-- Change Password Activity | AUTH -->
-        <activity android:name=".ui.auth.ChangePasswordActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Achordpany" />
-
         <!-- Forgot Password Activity | AUTH -->
         <activity android:name=".ui.auth.RecoverAccountActivity"
             android:exported="true"

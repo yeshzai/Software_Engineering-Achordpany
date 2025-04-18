@@ -95,28 +95,33 @@ public class ProfileFragment extends Fragment {
 
         ChordsRecommendations chordsRecommendations = ChordsRecommendations.getInstance();
 
-        String songTITLE_11 = chordsRecommendations.get_RecommendationsGenre1().get(0);
-        String songTITLE_12 = chordsRecommendations.get_RecommendationsGenre1().get(1);
-        String songTITLE_2 = chordsRecommendations.get_RecommendationsGenre2().get(0);
-        String songTITLE_3 = chordsRecommendations.get_RecommendationsGenre3().get(0);
+        String songTITLE_11 = chordsRecommendations.get_RecommendationsGenre1Title().get(0);
+        String songTITLE_12 = chordsRecommendations.get_RecommendationsGenre1Title().get(1);
+        String songTITLE_2 = chordsRecommendations.get_RecommendationsGenre2Title().get(0);
+        String songTITLE_3 = chordsRecommendations.get_RecommendationsGenre3Title().get(0);
+
+        String songARTIST_11 = chordsRecommendations.get_RecommendationsGenre1Artist().get(0);
+        String songARTIST_12 = chordsRecommendations.get_RecommendationsGenre1Artist().get(1);
+        String songARTIST_2 = chordsRecommendations.get_RecommendationsGenre2Artist().get(0);
+        String songARTIST_3 = chordsRecommendations.get_RecommendationsGenre3Artist().get(0);
+
         String genre1 = chordsRecommendations.get_Genres().get(0);
         String genre2 = chordsRecommendations.get_Genres().get(1);
         String genre3 = chordsRecommendations.get_Genres().get(2);
 
         binding.recommendations11.setText(songTITLE_11);
-        binding.recommendations11Artist.setText("No Artist");
-        binding.recommendations11Genre.setText(genre1);
-
         binding.recommendations12.setText(songTITLE_12);
-        binding.recommendations12Artist.setText("No Artist");
-        binding.recommendations12Genre.setText(genre1);
-
         binding.recommendations2.setText(songTITLE_2);
-        binding.recommendations2Artist.setText("No Artist");
-        binding.recommendations2Genre.setText(genre2);
-
         binding.recommendations3.setText(songTITLE_3);
-        binding.recommendations3Artist.setText("No Artist");
+
+        binding.recommendations11Artist.setText(songARTIST_11);
+        binding.recommendations12Artist.setText(songARTIST_12);
+        binding.recommendations2Artist.setText(songARTIST_2);
+        binding.recommendations3Artist.setText(songARTIST_3);
+
+        binding.recommendations11Genre.setText(genre1);
+        binding.recommendations12Genre.setText(genre1);
+        binding.recommendations2Genre.setText(genre2);
         binding.recommendations3Genre.setText(genre3);
 
         // Set tooltip to show full text on long press
@@ -124,6 +129,7 @@ public class ProfileFragment extends Fragment {
         TooltipCompat.setTooltipText(binding.recommendations12, songTITLE_12);
         TooltipCompat.setTooltipText(binding.recommendations2, songTITLE_2);
         TooltipCompat.setTooltipText(binding.recommendations3, songTITLE_3);
+
     }
 
 }

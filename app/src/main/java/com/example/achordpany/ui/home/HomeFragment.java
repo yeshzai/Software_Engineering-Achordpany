@@ -321,19 +321,21 @@ public class HomeFragment extends Fragment {
     public void load_Recommendations() {
 
         // Recommendation Title and Artist
-        if(chordsRecommendations.get_RecommendationsGenre1().isEmpty()) {
+        if(chordsRecommendations.get_RecommendationsGenre1Title().isEmpty()) {
 
             binding.recommendations1Board.setVisibility(View.INVISIBLE);
             binding.recommendations1Board.setVisibility(View.INVISIBLE);
 
-        } else if (chordsRecommendations.get_RecommendationsGenre1().size() == 1) {
+        } else if (chordsRecommendations.get_RecommendationsGenre1Title().size() == 1) {
 
             binding.recommendations1Board.setVisibility(View.VISIBLE);
             binding.recommendations2Board.setVisibility(View.INVISIBLE);
 
-            String recommendation_1 = chordsRecommendations.get_RecommendationsGenre1().get(0);
-            binding.recommendations1Title.setText(recommendation_1);
-            binding.recommendations1Artist.setText("No Artist");
+            String recommendation_1_Title = chordsRecommendations.get_RecommendationsGenre1Title().get(0);
+            String recommendation_1_Artist = chordsRecommendations.get_RecommendationsGenre1Artist().get(0);
+
+            binding.recommendations1Title.setText(recommendation_1_Title);
+            binding.recommendations1Artist.setText(recommendation_1_Artist);
             binding.recommendations1Genre.setText(chordsRecommendations.get_Genres().get(0));
 
         } else {
@@ -341,14 +343,18 @@ public class HomeFragment extends Fragment {
             binding.recommendations1Board.setVisibility(View.VISIBLE);
             binding.recommendations2Board.setVisibility(View.VISIBLE);
 
-            String recommendation_1 = chordsRecommendations.get_RecommendationsGenre1().get(0);
-            binding.recommendations1Title.setText(recommendation_1);
-            binding.recommendations1Artist.setText("No Artist");
+            String recommendation_1_Title = chordsRecommendations.get_RecommendationsGenre1Title().get(0);
+            String recommendation_1_Artist = chordsRecommendations.get_RecommendationsGenre1Artist().get(0);
+
+            binding.recommendations1Title.setText(recommendation_1_Title);
+            binding.recommendations1Artist.setText(recommendation_1_Artist);
             binding.recommendations1Genre.setText(chordsRecommendations.get_Genres().get(0));
 
-            String recommendation_2 = chordsRecommendations.get_RecommendationsGenre2().get(0);
-            binding.recommendations2Title.setText(recommendation_2);
-            binding.recommendations2Artist.setText("No Artist");
+            String recommendation_2_Title = chordsRecommendations.get_RecommendationsGenre2Title().get(0);
+            String recommendation_2_Artist = chordsRecommendations.get_RecommendationsGenre2Artist().get(0);
+
+            binding.recommendations2Title.setText(recommendation_2_Title);
+            binding.recommendations2Artist.setText(recommendation_2_Artist);
             binding.recommendations2Genre.setText(chordsRecommendations.get_Genres().get(1));
 
         }

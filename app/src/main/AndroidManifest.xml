@@ -68,6 +68,37 @@
         <activity android:name=".ui.history.HistoryWebViewActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | BOOKMARKS -->
+        <activity android:name=".ui.bookmark.BookmarksWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | HOME -->
+        <activity android:name=".ui.home.HomeWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Forgot Password Activity | AUTH -->
+        <activity android:name=".ui.auth.RecoverAccountActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Genre Activity -->
+        <activity android:name=".ui.profile.EditGenreActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Email Activity -->
+        <activity android:name=".ui.profile.EditEmailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- PROFILE | Edit Username Activity -->
+        <activity android:name=".ui.profile.EditUsernameActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
     </application>
 
 </manifest>

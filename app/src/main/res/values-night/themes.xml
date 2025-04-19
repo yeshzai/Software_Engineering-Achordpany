@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Achordpany" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Window Background -->
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryVariant">@color/light_green_700</item>
+        <item name="colorOnPrimary">@color/text_dark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/dark_green_200</item>
+        <item name="colorSecondaryVariant">@color/dark_green_700</item>
+        <item name="colorOnSecondary">@color/text_dark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="bottomNavigationStyle">@style/Widget.BottomNavigationView</item>
+        <item name="colorControlNormal">#121212</item>
+        <item name="colorControlActivated">#11A849</item>
+        <item name="colorControlHighlight">#11A849</item>
+    </style>
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/recoverAccount_Back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/image_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_return_black_24dp" />
+
+    <!-- Logo -->
+
+    <!-- Heading 1: Account Recovery Title -->
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="204dp"
+        android:layout_marginBottom="180dp"
+        android:contentDescription="Logo"
+        app:layout_constraintBottom_toTopOf="@+id/recoverAccount_Title"
+        app:layout_constraintEnd_toStartOf="@+id/recoverAccount_Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo_light"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/recoverAccount_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:text="ACCOUNT RECOVERY"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!-- Heading 2: Subtitle -->
+    <TextView
+        android:id="@+id/recoverAccount_Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Don't worry! Just provide your email."
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recoverAccount_Title"
+        tools:ignore="HardcodedText" />
+
+    <!-- Email Address EditText -->
+    <EditText
+        android:id="@+id/recoverAccount_EmailAddress"
+        style="@style/EditTextStyle"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="350dp"
+        android:drawableStart="@drawable/ic_user_black"
+        android:hint="  Email Address"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!-- Recover Account Button -->
+    <Button
+        android:id="@+id/recoverAccount_Button"
+        style="@style/RoundedButtonStyle"
+        android:layout_marginBottom="260dp"
+        android:text="Recover Account"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

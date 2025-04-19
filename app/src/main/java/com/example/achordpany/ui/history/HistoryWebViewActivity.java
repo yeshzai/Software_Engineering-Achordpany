@@ -35,8 +35,6 @@ public class HistoryWebViewActivity extends AppCompatActivity {
         btnBack_History = findViewById(R.id.btnBack_History);
 
         String song_Title = chordsWebView.get_Title();
-        String song_Artist = chordsWebView.get_Artist();
-        String song_Genre = chordsWebView.get_Genre();
         String song_URL = chordsWebView.get_Url();
 
         // Handle Back Button Click

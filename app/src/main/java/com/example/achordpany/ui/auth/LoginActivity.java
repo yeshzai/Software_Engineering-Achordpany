@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private TextView textForgotPassword;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -57,6 +58,14 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        textForgotPassword = findViewById(R.id.textForgotPassword);
+
+        // If user clicks forgot password, navigate to RecoverAccountActivity
+        textForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RecoverAccountActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         // PASSWORD HIDE/VISIBLE
         editTextPassword.setOnTouchListener((v, event) -> {
@@ -65,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 int paddingRight = editTextPassword.getPaddingRight();
                 float touchX = event.getX();
 
-                if (touchX > width - paddingRight - editTextPassword.getCompoundDrawables()[2].getBounds().width()) {
+                if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[2].getBounds().width())) {
 
                     if(!editTextPassword.isFocused()) {
                         editTextPassword.requestFocus();
@@ -131,20 +140,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
 
-                                    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
+                                    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance(LoginActivity.this);
                                     main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
-
-                                    try {
-                                        TimeUnit.MILLISECONDS.sleep(2000);   // Make sure that database is fully loaded.
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-
-                                    // Go to Main Page
-
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
 
                                 } else {
 
@@ -210,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
                 for(DataSnapshot snap_shot : snapshot.getChildren()) {
 
                     String emailFromDB = snap_shot.child("email").getValue(String.class);
-                    if(emailFromDB != null && emailFromDB.equals(the_email)) {
+                    if(emailFromDB != null && emailFromDB.equals(the_email.toLowerCase())) {
 
                         String return_username = snap_shot.child("username").getValue(String.class);
                         callBack.onUsernameReceived(return_username);

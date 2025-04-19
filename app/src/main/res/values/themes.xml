@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Achordpany" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Window Background -->
-        <item name="android:windowBackground">@color/background_light</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_green</item>
         <item name="colorPrimaryVariant">@color/light_green_700</item>

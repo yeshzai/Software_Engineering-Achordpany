@@ -15,6 +15,7 @@ public class ChordsBookmarks {
     private ArrayList<String> genre = new ArrayList<>();
     private ArrayList<String> site = new ArrayList<>();
     private ArrayList<String> url = new ArrayList<>();
+    private ArrayList<String> uid = new ArrayList<>();
 
     public static ChordsBookmarks getInstance() {
         if (instance == null) {
@@ -38,6 +39,9 @@ public class ChordsBookmarks {
     public void set_URL(String url) {
         this.url.add(url);
     }
+    public void set_UID(String uid) {
+        this.uid.add(uid);
+    }
 
     public ArrayList<String> get_Title() {
         return title;
@@ -54,10 +58,13 @@ public class ChordsBookmarks {
     public ArrayList<String> get_URL() {
         return url;
     }
+    public ArrayList<String> get_UID() {
+        return uid;
+    }
 
     public void initialize_Bookmarks(ArrayList<String> from_database_bookmarks) {
 
-        // [EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL
+        // [EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL|BUID|BookmarkUID
 
         if(from_database_bookmarks.size() > 1) {
 
@@ -72,13 +79,16 @@ public class ChordsBookmarks {
                 String database_bookmarks_site = from_database_bookmarks.get(i).substring(
                         from_database_bookmarks.get(i).indexOf("|BS|") + 4, from_database_bookmarks.get(i).indexOf("|BU|"));
                 String database_bookmarks_url = from_database_bookmarks.get(i).substring(
-                        from_database_bookmarks.get(i).indexOf("|BU|") + 4);
+                        from_database_bookmarks.get(i).indexOf("|BU|") + 4, from_database_bookmarks.get(i).indexOf("|BUID|"));
+                String database_bookmarks_uid = from_database_bookmarks.get(i).substring(
+                        from_database_bookmarks.get(i).indexOf("|BUID|") + 4);
 
                 this.set_Title(database_bookmarks_title);
                 this.set_Artist(database_bookmarks_artist);
                 this.set_Genre(database_bookmarks_genre);
                 this.set_Site(database_bookmarks_site);
                 this.set_URL(database_bookmarks_url);
+                this.set_UID(database_bookmarks_uid);
 
             }
 
@@ -89,18 +99,20 @@ public class ChordsBookmarks {
     // Called when application is closed.
     public void updateBookmarks_FirebaseDatabase(String passed_username) {
 
-        // FORMAT: "[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL"
+        // FORMAT: "[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL|BUID|BookmarkUID"
+
         ArrayList<String> updated_BookmarksList = new ArrayList<>();
-        updated_BookmarksList.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL");
+        updated_BookmarksList.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL|BUID|BookmarkUID");
 
         for(int i = 0; i < this.get_Title().size(); i++) {
 
             String history_node =
-                            "|BT|" + this.get_Title().get(i) +
+                    "|BT|" + this.get_Title().get(i) +
                             "|BA|" + this.get_Artist().get(i) +
                             "|BG|" + this.get_Genre().get(i) +
                             "|BS|" + this.get_Site().get(i) +
-                            "|BU|" + this.get_URL().get(i);
+                            "|BU|" + this.get_URL().get(i) +
+                            "|BUID|" + this.get_UID().get(i);
             updated_BookmarksList.add(history_node);
 
         }

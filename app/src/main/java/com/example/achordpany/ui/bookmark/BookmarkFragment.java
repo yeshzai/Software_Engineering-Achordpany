@@ -1,5 +1,6 @@
 package com.example.achordpany.ui.bookmark;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +15,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsSearchedHistory;
+import com.example.achordpany.ChordsWebView;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentBookmarkBinding;
+import com.example.achordpany.ui.history.HistoryWebViewActivity;
 
 import java.util.ArrayList;
 
 public class BookmarkFragment extends Fragment {
 
+    Main_EverythingLocalDatabase main_EverythingLocalDatabase;
     ChordsSearchedHistory chordsSearchedHistory;
     ChordsBookmarks chordsBookmarks;
     private FragmentBookmarkBinding binding;
@@ -45,6 +49,7 @@ public class BookmarkFragment extends Fragment {
 
         // Page Functions
 
+        main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
         chordsSearchedHistory = ChordsSearchedHistory.getInstance();
         chordsBookmarks = ChordsBookmarks.getInstance();
 
@@ -64,6 +69,11 @@ public class BookmarkFragment extends Fragment {
         binding.bookmarkBoard5BookmarkButton.setOnClickListener(v -> { bookmarked_functions(bookmarkTitle.size() - 5); }); // 0
 
         // Page Functions
+        binding.bookmarkBoard1OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 1) );
+        binding.bookmarkBoard2OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 2) );
+        binding.bookmarkBoard3OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 3) );
+        binding.bookmarkBoard4OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 4) );
+        binding.bookmarkBoard5OpenButton.setOnClickListener(v -> open_Website( bookmarkURL.size() - 5) );
 
         View root = binding.getRoot();
 
@@ -81,25 +91,17 @@ public class BookmarkFragment extends Fragment {
 
     private void bookmarked_functions(int whichIndex) {
 
-        //Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance();
-        ArrayList<String> all_BookmarkedURL = chordsSearchedHistory.get_URL();
+        int index_ToChange = chordsSearchedHistory.get_UID().indexOf(chordsBookmarks.get_UID().get(whichIndex));
 
-        for(int i = 0; i < all_BookmarkedURL.size(); i++) {
-
-            if(all_BookmarkedURL.get(i).equals(chordsBookmarks.get_URL().get(whichIndex))) {
-
-                chordsSearchedHistory.get_isBookmarked().set(i, "false");
-                break;
-
-            }
-
-        }
+        if(index_ToChange != -1)
+            chordsSearchedHistory.get_isBookmarked().set(index_ToChange, "false");
 
         chordsBookmarks.get_Title().remove(whichIndex);
         chordsBookmarks.get_Artist().remove(whichIndex);
         chordsBookmarks.get_Genre().remove(whichIndex);
         chordsBookmarks.get_Site().remove(whichIndex);
         chordsBookmarks.get_URL().remove(whichIndex);
+        chordsBookmarks.get_UID().remove(whichIndex);
 
         // Refresh Page
         load_BookmarkFragment();
@@ -130,6 +132,9 @@ public class BookmarkFragment extends Fragment {
             updater_BookmarkFragment(4, historySize - 4);
         if(historySize > 4)
             updater_BookmarkFragment(5, historySize - 5);
+
+        chordsBookmarks.updateBookmarks_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
+        chordsSearchedHistory.updateHistory_FirebaseDatabase(main_EverythingLocalDatabase.get_Username());
 
     }
 
@@ -164,6 +169,24 @@ public class BookmarkFragment extends Fragment {
                 binding.bookmarkBoard5Site.setText(bookmarkSite.get(historyIndex));
                 break;
         }
+
+    }
+
+    private void open_Website(int whichIndex) {
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        String the_Title = bookmarkTitle.get(whichIndex);
+        String the_Artist = bookmarkArtist.get(whichIndex);
+        String the_Genre = bookmarkGenre.get(whichIndex);
+        String the_URL = bookmarkURL.get(whichIndex);
+
+        chordsWebView.set_Title(the_Title);
+        chordsWebView.set_Artist(the_Artist);
+        chordsWebView.set_Genre(the_Genre);
+        chordsWebView.set_Url(the_URL);
+
+        Intent intent = new Intent(requireActivity(), BookmarksWebViewActivity.class);
+        startActivity(intent);
 
     }
 

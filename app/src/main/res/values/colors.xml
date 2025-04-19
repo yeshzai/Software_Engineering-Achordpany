@@ -11,7 +11,7 @@
             80 (128 in decimal) = 50% opacity (semi-transparent).
             00 (0 in decimal) = 0% opacity (fully transparent).
     -->
-    <color name="background_light">#FFFAFAFA</color>
+    <color name="backgroundColor">#FFFAFAFA</color>
     <color name="background_dark">#FF121212</color>
     <color name="text_light">#FFFAFAFA</color>
     <color name="text_dark">#FF121212</color>
@@ -26,8 +26,14 @@
     <color name="dark_green_700">#FF009635</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF002B</color>       <!-- Bright red -->
+    <color name="green">#00FF1A</color>     <!-- Bright green -->
+    <color name="gray">#DDDDDD</color>
 
     <color name="bottom_nav_light_active">#FF1DD360</color>  <!-- Active color -->
     <color name="bottom_nav_light_inactive">#121212</color>  <!-- Inactive color -->
+
+    <color name="genre_button_default">#FFFFFF</color>
+    <color name="genre_button_selected">#00FF1A</color>
 
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
 
     <!-- Header Layout with Back Button and Logo Image -->
@@ -105,7 +105,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="45dp"
         android:drawableStart="@drawable/ic_user_black"
-        android:hint=" Username"
+        android:hint="  Username"
         android:importantForAutofill="no"
         android:inputType="text"
         style="@style/EditTextStyle"
@@ -115,6 +115,32 @@
         app:layout_constraintTop_toBottomOf="@id/heading2"
         tools:ignore="HardcodedText" />
 
+    <!-- Username Input Field
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameLayout"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="45dp"
+        android:hint=" Username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundMode="none"
+        app:boxStrokeErrorColor="@color/red"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading2">
+
+        <EditText
+            android:id="@+id/usernameText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_user_black"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout> -->
+
     <!-- Email Address Input Field -->
     <EditText
         android:id="@+id/emailAddressText"
@@ -122,7 +148,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:drawableStart="@drawable/ic_email_black"
-        android:hint=" Email Address"
+        android:hint="  Email Address"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         style="@style/EditTextStyle"
@@ -130,18 +156,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/usernameText"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText" /> -->
+
+    <!-- Email Address Input Field
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailAddressLayout"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:hint=" Email Address"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeErrorColor="@color/red"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usernameLayout">
+
+        <EditText
+            android:id="@+id/emailAddressText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_email_black"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout> -->
 
     <!-- Password Input Field -->
     <EditText
         android:id="@+id/passwordText"
-        android:layout_width="300dp"
+        android:layout_width="302dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:drawableStart="@drawable/ic_lock_black"
         android:drawableEnd="@drawable/ic_eyehide_black"
         android:importantForAutofill="no"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:hint="  Password"
         style="@style/EditTextStyle"
         android:textSize="15sp"
@@ -150,16 +201,42 @@
         app:layout_constraintTop_toBottomOf="@id/emailAddressText"
         tools:ignore="HardcodedText" />
 
+    <!-- Password Input Field
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTextLayout"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:hint="  Password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeErrorColor="@color/red"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailAddressLayout">
+
+        <EditText
+            android:id="@+id/passwordText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_lock_black"
+            android:drawableEnd="@drawable/ic_eyehide_black"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout> -->
+
     <!-- Confirm Password Input Field -->
     <EditText
         android:id="@+id/confirmPasswordText"
-        android:layout_width="300dp"
+        android:layout_width="302dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:drawableStart="@drawable/ic_lock_black"
         android:drawableEnd="@drawable/ic_eyehide_black"
         android:importantForAutofill="no"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:hint="  Confirm Password"
         style="@style/EditTextStyle"
         android:textSize="15sp"
@@ -167,6 +244,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordText"
         tools:ignore="HardcodedText" />
+
+    <!-- Password Input Field
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirmPasswordTextLayout"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:hint="  Confirm Password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeErrorColor="@color/red"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordTextLayout">
+
+        <EditText
+            android:id="@+id/confirmPasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_lock_black"
+            android:drawableEnd="@drawable/ic_eyehide_black"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout> -->
 
     <!-- Continue Button -->
     <Button

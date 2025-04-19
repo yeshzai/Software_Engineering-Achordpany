@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="550dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardBackgroundColor="@color/backgroundColor"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Scrollable Content -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Card Heading -->
+                <TextView
+                    android:id="@+id/cardHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="TERMS &amp; CONDITIONS"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/terms_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <!-- Terms and Conditions
+                <TextView
+                    android:id="@+id/termsConditionsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome to Achordpany! By using our application, you agree to the following terms and conditions. Please read them carefully to understand your rights and obligations.
+
+\n\n**1. Purpose of the Application**
+Achordpany helps users search for song lyrics and guitar chords based on lyrics sung or heard. It streamlines the process by identifying the closest match without needing to enter song titles.
+
+\n\n**2. Key Features and Benefits**
+- Access to guitar chords and lyrics.
+- One-click music identification.
+- Real-time matching based on input melody or background audio.
+
+\n\n**3. Use of the Application**
+Achordpany is for personal, non-commercial use only.
+Users are responsible for input accuracy. While we strive for the best match, we cannot guarantee perfection.
+Some links may lead to external sites; we are not responsible for third-party content.
+
+\n\n**4. Intellectual Property**
+All content belongs to Achordpany LLC and is protected by law.
+Unauthorized reproduction, distribution, or modification is prohibited.
+
+\n\n**5. Privacy and Data Collection**
+We may collect voice inputs and song data to enhance app performance.
+All data is handled per applicable laws.
+Refer to our Privacy Policy for full details.
+
+\n\n**6. Disclaimer and Limitations of Liability**
+We do not guarantee complete accuracy.
+Achordpany LLC is not liable for any damages from app use.
+
+\n\n**7. Changes to Terms**
+These terms may change over time. Continued use means you accept any updates.
+
+\n\n**8. Contact Us**
+Questions or feedback?
+Reach out: support@achordpany.com
+
+\n\nBy using Achordpany, you acknowledge that you have read, understood, and agree to these Terms and Conditions."
+                -->
+
+                <!-- Genre Buttons
+                <Button
+                    android:id="@+id/genreButton_Rock"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Rock"
+                    android:backgroundTint="@color/genre_button_default" /> />-->
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Footer Layout with Logo Image and Copyright -->
+    <RelativeLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Logo Image -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo_light" />
+
+        <!-- Copyright -->
+        <TextView
+            android:id="@+id/copyright_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="All rights reserved."
+            android:textColor="@color/text_gray"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

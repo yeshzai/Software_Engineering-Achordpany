@@ -1,5 +1,6 @@
 package com.example.achordpany.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -182,30 +184,21 @@ public class ChangePasswordFragment extends Fragment {
 
         changePassword_Button.setOnClickListener(v -> {
 
-            if(changePassword_CurrentPassword.getText().toString().isEmpty())
-                changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
-            else
-                changePassword_CurrentPassword.setBackground(defaultBackground);
-
-            if(changePassword_NewPassword.getText().toString().isEmpty())
-                changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
-            else
-                changePassword_NewPassword.setBackground(defaultBackground);
-
-            if(changePassword_ConfirmPassword.getText().toString().isEmpty())
-                changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
-            else
-                changePassword_ConfirmPassword.setBackground(defaultBackground);
-
-            if(     changePassword_CurrentPassword.getText().toString().isEmpty()   &&
-                    changePassword_NewPassword.getText().toString().isEmpty()       &&
+            if(     changePassword_CurrentPassword.getText().toString().isEmpty()   ||
+                    changePassword_NewPassword.getText().toString().isEmpty()       ||
                     changePassword_ConfirmPassword.getText().toString().isEmpty()
             ) {
 
                 Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
-                changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
-                changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
-                changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
+
+                if(changePassword_CurrentPassword.getText().toString().isEmpty())
+                    changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
+
+                if(changePassword_NewPassword.getText().toString().isEmpty())
+                    changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
+
+                if(changePassword_ConfirmPassword.getText().toString().isEmpty())
+                    changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
 
             } else {
 
@@ -256,6 +249,10 @@ public class ChangePasswordFragment extends Fragment {
                         if (task.isSuccessful()) {
                             Toast.makeText(getActivity(), "Password Changed Successfully!", Toast.LENGTH_SHORT).show();
                             Log.d("[CHANGE PASSWORD]", "[SUCCESS] Changed Successfully!");
+
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+
                         } else {
                             Toast.makeText(getActivity(), "Password Failed to Change!", Toast.LENGTH_SHORT).show();
                             Log.d("[CHANGE PASSWORD]", "[FAILED] Change Failed!");

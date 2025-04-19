@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF11A849">
+    android:background="@color/primaryColorShade_600">
 
     <!-- Logo Image -->
     <ImageView
@@ -38,6 +38,18 @@
             android:layout_height="460dp"
             android:background="@color/backgroundColor" >
 
+            <ImageButton
+                android:id="@+id/themeToggle"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_theme_toggle"
+                android:contentDescription="Toggle Theme"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ClickableViewAccessibility,ContentDescription" />
+
             <!-- Title: LET'S -->
             <TextView
                 android:id="@+id/title1"
@@ -45,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
                 android:text="LET'S"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
                 android:text="GET STARTED"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Everything starts from here"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title2"
@@ -90,7 +102,7 @@
                 android:layout_marginBottom="180dp"
                 android:text="Login"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +118,7 @@
                 android:layout_marginBottom="116dp"
                 android:text="Sign Up"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

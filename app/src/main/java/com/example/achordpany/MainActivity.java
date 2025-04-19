@@ -55,9 +55,14 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        /*SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         int savedMode = prefs.getInt("night_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-        AppCompatDelegate.setDefaultNightMode(savedMode);
+        AppCompatDelegate.setDefaultNightMode(savedMode);*/
+        SharedPreferences sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("darkMode", false);
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
 
         super.onCreate(savedInstanceState);
 
@@ -217,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Load saved profile image from SharedPreferences
-        //SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String imageUriString = prefs.getString("profile_image_uri", null);
 
         if (imageUriString != null) {

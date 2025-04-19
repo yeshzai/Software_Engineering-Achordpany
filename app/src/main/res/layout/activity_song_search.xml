@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <!-- ✅ Header Layout with Back Button and Title -->
     <RelativeLayout
@@ -24,7 +25,7 @@
             android:text="@string/search_a_song"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:maxLines="1"
             android:ellipsize="end"/>
 
@@ -57,7 +58,7 @@
             android:layout_marginBottom="10dp"
             android:text="@string/play_a_song"
             android:textSize="19sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:maxLines="1"
             android:ellipsize="end"
             android:visibility="gone" />
@@ -68,7 +69,7 @@
             android:layout_height="wrap_content"
             android:text="Time Remaining: 8s"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"/>
@@ -160,10 +161,10 @@
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:text="@string/search_a_song"
-            android:backgroundTint="@color/light_green"
-            android:textColor="@android:color/white"/>
+            android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/textColor"/>
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

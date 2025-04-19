@@ -44,7 +44,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Dashboard"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Navigation section"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="16sp" />
         </RelativeLayout>
 
@@ -106,7 +106,7 @@
         android:layout_height="3dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="56dp"
-        android:background="@color/light_green"
+        android:background="@color/primaryColor"
         android:visibility="visible"
         android:elevation="8dp" />
 
@@ -157,8 +157,8 @@
             android:layout_height="56dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_searchsong_black_64dp"
-            android:backgroundTint="@color/light_green"
-            android:tint="@android:color/black"
+            android:backgroundTint="@color/primaryColor"
+            android:tint="@color/textColor"
             android:elevation="8dp"
             android:contentDescription="@string/fab_search" />
     </FrameLayout>

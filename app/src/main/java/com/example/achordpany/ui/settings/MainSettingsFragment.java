@@ -29,18 +29,19 @@ public class MainSettingsFragment extends Fragment {
 
         // Theme Toggle Logic
         SwitchCompat themeSwitch = view.findViewById(R.id.theme_switch);
-        SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences prefs = requireContext().getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
         int currentMode = AppCompatDelegate.getDefaultNightMode();
 
         // Set the switch to match current theme
-        themeSwitch.setChecked(currentMode == AppCompatDelegate.MODE_NIGHT_YES);
+        //themeSwitch.setChecked(currentMode == AppCompatDelegate.MODE_NIGHT_YES);
+        themeSwitch.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
 
         themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             int newMode = isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
             AppCompatDelegate.setDefaultNightMode(newMode);
 
             // Save preference
-            prefs.edit().putInt("night_mode", newMode).apply();
+            prefs.edit().putBoolean("darkMode", isChecked).apply();
 
             // Optionally recreate activity to apply theme immediately
             requireActivity().recreate();

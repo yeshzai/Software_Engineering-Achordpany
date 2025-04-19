@@ -69,8 +69,13 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
-        <!-- Change Password Activity | AUTH -->
-        <activity android:name=".ui.auth.ChangePasswordActivity"
+        <!-- Chords Display Activity | BOOKMARKS -->
+        <activity android:name=".ui.bookmark.BookmarksWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | HOME -->
+        <activity android:name=".ui.home.HomeWebViewActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 

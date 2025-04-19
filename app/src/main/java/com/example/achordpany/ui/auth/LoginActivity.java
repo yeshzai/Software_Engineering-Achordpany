@@ -207,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
                 for(DataSnapshot snap_shot : snapshot.getChildren()) {
 
                     String emailFromDB = snap_shot.child("email").getValue(String.class);
-                    if(emailFromDB != null && emailFromDB.equals(the_email)) {
+                    if(emailFromDB != null && emailFromDB.equals(the_email.toLowerCase())) {
 
                         String return_username = snap_shot.child("username").getValue(String.class);
                         callBack.onUsernameReceived(return_username);

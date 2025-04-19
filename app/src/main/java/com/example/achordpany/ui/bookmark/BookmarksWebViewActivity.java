@@ -1,4 +1,4 @@
-package com.example.achordpany.ui.history;
+package com.example.achordpany.ui.bookmark;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,35 +18,35 @@ import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 
-public class HistoryWebViewActivity extends AppCompatActivity {
+public class BookmarksWebViewActivity extends AppCompatActivity {
 
     ChordsWebView chordsWebView;
-    private ImageButton btnBack_History;
+    private ImageButton btnBack_Bookmarks;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_webview);
+        setContentView(R.layout.activity_bookmarks_webview);
 
         chordsWebView = ChordsWebView.getInstance();
-        TextView txtTitle_History = findViewById(R.id.txtTitle_History);
-        TextView txtLink_History = findViewById(R.id.txtLink_History);
-        btnBack_History = findViewById(R.id.btnBack_History);
+        TextView txtTitle_Bookmarks = findViewById(R.id.txtTitle_Bookmarks);
+        TextView txtLink_Bookmarks = findViewById(R.id.txtLink_Bookmarks);
+        btnBack_Bookmarks = findViewById(R.id.btnBack_Bookmarks);
 
         String song_Title = chordsWebView.get_Title();
         String song_URL = chordsWebView.get_Url();
 
         // Handle Back Button Click
-        btnBack_History.setOnClickListener(v -> {
+        btnBack_Bookmarks.setOnClickListener(v -> {
             finish();
-            Intent intent = new Intent(HistoryWebViewActivity.this, MainActivity.class);
+            Intent intent = new Intent(BookmarksWebViewActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-        WebView webView_History = findViewById(R.id.webView_History);
-        WebSettings webSettings = webView_History.getSettings();
+        WebView webView_Bookmarks = findViewById(R.id.webView_Bookmarks);
+        WebSettings webSettings = webView_Bookmarks.getSettings();
 
         // Securely Enable JavaScript
         webSettings.setJavaScriptEnabled(true);
@@ -56,7 +56,7 @@ public class HistoryWebViewActivity extends AppCompatActivity {
         webSettings.setBlockNetworkLoads(false); // Allows network requests, but only to trusted URLs
         webSettings.setBlockNetworkImage(false); // Allows image loading
 
-        webView_History.setWebViewClient(new WebViewClient() {
+        webView_Bookmarks.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
@@ -67,12 +67,12 @@ public class HistoryWebViewActivity extends AppCompatActivity {
             }
         });
 
-        webView_History.setWebChromeClient(new WebChromeClient());
+        webView_Bookmarks.setWebChromeClient(new WebChromeClient());
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        txtTitle_History.setText(song_Title);
-        txtLink_History.setText(song_URL);
-        webView_History.loadUrl(song_URL);
+        txtTitle_Bookmarks.setText(song_Title);
+        txtLink_Bookmarks.setText(song_URL);
+        webView_Bookmarks.loadUrl(song_URL);
 
     }
 }

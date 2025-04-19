@@ -1,5 +1,7 @@
 package com.example.achordpany.ui.settings;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -22,6 +26,25 @@ public class MainSettingsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_mainsettings, container, false);
+
+        // Theme Toggle Logic
+        SwitchCompat themeSwitch = view.findViewById(R.id.theme_switch);
+        SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        int currentMode = AppCompatDelegate.getDefaultNightMode();
+
+        // Set the switch to match current theme
+        themeSwitch.setChecked(currentMode == AppCompatDelegate.MODE_NIGHT_YES);
+
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int newMode = isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
+            AppCompatDelegate.setDefaultNightMode(newMode);
+
+            // Save preference
+            prefs.edit().putInt("night_mode", newMode).apply();
+
+            // Optionally recreate activity to apply theme immediately
+            requireActivity().recreate();
+        });
 
         // Button to Change Password
         View changePasswordBtn = view.findViewById(R.id.change_password_option);

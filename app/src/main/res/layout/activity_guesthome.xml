@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Bottom Navigation View -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view_GUEST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:clickable="false"
+        android:background="@color/black_guest"
+        app:itemIconTint="@color/bottom_nav_iconcolor_guest"
+        app:itemTextColor="@color/bottom_nav_textcolor_guest"
+        app:labelVisibilityMode="labeled"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu_guest" />
+
+    <!-- Floating Action Buttons inside FrameLayout to create overlay effect -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:translationZ="8dp"
+        android:background="@drawable/top_shadow"
+        app:layout_anchor="@id/nav_view_GUEST"
+        app:layout_anchorGravity="center">
+
+        <!-- Larger FAB (Background) -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_background_GUEST"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/background_light"
+            android:elevation="0dp"
+            app:useCompatPadding="false"
+            android:outlineProvider="none"
+            app:strokeWidth="0dp"
+            app:borderWidth="0dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:importantForAccessibility="no" />
+
+        <!-- Smaller FAB (Foreground with Icon) -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_GUEST"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_searchsong_black_64dp"
+            android:backgroundTint="@color/light_green"
+            android:tint="@android:color/black"
+            android:elevation="8dp"
+            android:contentDescription="@string/fab_search" />
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

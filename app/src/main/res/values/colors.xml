@@ -30,6 +30,9 @@
     <color name="green">#00FF1A</color>     <!-- Bright green -->
     <color name="gray">#DDDDDD</color>
 
+    <color name="dark_gray_guest">#454444</color>
+    <color name="black_guest">#000000</color>
+
     <color name="bottom_nav_light_active">#FF1DD360</color>  <!-- Active color -->
     <color name="bottom_nav_light_inactive">#121212</color>  <!-- Inactive color -->
 

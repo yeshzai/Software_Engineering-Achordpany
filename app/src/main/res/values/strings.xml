@@ -119,4 +119,28 @@
         By using Achordpany, you acknowledge that you have read and agree to this Privacy Policy.
         ]]>
     </string>
+
+    <string name="about_app"><![CDATA[
+        <b>About Achordpany</b><br/><br/>
+
+        Achordpany is your go-to app for effortlessly finding guitar chords and lyrics — even if you don’t know the song title. Whether you’ve got a melody stuck in your head or hear something playing nearby, Achordpany helps you identify the song and instantly view its chords.<br/><br/>
+
+        <b>What You Can Do with Achordpany:</b><br/>
+        - Identify songs by singing, humming, or letting the app listen<br/>
+        - Instantly access guitar chords and lyrics<br/>
+        - Save your favorite songs for quick access later<br/>
+        - Explore new music and practice your playing with ease<br/><br/>
+
+        Our goal is to make learning and playing music fun, intuitive, and accessible for everyone — from beginners to seasoned players.<br/><br/>
+
+        <b>Why We Built It:</b><br/>
+        Because we know how frustrating it is to have a tune in your head and no idea what it is. Achordpany bridges that gap — letting you go from inspiration to jamming in seconds.<br/><br/>
+
+        <b>Get in Touch:</b><br/>
+        We’d love to hear your feedback, suggestions, or song requests!<br/>
+        Email us at: support@achordpany.com<br/><br/>
+
+        Happy strumming!
+    ]]></string>
+
 </resources>

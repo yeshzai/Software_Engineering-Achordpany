@@ -79,6 +79,11 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
+        <!-- Chords Display Activity | PROFILE -->
+        <activity android:name=".ui.profile.ProfileWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
         <!-- Forgot Password Activity | AUTH -->
         <activity android:name=".ui.auth.RecoverAccountActivity"
             android:exported="true"

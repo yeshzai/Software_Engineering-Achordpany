@@ -327,6 +327,7 @@
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_11_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -389,6 +390,7 @@
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_12_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -461,6 +463,7 @@
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_2_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -523,6 +526,7 @@
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_3_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"

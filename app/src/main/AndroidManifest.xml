@@ -64,6 +64,16 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
+        <!-- Guest ChordsDisplayActivity -->
+        <activity android:name=".ui.guest.Guest_ChordsDisplayActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Guest SongSearchActivity -->
+        <activity android:name=".ui.guest.Guest_SongSearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
         <!-- Chords Display Activity -->
         <activity android:name=".ui.chords.ChordsDisplayActivity"
             android:exported="true"

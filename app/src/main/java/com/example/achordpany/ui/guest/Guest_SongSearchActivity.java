@@ -344,7 +344,7 @@ public class Guest_SongSearchActivity extends AppCompatActivity {
                     //startActivity(intent);
                     //finish();
 
-                    Intent intent = new Intent(Guest_SongSearchActivity.this, ChordsDisplayActivity.class);
+                    Intent intent = new Intent(Guest_SongSearchActivity.this, Guest_ChordsDisplayActivity.class);
                     startActivity(intent);
                     finish();
 

@@ -35,9 +35,9 @@ public class GuestActivity extends AppCompatActivity {
         FloatingActionButton fab_GUEST = findViewById(R.id.fab_GUEST);
         fab_GUEST.setOnClickListener(v -> {
 
-            //Intent intent = new Intent(GuestActivity.this, SongSearchActivity.class);
-            //startActivity(intent);
-            //finish();
+            Intent intent = new Intent(GuestActivity.this, Guest_SongSearchActivity.class);
+            startActivity(intent);
+            finish();
 
         });
 

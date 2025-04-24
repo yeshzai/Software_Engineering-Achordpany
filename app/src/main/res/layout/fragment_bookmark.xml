@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F1F1"
+    android:background="@color/cardBackgroundColor"
     tools:context=".ui.bookmark.BookmarkFragment">
 
     <androidx.cardview.widget.CardView
@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="14sp" />
 
                     <TextView
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -135,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="14sp" />
 
                     <TextView
@@ -152,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -207,7 +207,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -216,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="14sp" />
 
                     <TextView
@@ -224,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -279,7 +279,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -288,7 +288,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="14sp" />
 
                     <TextView
@@ -296,7 +296,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -351,7 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_text"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -360,7 +360,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/song_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="14sp" />
 
                     <TextView
@@ -368,7 +368,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_desc"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
 

@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/cardBackgroundColor">
 
     <!-- ✅ Header Layout with Back Button, Title, and Link -->
     <RelativeLayout
@@ -33,7 +34,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Placeholder Title"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="22sp"
             android:textStyle="bold" />
 

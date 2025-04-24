@@ -4,110 +4,112 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
-    <!-- Genre Selection Card -->
     <androidx.cardview.widget.CardView
-        android:layout_width="340dp"
-        android:layout_height="390dp"
-        android:layout_marginBottom="170dp"
-        app:cardElevation="8dp"
+        android:layout_width="0dp"
+        android:layout_height="550dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardBackgroundColor="@color/backgroundColor"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="#fafafa"
+        app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Card Heading -->
+            <TextView
+                android:id="@+id/cardHeading"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp">
+                android:text="PASSWORD CHANGE"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp" />
 
-                <!-- Card Heading -->
-                <TextView
-                    android:id="@+id/cardHeading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="PASSWORD CHANGE"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <!-- Password Input Field -->
+            <EditText
+                android:id="@+id/changePassword_CurrentPassword"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="12dp"
+                android:drawableStart="@drawable/ic_lock_black"
+                android:drawableEnd="@drawable/ic_eyehide_black"
+                android:hint="  Current Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardHeading" />
 
-                <!-- Password Input Field -->
-                <EditText
-                    android:id="@+id/changePassword_CurrentPassword"
-                    android:layout_width="280dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableStart="@drawable/ic_lock_black"
-                    android:drawableEnd="@drawable/ic_eyehide_black"
-                    android:importantForAutofill="no"
-                    android:inputType="textPassword"
-                    android:hint="  Current Password"
-                    style="@style/EditTextStyle"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cardHeading" />
+            <EditText
+                android:id="@+id/changePassword_NewPassword"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="12dp"
+                android:drawableStart="@drawable/ic_lock_black"
+                android:drawableEnd="@drawable/ic_eyehide_black"
+                android:hint="  New Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/changePassword_CurrentPassword" />
 
-                <EditText
-                    android:id="@+id/changePassword_NewPassword"
-                    android:layout_width="280dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableStart="@drawable/ic_lock_black"
-                    android:drawableEnd="@drawable/ic_eyehide_black"
-                    android:importantForAutofill="no"
-                    android:inputType="textPassword"
-                    android:hint="  New Password"
-                    style="@style/EditTextStyle"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/changePassword_CurrentPassword" />
+            <!-- Confirm Password Input Field -->
+            <EditText
+                android:id="@+id/changePassword_ConfirmPassword"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="12dp"
+                android:drawableStart="@drawable/ic_lock_black"
+                android:drawableEnd="@drawable/ic_eyehide_black"
+                android:hint="  Confirm Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/changePassword_NewPassword" />
 
-                <!-- Confirm Password Input Field -->
-                <EditText
-                    android:id="@+id/changePassword_ConfirmPassword"
-                    android:layout_width="280dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableStart="@drawable/ic_lock_black"
-                    android:drawableEnd="@drawable/ic_eyehide_black"
-                    android:importantForAutofill="no"
-                    android:inputType="textPassword"
-                    android:hint="  Confirm Password"
-                    style="@style/EditTextStyle"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/changePassword_NewPassword" />
-
-                <!-- Confirm Change Button -->
-                <Button
-                    android:id="@+id/changePassword_Button"
-                    style="@style/RoundedButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="47dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Confirm"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.496"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
+            <!-- Confirm Change Button -->
+            <Button
+                android:id="@+id/changePassword_Button"
+                style="@style/RoundedButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="12dp"
+                android:text="Confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <!-- Footer Layout with Logo Image and Copyright -->
@@ -123,7 +125,6 @@
             android:id="@+id/logoImageView"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:visibility="invisible"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
             android:src="@drawable/logo_light" />

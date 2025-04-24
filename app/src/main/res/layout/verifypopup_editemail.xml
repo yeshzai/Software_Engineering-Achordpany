@@ -34,7 +34,7 @@
             android:layout_marginTop="18dp"
             android:fontFamily="sans-serif-black"
             android:text="Are your sure you want to change your email?"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="15sp"
             tools:ignore="HardcodedText" />
 
@@ -44,7 +44,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
             android:text="If your new email does not exist, you may not anymore be able to open your account ever again."
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
@@ -54,7 +54,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
             android:text="Please double check your new email before accepting. If you wish to continue, please accept. If not, please reject."
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
@@ -64,7 +64,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif-black"
             android:text="New email:"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="15sp"
             tools:ignore="HardcodedText" />
 
@@ -75,7 +75,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="serif-monospace"
             android:text="Achordpany@gmail.com"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="15sp"
             tools:ignore="HardcodedText" />
 
@@ -95,10 +95,10 @@
                 android:layout_height="40dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:background="@color/black"
+                android:background="@color/textColor"
                 android:fontFamily="sans-serif"
                 android:text="Accept"
-                android:textColor="@color/white"
+                android:textColor="@color/textColor"
                 android:textSize="16sp"
                 tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck" />
 
@@ -109,10 +109,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:background="@color/black"
+                android:background="@color/textColor"
                 android:fontFamily="sans-serif"
                 android:text="Reject"
-                android:textColor="@color/white"
+                android:textColor="@color/textColor"
                 android:textSize="16sp"
                 tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck" />
         </LinearLayout>

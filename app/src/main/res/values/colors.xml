@@ -11,32 +11,39 @@
             80 (128 in decimal) = 50% opacity (semi-transparent).
             00 (0 in decimal) = 0% opacity (fully transparent).
     -->
-    <color name="background_light">#FFFAFAFA</color>
-    <color name="background_dark">#FF121212</color>
-    <color name="text_light">#FFFAFAFA</color>
-    <color name="text_dark">#FF121212</color>
+    <color name="backgroundColor">#FFFAFAFA</color>
+    <!--<color name="background_dark">#FF121212</color>-->
+    <color name="textColor">#FF121212</color>
+    <!--<color name="text_light">#FF121212</color>-->
     <color name="text_gray">#737373</color>
-    <color name="dark_green">#FF00DB4D</color>
-    <color name="light_green">#FF1DD360</color>
-    <color name="light_green_200">#FFB9F9CF</color>
-    <color name="light_green_600">#FF11A849</color>
-    <color name="light_green_700">#FF11843C</color>
-    <color name="dark_green_200">#FFAEFFCB</color>
+    <!--<color name="dark_green">#FF00DB4D</color>-->
+    <color name="primaryColor">#FF1DD360</color>
+    <color name="primaryColorShade_200">#FFB9F9CF</color>
+    <color name="primaryColorShade_600">#FF11A849</color>
+    <color name="primaryColorShade_700">#FF11843C</color>
+    <!--<color name="dark_green_200">#FFAEFFCB</color>
     <color name="dark_green_600">#FF00C03F</color>
     <color name="dark_green_700">#FF009635</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="red">#FF002B</color>       <!-- Bright red -->
+    <color name="white">#FFFFFFFF</color>-->
+
     <color name="green">#00FF1A</color>     <!-- Bright green -->
     <color name="gray">#DDDDDD</color>
 
     <color name="dark_gray_guest">#454444</color>
     <color name="black_guest">#000000</color>
 
+    <color name="cardBackgroundColor">#FFF1F1F1</color>
+    <color name="homeBG">#FFE5E6E9</color>
+    <color name="subText">#FF424242</color>
+    <color name="fieldInputs">#FF737373</color>
+    <color name="errorColor">#FF002B</color>       <!-- Bright red -->
+
     <color name="bottom_nav_light_active">#FF1DD360</color>  <!-- Active color -->
     <color name="bottom_nav_light_inactive">#121212</color>  <!-- Inactive color -->
 
-    <color name="genre_button_default">#FFFFFF</color>
+    <color name="genre_button_default">#FAFAFA</color>
     <color name="genre_button_selected">#00FF1A</color>
-
+    <color name="genre_button_default_text">#FF121212</color>
+    <color name="genre_button_selected_text">#FFFAFAFA</color>
 </resources>

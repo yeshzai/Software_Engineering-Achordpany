@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
+import com.example.achordpany.ui.auth.WelcomeActivity;
 import com.example.achordpany.ui.search.SongSearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +30,14 @@ public class GuestActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Create an account to use this feature.", Toast.LENGTH_SHORT).show();
             return true;
+
+        });
+
+        findViewById(R.id.btnBack_GUEST).setOnClickListener(v -> {
+
+            Intent intent = new Intent(GuestActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
 
         });
 

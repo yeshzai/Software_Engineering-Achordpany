@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="backgroundColor">#FF121212</color>
+    <color name="textColor">#FFFAFAFA</color>
+    <color name="text_gray">#737373</color>
+    <color name="primaryColor">#FF00DB4D</color>
+    <color name="primaryColorShade_200">#FFAEFFCB</color>
+    <color name="primaryColorShade_600">#FF00C03F</color>
+    <color name="primaryColorShade_700">#FF009635</color>
+
+    <color name="cardBackgroundColor">#FF1E1E1E</color>
+    <color name="homeBG">#FF353535</color>
+    <color name="subText">#FFFAFAFA</color>
+    <color name="fieldInputs">#FFD0D0D0</color>
+    <color name="errorColor">#FF002B</color>
+
+    <color name="bottom_nav_light_active">#FF00DB4D</color>  <!-- Active color -->
+    <color name="bottom_nav_light_inactive">#FFFAFAFA</color>  <!-- Inactive color -->
+
+    <color name="genre_button_default">#121212</color>
+    <color name="genre_button_selected">#00FF1A</color>
+    <color name="genre_button_default_text">#FFFAFAFA</color>
+    <color name="genre_button_selected_text">#FF121212</color>
+</resources>

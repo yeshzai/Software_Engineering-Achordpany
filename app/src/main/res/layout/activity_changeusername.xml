@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
     <!-- Header Layout with Back Button and Logo Image -->
     <RelativeLayout
@@ -81,7 +81,7 @@
         android:layout_marginTop="420dp"
         android:text="Change Username"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

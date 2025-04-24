@@ -2,7 +2,7 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent"/>
-            <stroke android:width="2dp" android:color="@color/red"/>
+            <stroke android:width="2dp" android:color="@color/errorColor"/>
             <corners android:radius="4dp"/> <!-- Slightly rounded edges -->
             <padding android:left="4dp" android:right="4dp" android:top="4dp" android:bottom="4dp"/>
         </shape>

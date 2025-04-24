@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SongSearchActivity.class);
             startActivity(intent);
+            finish();
         });
 
         // Dropdown button click listener

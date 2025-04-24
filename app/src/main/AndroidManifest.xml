@@ -59,6 +59,21 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
+        <!-- Guest Activity -->
+        <activity android:name=".ui.guest.GuestActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Guest ChordsDisplayActivity -->
+        <activity android:name=".ui.guest.Guest_ChordsDisplayActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Guest SongSearchActivity -->
+        <activity android:name=".ui.guest.Guest_SongSearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
         <!-- Chords Display Activity -->
         <activity android:name=".ui.chords.ChordsDisplayActivity"
             android:exported="true"
@@ -76,6 +91,11 @@
 
         <!-- Chords Display Activity | HOME -->
         <activity android:name=".ui.home.HomeWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | PROFILE -->
+        <activity android:name=".ui.profile.ProfileWebViewActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 

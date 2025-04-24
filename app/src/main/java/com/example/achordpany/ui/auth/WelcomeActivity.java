@@ -1,6 +1,7 @@
 package com.example.achordpany.ui.auth;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
+import com.example.achordpany.ui.guest.GuestActivity;
 import com.example.achordpany.ui.signup.SignUpActivity;
 
 import android.content.Intent;
@@ -55,6 +56,14 @@ public class WelcomeActivity extends AppCompatActivity {
         findViewById(R.id.signUpBtn).setOnClickListener(v -> {
 
             Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
+            startActivity(intent);
+            finish();
+
+        });
+
+        findViewById(R.id.guest_login).setOnClickListener(v -> {
+
+            Intent intent = new Intent(WelcomeActivity.this, GuestActivity.class);
             startActivity(intent);
             finish();
 

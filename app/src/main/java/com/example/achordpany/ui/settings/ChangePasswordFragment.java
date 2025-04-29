@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -77,7 +76,7 @@ public class ChangePasswordFragment extends Fragment {
                         changePassword_CurrentPassword.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW
@@ -119,7 +118,7 @@ public class ChangePasswordFragment extends Fragment {
                         changePassword_NewPassword.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW
@@ -161,7 +160,7 @@ public class ChangePasswordFragment extends Fragment {
                         changePassword_ConfirmPassword.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW

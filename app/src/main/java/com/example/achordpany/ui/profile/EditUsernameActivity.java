@@ -82,7 +82,7 @@ public class EditUsernameActivity extends AppCompatActivity {
                         changeUsername_Password.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW

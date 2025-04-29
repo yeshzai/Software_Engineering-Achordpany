@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.auth.LoginActivity;
 import com.example.achordpany.ui.auth.WelcomeActivity;
-import com.example.achordpany.ui.profile.EditEmailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,7 +92,7 @@ public class SignUpStep1Fragment extends Fragment {
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW
@@ -135,7 +134,7 @@ public class SignUpStep1Fragment extends Fragment {
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW

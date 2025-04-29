@@ -19,8 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
-import com.example.achordpany.ChordsRecommendations;
-import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.signup.SignUpActivity;
@@ -35,8 +33,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.concurrent.TimeUnit;
 
 interface UsernameCallBack {
     void onUsernameReceived(String username);
@@ -92,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                         editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
                                 ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW

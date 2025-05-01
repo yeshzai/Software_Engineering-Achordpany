@@ -74,7 +74,7 @@ public class ChangePasswordFragment extends Fragment {
                     if (isPasswordVisible_Current) {    // HIDE
                         changePassword_CurrentPassword.setTransformationMethod(new PasswordTransformationMethod());
                         changePassword_CurrentPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -82,9 +82,9 @@ public class ChangePasswordFragment extends Fragment {
                     } else {    // SHOW
                         changePassword_CurrentPassword.setTransformationMethod(null);
                         changePassword_CurrentPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }
@@ -116,7 +116,7 @@ public class ChangePasswordFragment extends Fragment {
                     if (isPasswordVisible_New) {    // HIDE
                         changePassword_NewPassword.setTransformationMethod(new PasswordTransformationMethod());
                         changePassword_NewPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -124,9 +124,9 @@ public class ChangePasswordFragment extends Fragment {
                     } else {    // SHOW
                         changePassword_NewPassword.setTransformationMethod(null);
                         changePassword_NewPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }
@@ -158,7 +158,7 @@ public class ChangePasswordFragment extends Fragment {
                     if (isPasswordVisible_Confirm) {    // HIDE
                         changePassword_ConfirmPassword.setTransformationMethod(new PasswordTransformationMethod());
                         changePassword_ConfirmPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -166,9 +166,9 @@ public class ChangePasswordFragment extends Fragment {
                     } else {    // SHOW
                         changePassword_ConfirmPassword.setTransformationMethod(null);
                         changePassword_ConfirmPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }

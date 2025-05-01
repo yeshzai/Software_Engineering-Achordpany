@@ -23,7 +23,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light"
+            android:src="@drawable/logo_footer"
             tools:ignore="HardcodedText" />
 
         <!-- Back Button -->
@@ -38,7 +38,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
     <!-- Profile FAB on Top -->

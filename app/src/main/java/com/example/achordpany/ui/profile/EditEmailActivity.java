@@ -84,7 +84,7 @@ public class EditEmailActivity extends AppCompatActivity {
                     if (isPasswordVisible) {    // HIDE
                         changeEmail_Password.setTransformationMethod(new PasswordTransformationMethod());
                         changeEmail_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -92,9 +92,9 @@ public class EditEmailActivity extends AppCompatActivity {
                     } else {    // SHOW
                         changeEmail_Password.setTransformationMethod(null);
                         changeEmail_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }

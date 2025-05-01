@@ -105,7 +105,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="Password Icon"
-                    android:src="@drawable/ic_lock_black" />
+                    android:src="@drawable/ic_lock" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -153,7 +153,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="Terms Icon"
-                    android:src="@drawable/ic_terms_light_24dp" />
+                    android:src="@drawable/ic_terms" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -258,7 +258,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light" />
+            android:src="@drawable/logo_footer" />
 
         <!-- Copyright -->
         <TextView

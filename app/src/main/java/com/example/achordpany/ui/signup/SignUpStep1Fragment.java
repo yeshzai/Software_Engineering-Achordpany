@@ -90,7 +90,7 @@ public class SignUpStep1Fragment extends Fragment {
                     if (isPasswordVisible) {    // HIDE
                         passwordText.setTransformationMethod(new PasswordTransformationMethod());
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -98,9 +98,9 @@ public class SignUpStep1Fragment extends Fragment {
                     } else {    // SHOW
                         passwordText.setTransformationMethod(null);
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }
@@ -132,7 +132,7 @@ public class SignUpStep1Fragment extends Fragment {
                     if (isConfirmPasswordVisible) { // HIDE
                         confirmPasswordText.setTransformationMethod(new PasswordTransformationMethod());
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -140,9 +140,9 @@ public class SignUpStep1Fragment extends Fragment {
                     } else {    // SHOW
                         confirmPasswordText.setTransformationMethod(null);
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }

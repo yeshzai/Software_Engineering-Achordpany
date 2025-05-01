@@ -73,7 +73,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light" />
+            android:src="@drawable/logo_footer" />
 
         <!-- Copyright -->
         <TextView

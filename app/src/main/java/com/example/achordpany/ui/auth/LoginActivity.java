@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (isPasswordVisible) {    // HIDE
                         editTextPassword.setTransformationMethod(new PasswordTransformationMethod());
                         editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -94,9 +94,9 @@ public class LoginActivity extends AppCompatActivity {
                     } else {    // SHOW
                         editTextPassword.setTransformationMethod(null);
                         editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }

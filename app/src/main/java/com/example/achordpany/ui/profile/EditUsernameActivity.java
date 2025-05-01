@@ -80,7 +80,7 @@ public class EditUsernameActivity extends AppCompatActivity {
                     if (isPasswordVisible) {    // HIDE
                         changeUsername_Password.setTransformationMethod(new PasswordTransformationMethod());
                         changeUsername_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
                                 ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
@@ -88,9 +88,9 @@ public class EditUsernameActivity extends AppCompatActivity {
                     } else {    // SHOW
                         changeUsername_Password.setTransformationMethod(null);
                         changeUsername_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }

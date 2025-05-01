@@ -22,7 +22,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light"
+            android:src="@drawable/logo_footer"
             android:visibility="invisible"
             tools:ignore="HardcodedText" />
 
@@ -38,7 +38,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
     <EditText
@@ -47,7 +47,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="260dp"
-        android:drawableStart="@drawable/ic_user_black"
+        android:drawableStart="@drawable/ic_user"
         android:hint="  New Email Address"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
@@ -63,7 +63,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="320dp"
-        android:drawableStart="@drawable/ic_lock_black"
+        android:drawableStart="@drawable/ic_lock"
         android:drawableEnd="@drawable/ic_eyehide"
         android:hint="  Password Required"
         android:importantForAutofill="no"

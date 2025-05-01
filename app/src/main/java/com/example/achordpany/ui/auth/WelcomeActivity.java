@@ -1,5 +1,4 @@
 package com.example.achordpany.ui.auth;
-import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.signup.SignUpActivity;
 
@@ -11,8 +10,6 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -61,6 +58,6 @@ public class WelcomeActivity extends AppCompatActivity {
         });
 
         ImageView logoImageView = findViewById(R.id.logoImageView);
-        logoImageView.setImageResource(R.drawable.logo_light);
+        logoImageView.setImageResource(R.drawable.logo_welcome);
     }
 }

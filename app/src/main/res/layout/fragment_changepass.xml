@@ -48,7 +48,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
-                android:drawableStart="@drawable/ic_lock_black"
+                android:drawableStart="@drawable/ic_lock"
                 android:drawableEnd="@drawable/ic_eyehide"
                 android:hint="  Current Password"
                 android:importantForAutofill="no"
@@ -66,7 +66,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
-                android:drawableStart="@drawable/ic_lock_black"
+                android:drawableStart="@drawable/ic_lock"
                 android:drawableEnd="@drawable/ic_eyehide"
                 android:hint="  New Password"
                 android:importantForAutofill="no"
@@ -85,7 +85,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
-                android:drawableStart="@drawable/ic_lock_black"
+                android:drawableStart="@drawable/ic_lock"
                 android:drawableEnd="@drawable/ic_eyehide"
                 android:hint="  Confirm Password"
                 android:importantForAutofill="no"
@@ -127,7 +127,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light" />
+            android:src="@drawable/logo_footer" />
 
         <!-- Copyright -->
         <TextView

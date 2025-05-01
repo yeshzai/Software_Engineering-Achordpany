@@ -15,7 +15,7 @@
         android:contentDescription="Logo"
         android:translationZ="10dp"
         android:elevation="20dp"
-        android:src="@drawable/logo_white"
+        android:src="@drawable/logo_welcome"
         android:scaleType="fitCenter"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/cardView"

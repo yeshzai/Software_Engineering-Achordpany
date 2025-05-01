@@ -17,21 +17,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GuestActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guesthome);
-
-        bottomNavigationView = findViewById(R.id.nav_view_GUEST);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-
-            Toast.makeText(this, "Create an account to use this feature.", Toast.LENGTH_SHORT).show();
-            return true;
-
-        });
 
         findViewById(R.id.btnBack_GUEST).setOnClickListener(v -> {
 

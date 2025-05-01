@@ -176,120 +176,114 @@ public class SignUpStep1Fragment extends Fragment {
             String user_passwordText = passwordText.getText().toString();
             String user_confirmPasswordText = confirmPasswordText.getText().toString();
 
-            // Check if username already exists.
-            DatabaseReference users_usernamelist = FirebaseDatabase.getInstance().getReference("Users_UsernameList");
-            users_usernamelist.child(user_usernameText).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+            if(user_usernameText.isEmpty()) {
 
-                    if (snapshot.exists()) {    // Username already exists.
+                Toast.makeText(requireActivity(), "Please enter a username.", Toast.LENGTH_SHORT).show();
+                usernameText.setBackgroundResource(R.drawable.edittext_error);
 
-                        Toast.makeText(requireActivity(), "Username already taken! Please choose another.", Toast.LENGTH_LONG).show();
-                        usernameText.setBackgroundResource(R.drawable.edittext_error);
+            } else {
 
-                    } else {                    // Username available, proceed.
+                // Check if username already exists.
+                DatabaseReference users_usernamelist = FirebaseDatabase.getInstance().getReference("Users_UsernameList");
+                users_usernamelist.child(user_usernameText).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        if(!username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
-                            returnWhich_DefaultBackground(1234);
+                        if (snapshot.exists()) {    // Username already exists.
 
-                            // Check if email already exists.
-                            FirebaseAuth.getInstance().fetchSignInMethodsForEmail(user_emailAddressText)
-                                    .addOnCompleteListener(task -> {
-                                        if (task.isSuccessful()) {
+                            Toast.makeText(requireActivity(), "Username already taken! Please choose another.", Toast.LENGTH_LONG).show();
+                            usernameText.setBackgroundResource(R.drawable.edittext_error);
 
-                                            List<String> signInMethods = task.getResult().getSignInMethods();
+                        } else {                    // Username available, proceed.
 
-                                            if (signInMethods != null && !signInMethods.isEmpty()) {
+                            if(username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
 
-                                                // Email already exists
-                                                Toast.makeText(requireActivity(), "Email already exists. Please choose another.", Toast.LENGTH_SHORT).show();
-                                                emailAddressText.setBackgroundResource(R.drawable.edittext_error);
+                                returnWhich_DefaultBackground(1234);
+                                if(user_emailAddressText.isEmpty()) {
 
-                                            } else {
+                                    Toast.makeText(requireActivity(), "Please enter an email address.", Toast.LENGTH_SHORT).show();
+                                    emailAddressText.setBackgroundResource(R.drawable.edittext_error);
 
-                                                // Email is available
-                                                if(!user_usernameText.isEmpty() && !user_emailAddressText.isEmpty()
-                                                        && !user_passwordText.isEmpty() && !user_confirmPasswordText.isEmpty())
-                                                {
-                                                    returnWhich_DefaultBackground(1234);
+                                } else {
 
-                                                    if (user_passwordText.equals(user_confirmPasswordText)) {
+                                    // Check if email already exists.
+                                    FirebaseAuth.getInstance().fetchSignInMethodsForEmail(user_emailAddressText)
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
 
-                                                        passwordText.setBackground(defaultBackground);
-                                                        confirmPasswordText.setBackground(defaultBackground);
+                                                    List<String> signInMethods = task.getResult().getSignInMethods();
 
-                                                        signUpCredentials.set_credential_usernameText(user_usernameText);
-                                                        signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
-                                                        signUpCredentials.set_credential_passwordText(user_passwordText);
-                                                        signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
+                                                    if (signInMethods != null && !signInMethods.isEmpty()) {
 
-                                                        // Testing purposes - Logcat
-                                                        Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
-                                                        Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
-                                                        Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
-                                                        Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
-
-                                                        ((SignUpActivity) requireActivity()).navigateToStep(2);
+                                                        // Email already exists
+                                                        Toast.makeText(requireActivity(), "Email already exists. Please choose another.", Toast.LENGTH_SHORT).show();
+                                                        emailAddressText.setBackgroundResource(R.drawable.edittext_error);
 
                                                     } else {
 
-                                                        Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
-                                                        passwordText.setBackgroundResource(R.drawable.edittext_error);
-                                                        confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
-                                                        returnWhich_DefaultBackground(12);
+                                                        // Email is available
+                                                        if (user_passwordText.equals(user_confirmPasswordText)) {
+
+                                                            passwordText.setBackground(defaultBackground);
+                                                            confirmPasswordText.setBackground(defaultBackground);
+
+                                                            signUpCredentials.set_credential_usernameText(user_usernameText);
+                                                            signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
+                                                            signUpCredentials.set_credential_passwordText(user_passwordText);
+                                                            signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
+
+                                                            // Testing purposes - Logcat
+                                                            Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
+                                                            Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
+                                                            Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
+                                                            Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
+
+                                                            ((SignUpActivity) requireActivity()).navigateToStep(2);
+
+                                                        } else {
+
+                                                            Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+                                                            passwordText.setBackgroundResource(R.drawable.edittext_error);
+                                                            confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
+                                                            returnWhich_DefaultBackground(12);
+
+                                                        }
 
                                                     }
+
                                                 } else {
 
-                                                    Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
-
-                                                    returnWhich_DefaultBackground(1234);
-                                                    if(usernameText.getText().toString().isEmpty()) {
-                                                        usernameText.setBackgroundResource(R.drawable.edittext_error);
-                                                    }
-                                                    if(emailAddressText.getText().toString().isEmpty()) {
-                                                        emailAddressText.setBackgroundResource(R.drawable.edittext_error);
-                                                    }
-                                                    if(passwordText.getText().toString().isEmpty()) {
-                                                        passwordText.setBackgroundResource(R.drawable.edittext_error);
-                                                    }
-                                                    if(confirmPasswordText.getText().toString().isEmpty()) {
-                                                        confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
-                                                    }
+                                                    Exception e = task.getException();
+                                                    Log.e("EMAIL_CHECK", "[FAILED] Cannot find email! ERROR: " + e.getMessage());
+                                                    emailAddressText.setBackgroundResource(R.drawable.edittext_error);
+                                                    Toast.makeText(requireActivity(), "Please enter valid/correct email.", Toast.LENGTH_SHORT).show();
 
                                                 }
+                                            });
 
-                                            }
+                                }
 
-                                        } else {
+                            } else {  // [KEY - CHILD_NAME] Username Contain Invalid Character(s)
 
-                                            Exception e = task.getException();
-                                            Log.e("EMAIL_CHECK", "[FAILED] Cannot find email! ERROR: " + e.getMessage());
-                                            emailAddressText.setBackgroundResource(R.drawable.edittext_error);
-                                            Toast.makeText(requireActivity(), "Please enter valid/correct email.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireActivity(), "Username invalid! Contains special characters.", Toast.LENGTH_SHORT).show();
+                                usernameText.setBackgroundResource(R.drawable.edittext_error);
+                                returnWhich_DefaultBackground(234);
 
-                                        }
-                                    });
-
-                        } else {  // [KEY - CHILD_NAME] Username Contain Invalid Character(s)
-
-                            Toast.makeText(requireActivity(), "Username invalid! Contains special characters.", Toast.LENGTH_SHORT).show();
-                            usernameText.setBackgroundResource(R.drawable.edittext_error);
-                            returnWhich_DefaultBackground(234);
+                            }
 
                         }
 
                     }
 
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("[DATABASE ERROR]", error.getMessage());
 
-                    Log.d("[DATABASE ERROR]", error.getMessage());
+                    }
+                });
 
-                }
-            });
+            }
 
         });
 
@@ -359,16 +353,14 @@ public class SignUpStep1Fragment extends Fragment {
     private boolean username_valid(String check_username) {
 
         String[] forbidden_keys = {".", "$", "#", "[", "]", "/"};
-        boolean the_result = false;
 
         for(String i : forbidden_keys) {
             if(check_username.contains(i)) {
-                the_result = true;
-                break;
+                return false;
             }
         }
 
-        return the_result;
+        return true;
 
     }
 

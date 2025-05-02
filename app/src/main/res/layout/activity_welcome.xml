@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="80dp"
                 android:text="Continue as Guest"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -156,7 +156,7 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_searchsong_black_64dp"
+            android:src="@drawable/ic_searchsong_guest"
             android:backgroundTint="@color/primaryColor"
             android:tint="@color/textColor"
             android:elevation="8dp"

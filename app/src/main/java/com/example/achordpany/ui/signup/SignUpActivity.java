@@ -47,6 +47,9 @@ public class SignUpActivity extends AppCompatActivity {
             case 4:
                 fragment = new SignUpStep4Fragment();
                 break;
+            case 5:
+                fragment = new SignUp_TermsConditionsFragment();
+                break;
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();

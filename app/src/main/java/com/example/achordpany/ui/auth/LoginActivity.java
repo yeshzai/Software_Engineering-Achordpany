@@ -3,6 +3,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textForgotPassword;
+    private Drawable defaultBackground;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -62,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         textForgotPassword = findViewById(R.id.textForgotPassword);
+        defaultBackground = editTextEmail.getBackground();
 
         // If user clicks forgot password, navigate to RecoverAccountActivity
         textForgotPassword.setOnClickListener(v -> {
@@ -70,8 +73,18 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         });
 
+        editTextEmail.setOnTouchListener((v, event) -> {
+
+            editTextEmail.setBackground(defaultBackground);
+            return false;
+
+        });
+
         // PASSWORD HIDE/VISIBLE
         editTextPassword.setOnTouchListener((v, event) -> {
+
+            editTextPassword.setBackground(defaultBackground);
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = editTextPassword.getWidth();
                 int paddingRight = editTextPassword.getPaddingRight();
@@ -119,6 +132,9 @@ public class LoginActivity extends AppCompatActivity {
         // If login is successful, navigate to MainActivity (which hosts HomeFragment)
         findViewById(R.id.buttonLogin).setOnClickListener(v -> {
 
+            editTextEmail.setBackground(defaultBackground);
+            editTextPassword.setBackground(defaultBackground);
+
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
@@ -160,7 +176,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
-                        Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
+                        editTextEmail.setBackgroundResource(R.drawable.edittext_error);
+                        editTextPassword.setBackgroundResource(R.drawable.edittext_error);
+                        Toast.makeText(LoginActivity.this, "Invalid Email Address or Password!", Toast.LENGTH_SHORT).show();
                         Log.d("Login", "[FAILED] Login Failed!");
 
                     }

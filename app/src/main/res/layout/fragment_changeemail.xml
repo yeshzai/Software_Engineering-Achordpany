@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
@@ -33,7 +34,7 @@
                 android:id="@+id/cardHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CHANGE PASSWORD"
+                android:text="CHANGE EMAIL"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -48,52 +49,17 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
-                android:drawableStart="@drawable/ic_lock"
-                android:drawableEnd="@drawable/ic_eyehide"
-                android:hint="  Current Password"
+                android:drawableStart="@drawable/ic_email"
+                android:hint="  New Email Address"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardHeading" />
-
-            <EditText
-                android:id="@+id/changePassword_NewPassword"
-                style="@style/EditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="12dp"
-                android:drawableStart="@drawable/ic_lock"
-                android:drawableEnd="@drawable/ic_eyehide"
-                android:hint="  New Password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/changePassword_CurrentPassword" />
+                app:layout_constraintTop_toBottomOf="@id/cardHeading"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <!-- Confirm Password Input Field -->
-            <EditText
-                android:id="@+id/changePassword_ConfirmPassword"
-                style="@style/EditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="12dp"
-                android:drawableStart="@drawable/ic_lock"
-                android:drawableEnd="@drawable/ic_eyehide"
-                android:hint="  Confirm Password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/changePassword_NewPassword" />
 
             <!-- Confirm Change Button -->
             <Button
@@ -108,7 +74,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

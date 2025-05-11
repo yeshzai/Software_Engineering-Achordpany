@@ -146,10 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-
-                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        Log.d("Login", "[SUCCESS] Login Successful!");
-
                         // Load Firebase to Local Database
                         findUsernameByEmail(email, new UsernameCallBack() {
                             @Override
@@ -161,6 +157,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance(LoginActivity.this);
                                     main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
+
+                                    // Launch Login Loading Screen
+                                    /*Intent intent = new Intent(LoginActivity.this, LoginSuccessActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                                    Log.d("Login", "[SUCCESS] Login Successful!");
+                                    finish(); // Close login page*/
 
                                 } else {
 

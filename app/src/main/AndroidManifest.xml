@@ -37,6 +37,11 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
+        <!-- Login Loading Screen Activity -->
+        <activity android:name=".ui.auth.LoginSuccessActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
         <!-- Main Activity -->
         <activity
             android:name=".MainActivity"

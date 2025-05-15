@@ -20,7 +20,7 @@ android {
 
         ndk {
             // On Apple silicon, you can omit x86_64.
-            abiFilters += listOf("arm64-v8a", "x86_64")
+            abiFilters += listOf("arm64-v8a", "x86_64", "armeabi-v7a", "arm64-v8a", "x86")
         }
 
     }
@@ -71,7 +71,12 @@ dependencies {
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-auth:23.2.0")
 
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.16.0")
 
+
+
+    implementation("org.pytorch:pytorch_android:1.13.1")
+    implementation("org.pytorch:pytorch_android_torchvision:1.13.1")
 
     implementation(libs.appcompat)
     implementation(libs.material)

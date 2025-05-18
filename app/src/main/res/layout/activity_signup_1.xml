@@ -98,7 +98,141 @@
         tools:ignore="HardcodedText"
         tools:layout_editor_absoluteY="220dp" />
 
-    <!-- Username Input Field -->
+    <!-- Username Field with Error Support -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:hintEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Username"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/heading2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:hintTextAppearance="@style/HintStyle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="56dp"
+            android:drawablePadding="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_user"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="15sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Email Field with Error Support -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:hintEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Email Address"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/usernameLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:hintTextAppearance="@style/HintStyle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailAddressText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="56dp"
+            android:drawablePadding="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textSize="15sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password Field with Error Support -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Password"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:hintTextAppearance="@style/HintStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawableEnd="@drawable/ic_eyehide"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="56dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Confirm Password Field with Error Support -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirmpasswordLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Confirm Password"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:hintTextAppearance="@style/HintStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirmPasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawableEnd="@drawable/ic_eyehide"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="56dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Username Input Field
     <EditText
         android:id="@+id/usernameText"
         android:layout_width="300dp"
@@ -113,35 +247,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/heading2"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText" />-->
 
-    <!-- Username Input Field
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameLayout"
-        android:layout_width="350dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="45dp"
-        android:hint=" Username"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        app:boxBackgroundMode="none"
-        app:boxStrokeErrorColor="@color/red"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heading2">
-
-        <EditText
-            android:id="@+id/usernameText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:drawableStart="@drawable/ic_user_black"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textSize="15sp" />
-
-    </com.google.android.material.textfield.TextInputLayout> -->
-
-    <!-- Email Address Input Field -->
+    <!-- Email Address Input Field
     <EditText
         android:id="@+id/emailAddressText"
         android:layout_width="300dp"
@@ -158,32 +266,7 @@
         app:layout_constraintTop_toBottomOf="@id/usernameText"
         tools:ignore="HardcodedText" /> -->
 
-    <!-- Email Address Input Field
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailAddressLayout"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:hint=" Email Address"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeErrorColor="@color/red"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernameLayout">
-
-        <EditText
-            android:id="@+id/emailAddressText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:drawableStart="@drawable/ic_email_black"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:textSize="15sp" />
-
-    </com.google.android.material.textfield.TextInputLayout> -->
-
-    <!-- Password Input Field -->
+    <!-- Password Input Field
     <EditText
         android:id="@+id/passwordText"
         android:layout_width="302dp"
@@ -199,35 +282,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailAddressText"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText" />-->
 
-    <!-- Password Input Field
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordTextLayout"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:hint="  Password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeErrorColor="@color/red"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailAddressLayout">
-
-        <EditText
-            android:id="@+id/passwordText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:drawableStart="@drawable/ic_lock_black"
-            android:drawableEnd="@drawable/ic_eyehide_black"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:textSize="15sp" />
-
-    </com.google.android.material.textfield.TextInputLayout> -->
-
-    <!-- Confirm Password Input Field -->
+    <!-- Confirm Password Input Field
     <EditText
         android:id="@+id/confirmPasswordText"
         android:layout_width="302dp"
@@ -243,33 +300,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordText"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText" />-->
 
-    <!-- Password Input Field
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/confirmPasswordTextLayout"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:hint="  Confirm Password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeErrorColor="@color/red"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordTextLayout">
-
-        <EditText
-            android:id="@+id/confirmPasswordText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:drawableStart="@drawable/ic_lock_black"
-            android:drawableEnd="@drawable/ic_eyehide_black"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:textSize="15sp" />
-
-    </com.google.android.material.textfield.TextInputLayout> -->
 
     <!-- Continue Button -->
     <Button
@@ -277,7 +309,7 @@
         style="@style/RoundedButtonStyle"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="168dp"
+        android:layout_marginBottom="80dp"
         android:text=" Continue"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -286,6 +318,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmpasswordLayout"
         tools:ignore="HardcodedText" />
 
     <!-- Log In Link -->
@@ -293,7 +326,7 @@
         android:id="@+id/textHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="55dp"
         android:clickable="true"
         android:focusable="true"
         android:importantForAccessibility="yes"

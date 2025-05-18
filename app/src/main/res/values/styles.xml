@@ -12,6 +12,11 @@
         <item name="android:backgroundTint">@color/edittext_underline_color</item>
     </style>
 
+    <style name="HintStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">12sp</item>
+        <item name="android:translationY">-2dp</item>
+    </style>
+
     <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextColor">@color/bottom_nav_color</item>

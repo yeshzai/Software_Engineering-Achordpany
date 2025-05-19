@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
 
     <!-- Header Layout with Back Button and Logo Image -->
@@ -23,7 +23,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light"
+            android:src="@drawable/logo_footer"
             tools:ignore="HardcodedText" />
 
         <!-- Back Button -->
@@ -38,7 +38,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
     <!-- Profile FAB on Top -->
@@ -70,7 +70,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/backgroundColor"
             android:elevation="16dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
@@ -93,7 +93,7 @@
         android:id="@+id/cardContainer"
         android:layout_width="320dp"
         android:layout_height="400dp"
-        app:cardBackgroundColor="#f1f1f1"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnContinue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +114,7 @@
                 android:text="@string/select_your_avatar"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:layout_marginTop="23dp"
                 android:layout_marginBottom="8dp"/>
 
@@ -143,7 +143,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +159,7 @@
         android:focusable="true"
         android:importantForAccessibility="yes"
         android:text="Already a member? Log In"
-        android:textColor="#FF11843C"
+        android:textColor="@color/primaryColorShade_700"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

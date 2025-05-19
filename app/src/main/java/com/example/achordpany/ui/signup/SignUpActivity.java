@@ -1,11 +1,13 @@
 package com.example.achordpany.ui.signup;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.achordpany.R;
@@ -15,6 +17,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("darkMode", false);
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -40,6 +46,9 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case 4:
                 fragment = new SignUpStep4Fragment();
+                break;
+            case 5:
+                fragment = new SignUp_TermsConditionsFragment();
                 break;
         }
 

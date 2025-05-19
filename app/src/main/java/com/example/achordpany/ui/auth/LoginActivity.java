@@ -1,7 +1,11 @@
 package com.example.achordpany.ui.auth;
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,16 +19,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
-import com.example.achordpany.ChordsRecommendations;
-import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.signup.SignUpActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,8 +38,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.concurrent.TimeUnit;
 
 interface UsernameCallBack {
     void onUsernameReceived(String username);
@@ -45,20 +48,32 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
 
     private boolean isPasswordVisible = false;
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    private TextInputEditText editTextEmail;
+    private TextInputEditText editTextPassword;
+    private TextInputLayout emailLayout;
+    private TextInputLayout passwordLayout;
     private TextView textForgotPassword;
+    private Drawable defaultBackground;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("darkMode", false);
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login); // Ensure this matches your Login layout file
+
+        emailLayout = findViewById(R.id.emailLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
 
         auth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         textForgotPassword = findViewById(R.id.textForgotPassword);
+        defaultBackground = editTextEmail.getBackground();
 
         // If user clicks forgot password, navigate to RecoverAccountActivity
         textForgotPassword.setOnClickListener(v -> {
@@ -67,8 +82,22 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         });
 
+        editTextEmail.setOnTouchListener((v, event) -> {
+
+            emailLayout.setError(null);
+            emailLayout.setErrorEnabled(false);
+            //editTextEmail.setBackground(defaultBackground);
+            return false;
+
+        });
+
         // PASSWORD HIDE/VISIBLE
         editTextPassword.setOnTouchListener((v, event) -> {
+
+            passwordLayout.setError(null);
+            passwordLayout.setErrorEnabled(false);
+            //editTextPassword.setBackground(defaultBackground);
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = editTextPassword.getWidth();
                 int paddingRight = editTextPassword.getPaddingRight();
@@ -83,17 +112,17 @@ public class LoginActivity extends AppCompatActivity {
                     if (isPasswordVisible) {    // HIDE
                         editTextPassword.setTransformationMethod(new PasswordTransformationMethod());
                         editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW
                         editTextPassword.setTransformationMethod(null);
                         editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }
@@ -116,6 +145,13 @@ public class LoginActivity extends AppCompatActivity {
         // If login is successful, navigate to MainActivity (which hosts HomeFragment)
         findViewById(R.id.buttonLogin).setOnClickListener(v -> {
 
+            //editTextEmail.setBackground(defaultBackground);
+            //editTextPassword.setBackground(defaultBackground);
+            emailLayout.setError(null);
+            emailLayout.setErrorEnabled(false);
+            passwordLayout.setError(null);
+            passwordLayout.setErrorEnabled(false);
+
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
@@ -127,10 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-
-                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        Log.d("Login", "[SUCCESS] Login Successful!");
-
                         // Load Firebase to Local Database
                         findUsernameByEmail(email, new UsernameCallBack() {
                             @Override
@@ -139,6 +171,8 @@ public class LoginActivity extends AppCompatActivity {
                                 if(username != null) {
 
                                     Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
+                                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                                    setContentView(R.layout.activity_loginsuccess);
 
                                     Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance(LoginActivity.this);
                                     main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
@@ -157,7 +191,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
-                        Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
+                        //editTextEmail.setBackgroundResource(R.drawable.edittext_error);
+                        //editTextPassword.setBackgroundResource(R.drawable.edittext_error);
+                        emailLayout.setError("Invalid email address");
+                        passwordLayout.setError("Invalid password");
+                        updatePasswordIcons(editTextPassword, isPasswordVisible);
+                        Toast.makeText(LoginActivity.this, "Invalid Email Address or Password!", Toast.LENGTH_SHORT).show();
                         Log.d("Login", "[FAILED] Login Failed!");
 
                     }
@@ -165,6 +204,9 @@ public class LoginActivity extends AppCompatActivity {
 
             } else {
 
+                emailLayout.setError("This field cannot be empty.");
+                passwordLayout.setError("This field cannot be empty.");
+                updatePasswordIcons(editTextPassword, isPasswordVisible);
                 Toast.makeText(LoginActivity.this, "Please Fill In All Fields!", Toast.LENGTH_SHORT).show();
 
             }
@@ -207,7 +249,7 @@ public class LoginActivity extends AppCompatActivity {
                 for(DataSnapshot snap_shot : snapshot.getChildren()) {
 
                     String emailFromDB = snap_shot.child("email").getValue(String.class);
-                    if(emailFromDB != null && emailFromDB.equals(the_email)) {
+                    if(emailFromDB != null && emailFromDB.equals(the_email.toLowerCase())) {
 
                         String return_username = snap_shot.child("username").getValue(String.class);
                         callBack.onUsernameReceived(return_username);
@@ -228,6 +270,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updatePasswordIcons(EditText editText, boolean isVisible) {
+        Drawable lockIcon = ContextCompat.getDrawable(this, R.drawable.ic_lock);
+        Drawable eyeIcon = ContextCompat.getDrawable(this,
+                isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+        editText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+
+        TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
+
+        // Set the start icon (lock icon)
+        layout.setStartIconDrawable(R.drawable.ic_lock);
+
+        // Tell TextInputLayout to use a custom end icon
+        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+
+        // Set the end icon (eye icon)
+        layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
     }
 
 }

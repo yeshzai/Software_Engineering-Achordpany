@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.achordpany.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.util.Log;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 public class RecoverAccountActivity extends AppCompatActivity {
 
     private Drawable defaultBackground;
+    private TextInputLayout recoverAccount_EmailAddressLayout;
     TextView recoverAccount_Subtitle;
+
     FirebaseAuth auth;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -31,6 +34,8 @@ public class RecoverAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recoveraccount);
 
+        recoverAccount_EmailAddressLayout = findViewById(R.id.recoverAccount_EmailAddressLayout);
+
         auth = FirebaseAuth.getInstance();
         recoverAccount_Subtitle = findViewById(R.id.recoverAccount_Subtitle);
         EditText recoverAccount_EmailAddress = findViewById(R.id.recoverAccount_EmailAddress);
@@ -39,19 +44,24 @@ public class RecoverAccountActivity extends AppCompatActivity {
         defaultBackground = recoverAccount_EmailAddress.getBackground();
 
         recoverAccount_EmailAddress.setOnTouchListener((v, event) -> {
-            recoverAccount_EmailAddress.setBackground(defaultBackground);
+            //recoverAccount_EmailAddress.setBackground(defaultBackground);
+            recoverAccount_EmailAddressLayout.setError(null);
+            recoverAccount_EmailAddressLayout.setErrorEnabled(false);
             return false;
         });
 
         recoverAccount_Button.setOnClickListener(v -> {
 
             if(recoverAccount_EmailAddress.getText().toString().isEmpty()) {
+                recoverAccount_EmailAddress.setError("This field cannot be empty.");
                 Toast.makeText(getApplicationContext(), "Please enter your email address.",
                         Toast.LENGTH_SHORT).show();
-                recoverAccount_EmailAddress.setBackgroundResource(R.drawable.edittext_error);
+                //recoverAccount_EmailAddress.setBackgroundResource(R.drawable.edittext_error);
                 return;
             } else {
-                recoverAccount_EmailAddress.setBackground(defaultBackground);
+                //recoverAccount_EmailAddress.setBackground(defaultBackground);
+                recoverAccount_EmailAddressLayout.setError(null);
+                recoverAccount_EmailAddressLayout.setErrorEnabled(false);
                 recoverAccount_Function(recoverAccount_EmailAddress.getText().toString());
             }
 

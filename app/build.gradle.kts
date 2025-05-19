@@ -71,8 +71,6 @@ dependencies {
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-auth:23.2.0")
 
-
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

@@ -37,6 +37,11 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
+        <!-- Login Loading Screen Activity -->
+        <activity android:name=".ui.auth.LoginSuccessActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
         <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
@@ -59,6 +64,21 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany"/>
 
+        <!-- Guest Activity -->
+        <activity android:name=".ui.guest.GuestActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Guest ChordsDisplayActivity -->
+        <activity android:name=".ui.guest.Guest_ChordsDisplayActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
+        <!-- Guest SongSearchActivity -->
+        <activity android:name=".ui.guest.Guest_SongSearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany"/>
+
         <!-- Chords Display Activity -->
         <activity android:name=".ui.chords.ChordsDisplayActivity"
             android:exported="true"
@@ -69,8 +89,18 @@
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 
-        <!-- Change Password Activity | AUTH -->
-        <activity android:name=".ui.auth.ChangePasswordActivity"
+        <!-- Chords Display Activity | BOOKMARKS -->
+        <activity android:name=".ui.bookmark.BookmarksWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | HOME -->
+        <activity android:name=".ui.home.HomeWebViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Achordpany" />
+
+        <!-- Chords Display Activity | PROFILE -->
+        <activity android:name=".ui.profile.ProfileWebViewActivity"
             android:exported="true"
             android:theme="@style/Theme.Achordpany" />
 

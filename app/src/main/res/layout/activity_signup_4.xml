@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
 
     <!-- Header Layout with Back Button and Logo Image -->
@@ -23,7 +23,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light"
+            android:src="@drawable/logo_footer"
             android:layout_centerVertical="true"
             tools:ignore="HardcodedText" />
 
@@ -39,7 +39,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
     <!-- Headings -->
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:text="PREVIEW"
-        android:textColor="@android:color/black"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile preview"
-        android:textColor="@android:color/black"
+        android:textColor="@color/textColor"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
         android:layout_width="320dp"
         android:layout_height="340dp"
         android:layout_marginBottom="188dp"
-        app:cardBackgroundColor="#f1f1f1"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
                 android:text="USERNAME"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintStart_toEndOf="@id/profileImage"
                 app:layout_constraintTop_toTopOf="@id/profileImage"
                 app:layout_constraintBottom_toBottomOf="@id/profileImage"
@@ -124,7 +124,7 @@
                 android:text="PASSWORD:"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileImage"
                 tools:ignore="HardcodedText" />
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:text="********"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintStart_toEndOf="@id/passwordLabel"
                 app:layout_constraintTop_toTopOf="@id/passwordLabel"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +151,7 @@
                 android:text="GENRES:"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordLabel"
                 tools:ignore="HardcodedText" />
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:text="Rock, Jazz"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintStart_toStartOf="@id/passwordValue"
                 app:layout_constraintTop_toTopOf="@id/genresLabel"
                 tools:ignore="HardcodedText" />
@@ -174,26 +174,41 @@
 
 
     <!-- Agreement Checkbox -->
+
+    <!-- Login Redirect Text -->
+
     <CheckBox
         android:id="@+id/checkBox_Terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I Agree to Terms &amp; Conditions and Privacy Policy"
+        android:layout_marginStart="32dp"
+        android:textColor="@color/textColor"
         android:textSize="12sp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/btnSignupEnd"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
-    <!-- Login Redirect Text -->
+    <TextView
+        android:id="@+id/checkBox_TermsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/terms_text"
+        android:textColor="@color/textColor"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/btnSignupEnd"
+        app:layout_constraintRight_toLeftOf="@+id/checkBox_Terms"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
     <TextView
         android:id="@+id/textHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:text="Already a member? Log In"
-        android:textColor="#FF11843C"
+        android:textColor="@color/primaryColorShade_700"
         android:textSize="14sp"
         android:gravity="center"
         android:textAlignment="center"
@@ -209,7 +224,7 @@
         android:layout_marginBottom="92dp"
         android:text="Sign Up"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

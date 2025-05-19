@@ -72,6 +72,12 @@ public class SignUpStep4Fragment extends Fragment {
         passwordValue.setText(signUpCredentials.get_credential_passwordText());
         genresValue.setText(signUpCredentials.get_credential_genre().toString());
 
+        view.findViewById(R.id.checkBox_TermsText).setOnClickListener(v -> {
+
+            ((SignUpActivity) requireActivity()).navigateToStep(5);
+
+        });
+
         Button btnSignUpEnd = view.findViewById(R.id.btnSignupEnd);
         btnSignUpEnd.setOnClickListener(v -> {
 
@@ -86,7 +92,7 @@ public class SignUpStep4Fragment extends Fragment {
                 requireActivity().finish();
 
             } else {
-                Toast.makeText(getContext(), "Please accept the Terms and Conditions!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "You need to accept the Terms & Conditions.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -168,8 +174,8 @@ public class SignUpStep4Fragment extends Fragment {
         ArrayList<String> new_bookmarks = new ArrayList<>();
         new_bookmarks.add("[EMPTY]|BT|BookmarkTitle|BA|BookmarkArtist|BG|BookmarkGenre|BS|BookmarkSite|BU|BookmarkURL|BUID|BookmarkUID"); // FORMAT
 
-        //                          USERNAME          EMAIL          AVATAR        GENRES      HISTORY      BOOKMARKS
-        firebaseHelper.addNewUser(new_username, new_emailAddress, new_avatarUID, new_genres, new_history, new_bookmarks);
+        //                          USERNAME                EMAIL                  AVATAR        GENRES      HISTORY      BOOKMARKS
+        firebaseHelper.addNewUser(new_username, new_emailAddress.toLowerCase(), new_avatarUID, new_genres, new_history, new_bookmarks);
 
     }
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
 
     <!-- Header Layout with Back Button and Logo Image -->
@@ -23,7 +23,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light"
+            android:src="@drawable/logo_footer"
             android:visibility="invisible"
             tools:ignore="HardcodedText" />
 
@@ -39,7 +39,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
     <!-- Main Heading -->
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:text="GENRE"
-        android:textColor="@android:color/black"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select 3 Preferred Genres"
-        android:textColor="@android:color/black"
+        android:textColor="@color/textColor"
         android:textSize="15sp"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,7 @@
         android:layout_height="370dp"
         android:layout_marginBottom="170dp"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="#f1f1f1"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -99,93 +99,88 @@
                 <!-- Genre Buttons -->
                 <Button
                     android:id="@+id/editgenre_genreButton_Rock"
-                    style="@style/GenreStyle"
-                    android:layout_width="267dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:text="ROCK"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Rock"
+                    android:backgroundTint="@color/genre_button_default" />
 
                 <Button
                     android:id="@+id/editgenre_genreButton_Blues"
-                    style="@style/GenreStyle"
-                    android:layout_width="267dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:text="BLUES"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Blues"
+                    android:backgroundTint="@color/genre_button_default" />
 
                 <Button
                     android:id="@+id/editgenre_genreButton_Jazz"
-                    style="@style/GenreStyle"
-                    android:layout_width="267dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:text="JAZZ"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Jazz"
+                    android:backgroundTint="@color/genre_button_default" />
+
 
                 <Button
                     android:id="@+id/editgenre_genreButton_Classical"
-                    style="@style/GenreStyle"
-                    android:layout_width="267dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:text="CLASSICAL"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Classical"
+                    android:backgroundTint="@color/genre_button_default" />
 
                 <Button
                     android:id="@+id/editgenre_genreButton_Pop"
-                    style="@style/GenreStyle"
-                    android:layout_width="267dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:text="POP"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Pop"
+                    android:backgroundTint="@color/genre_button_default" />
 
                 <Button
                     android:id="@+id/editgenre_genreButton_Reggae"
-                    style="@style/GenreStyle"
-                    android:layout_width="267dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:text="REGGAE"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|center_vertical"
+                    android:text="Reggae"
+                    android:backgroundTint="@color/genre_button_default" />
 
             </LinearLayout>
         </ScrollView>
@@ -199,7 +194,7 @@
         android:layout_marginBottom="92dp"
         android:text="Continue"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

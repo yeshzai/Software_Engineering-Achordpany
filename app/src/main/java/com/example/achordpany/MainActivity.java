@@ -15,6 +15,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import android.util.Log;
 
@@ -44,6 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private NavController navController;
     private View activeTabIndicator;
     private BottomNavigationView bottomNavigationView;
     private int tabWidth;
@@ -52,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        int savedMode = prefs.getInt("night_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        AppCompatDelegate.setDefaultNightMode(savedMode);*/
+        SharedPreferences sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("darkMode", false);
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+
         super.onCreate(savedInstanceState);
 
         // Initialize View Binding
@@ -98,6 +110,56 @@ public class MainActivity extends AppCompatActivity {
         setupNavigation();
         setupTabIndicator();
 
+        //navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        // Back button click logic here
+        /*ImageView backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            if (navController != null) {
+                navController.popBackStack();
+            }
+        });*/
+
+        ImageView backButton = findViewById(R.id.back_button);
+
+        // Set click listener only once
+        backButton.setOnClickListener(v -> {
+            if (!navController.popBackStack()) {
+                navController.navigate(R.id.navigation_home); // fallback
+            }
+        });
+
+        // Destination listener for UI visibility
+        if (navController != null) {
+            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                BottomNavigationView bottomNav = findViewById(R.id.nav_view);
+                FloatingActionButton fab = findViewById(R.id.fab);
+                View fabBackground = findViewById(R.id.fab_background);
+                View activeTabIndicator = findViewById(R.id.active_tab_indicator);
+                //ImageView backButton = findViewById(R.id.back_button);
+
+                int destId = destination.getId();
+
+                if (destId == R.id.mainSettingsFragment ||
+                        destId == R.id.changePassFragment ||
+                        destId == R.id.termsConditionsFragment ||
+                        destId == R.id.privacyPolicyFragment ||
+                        destId == R.id.aboutAppFragment) {
+                    bottomNav.setVisibility(View.GONE);
+                    fab.setVisibility(View.GONE);
+                    fabBackground.setVisibility(View.GONE);
+                    activeTabIndicator.setVisibility(View.GONE);
+                    backButton.setVisibility(View.VISIBLE);
+                } else {
+                    bottomNav.setVisibility(View.VISIBLE);
+                    fab.setVisibility(View.VISIBLE);
+                    fabBackground.setVisibility(View.VISIBLE);
+                    activeTabIndicator.setVisibility(View.VISIBLE);
+                    backButton.setVisibility(View.GONE);
+                }
+            });
+        }
+
         // Ensure Home is the default selected tab
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         headerTitle.setText("Dashboard");
@@ -115,13 +177,14 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SongSearchActivity.class);
             startActivity(intent);
+            finish();
         });
 
         // Dropdown button click listener
         dropdownButton.setOnClickListener(this::showProfileMenu);
 
         // Handle Bottom Navigation Item Clicks
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        /*bottomNavigationView.setOnItemSelectedListener(item -> {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
 
@@ -136,6 +199,24 @@ public class MainActivity extends AppCompatActivity {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             NavController navController = getNavController();
+            if (navController == null) return; // Exit if null to prevent crashes
+
+        }, 500); // Small delay to ensure UI is fully loaded before navigation
+        */
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+
+            if (handled) {
+                updateTabIndicator(item.getItemId());
+                updateHeaderTitle(item.getItemId());
+                updateSubText(item.getItemId());
+            }
+
+            return handled;
+        });
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (navController == null) return; // Exit if null to prevent crashes
 
         }, 500); // Small delay to ensure UI is fully loaded before navigation
@@ -225,11 +306,21 @@ public class MainActivity extends AppCompatActivity {
 
     // Handle Menu Item Clicks
     private boolean onMenuItemClick(MenuItem item) {
+        NavController navController = getNavController();
+        if (navController == null) {
+            Log.e("MainActivity", "NavController is null, navigation failed.");
+            return false;
+        }
+
         if (item.getItemId() == R.id.menu_general_settings) {
-            Toast.makeText(this, "General Settings Clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "General Settings Clicked", Toast.LENGTH_SHORT).show();
+            navController.navigate(R.id.mainSettingsFragment); // Navigate to MainSettingsFragment
+            sharedViewModel.setTitle("SETTINGS");
+            sharedViewModel.setSubtext("Manage your preferences");
             return true;
         } else if (item.getItemId() == R.id.menu_profile_settings) {
-            Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
+            navController.navigate(R.id.navigation_profile); // Navigate to MainSettingsFragment
             return true;
         } else if (item.getItemId() == R.id.menu_logout) {
             Toast.makeText(this, "Logout Successful!", Toast.LENGTH_SHORT).show();
@@ -262,7 +353,8 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment);
 
         if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
+            navController = navHostFragment.getNavController();
+            //NavController navController = navHostFragment.getNavController();
             NavigationUI.setupWithNavController(binding.navView, navController);
         } else {
             Log.e("MainActivity", "NavHostFragment is NULL! Check activity_main.xml");

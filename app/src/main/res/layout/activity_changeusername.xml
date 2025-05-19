@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="@color/backgroundColor">
 
     <!-- Header Layout with Back Button and Logo Image -->
     <RelativeLayout
@@ -22,7 +22,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_light"
+            android:src="@drawable/logo_footer"
             android:visibility="invisible"
             tools:ignore="HardcodedText" />
 
@@ -38,32 +38,16 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/changeUsername_CurrentUsername"
-        style="@style/EditTextStyle"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:drawableStart="@drawable/ic_user_black"
-        android:hint="  Current Username"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
-
-    <EditText
+    <!--<EditText
         android:id="@+id/changeUsername_NewUsername"
         style="@style/EditTextStyle"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="260dp"
-        android:drawableStart="@drawable/ic_user_black"
+        android:drawableStart="@drawable/ic_user"
         android:hint="  New Username"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
@@ -79,8 +63,8 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="320dp"
-        android:drawableStart="@drawable/ic_lock_black"
-        android:drawableEnd="@drawable/ic_eyehide_black"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawableEnd="@drawable/ic_eyehide"
         android:hint="  Password Required"
         android:importantForAutofill="no"
         android:inputType="textPassword"
@@ -88,7 +72,74 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText" />-->
+
+    <!-- Email Field with Error Support -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/changeUsername_NewUsernameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        app:hintEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:startIconDrawable="@drawable/ic_user"
+        android:hint="New Username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:hintTextAppearance="@style/HintStyle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/changeUsername_NewUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="56dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="@null"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textSize="15sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password Field with Error Support android:drawableStart="@drawable/ic_lock"
+        android:drawableEnd="@drawable/ic_eyehide" android:drawablePadding="10dp"-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/changeUsername_PasswordLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_eyehide"
+        android:hint="Password Required"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:hintTextAppearance="@style/HintStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/changeUsername_NewUsernameLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/changeUsername_Password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="@null"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="56dp"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Confirm Change Username Button -->
     <Button
@@ -97,7 +148,7 @@
         android:layout_marginTop="420dp"
         android:text="Change Username"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

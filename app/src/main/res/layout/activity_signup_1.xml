@@ -109,13 +109,8 @@
         app:hintAnimationEnabled="true"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-<<<<<<< HEAD
         app:startIconDrawable="@drawable/ic_user"
         android:hint="Username"
-=======
-        android:hint="Username"
-        app:errorEnabled="true"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         app:layout_constraintTop_toBottomOf="@id/heading2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,18 +121,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="56dp"
-<<<<<<< HEAD
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:gravity="center_vertical"
             android:background="@null"
-=======
-            android:drawablePadding="10dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:gravity="center_vertical"
-            android:drawableStart="@drawable/ic_user"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
             android:importantForAutofill="no"
             android:inputType="text"
             android:textSize="15sp"/>
@@ -149,22 +136,13 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="10dp"
-=======
-        android:layout_marginTop="15dp"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         app:hintEnabled="true"
         app:hintAnimationEnabled="true"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-<<<<<<< HEAD
         app:startIconDrawable="@drawable/ic_email"
         android:hint="Email Address"
-=======
-        android:hint="Email Address"
-        app:errorEnabled="true"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         app:layout_constraintTop_toBottomOf="@id/usernameLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,18 +153,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="56dp"
-<<<<<<< HEAD
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:gravity="center_vertical"
             android:background="@null"
-=======
-            android:drawablePadding="10dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:gravity="center_vertical"
-            android:drawableStart="@drawable/ic_email"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textSize="15sp"/>
@@ -198,7 +168,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="10dp"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="custom"
@@ -206,13 +175,6 @@
         android:hint="Password"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-=======
-        android:layout_marginTop="15dp"
-        android:hint="Password"
-        app:boxStrokeWidth="1dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:errorEnabled="true"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:hintTextAppearance="@style/HintStyle"
@@ -224,13 +186,7 @@
             android:id="@+id/passwordText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-<<<<<<< HEAD
             android:background="@null"
-=======
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableEnd="@drawable/ic_eyehide"
-            android:drawablePadding="10dp"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
             android:gravity="center_vertical"
             android:importantForAutofill="no"
             android:inputType="textPassword"
@@ -246,7 +202,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="10dp"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="custom"
@@ -254,13 +209,6 @@
         android:hint="Confirm Password"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-=======
-        android:layout_marginTop="15dp"
-        android:hint="Confirm Password"
-        app:boxStrokeWidth="1dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:errorEnabled="true"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:hintTextAppearance="@style/HintStyle"
@@ -272,13 +220,7 @@
             android:id="@+id/confirmPasswordText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-<<<<<<< HEAD
             android:background="@null"
-=======
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableEnd="@drawable/ic_eyehide"
-            android:drawablePadding="10dp"
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
             android:gravity="center_vertical"
             android:importantForAutofill="no"
             android:inputType="textPassword"

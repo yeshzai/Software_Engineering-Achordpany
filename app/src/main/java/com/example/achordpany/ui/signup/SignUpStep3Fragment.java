@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import androidx.core.content.ContextCompat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,7 +87,7 @@ public class SignUpStep3Fragment extends Fragment {
     private void setupGenreButton(Button button, String genreName) {
         button.setOnClickListener(v -> {
             if (genres.size() != 3 || genres.contains(genreName)) {
-                if (!button.isSelected()) {
+                /*if (!button.isSelected()) {
                     genres.add(genreName);
                     button.setSelected(true);
                     button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00C853"))); // green
@@ -96,6 +97,22 @@ public class SignUpStep3Fragment extends Fragment {
                     button.setSelected(false);
                     button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF"))); // white
                     button.setTextColor(Color.BLACK);
+                }*/
+
+                if (!button.isSelected()) {
+                    genres.add(genreName);
+                    button.setSelected(true);
+                    button.setBackgroundTintList(ColorStateList.valueOf(
+                            ContextCompat.getColor(requireContext(), R.color.genre_selected_bg)
+                    ));
+                    button.setTextColor(ContextCompat.getColor(requireContext(), R.color.genre_selected_text));
+                } else {
+                    genres.remove(genreName);
+                    button.setSelected(false);
+                    button.setBackgroundTintList(ColorStateList.valueOf(
+                            ContextCompat.getColor(requireContext(), R.color.genre_unselected_bg)
+                    ));
+                    button.setTextColor(ContextCompat.getColor(requireContext(), R.color.genre_unselected_text));
                 }
             } else {
                 Toast.makeText(getContext(), "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();

@@ -52,6 +52,7 @@
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_eyehide"
                 android:hint="Current Password"
+                app:hintTextColor="@color/textFieldHintColor"
                 app:boxStrokeWidth="1dp"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintAnimationEnabled="true"
@@ -86,6 +87,7 @@
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_eyehide"
                 android:hint="New Password"
+                app:hintTextColor="@color/textFieldHintColor"
                 app:boxStrokeWidth="1dp"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintAnimationEnabled="true"
@@ -120,6 +122,7 @@
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_eyehide"
                 android:hint="Confirm Password"
+                app:hintTextColor="@color/textFieldHintColor"
                 app:boxStrokeWidth="1dp"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintAnimationEnabled="true"
@@ -211,7 +214,7 @@
                 android:layout_marginEnd="12dp"
                 android:text="Confirm"
                 android:textAllCaps="false"
-                android:textColor="@color/textColor"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>

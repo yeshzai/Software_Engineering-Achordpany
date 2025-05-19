@@ -69,8 +69,19 @@ public class SignUpStep2Fragment extends Fragment {
         List<String> avatarList = getAvatarFiles();
 
         // Setup RecyclerView
-        recyclerViewAvatars.setLayoutManager(new GridLayoutManager(requireContext(), 4));
+        /*recyclerViewAvatars.setLayoutManager(new GridLayoutManager(requireContext(), 4));
+        AvatarAdapter adapter = new AvatarAdapter(requireContext(), avatarList, avatarPath -> {*/
+
+        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 4) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recyclerViewAvatars.setLayoutManager(layoutManager);
+
         AvatarAdapter adapter = new AvatarAdapter(requireContext(), avatarList, avatarPath -> {
+
             loadImageFromAssets(avatarPath, profileImageView); // Set selected avatar to ImageView
 
             // Convert avatar filename to a URI-like string and store it

@@ -73,7 +73,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="serif-monospace"
             android:text="Achordpany@gmail.com"
             android:textColor="@color/textColor"
             android:textSize="15sp"
@@ -96,9 +95,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:background="@color/textColor"
-                android:fontFamily="sans-serif"
                 android:text="Accept"
-                android:textColor="@color/textColor"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck" />
 
@@ -110,9 +108,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:background="@color/textColor"
-                android:fontFamily="sans-serif"
                 android:text="Reject"
-                android:textColor="@color/textColor"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck" />
         </LinearLayout>

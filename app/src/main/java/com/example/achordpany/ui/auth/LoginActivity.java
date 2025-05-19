@@ -84,8 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextEmail.setOnTouchListener((v, event) -> {
 
-            emailLayout.setError(null);
-            emailLayout.setErrorEnabled(false);
+            return_allDefaultBackground();
             //editTextEmail.setBackground(defaultBackground);
             return false;
 
@@ -94,8 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         // PASSWORD HIDE/VISIBLE
         editTextPassword.setOnTouchListener((v, event) -> {
 
-            passwordLayout.setError(null);
-            passwordLayout.setErrorEnabled(false);
+            return_allDefaultBackground();
             //editTextPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -147,10 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
             //editTextEmail.setBackground(defaultBackground);
             //editTextPassword.setBackground(defaultBackground);
-            emailLayout.setError(null);
-            emailLayout.setErrorEnabled(false);
-            passwordLayout.setError(null);
-            passwordLayout.setErrorEnabled(false);
+            return_allDefaultBackground();
 
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
@@ -204,8 +199,12 @@ public class LoginActivity extends AppCompatActivity {
 
             } else {
 
-                emailLayout.setError("This field cannot be empty.");
-                passwordLayout.setError("This field cannot be empty.");
+                if(editTextEmail.getText().toString().isEmpty())
+                    emailLayout.setError("This field cannot be empty.");
+
+                if(editTextPassword.getText().toString().isEmpty())
+                    passwordLayout.setError("This field cannot be empty.");
+
                 updatePasswordIcons(editTextPassword, isPasswordVisible);
                 Toast.makeText(LoginActivity.this, "Please Fill In All Fields!", Toast.LENGTH_SHORT).show();
 
@@ -288,6 +287,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // Set the end icon (eye icon)
         layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+    }
+
+    private void return_allDefaultBackground() {
+
+        emailLayout.setError(null);
+        emailLayout.setErrorEnabled(false);
+
+        passwordLayout.setError(null);
+        passwordLayout.setErrorEnabled(false);
+
     }
 
 }

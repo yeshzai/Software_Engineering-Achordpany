@@ -296,36 +296,51 @@ public class SignUpStep1Fragment extends Fragment {
 
                                                         } else {
 
-                                                            if (user_passwordText.equals(user_confirmPasswordText)) {
+                                                            if(user_passwordText.length() < 6 || user_confirmPasswordText.length() < 6) {
 
-                                                                //passwordText.setBackground(defaultBackground);
-                                                                //confirmPasswordText.setBackground(defaultBackground);
-                                                                passwordLayout.setError(null);
-                                                                passwordLayout.setErrorEnabled(false);
+                                                                if(user_passwordText.length() < 6) {
+                                                                    passwordLayout.setError("Minimum of 6 characters required.");
+                                                                    updatePasswordIcons(passwordText, isPasswordVisible);
+                                                                }
 
-                                                                confirmpasswordLayout.setError(null);
-                                                                confirmpasswordLayout.setErrorEnabled(false);
+                                                                if(user_confirmPasswordText.length() < 6) {
+                                                                    confirmpasswordLayout.setError("Minimum of 6 characters required.");
+                                                                    updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
+                                                                }
 
-
-                                                                signUpCredentials.set_credential_usernameText(user_usernameText);
-                                                                signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
-                                                                signUpCredentials.set_credential_passwordText(user_passwordText);
-                                                                signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
-
-                                                                // Testing purposes - Logcat
-                                                                Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
-                                                                Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
-                                                                Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
-                                                                Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
-
-                                                                ((SignUpActivity) requireActivity()).navigateToStep(2);
 
                                                             } else {
-                                                                //passwordText.setBackgroundResource(R.drawable.edittext_error);
-                                                                //confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
-                                                                passwordLayout.setError("Password do not match.");
 
-                                                                // Re-apply password icon
+                                                                if (user_passwordText.equals(user_confirmPasswordText)) {
+
+                                                                    //passwordText.setBackground(defaultBackground);
+                                                                    //confirmPasswordText.setBackground(defaultBackground);
+                                                                    passwordLayout.setError(null);
+                                                                    passwordLayout.setErrorEnabled(false);
+
+                                                                    confirmpasswordLayout.setError(null);
+                                                                    confirmpasswordLayout.setErrorEnabled(false);
+
+
+                                                                    signUpCredentials.set_credential_usernameText(user_usernameText);
+                                                                    signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
+                                                                    signUpCredentials.set_credential_passwordText(user_passwordText);
+                                                                    signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
+
+                                                                    // Testing purposes - Logcat
+                                                                    Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
+                                                                    Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
+                                                                    Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
+                                                                    Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
+
+                                                                    ((SignUpActivity) requireActivity()).navigateToStep(2);
+
+                                                                } else {
+                                                                    //passwordText.setBackgroundResource(R.drawable.edittext_error);
+                                                                    //confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
+                                                                    passwordLayout.setError("Password do not match.");
+
+                                                                    // Re-apply password icon
                                                                 /*passwordText.post(() -> {
                                                                     Drawable lockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
                                                                     Drawable eyeIcon = ContextCompat.getDrawable(requireContext(),
@@ -337,12 +352,12 @@ public class SignUpStep1Fragment extends Fragment {
                                                                         Log.e("DrawableError", "Missing drawable resource: lockIcon or eyeIcon is null");
                                                                     }
                                                                 });*/
-                                                                updatePasswordIcons(passwordText, isPasswordVisible);
+                                                                    updatePasswordIcons(passwordText, isPasswordVisible);
 
 
-                                                                confirmpasswordLayout.setError("Password do not match.");
+                                                                    confirmpasswordLayout.setError("Password do not match.");
 
-                                                                // Re-apply confirm password icon
+                                                                    // Re-apply confirm password icon
                                                                 /*confirmPasswordText.post(() -> {
                                                                     Drawable confirmLockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
                                                                     Drawable confirmEyeIcon = ContextCompat.getDrawable(requireContext(),
@@ -354,9 +369,11 @@ public class SignUpStep1Fragment extends Fragment {
                                                                         Log.e("DrawableError", "Missing drawable resource: confirmLockIcon or confirmEyeIcon is null");
                                                                     }
                                                                 });*/
-                                                                updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
+                                                                    updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
 
-                                                                Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+                                                                }
+
                                                             }
 
                                                         }

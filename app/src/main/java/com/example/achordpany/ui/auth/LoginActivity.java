@@ -85,7 +85,10 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail.setOnTouchListener((v, event) -> {
 
             emailLayout.setError(null);
+<<<<<<< HEAD
             emailLayout.setErrorEnabled(false);
+=======
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
             //editTextEmail.setBackground(defaultBackground);
             return false;
 
@@ -95,7 +98,10 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword.setOnTouchListener((v, event) -> {
 
             passwordLayout.setError(null);
+<<<<<<< HEAD
             passwordLayout.setErrorEnabled(false);
+=======
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
             //editTextPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -148,9 +154,13 @@ public class LoginActivity extends AppCompatActivity {
             //editTextEmail.setBackground(defaultBackground);
             //editTextPassword.setBackground(defaultBackground);
             emailLayout.setError(null);
+<<<<<<< HEAD
             emailLayout.setErrorEnabled(false);
             passwordLayout.setError(null);
             passwordLayout.setErrorEnabled(false);
+=======
+            passwordLayout.setError(null);
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
 
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();

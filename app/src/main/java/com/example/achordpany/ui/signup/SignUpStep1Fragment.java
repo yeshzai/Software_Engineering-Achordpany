@@ -438,6 +438,7 @@ public class SignUpStep1Fragment extends Fragment {
     private void return_AllDefaultBackground() {
 
         usernameLayout.setError(null);
+<<<<<<< HEAD
         usernameLayout.setErrorEnabled(false);
 
         emailLayout.setError(null);
@@ -448,6 +449,11 @@ public class SignUpStep1Fragment extends Fragment {
 
         confirmpasswordLayout.setError(null);
         confirmpasswordLayout.setErrorEnabled(false);
+=======
+        emailLayout.setError(null);
+        passwordLayout.setError(null);
+        confirmpasswordLayout.setError(null);
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
 
         //usernameText.setBackground(defaultBackground);
         //emailAddressText.setBackground(defaultBackground);

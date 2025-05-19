@@ -41,7 +41,11 @@
             android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
+<<<<<<< HEAD
     <!--<EditText
+=======
+    <EditText
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         android:id="@+id/changeUsername_NewUsername"
         style="@style/EditTextStyle"
         android:layout_width="300dp"

@@ -56,9 +56,12 @@ public class EditEmailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
+<<<<<<< HEAD
         changeEmail_PasswordLayout = findViewById(R.id.changeEmail_PasswordLayout);
         changeEmail_NewEmailLayout = findViewById(R.id.changeEmail_NewEmailLayout);
 
+=======
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         changeEmail_NewEmail = findViewById(R.id.changeEmail_NewEmail);
         changeEmail_Password = findViewById(R.id.changeEmail_Password);
         Button changeEmail_ChangeButton = findViewById(R.id.changeEmail_ChangeButton);
@@ -279,6 +282,7 @@ public class EditEmailActivity extends AppCompatActivity {
 
     private void return_DefaultBackground() {
 
+<<<<<<< HEAD
         //changeEmail_NewEmail.setBackground(defaultBackground);
         //changeEmail_Password.setBackground(defaultBackground);
 
@@ -287,6 +291,10 @@ public class EditEmailActivity extends AppCompatActivity {
 
         changeEmail_PasswordLayout.setError(null);
         changeEmail_PasswordLayout.setErrorEnabled(false);
+=======
+        changeEmail_NewEmail.setBackground(defaultBackground);
+        changeEmail_Password.setBackground(defaultBackground);
+>>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
 
     }
 

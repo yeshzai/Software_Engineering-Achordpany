@@ -163,8 +163,9 @@
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:text="@string/search_a_song"
+            android:textStyle="bold"
             android:backgroundTint="@color/primaryColor"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/black"/>
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

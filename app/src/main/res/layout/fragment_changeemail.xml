@@ -51,6 +51,7 @@
                 android:layout_marginEnd="12dp"
                 android:drawableStart="@drawable/ic_email"
                 android:hint="  New Email Address"
+                app:hintTextColor="@color/textFieldHintColor"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:textSize="15sp"
@@ -72,7 +73,7 @@
                 android:layout_marginEnd="12dp"
                 android:text="Confirm"
                 android:textAllCaps="false"
-                android:textColor="@color/textColor"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="VisualLintButtonSize" />

@@ -27,15 +27,15 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.chords.SongTitleProcessing;
+import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 
-import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SongSearchActivity extends AppCompatActivity {
     private TextView txtStatus, txtAboveWave, txtCountdown;
@@ -48,16 +48,17 @@ public class SongSearchActivity extends AppCompatActivity {
     private int step = 0;
     private int timeRemaining = 10;
 
+    private static final String TAG = "SongSearchActivity";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 1;
-    private static final int SAMPLE_RATE = 16000;
+    private static final int SAMPLE_RATE = 16000; // 16kHz
     private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+    private static final int BUFFER_SIZE_FACTOR = 2;
     private AudioRecord audioRecord;
     private boolean isRecording = false;
     private String recognizedLyrics = "";
-    
-    private static final String SERVER_IP = "192.168.1.100"; // CHANGE THIS to your computer's IP address
-    private static final String TRANSCRIPTION_SERVICE_URL = "http://" + SERVER_IP + ":5000/transcribe";
+    private TranscriptionModel transcriptionModel;
+    private List<Short> audioBuffer = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,16 @@ public class SongSearchActivity extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
+        }
+
+        try {
+            transcriptionModel = new TranscriptionModel(this);
+            Log.d(TAG, "Transcription model initialized successfully");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize transcription model: " + e.getMessage());
+            Toast.makeText(this, "Failed to initialize transcription service", Toast.LENGTH_LONG).show();
+            finish();
+            return;
         }
 
         initializeViews();
@@ -109,11 +120,12 @@ public class SongSearchActivity extends AppCompatActivity {
 
         int minBufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
         if (minBufferSize != AudioRecord.ERROR && minBufferSize != AudioRecord.ERROR_BAD_VALUE) {
-            audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
+            int bufferSize = minBufferSize * BUFFER_SIZE_FACTOR;
+            audioRecord = new AudioRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION,
                     SAMPLE_RATE,
                     CHANNEL_CONFIG,
                     AUDIO_FORMAT,
-                    minBufferSize);
+                    bufferSize);
         }
     }
 
@@ -172,10 +184,7 @@ public class SongSearchActivity extends AppCompatActivity {
                     SongTitleProcessing.getInstance().set_SongLyrics(recognizedLyrics.trim());
                     Log.d("TRANSCRIPTION", "Final lyrics: " + recognizedLyrics.trim());
                     
-                    Intent intent = new Intent(SongSearchActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    intent.putExtra("openChords", true);
-                    intent.putExtra("from_search", true);
+                    Intent intent = new Intent(SongSearchActivity.this, ChordsDisplayActivity.class);
                     startActivity(intent);
                     finish();
                 }, 2000);
@@ -184,116 +193,53 @@ public class SongSearchActivity extends AppCompatActivity {
     }
 
     private void startRecording() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("PERMISSION", "Audio permission not granted");
-            Toast.makeText(this, "Audio permission not granted", Toast.LENGTH_SHORT).show();
-            cleanupAndExit();
-            return;
-        }
-
         if (audioRecord == null || audioRecord.getState() != AudioRecord.STATE_INITIALIZED) {
-            Toast.makeText(this, "Error: Audio recorder not initialized", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "AudioRecord not initialized");
             return;
         }
 
-        final int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
-        final short[] audioBuffer = new short[bufferSize / 2];
-        final ByteArrayOutputStream recordingBuffer = new ByteArrayOutputStream();
-
-        audioRecord.startRecording();
         isRecording = true;
+        audioBuffer.clear();
 
-        new Thread(() -> {
-            try {
-                while (isRecording && timeRemaining > 0) {
-                    int numberOfShorts = audioRecord.read(audioBuffer, 0, audioBuffer.length);
-                    for (int i = 0; i < numberOfShorts; i++) {
-                        recordingBuffer.write(audioBuffer[i] & 0xFF);
-                        recordingBuffer.write((audioBuffer[i] >> 8) & 0xFF);
+        Thread recordingThread = new Thread(() -> {
+            audioRecord.startRecording();
+            // Buffer size aligned to 16-bit samples
+            short[] buffer = new short[4096];
+
+            while (isRecording) {
+                int read = audioRecord.read(buffer, 0, buffer.length);
+                if (read > 0) {
+                    // Store raw 16-bit samples
+                    for (int i = 0; i < read; i++) {
+                        audioBuffer.add(buffer[i]);
                     }
                 }
+            }
 
-                // Convert to float array and normalize
-                byte[] recordedData = recordingBuffer.toByteArray();
-                float[] floatData = new float[recordedData.length / 2];
-                ByteBuffer.wrap(recordedData).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(new short[recordedData.length / 2]);
+            audioRecord.stop();
+
+            // Process the recorded audio
+            try {
+                // Convert the entire buffer to shorts array
+                short[] audioData = new short[audioBuffer.size()];
+                for (int i = 0; i < audioBuffer.size(); i++) {
+                    audioData[i] = audioBuffer.get(i);
+                }
                 
-                float maxAbs = 0.0f;
-                for (int i = 0; i < floatData.length; i++) {
-                    floatData[i] = audioBuffer[i] / 32768.0f;
-                    maxAbs = Math.max(maxAbs, Math.abs(floatData[i]));
-                }
-
-                // Normalize
-                if (maxAbs > 0) {
-                    for (int i = 0; i < floatData.length; i++) {
-                        floatData[i] /= maxAbs;
-                    }
-                }
-
-                sendToTranscriptionService(floatData);
-
+                recognizedLyrics = transcriptionModel.transcribeAudio(audioData);
+                Log.d(TAG, "Transcription result: " + recognizedLyrics);
+                
+                handler.post(this::nextStep);
             } catch (Exception e) {
-                Log.e("AUDIO", "Error recording audio: " + e.getMessage());
-                runOnUiThread(() -> {
-                    Toast.makeText(SongSearchActivity.this, "Error recording audio", Toast.LENGTH_SHORT).show();
-                });
-            } finally {
-                if (audioRecord != null) {
-                    audioRecord.stop();
-                }
-            }
-        }).start();
-    }
-
-    private void sendToTranscriptionService(float[] audioData) {
-        new Thread(() -> {
-            try {
-                // Convert audio data to bytes
-                ByteBuffer byteBuffer = ByteBuffer.allocate(audioData.length * 4);
-                byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-                for (float value : audioData) {
-                    byteBuffer.putFloat(value);
-                }
-                byte[] audioBytes = byteBuffer.array();
-
-                // Send to transcription service
-                URL url = new URL(TRANSCRIPTION_SERVICE_URL);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/octet-stream");
-                conn.setDoOutput(true);
-
-                try (OutputStream os = conn.getOutputStream()) {
-                    os.write(audioBytes);
-                }
-
-                // Get response
-                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    try (InputStream is = conn.getInputStream();
-                         ByteArrayOutputStream result = new ByteArrayOutputStream()) {
-                        byte[] responseBuffer = new byte[1024];
-                        int length;
-                        while ((length = is.read(responseBuffer)) != -1) {
-                            result.write(responseBuffer, 0, length);
-                        }
-                        String jsonResponse = result.toString("UTF-8");
-                        JSONObject json = new JSONObject(jsonResponse);
-                        String transcription = json.getString("transcription");
-                        
-                        runOnUiThread(() -> {
-                            recognizedLyrics = transcription;
-                            nextStep();
-                        });
-                    }
-                }
-            } catch (Exception e) {
-                Log.e("TRANSCRIPTION", "Error: " + e.getMessage());
-                runOnUiThread(() -> {
-                    Toast.makeText(SongSearchActivity.this, "Transcription error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Error during transcription: " + e.getMessage());
+                handler.post(() -> {
+                    Toast.makeText(this, "Transcription failed", Toast.LENGTH_SHORT).show();
+                    restartListening();
                 });
             }
-        }).start();
+        });
+
+        recordingThread.start();
     }
 
     private void startListeningForAudio() {
@@ -361,6 +307,9 @@ public class SongSearchActivity extends AppCompatActivity {
             audioRecord.release();
             audioRecord = null;
         }
+        if (transcriptionModel != null) {
+            transcriptionModel.close();
+        }
         handler.removeCallbacksAndMessages(null);
         finish();
     }
@@ -369,11 +318,15 @@ public class SongSearchActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (audioRecord != null) {
-            audioRecord.stop();
             audioRecord.release();
             audioRecord = null;
         }
-        handler.removeCallbacksAndMessages(null);
+        if (transcriptionModel != null) {
+            transcriptionModel.close();
+        }
+        if (handler != null && listeningTimeoutRunnable != null) {
+            handler.removeCallbacks(listeningTimeoutRunnable);
+        }
     }
 
     @Override

@@ -119,11 +119,15 @@ public class EditUsernameActivity extends AppCompatActivity {
                 }
                 if(changeUsername_Password.getText().toString().isEmpty()) {
                     changeUsername_PasswordLayout.setError("This field cannot be empty.");
+                    updatePasswordIcons(changeUsername_Password, isPasswordVisible);
                     //changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
                 }
 
                 changeUsername_NewUsernameLayout.setError("This field cannot be empty.");
+
                 changeUsername_PasswordLayout.setError("This field cannot be empty.");
+                updatePasswordIcons(changeUsername_Password, isPasswordVisible);
+
                 Toast.makeText(EditUsernameActivity.this, "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
             } else {
@@ -281,6 +285,24 @@ public class EditUsernameActivity extends AppCompatActivity {
         });
     }
 
+    private void updatePasswordIcons(EditText editText, boolean isVisible) {
+        Drawable lockIcon = ContextCompat.getDrawable(this, R.drawable.ic_lock);
+        Drawable eyeIcon = ContextCompat.getDrawable(this,
+                isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+        editText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+
+        TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
+
+        // Set the start icon (lock icon)
+        layout.setStartIconDrawable(R.drawable.ic_lock);
+
+        // Tell TextInputLayout to use a custom end icon
+        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+
+        // Set the end icon (eye icon)
+        layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+    }
+
     private void return_DefaultBackground() {
 
         //changeUsername_NewUsername.setBackground(defaultBackground);
@@ -295,6 +317,7 @@ public class EditUsernameActivity extends AppCompatActivity {
 
     private void all_ErrorBackground() {
         changeUsername_PasswordLayout.setError("Re-authentication failed.");
+        updatePasswordIcons(changeUsername_Password, isPasswordVisible);
         //changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
 
     }

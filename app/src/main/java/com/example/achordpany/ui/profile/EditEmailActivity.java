@@ -124,11 +124,15 @@ public class EditEmailActivity extends AppCompatActivity {
                 }
                 if(changeEmail_Password.getText().toString().isEmpty()) {
                     changeEmail_PasswordLayout.setError("This field cannot be empty.");
+                    updatePasswordIcons(changeEmail_Password, isPasswordVisible);
                     //changeEmail_Password.setBackgroundResource(R.drawable.edittext_error);
                 }
 
                 changeEmail_NewEmailLayout.setError("This field cannot be empty.");
+
                 changeEmail_PasswordLayout.setError("This field cannot be empty.");
+                updatePasswordIcons(changeEmail_Password, isPasswordVisible);
+
                 Toast.makeText(EditEmailActivity.this, "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
             } else {
@@ -149,6 +153,24 @@ public class EditEmailActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    private void updatePasswordIcons(EditText editText, boolean isVisible) {
+        Drawable lockIcon = ContextCompat.getDrawable(this, R.drawable.ic_lock);
+        Drawable eyeIcon = ContextCompat.getDrawable(this,
+                isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+        editText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+
+        TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
+
+        // Set the start icon (lock icon)
+        layout.setStartIconDrawable(R.drawable.ic_lock);
+
+        // Tell TextInputLayout to use a custom end icon
+        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+
+        // Set the end icon (eye icon)
+        layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
     }
 
     private void checkIfEmailExists(String newEmail, String password) {

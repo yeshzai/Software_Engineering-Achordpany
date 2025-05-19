@@ -151,7 +151,6 @@ public class LoginActivity extends AppCompatActivity {
             emailLayout.setErrorEnabled(false);
             passwordLayout.setError(null);
             passwordLayout.setErrorEnabled(false);
-            passwordLayout.setError(null);
 
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();

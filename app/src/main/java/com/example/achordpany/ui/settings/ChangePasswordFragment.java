@@ -207,14 +207,17 @@ public class ChangePasswordFragment extends Fragment {
 
                 if(changePassword_CurrentPassword.getText().toString().isEmpty())
                     changePassword_CurrentPasswordLayout.setError("This field cannot be empty.");
+                    updatePasswordIcons(changePassword_CurrentPassword, isPasswordVisible_Current);
                     //changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error); hi
 
                 if(changePassword_NewPassword.getText().toString().isEmpty())
                     changePassword_NewPasswordLayout.setError("This field cannot be empty.");
+                    updatePasswordIcons(changePassword_NewPassword, isPasswordVisible_New);
                     //changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
 
                 if(changePassword_ConfirmPassword.getText().toString().isEmpty())
                     changePassword_ConfirmPasswordLayout.setError("This field cannot be empty.");
+                    updatePasswordIcons(changePassword_ConfirmPassword, isPasswordVisible_Confirm);
                     //changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
 
             } else {
@@ -238,6 +241,7 @@ public class ChangePasswordFragment extends Fragment {
                         Toast.makeText(requireActivity(), "Re-authentication failed. Please try again.", Toast.LENGTH_LONG).show();
                         Log.d("[RE-AUTHENTICATION]", "[FAILED]" + reauthTask.getException().getMessage());
                         changePassword_CurrentPasswordLayout.setError("Re-authentication failed.");
+                        updatePasswordIcons(changePassword_CurrentPassword, isPasswordVisible_Current);
                         //changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
 
                         }
@@ -246,8 +250,13 @@ public class ChangePasswordFragment extends Fragment {
                 } else {
 
                     changePassword_NewPasswordLayout.setError("Passwords do not match.");
+                    updatePasswordIcons(changePassword_NewPassword, isPasswordVisible_New);
+
                     changePassword_ConfirmPasswordLayout.setError("Passwords do not match.");
+                    updatePasswordIcons(changePassword_ConfirmPassword, isPasswordVisible_Confirm);
+
                     Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+
                     //changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
                     //changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
 
@@ -283,6 +292,24 @@ public class ChangePasswordFragment extends Fragment {
             Log.d("[CHANGE PASSWORD]", "[NaN] No Account Found!");
         }
 
+    }
+
+    private void updatePasswordIcons(EditText editText, boolean isVisible) {
+        Drawable lockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
+        Drawable eyeIcon = ContextCompat.getDrawable(requireContext(),
+                isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+        editText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+
+        TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
+
+        // Set the start icon (lock icon)
+        layout.setStartIconDrawable(R.drawable.ic_lock);
+
+        // Tell TextInputLayout to use a custom end icon
+        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+
+        // Set the end icon (eye icon)
+        layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
     }
 
     private void restoreAll_defaultBackground() {

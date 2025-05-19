@@ -23,6 +23,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,10 +37,12 @@ public class ChangePasswordFragment extends Fragment {
     private boolean isPasswordVisible_Current = false;
     private boolean isPasswordVisible_New = false;
     private boolean isPasswordVisible_Confirm = false;
-
-    EditText changePassword_CurrentPassword;
-    EditText changePassword_NewPassword;
-    EditText changePassword_ConfirmPassword;
+    private TextInputLayout changePassword_CurrentPasswordLayout;
+    private TextInputLayout changePassword_NewPasswordLayout;
+    private TextInputLayout changePassword_ConfirmPasswordLayout;
+    private TextInputEditText changePassword_CurrentPassword;
+    private TextInputEditText changePassword_NewPassword;
+    private TextInputEditText changePassword_ConfirmPassword;
     Button changePassword_Button;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -49,6 +53,11 @@ public class ChangePasswordFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_changepass, container, false);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        changePassword_CurrentPasswordLayout = view.findViewById(R.id.changePassword_CurrentPasswordLayout);
+        changePassword_NewPasswordLayout = view.findViewById(R.id.changePassword_NewPasswordLayout);
+        changePassword_ConfirmPasswordLayout = view.findViewById(R.id.changePassword_ConfirmPasswordLayout);
+
         changePassword_CurrentPassword = view.findViewById(R.id.changePassword_CurrentPassword);
         changePassword_NewPassword = view.findViewById(R.id.changePassword_NewPassword);
         changePassword_ConfirmPassword = view.findViewById(R.id.changePassword_ConfirmPassword);
@@ -58,7 +67,9 @@ public class ChangePasswordFragment extends Fragment {
         // PASSWORD HIDE/VISIBLE
         changePassword_CurrentPassword.setOnTouchListener((v, event) -> {
 
-            changePassword_CurrentPassword.setBackground(defaultBackground);
+            changePassword_CurrentPasswordLayout.setError(null);
+            changePassword_CurrentPasswordLayout.setErrorEnabled(false);
+            //changePassword_CurrentPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = changePassword_CurrentPassword.getWidth();
@@ -100,7 +111,9 @@ public class ChangePasswordFragment extends Fragment {
         // PASSWORD HIDE/VISIBLE
         changePassword_NewPassword.setOnTouchListener((v, event) -> {
 
-            changePassword_NewPassword.setBackground(defaultBackground);
+            changePassword_NewPasswordLayout.setError(null);
+            changePassword_NewPasswordLayout.setErrorEnabled(false);
+            //changePassword_NewPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = changePassword_NewPassword.getWidth();
@@ -142,7 +155,9 @@ public class ChangePasswordFragment extends Fragment {
         // PASSWORD HIDE/VISIBLE
         changePassword_ConfirmPassword.setOnTouchListener((v, event) -> {
 
-            changePassword_ConfirmPassword.setBackground(defaultBackground);
+            changePassword_ConfirmPasswordLayout.setError(null);
+            changePassword_ConfirmPasswordLayout.setErrorEnabled(false);
+            //changePassword_ConfirmPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = changePassword_ConfirmPassword.getWidth();
@@ -191,13 +206,16 @@ public class ChangePasswordFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
                 if(changePassword_CurrentPassword.getText().toString().isEmpty())
-                    changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
+                    changePassword_CurrentPasswordLayout.setError("This field cannot be empty.");
+                    //changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
 
                 if(changePassword_NewPassword.getText().toString().isEmpty())
-                    changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
+                    changePassword_NewPasswordLayout.setError("This field cannot be empty.");
+                    //changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
 
                 if(changePassword_ConfirmPassword.getText().toString().isEmpty())
-                    changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
+                    changePassword_ConfirmPasswordLayout.setError("This field cannot be empty.");
+                    //changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
 
             } else {
 
@@ -219,16 +237,19 @@ public class ChangePasswordFragment extends Fragment {
 
                         Toast.makeText(requireActivity(), "Re-authentication failed. Please try again.", Toast.LENGTH_LONG).show();
                         Log.d("[RE-AUTHENTICATION]", "[FAILED]" + reauthTask.getException().getMessage());
-                        changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
+                        changePassword_CurrentPasswordLayout.setError("Re-authentication failed.");
+                        //changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
 
                         }
                     });
 
                 } else {
 
+                    changePassword_NewPasswordLayout.setError("Passwords do not match.");
+                    changePassword_ConfirmPasswordLayout.setError("Passwords do not match.");
                     Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
-                    changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
-                    changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
+                    //changePassword_NewPassword.setBackgroundResource(R.drawable.edittext_error);
+                    //changePassword_ConfirmPassword.setBackgroundResource(R.drawable.edittext_error);
 
                 }
             }
@@ -266,10 +287,18 @@ public class ChangePasswordFragment extends Fragment {
 
     private void restoreAll_defaultBackground() {
 
-        changePassword_CurrentPassword.setBackground(defaultBackground);
-        changePassword_NewPassword.setBackground(defaultBackground);
-        changePassword_ConfirmPassword.setBackground(defaultBackground);
+        //changePassword_CurrentPassword.setBackground(defaultBackground);
+        //changePassword_NewPassword.setBackground(defaultBackground);
+        //changePassword_ConfirmPassword.setBackground(defaultBackground);
 
+        changePassword_CurrentPasswordLayout.setError(null);
+        changePassword_CurrentPasswordLayout.setErrorEnabled(false);
+
+        changePassword_NewPasswordLayout.setError(null);
+        changePassword_NewPasswordLayout.setErrorEnabled(false);
+
+        changePassword_ConfirmPasswordLayout.setError(null);
+        changePassword_ConfirmPasswordLayout.setErrorEnabled(false);
     }
 
 }

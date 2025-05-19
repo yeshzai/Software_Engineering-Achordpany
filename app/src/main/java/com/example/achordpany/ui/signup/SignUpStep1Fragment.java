@@ -298,8 +298,14 @@ public class SignUpStep1Fragment extends Fragment {
 
                                                             if (user_passwordText.equals(user_confirmPasswordText)) {
 
-                                                                passwordText.setBackground(defaultBackground);
-                                                                confirmPasswordText.setBackground(defaultBackground);
+                                                                //passwordText.setBackground(defaultBackground);
+                                                                //confirmPasswordText.setBackground(defaultBackground);
+                                                                passwordLayout.setError(null);
+                                                                passwordLayout.setErrorEnabled(false);
+
+                                                                confirmpasswordLayout.setError(null);
+                                                                confirmpasswordLayout.setErrorEnabled(false);
+
 
                                                                 signUpCredentials.set_credential_usernameText(user_usernameText);
                                                                 signUpCredentials.set_credential_emailAddressText(user_emailAddressText);

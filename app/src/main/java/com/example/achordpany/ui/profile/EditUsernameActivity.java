@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,10 +36,11 @@ public class EditUsernameActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
-
+    private TextInputLayout changeUsername_NewUsernameLayout;
+    private TextInputLayout changeUsername_PasswordLayout;
     private boolean isPasswordVisible = false;
-    EditText changeUsername_NewUsername;
-    EditText changeUsername_Password;
+    private TextInputEditText changeUsername_NewUsername;
+    private TextInputEditText changeUsername_Password;
     private Drawable defaultBackground;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -49,6 +52,9 @@ public class EditUsernameActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+
+        changeUsername_NewUsernameLayout = findViewById(R.id.changeUsername_NewUsernameLayout);
+        changeUsername_PasswordLayout = findViewById(R.id.changeUsername_PasswordLayout);
 
         changeUsername_NewUsername = findViewById(R.id.changeUsername_NewUsername);
         changeUsername_Password = findViewById(R.id.changeUsername_Password);
@@ -108,12 +114,16 @@ public class EditUsernameActivity extends AppCompatActivity {
             if(changeUsername_NewUsername.getText().toString().isEmpty() || changeUsername_Password.getText().toString().isEmpty()) {
 
                 if(changeUsername_NewUsername.getText().toString().isEmpty()) {
-                    changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error);
+                    changeUsername_NewUsernameLayout.setError("This field cannot be empty.");
+                    //changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error);
                 }
                 if(changeUsername_Password.getText().toString().isEmpty()) {
-                    changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
+                    changeUsername_PasswordLayout.setError("This field cannot be empty.");
+                    //changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
                 }
 
+                changeUsername_NewUsernameLayout.setError("This field cannot be empty.");
+                changeUsername_PasswordLayout.setError("This field cannot be empty.");
                 Toast.makeText(EditUsernameActivity.this, "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
             } else {
@@ -129,7 +139,8 @@ public class EditUsernameActivity extends AppCompatActivity {
 
                         if (snapshot.exists()) {    // Username already exists.
                             Toast.makeText(getApplicationContext(), "Username already taken! Choose another.", Toast.LENGTH_LONG).show();
-                            changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error);
+                            changeUsername_NewUsernameLayout.setError("Username already taken.");
+                            //changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error);
                         } else {                    // Username available, proceed to account authentication.
                             updateUsername(newUsername, password);
                         }
@@ -272,14 +283,19 @@ public class EditUsernameActivity extends AppCompatActivity {
 
     private void return_DefaultBackground() {
 
-        changeUsername_NewUsername.setBackground(defaultBackground);
-        changeUsername_Password.setBackground(defaultBackground);
+        //changeUsername_NewUsername.setBackground(defaultBackground);
+        //changeUsername_Password.setBackground(defaultBackground);
 
+        changeUsername_NewUsernameLayout.setError(null);
+        changeUsername_NewUsernameLayout.setErrorEnabled(false);
+
+        changeUsername_PasswordLayout.setError(null);
+        changeUsername_PasswordLayout.setErrorEnabled(false);
     }
 
     private void all_ErrorBackground() {
-
-        changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
+        changeUsername_PasswordLayout.setError("Re-authentication failed.");
+        //changeUsername_Password.setBackgroundResource(R.drawable.edittext_error);
 
     }
 

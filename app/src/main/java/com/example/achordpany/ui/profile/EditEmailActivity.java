@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import com.example.achordpany.MainActivity;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -42,8 +43,8 @@ public class EditEmailActivity extends AppCompatActivity {
     private TextInputLayout changeEmail_NewEmailLayout;
     private TextInputLayout changeEmail_PasswordLayout;
     private boolean isPasswordVisible = false;
-    EditText changeEmail_NewEmail;
-    EditText changeEmail_Password;
+    private TextInputEditText changeEmail_NewEmail;
+    private TextInputEditText changeEmail_Password;
     private Drawable defaultBackground;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -56,12 +57,9 @@ public class EditEmailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-<<<<<<< HEAD
         changeEmail_PasswordLayout = findViewById(R.id.changeEmail_PasswordLayout);
         changeEmail_NewEmailLayout = findViewById(R.id.changeEmail_NewEmailLayout);
 
-=======
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
         changeEmail_NewEmail = findViewById(R.id.changeEmail_NewEmail);
         changeEmail_Password = findViewById(R.id.changeEmail_Password);
         Button changeEmail_ChangeButton = findViewById(R.id.changeEmail_ChangeButton);
@@ -164,7 +162,8 @@ public class EditEmailActivity extends AppCompatActivity {
                         if (signInMethods != null && !signInMethods.isEmpty()) {
                             // Email already exists
                             Toast.makeText(EditEmailActivity.this, "Email already exists.", Toast.LENGTH_SHORT).show();
-                            changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
+                            changeEmail_NewEmail.setError("Email already exists.");
+                            //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                         } else {
                             // Email is available
                             updateEmail(newEmail, password);
@@ -174,7 +173,8 @@ public class EditEmailActivity extends AppCompatActivity {
 
                         Exception e = task.getException();
                         Log.e("EMAIL_CHECK", "[FAILED] Cannot find email! ERROR: " + e.getMessage());
-                        changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
+                        changeEmail_NewEmail.setError("Invalid email.");
+                        //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                         Toast.makeText(EditEmailActivity.this, "Please enter valid/correct email.", Toast.LENGTH_SHORT).show();
 
                     }
@@ -230,8 +230,10 @@ public class EditEmailActivity extends AppCompatActivity {
 
                             // Handle errors
                             String errorMessage = updateTask.getException().getMessage();
+
                             Toast.makeText(EditEmailActivity.this, "Failed to update email: " + errorMessage, Toast.LENGTH_LONG).show();
-                            changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
+                            changeEmail_NewEmail.setError("Update failed.");
+                            //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                             Log.d("[EDIT EMAIL]", "[FAILED] Email Change Failed!");
 
                         }
@@ -282,7 +284,6 @@ public class EditEmailActivity extends AppCompatActivity {
 
     private void return_DefaultBackground() {
 
-<<<<<<< HEAD
         //changeEmail_NewEmail.setBackground(defaultBackground);
         //changeEmail_Password.setBackground(defaultBackground);
 
@@ -291,16 +292,13 @@ public class EditEmailActivity extends AppCompatActivity {
 
         changeEmail_PasswordLayout.setError(null);
         changeEmail_PasswordLayout.setErrorEnabled(false);
-=======
-        changeEmail_NewEmail.setBackground(defaultBackground);
-        changeEmail_Password.setBackground(defaultBackground);
->>>>>>> 00c3b3b48a97b038b802cd46ecf59e00c1e5b8c4
 
     }
 
     private void all_ErrorBackground() {
 
-        changeEmail_Password.setBackgroundResource(R.drawable.edittext_error);
+        changeEmail_Password.setError("Re-authentication failed.");
+        //changeEmail_Password.setBackgroundResource(R.drawable.edittext_error);
 
     }
 

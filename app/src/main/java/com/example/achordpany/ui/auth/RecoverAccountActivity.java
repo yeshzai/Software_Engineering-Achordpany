@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.achordpany.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,6 +24,7 @@ public class RecoverAccountActivity extends AppCompatActivity {
 
     private Drawable defaultBackground;
     private TextInputLayout recoverAccount_EmailAddressLayout;
+    private TextInputEditText recoverAccount_EmailAddress;
     TextView recoverAccount_Subtitle;
 
     FirebaseAuth auth;
@@ -38,7 +40,7 @@ public class RecoverAccountActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         recoverAccount_Subtitle = findViewById(R.id.recoverAccount_Subtitle);
-        EditText recoverAccount_EmailAddress = findViewById(R.id.recoverAccount_EmailAddress);
+        recoverAccount_EmailAddress = findViewById(R.id.recoverAccount_EmailAddress);
         Button recoverAccount_Button = findViewById(R.id.recoverAccount_Button);
         ImageView recoverAccount_Back = findViewById(R.id.recoverAccount_Back);
         defaultBackground = recoverAccount_EmailAddress.getBackground();
@@ -53,7 +55,7 @@ public class RecoverAccountActivity extends AppCompatActivity {
         recoverAccount_Button.setOnClickListener(v -> {
 
             if(recoverAccount_EmailAddress.getText().toString().isEmpty()) {
-                recoverAccount_EmailAddress.setError("This field cannot be empty.");
+                recoverAccount_EmailAddressLayout.setError("This field cannot be empty.");
                 Toast.makeText(getApplicationContext(), "Please enter your email address.",
                         Toast.LENGTH_SHORT).show();
                 //recoverAccount_EmailAddress.setBackgroundResource(R.drawable.edittext_error);

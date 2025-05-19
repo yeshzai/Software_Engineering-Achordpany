@@ -39,7 +39,110 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp" />
 
-            <!-- Password Input Field -->
+
+            <!-- Password Field with Error Support -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/changePassword_CurrentPasswordLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_eyehide"
+                android:hint="Current Password"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/HintStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emailLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/changePassword_CurrentPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:minHeight="56dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password Field with Error Support -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/changePassword_NewPasswordLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_eyehide"
+                android:hint="New Password"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/HintStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emailLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/changePassword_NewPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:minHeight="56dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Confirm Password Field with Error Support -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/changePassword_ConfirmPasswordLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_eyehide"
+                android:hint="Confirm Password"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/HintStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/changePassword_ConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:minHeight="56dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password Input Field
             <EditText
                 android:id="@+id/changePassword_CurrentPassword"
                 style="@style/EditTextStyle"
@@ -75,8 +178,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/changePassword_CurrentPassword" />
-
-            <!-- Confirm Password Input Field -->
+            -->
+            <!-- Confirm Password Input Field
             <EditText
                 android:id="@+id/changePassword_ConfirmPassword"
                 style="@style/EditTextStyle"
@@ -94,6 +197,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/changePassword_NewPassword" />
+            -->
 
             <!-- Confirm Change Button -->
             <Button

@@ -61,7 +61,7 @@ public class RecoverAccountActivity extends AppCompatActivity {
                 //recoverAccount_EmailAddress.setBackgroundResource(R.drawable.edittext_error);
                 return;
             } else {
-                //recoverAccount_EmailAddress.setBackground(defaultBackground);
+                //recoverAccount_EmailAddress.setBackground(defaultBackground); hi
                 recoverAccount_EmailAddressLayout.setError(null);
                 recoverAccount_EmailAddressLayout.setErrorEnabled(false);
                 recoverAccount_Function(recoverAccount_EmailAddress.getText().toString());

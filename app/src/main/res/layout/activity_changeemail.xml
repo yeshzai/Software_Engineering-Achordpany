@@ -110,7 +110,8 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp" />
 
-            <!-- Email Field with Error Support -->
+            <!-- Email Field with Error Support
+            -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/changeEmail_NewEmailLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

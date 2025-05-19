@@ -40,7 +40,8 @@
                 android:layout_marginBottom="20dp" />
 
 
-            <!-- Password Field with Error Support -->
+            <!-- Password Field with Error Support
+            -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/changePassword_CurrentPasswordLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

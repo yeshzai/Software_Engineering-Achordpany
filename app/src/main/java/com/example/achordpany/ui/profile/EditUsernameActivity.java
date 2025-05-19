@@ -115,7 +115,7 @@ public class EditUsernameActivity extends AppCompatActivity {
 
                 if(changeUsername_NewUsername.getText().toString().isEmpty()) {
                     changeUsername_NewUsernameLayout.setError("This field cannot be empty.");
-                    //changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error);
+                    //changeUsername_NewUsername.setBackgroundResource(R.drawable.edittext_error); hi
                 }
                 if(changeUsername_Password.getText().toString().isEmpty()) {
                     changeUsername_PasswordLayout.setError("This field cannot be empty.");

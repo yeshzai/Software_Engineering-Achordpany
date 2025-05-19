@@ -119,16 +119,16 @@ public class EditEmailActivity extends AppCompatActivity {
                     || changeEmail_Password.getText().toString().isEmpty()) {
 
                 if(changeEmail_NewEmail.getText().toString().isEmpty()) {
-                    changeEmail_NewEmail.setError("This field cannot be empty.");
+                    changeEmail_NewEmailLayout.setError("This field cannot be empty.");
                     //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                 }
                 if(changeEmail_Password.getText().toString().isEmpty()) {
-                    changeEmail_Password.setError("This field cannot be empty.");
+                    changeEmail_PasswordLayout.setError("This field cannot be empty.");
                     //changeEmail_Password.setBackgroundResource(R.drawable.edittext_error);
                 }
 
-                changeEmail_NewEmail.setError("This field cannot be empty.");
-                changeEmail_Password.setError("This field cannot be empty.");
+                changeEmail_NewEmailLayout.setError("This field cannot be empty.");
+                changeEmail_PasswordLayout.setError("This field cannot be empty.");
                 Toast.makeText(EditEmailActivity.this, "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
 
             } else {
@@ -162,7 +162,7 @@ public class EditEmailActivity extends AppCompatActivity {
                         if (signInMethods != null && !signInMethods.isEmpty()) {
                             // Email already exists
                             Toast.makeText(EditEmailActivity.this, "Email already exists.", Toast.LENGTH_SHORT).show();
-                            changeEmail_NewEmail.setError("Email already exists.");
+                            changeEmail_NewEmailLayout.setError("Email already exists.");
                             //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                         } else {
                             // Email is available
@@ -173,7 +173,7 @@ public class EditEmailActivity extends AppCompatActivity {
 
                         Exception e = task.getException();
                         Log.e("EMAIL_CHECK", "[FAILED] Cannot find email! ERROR: " + e.getMessage());
-                        changeEmail_NewEmail.setError("Invalid email.");
+                        changeEmail_NewEmailLayout.setError("Invalid email.");
                         //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                         Toast.makeText(EditEmailActivity.this, "Please enter valid/correct email.", Toast.LENGTH_SHORT).show();
 
@@ -232,7 +232,7 @@ public class EditEmailActivity extends AppCompatActivity {
                             String errorMessage = updateTask.getException().getMessage();
 
                             Toast.makeText(EditEmailActivity.this, "Failed to update email: " + errorMessage, Toast.LENGTH_LONG).show();
-                            changeEmail_NewEmail.setError("Update failed.");
+                            changeEmail_NewEmailLayout.setError("Update failed.");
                             //changeEmail_NewEmail.setBackgroundResource(R.drawable.edittext_error);
                             Log.d("[EDIT EMAIL]", "[FAILED] Email Change Failed!");
 
@@ -297,7 +297,7 @@ public class EditEmailActivity extends AppCompatActivity {
 
     private void all_ErrorBackground() {
 
-        changeEmail_Password.setError("Re-authentication failed.");
+        changeEmail_PasswordLayout.setError("Re-authentication failed.");
         //changeEmail_Password.setBackgroundResource(R.drawable.edittext_error);
 
     }

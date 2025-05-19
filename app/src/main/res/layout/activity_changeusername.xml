@@ -140,7 +140,8 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Password Field with Error Support android:drawableStart="@drawable/ic_lock"
-            android:drawableEnd="@drawable/ic_eyehide" android:drawablePadding="10dp"-->
+            android:drawableEnd="@drawable/ic_eyehide" android:drawablePadding="10dp"
+            -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/changeUsername_PasswordLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

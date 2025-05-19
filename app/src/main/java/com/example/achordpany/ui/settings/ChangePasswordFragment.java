@@ -207,7 +207,7 @@ public class ChangePasswordFragment extends Fragment {
 
                 if(changePassword_CurrentPassword.getText().toString().isEmpty())
                     changePassword_CurrentPasswordLayout.setError("This field cannot be empty.");
-                    //changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error);
+                    //changePassword_CurrentPassword.setBackgroundResource(R.drawable.edittext_error); hi
 
                 if(changePassword_NewPassword.getText().toString().isEmpty())
                     changePassword_NewPasswordLayout.setError("This field cannot be empty.");

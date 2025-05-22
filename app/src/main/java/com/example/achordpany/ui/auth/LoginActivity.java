@@ -230,8 +230,12 @@ public class LoginActivity extends AppCompatActivity {
         int start = spannable.toString().indexOf("Sign Up");
         int end = start + "Sign Up".length();
 
-        // Apply the color change (e.g., Blue) to "Sign Up"
-        spannable.setSpan(new ForegroundColorSpan(Color.GREEN), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(
+                new ForegroundColorSpan(ContextCompat.getColor(this, R.color.textColor)),
+                start,
+                end,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
 
         // Set the styled text to the TextView
         textNoAccount.setText(spannable);

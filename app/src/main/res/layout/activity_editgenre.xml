@@ -23,7 +23,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_footer"
+            android:src="@drawable/logo_header"
             android:visibility="invisible"
             tools:ignore="HardcodedText" />
 

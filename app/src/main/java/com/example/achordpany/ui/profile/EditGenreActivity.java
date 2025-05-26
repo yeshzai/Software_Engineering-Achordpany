@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.achordpany.ChordsRecommendations;
 import com.example.achordpany.MainActivity;
@@ -86,13 +87,18 @@ public class EditGenreActivity extends AppCompatActivity {
                 if (!button.isSelected()) {
                     genres.add(genreName);
                     button.setSelected(true);
-                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00C853"))); // green
-                    button.setTextColor(Color.WHITE);
+
+                    button.setBackgroundTintList(ColorStateList.valueOf(
+                            ContextCompat.getColor(this, R.color.genre_selected_bg)
+                    ));
+                    button.setTextColor(ContextCompat.getColor(this, R.color.genre_selected_text));
                 } else {
                     genres.remove(genreName);
                     button.setSelected(false);
-                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF"))); // white
-                    button.setTextColor(Color.BLACK);
+                    button.setBackgroundTintList(ColorStateList.valueOf(
+                            ContextCompat.getColor(this, R.color.genre_unselected_bg)
+                    ));
+                    button.setTextColor(ContextCompat.getColor(this, R.color.genre_unselected_text));
                 }
             } else {
                 Toast.makeText(this, "Selected 3 Genres Already!", Toast.LENGTH_SHORT).show();

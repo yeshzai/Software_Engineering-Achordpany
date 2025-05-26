@@ -111,7 +111,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/changeUsername_NewUsernameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
             app:hintEnabled="true"
@@ -146,12 +146,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/changeUsername_PasswordLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:startIconDrawable="@drawable/ic_lock"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_eyehide"
+            app:endIconMode="password_toggle"
             android:hint="Password Required"
             app:hintTextColor="@color/textFieldHintColor"
             app:boxStrokeWidth="1dp"

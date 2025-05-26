@@ -84,21 +84,15 @@ public class EditUsernameActivity extends AppCompatActivity {
                     }
 
                     if (isPasswordVisible) {    // HIDE
-                        changeUsername_Password.setTransformationMethod(new PasswordTransformationMethod());
-                        changeUsername_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
-                                null  // drawableBottom
-                        );
+                        TextInputLayout layout = (TextInputLayout) changeUsername_Password.getParent().getParent();
+                        layout.setStartIconDrawable(R.drawable.ic_lock);
+                        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+                        // Default toggle will hide the password automatically
                     } else {    // SHOW
-                        changeUsername_Password.setTransformationMethod(null);
-                        changeUsername_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
-                                null  // drawableBottom
-                        );
+                        TextInputLayout layout = (TextInputLayout) changeUsername_Password.getParent().getParent();
+                        layout.setStartIconDrawable(R.drawable.ic_lock);
+                        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+                        // Default toggle will show the password automatically
                     }
 
                     isPasswordVisible = !isPasswordVisible;

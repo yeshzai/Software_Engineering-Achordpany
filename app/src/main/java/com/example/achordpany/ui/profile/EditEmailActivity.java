@@ -88,21 +88,15 @@ public class EditEmailActivity extends AppCompatActivity {
                     }
 
                     if (isPasswordVisible) {    // HIDE
-                        changeEmail_Password.setTransformationMethod(new PasswordTransformationMethod());
-                        changeEmail_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
-                                null  // drawableBottom
-                        );
+                        TextInputLayout layout = (TextInputLayout) changeEmail_Password.getParent().getParent();
+                        layout.setStartIconDrawable(R.drawable.ic_lock);
+                        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+                        // Default toggle handles hiding the password
                     } else {    // SHOW
-                        changeEmail_Password.setTransformationMethod(null);
-                        changeEmail_Password.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
-                                null  // drawableBottom
-                        );
+                        TextInputLayout layout = (TextInputLayout) changeEmail_Password.getParent().getParent();
+                        layout.setStartIconDrawable(R.drawable.ic_lock);
+                        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+                        // Default toggle handles showing the password
                     }
 
                     isPasswordVisible = !isPasswordVisible;

@@ -83,21 +83,15 @@ public class ChangePasswordFragment extends Fragment {
                     }
 
                     if (isPasswordVisible_Current) {    // HIDE
-                        changePassword_CurrentPassword.setTransformationMethod(new PasswordTransformationMethod());
-                        changePassword_CurrentPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
-                                null  // drawableBottom
-                        );
+                        TextInputLayout layout = (TextInputLayout) changePassword_CurrentPassword.getParent().getParent();
+                        layout.setStartIconDrawable(R.drawable.ic_lock);
+                        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+                        // The default toggle will hide the password automatically
                     } else {    // SHOW
-                        changePassword_CurrentPassword.setTransformationMethod(null);
-                        changePassword_CurrentPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
-                                null  // drawableBottom
-                        );
+                        TextInputLayout layout = (TextInputLayout) changePassword_CurrentPassword.getParent().getParent();
+                        layout.setStartIconDrawable(R.drawable.ic_lock);
+                        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+                        // The default toggle will show the password automatically
                     }
 
                     isPasswordVisible_Current = !isPasswordVisible_Current;

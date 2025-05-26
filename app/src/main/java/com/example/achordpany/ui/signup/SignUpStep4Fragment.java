@@ -70,7 +70,11 @@ public class SignUpStep4Fragment extends Fragment {
 
         profileName.setText(signUpCredentials.get_credential_usernameText());
         passwordValue.setText(signUpCredentials.get_credential_passwordText());
-        genresValue.setText(signUpCredentials.get_credential_genre().toString());
+        String genresValue_Text = "";
+        for(String genre_text : signUpCredentials.get_credential_genre()) {
+            genresValue_Text += genre_text + "\n";
+        }
+        genresValue.setText(genresValue_Text);
 
         view.findViewById(R.id.checkBox_TermsText).setOnClickListener(v -> {
 

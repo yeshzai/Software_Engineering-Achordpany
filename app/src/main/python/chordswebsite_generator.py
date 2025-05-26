@@ -1,23 +1,25 @@
-from googlesearch import search
+import requests
+
+API_KEY = "AIzaSyC7NfF-v7AQg7QRIrSkvMdPTeMauf7vjxE"
+CSE_ID = "71744b8e3733749a8"
 
 def find_chords(song_title):
-    # List of chord sites to try, in order of priority
-    chord_sites = [
-        "ultimate-guitar.com",
-        "e-chords.com",
-        "chordie.com",
-        "guitartabs.cc",
-        "chordify.net"
-    ]
+    query = f"{song_title} guitar chords site:ultimate-guitar.com"
 
-    for site in chord_sites:
-        query = f'{song_title} guitar chords site:{site}'
-        try:
-            for result in search(query, num_results=1):
-                return result  # Return the first valid result found
-        except Exception as e:
-            print(f"Error searching {site}: {e}")
-            continue  # If search fails, try the next site
+    url = "https://www.googleapis.com/customsearch/v1"
+    params = {
+        "key": API_KEY,
+        "cx": CSE_ID,
+        "q": query,
+        "num": 1
+    }
 
-    return None  # If no result found on any site
-
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        results = response.json()
+        if "items" in results and results["items"]:
+            return results["items"][0]["link"]
+    except Exception as e:
+        print(f"Error: {e}")
+        return None

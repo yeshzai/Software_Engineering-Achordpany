@@ -22,7 +22,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_footer"
+            android:src="@drawable/logo_header"
             android:visibility="invisible"
             tools:ignore="HardcodedText" />
 
@@ -111,7 +111,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/changeUsername_NewUsernameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
             app:hintEnabled="true"
@@ -146,7 +146,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/changeUsername_PasswordLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:startIconDrawable="@drawable/ic_lock"
@@ -228,7 +228,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:contentDescription="Logo"
-            android:src="@drawable/logo_footer" />
+            android:src="@drawable/logo_header" />
 
         <!-- Copyright -->
         <TextView

@@ -28,11 +28,9 @@ public class SignUpActivity extends AppCompatActivity {
         if(savedInstanceState == null) {
             navigateToStep(1); // Start on Step 1
         }
-
     }
 
     public void navigateToStep(int step) {
-
         Fragment fragment = null;
         switch (step) {
             case 1:
@@ -51,9 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
                 fragment = new SignUp_TermsConditionsFragment();
                 break;
         }
-
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
-
     }
 
     public void setSelectedProfileImageUri(Uri uri) {
@@ -65,5 +61,4 @@ public class SignUpActivity extends AppCompatActivity {
         Log.d("SignUpActivity", "Retrieving Image URI: " + selectedProfileImageUri);
         return selectedProfileImageUri;
     }
-
 }

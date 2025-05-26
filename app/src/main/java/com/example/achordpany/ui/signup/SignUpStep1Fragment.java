@@ -430,31 +430,15 @@ public class SignUpStep1Fragment extends Fragment {
     }
 
     private void updatePasswordIcons(EditText editText, boolean isVisible) {
-        Drawable lockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
-        Drawable eyeIcon = ContextCompat.getDrawable(requireContext(),
-                isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
-        editText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
-
         TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
 
         // Set the start icon (lock icon)
         layout.setStartIconDrawable(R.drawable.ic_lock);
-        //layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.grey)));
 
-        // Tell TextInputLayout to use a custom end icon
-        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+        // Enable default password toggle (eye icon)
+        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
 
-        // Set the end icon (eye icon)
-        layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
-
-        // Set the end icon (eye icon)
-        /*if (isVisible) {
-            layout.setEndIconDrawable(R.drawable.ic_eye);
-        } else {
-            layout.setEndIconDrawable(R.drawable.ic_eyehide);
-        }*/
-
-        //layout.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.grey)));
+        // No need to manually set end icon drawable here — the toggle handles it.
     }
 
 

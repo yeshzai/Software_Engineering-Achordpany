@@ -1,10 +1,8 @@
 package com.example.achordpany.ui.auth;
-import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -25,14 +23,12 @@ import androidx.core.content.ContextCompat;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.signup.SignUpActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,39 +42,30 @@ interface UsernameCallBack {
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-
     private boolean isPasswordVisible = false;
-    private TextInputEditText editTextEmail;
-    private TextInputEditText editTextPassword;
-    private TextInputLayout emailLayout;
-    private TextInputLayout passwordLayout;
+    private TextInputEditText editTextEmail, editTextPassword;
+    private TextInputLayout emailLayout, passwordLayout;
     private TextView textForgotPassword;
-    private Drawable defaultBackground;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
         boolean isDarkMode = sharedPreferences.getBoolean("darkMode", false);
-        AppCompatDelegate.setDefaultNightMode(isDarkMode ?
-                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // Ensure this matches your Login layout file
-
-        emailLayout = findViewById(R.id.emailLayout);
-        passwordLayout = findViewById(R.id.passwordLayout);
+        setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
+        emailLayout = findViewById(R.id.emailLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         textForgotPassword = findViewById(R.id.textForgotPassword);
-        defaultBackground = editTextEmail.getBackground();
 
-        // If user clicks forgot password, navigate to RecoverAccountActivity
         textForgotPassword.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RecoverAccountActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, RecoverAccountActivity.class));
             finish();
         });
 
@@ -87,60 +74,29 @@ public class LoginActivity extends AppCompatActivity {
             return_allDefaultBackground();
             //editTextEmail.setBackground(defaultBackground);
             return false;
-
         });
 
-        // PASSWORD HIDE/VISIBLE
         editTextPassword.setOnTouchListener((v, event) -> {
 
             return_allDefaultBackground();
             //editTextPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                int width = editTextPassword.getWidth();
-                int paddingRight = editTextPassword.getPaddingRight();
-                float touchX = event.getX();
-
                 if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[2].getBounds().width())) {
-
-                    if(!editTextPassword.isFocused()) {
-                        editTextPassword.requestFocus();
-                    }
-
-                    if (isPasswordVisible) {    // HIDE
-                        editTextPassword.setTransformationMethod(new PasswordTransformationMethod());
-                        editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eyehide), // drawableEnd
-                                null  // drawableBottom
-                        );
-                    } else {    // SHOW
-                        editTextPassword.setTransformationMethod(null);
-                        editTextPassword.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(this, R.drawable.ic_lock), // drawableStart
-                                null, // drawableTop
-                                ContextCompat.getDrawable(this, R.drawable.ic_eye), // drawableEnd
-                                null  // drawableBottom
-                        );
-                    }
-
-                    isPasswordVisible = !isPasswordVisible;
-                    editTextPassword.setSelection(editTextPassword.getText().length());
+                    if (!editTextPassword.isFocused()) editTextPassword.requestFocus();
+                    togglePasswordVisibility();
                     return true;
                 }
             }
             return false;
         });
 
-        // Handle Back Button Click - Navigate to WelcomeActivity
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear previous activities
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
 
-        // If login is successful, navigate to MainActivity (which hosts HomeFragment)
         findViewById(R.id.buttonLogin).setOnClickListener(v -> {
 
             //editTextEmail.setBackground(defaultBackground);
@@ -150,53 +106,25 @@ public class LoginActivity extends AppCompatActivity {
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
-            if(!email.isEmpty() && !password.isEmpty()) {
-
-                // Add restrictions for email (gmail.com, bicol-u.edu.ph, yahoo.com, etc).
-
-                // LogIn using Firebase Database
-                auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        // Load Firebase to Local Database
-                        findUsernameByEmail(email, new UsernameCallBack() {
-                            @Override
-                            public void onUsernameReceived(String username) {
-
-                                if(username != null) {
-
-                                    Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
-                                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                    setContentView(R.layout.activity_loginsuccess);
-
-                                    Main_EverythingLocalDatabase main_EverythingLocalDatabase = Main_EverythingLocalDatabase.getInstance(LoginActivity.this);
-                                    main_EverythingLocalDatabase.mainPage_RetrieveFirebase(username);
-
-                                } else {
-
-                                    Log.d("USERNAME SEARCH", "[FAILED] Username Not Found!");
-
-                                }
-
+            if (!email.isEmpty() && !password.isEmpty()) {
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnSuccessListener(authResult -> findUsernameByEmail(email, username -> {
+                            if (username != null) {
+                                Log.d("USERNAME SEARCH", "[SUCCESS] Username: " + username);
+                                Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                                setContentView(R.layout.activity_loginsuccess);
+                                Main_EverythingLocalDatabase.getInstance(LoginActivity.this).mainPage_RetrieveFirebase(username);
+                            } else {
+                                Log.d("USERNAME SEARCH", "[FAILED] Username Not Found!");
                             }
+                        }))
+                        .addOnFailureListener(e -> {
+                            emailLayout.setError("Invalid email address");
+                            passwordLayout.setError("Invalid password");
+                            updatePasswordIcons();
+                            Toast.makeText(LoginActivity.this, "Invalid Email Address or Password!", Toast.LENGTH_SHORT).show();
+                            Log.d("Login", "[FAILED] Login Failed!");
                         });
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        //editTextEmail.setBackgroundResource(R.drawable.edittext_error);
-                        //editTextPassword.setBackgroundResource(R.drawable.edittext_error);
-                        emailLayout.setError("Invalid email address");
-                        passwordLayout.setError("Invalid password");
-                        updatePasswordIcons(editTextPassword, isPasswordVisible);
-                        Toast.makeText(LoginActivity.this, "Invalid Email Address or Password!", Toast.LENGTH_SHORT).show();
-                        Log.d("Login", "[FAILED] Login Failed!");
-
-                    }
-                });
-
             } else {
 
                 if(editTextEmail.getText().toString().isEmpty())
@@ -206,69 +134,63 @@ public class LoginActivity extends AppCompatActivity {
                     passwordLayout.setError("This field cannot be empty.");
 
                 updatePasswordIcons(editTextPassword, isPasswordVisible);
+
                 Toast.makeText(LoginActivity.this, "Please Fill In All Fields!", Toast.LENGTH_SHORT).show();
-
             }
-
         });
 
-        // If user clicks signup, navigate to MainActivity and open SignupFragment1
         findViewById(R.id.textNoAccount).setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             finish();
         });
 
-        // Find the TextView
+        // Color the "Sign Up" part
         TextView textNoAccount = findViewById(R.id.textNoAccount);
-
-        // Create a SpannableString to change color for "Sign Up"
         SpannableString spannable = new SpannableString("Don't have an account? Sign Up");
-
-        // Find "Sign Up" position
         int start = spannable.toString().indexOf("Sign Up");
         int end = start + "Sign Up".length();
-
-        // Apply the color change (e.g., Blue) to "Sign Up"
-        spannable.setSpan(new ForegroundColorSpan(Color.GREEN), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        // Set the styled text to the TextView
+        spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.textColor)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textNoAccount.setText(spannable);
     }
 
-    // Getting Username by Email Logged In
+    private void togglePasswordVisibility() {
+        isPasswordVisible = !isPasswordVisible;
+        // Toggle password visibility
+        editTextPassword.setTransformationMethod(isPasswordVisible ? null : new PasswordTransformationMethod());
+        // Move cursor to the end after toggle
+        editTextPassword.setSelection(editTextPassword.getText().length());
+    }
+
+    private void updatePasswordIcons() {
+        TextInputLayout passwordLayout = findViewById(R.id.passwordLayout); // replace with your layout ID
+
+        // Set start icon to default lock icon (material default)
+        passwordLayout.setStartIconDrawable(null); // remove custom lock icon
+
+        // Enable built-in password toggle icon
+        passwordLayout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+    }
+
     private void findUsernameByEmail(String the_email, UsernameCallBack callBack) {
-
         DatabaseReference userCredentials = FirebaseDatabase.getInstance().getReference("Users_Credentials");
-
         userCredentials.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot snap_shot : snapshot.getChildren()) {
-
-                    String emailFromDB = snap_shot.child("email").getValue(String.class);
-                    if(emailFromDB != null && emailFromDB.equals(the_email.toLowerCase())) {
-
-                        String return_username = snap_shot.child("username").getValue(String.class);
-                        callBack.onUsernameReceived(return_username);
-                        return; // Stop searching once found.
-
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    String emailFromDB = snap.child("email").getValue(String.class);
+                    if (emailFromDB != null && emailFromDB.equalsIgnoreCase(the_email)) {
+                        callBack.onUsernameReceived(snap.child("username").getValue(String.class));
+                        return;
                     }
-
                 }
-                callBack.onUsernameReceived(null);  // No email is found.
-
+                callBack.onUsernameReceived(null);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
                 callBack.onUsernameReceived(null);
-
             }
         });
-
     }
 
     private void updatePasswordIcons(EditText editText, boolean isVisible) {
@@ -299,5 +221,5 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-}
 
+}

@@ -318,11 +318,13 @@ public class MainActivity extends AppCompatActivity {
             sharedViewModel.setTitle("SETTINGS");
             sharedViewModel.setSubtext("Manage your preferences");
             return true;
-        } else if (item.getItemId() == R.id.menu_profile_settings) {
-            //Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
-            navController.navigate(R.id.navigation_profile); // Navigate to MainSettingsFragment
-            return true;
-        } else if (item.getItemId() == R.id.menu_logout) {
+        }
+        //else if (item.getItemId() == R.id.menu_profile_settings) {
+        //    //Toast.makeText(this, "Profile Settings Clicked", Toast.LENGTH_SHORT).show();
+        //    navController.navigate(R.id.navigation_profile); // Navigate to MainSettingsFragment
+        //    return true;
+        //}
+        else if (item.getItemId() == R.id.menu_logout) {
             Toast.makeText(this, "Logout Successful!", Toast.LENGTH_SHORT).show();
 
             // Logout Firebase

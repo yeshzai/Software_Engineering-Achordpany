@@ -172,14 +172,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:startIconDrawable="@drawable/ic_lock"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_eyehide"
+        app:endIconMode="password_toggle"
         android:hint="Password"
         app:hintTextColor="@color/textFieldHintColor"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
         app:hintTextAppearance="@style/HintStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -189,13 +186,11 @@
             android:id="@+id/passwordText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:minHeight="56dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="@null"
+            android:inputType="textPassword"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,8 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:startIconDrawable="@drawable/ic_lock"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_eyehide"
+        app:endIconMode="password_toggle"
         android:hint="Confirm Password"
         app:hintTextColor="@color/textFieldHintColor"
         app:boxStrokeWidth="1dp"
@@ -233,6 +227,7 @@
             android:paddingBottom="12dp"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <!-- Username Input Field
     <EditText

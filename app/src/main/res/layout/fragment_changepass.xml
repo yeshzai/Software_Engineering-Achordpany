@@ -45,7 +45,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/changePassword_CurrentPasswordLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="270dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:startIconDrawable="@drawable/ic_lock"
@@ -79,7 +79,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/changePassword_NewPasswordLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="270dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:startIconDrawable="@drawable/ic_lock"
@@ -113,7 +113,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/changePassword_ConfirmPasswordLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="270dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:startIconDrawable="@drawable/ic_lock"

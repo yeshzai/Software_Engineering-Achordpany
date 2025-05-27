@@ -70,14 +70,16 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         editTextEmail.setOnTouchListener((v, event) -> {
-            emailLayout.setError(null);
-            emailLayout.setErrorEnabled(false);
+
+            return_allDefaultBackground();
+            //editTextEmail.setBackground(defaultBackground);
             return false;
         });
 
         editTextPassword.setOnTouchListener((v, event) -> {
-            passwordLayout.setError(null);
-            passwordLayout.setErrorEnabled(false);
+
+            return_allDefaultBackground();
+            //editTextPassword.setBackground(defaultBackground);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[2].getBounds().width())) {
@@ -96,10 +98,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.buttonLogin).setOnClickListener(v -> {
-            emailLayout.setError(null);
-            emailLayout.setErrorEnabled(false);
-            passwordLayout.setError(null);
-            passwordLayout.setErrorEnabled(false);
+
+            //editTextEmail.setBackground(defaultBackground);
+            //editTextPassword.setBackground(defaultBackground);
+            return_allDefaultBackground();
 
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
@@ -124,9 +126,15 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("Login", "[FAILED] Login Failed!");
                         });
             } else {
-                emailLayout.setError("This field cannot be empty.");
-                passwordLayout.setError("This field cannot be empty.");
-                updatePasswordIcons();
+
+                if(editTextEmail.getText().toString().isEmpty())
+                    emailLayout.setError("This field cannot be empty.");
+
+                if(editTextPassword.getText().toString().isEmpty())
+                    passwordLayout.setError("This field cannot be empty.");
+
+                updatePasswordIcons(editTextPassword, isPasswordVisible);
+
                 Toast.makeText(LoginActivity.this, "Please Fill In All Fields!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -184,4 +192,34 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void updatePasswordIcons(EditText editText, boolean isVisible) {
+        Drawable lockIcon = ContextCompat.getDrawable(this, R.drawable.ic_lock);
+        Drawable eyeIcon = ContextCompat.getDrawable(this,
+                isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+        editText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+
+        TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
+
+        // Set the start icon (lock icon)
+        layout.setStartIconDrawable(R.drawable.ic_lock);
+
+        // Tell TextInputLayout to use a custom end icon
+        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+
+        // Set the end icon (eye icon)
+        layout.setEndIconDrawable(isVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+    }
+
+    private void return_allDefaultBackground() {
+
+        emailLayout.setError(null);
+        emailLayout.setErrorEnabled(false);
+
+        passwordLayout.setError(null);
+        passwordLayout.setErrorEnabled(false);
+
+    }
+
+
 }

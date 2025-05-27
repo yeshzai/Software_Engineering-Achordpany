@@ -100,6 +100,10 @@ public class ChordsRecommendations {
             return;
         }
 
+        genre1 = (genre1.toLowerCase().equals("pop")) ? "Pop Music" : genre1;
+        genre2 = (genre2.toLowerCase().equals("pop")) ? "Pop Music" : genre2;
+        genre3 = (genre3.toLowerCase().equals("pop")) ? "Pop Music" : genre3;
+
         PyObject pyObjectResultGenre1 = pyModule.callAttr("generate_recommendations", genre1);
         PyObject pyObjectResultGenre2 = pyModule.callAttr("generate_recommendations", genre2);
         PyObject pyObjectResultGenre3 = pyModule.callAttr("generate_recommendations", genre3);

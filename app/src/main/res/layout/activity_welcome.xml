@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF11A849">
+    android:background="@color/primaryColorShade_600">
 
     <!-- Logo Image -->
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="280dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="88dp"
+        android:layout_width="450dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="75dp"
         android:contentDescription="Logo"
         android:translationZ="10dp"
         android:elevation="20dp"
-        android:src="@drawable/logo_white"
+        android:src="@drawable/logo_welcome"
         android:scaleType="fitCenter"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
@@ -36,7 +36,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="460dp"
-            android:background="@color/background_light" >
+            android:background="@color/backgroundColor" >
+
+            <ImageButton
+                android:id="@+id/themeToggle"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_theme_toggle"
+                android:contentDescription="Toggle Theme"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ClickableViewAccessibility,ContentDescription" />
 
             <!-- Title: LET'S -->
             <TextView
@@ -45,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
                 android:text="LET'S"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
                 android:text="GET STARTED"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Everything starts from here"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title2"
@@ -109,6 +121,21 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <!-- Guest Login -->
+            <TextView
+                android:id="@+id/guest_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+                android:text="Continue as Guest"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"

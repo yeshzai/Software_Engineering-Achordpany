@@ -26,18 +26,31 @@ import androidx.fragment.app.Fragment;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.auth.LoginActivity;
 import com.example.achordpany.ui.auth.WelcomeActivity;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpStep1Fragment extends Fragment {
 
     private Drawable defaultBackground;
     private boolean isPasswordVisible = false;
     private boolean isConfirmPasswordVisible = false;
-    public TextView usernameText;
-    public TextView emailAddressText;
-    public EditText passwordText;
-    public EditText confirmPasswordText;
+    public TextInputEditText usernameText;
+    public TextInputEditText emailAddressText;
+    public TextInputEditText passwordText;
+    public TextInputEditText confirmPasswordText;
+    private TextInputLayout usernameLayout;
+    private TextInputLayout emailLayout;
+    private TextInputLayout passwordLayout;
+    private TextInputLayout confirmpasswordLayout;
 
     @SuppressLint("ClickableViewAccessibility")
 
@@ -51,6 +64,12 @@ public class SignUpStep1Fragment extends Fragment {
         emailAddressText = view.findViewById(R.id.emailAddressText);
         passwordText = view.findViewById(R.id.passwordText);
         confirmPasswordText = view.findViewById(R.id.confirmPasswordText);
+
+        usernameLayout = view.findViewById(R.id.usernameLayout);
+        emailLayout = view.findViewById(R.id.emailLayout);
+        passwordLayout = view.findViewById(R.id.passwordLayout);
+        confirmpasswordLayout = view.findViewById(R.id.confirmpasswordLayout);
+
         defaultBackground = usernameText.getBackground();
         backtrackContent();
 
@@ -63,18 +82,31 @@ public class SignUpStep1Fragment extends Fragment {
 
         });
 
+        passwordText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updatePasswordIcons(passwordText, isPasswordVisible);
+            }
+        });
+        confirmPasswordText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
+            }
+        });
+
 
         // PASSWORD HIDE/VISIBLE
         passwordText.setOnTouchListener((v, event) -> {
 
-            returnWhich_DefaultBackground(1234);
+            return_AllDefaultBackground();
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = passwordText.getWidth();
                 int paddingRight = passwordText.getPaddingRight();
                 float touchX = event.getX();
 
-                if (touchX > width - paddingRight - passwordText.getCompoundDrawables()[2].getBounds().width()) {
+                //if (touchX > width - paddingRight - passwordText.getCompoundDrawables()[2].getBounds().width()) {
+                Drawable endDrawable = passwordText.getCompoundDrawables()[2];
+                if (endDrawable != null && touchX > width - paddingRight - endDrawable.getBounds().width()) {
 
                     if(!passwordText.isFocused()) {
                         passwordText.requestFocus();
@@ -83,17 +115,17 @@ public class SignUpStep1Fragment extends Fragment {
                     if (isPasswordVisible) {    // HIDE
                         passwordText.setTransformationMethod(new PasswordTransformationMethod());
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW
                         passwordText.setTransformationMethod(null);
                         passwordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }
@@ -109,14 +141,16 @@ public class SignUpStep1Fragment extends Fragment {
         // CONFIRM PASSWORD HIDE/VISIBLE
         confirmPasswordText.setOnTouchListener((v, event) -> {
 
-            returnWhich_DefaultBackground(1234);
+            return_AllDefaultBackground();
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 int width = confirmPasswordText.getWidth();
                 int paddingRight = confirmPasswordText.getPaddingRight();
                 float touchX = event.getX();
 
-                if (touchX > width - paddingRight - confirmPasswordText.getCompoundDrawables()[2].getBounds().width()) {
+                //if (touchX > width - paddingRight - confirmPasswordText.getCompoundDrawables()[2].getBounds().width()) {
+                Drawable endDrawable = confirmPasswordText.getCompoundDrawables()[2];
+                if (endDrawable != null && touchX > width - paddingRight - endDrawable.getBounds().width()) {
 
                     if(!confirmPasswordText.isFocused()) {
                         confirmPasswordText.requestFocus();
@@ -125,17 +159,17 @@ public class SignUpStep1Fragment extends Fragment {
                     if (isConfirmPasswordVisible) { // HIDE
                         confirmPasswordText.setTransformationMethod(new PasswordTransformationMethod());
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eyehide), // drawableEnd
                                 null  // drawableBottom
                         );
                     } else {    // SHOW
                         confirmPasswordText.setTransformationMethod(null);
                         confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_black), // drawableStart
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock), // drawableStart
                                 null, // drawableTop
-                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_black), // drawableEnd
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye), // drawableEnd
                                 null  // drawableBottom
                         );
                     }
@@ -149,18 +183,19 @@ public class SignUpStep1Fragment extends Fragment {
         });
 
         usernameText.setOnTouchListener((v, event) -> {
-            returnWhich_DefaultBackground(1234);
+            return_AllDefaultBackground();
             return false;
         });
 
         emailAddressText.setOnTouchListener((v, event) -> {
-            returnWhich_DefaultBackground(1234);
+            return_AllDefaultBackground();
             return false;
         });
 
         Button btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(v -> {
 
+            return_AllDefaultBackground();
             SignUpCredentials signUpCredentials = SignUpCredentials.getInstance();
 
             String user_usernameText = usernameText.getText().toString();
@@ -168,65 +203,213 @@ public class SignUpStep1Fragment extends Fragment {
             String user_passwordText = passwordText.getText().toString();
             String user_confirmPasswordText = confirmPasswordText.getText().toString();
 
-            if(!username_valid(user_usernameText)) { // [KEY - CHILD_NAME] Username Does Not Contain Invalid Character(s)
-                returnWhich_DefaultBackground(1234);
+            if(user_usernameText.isEmpty()) {
 
-                if(!user_usernameText.isEmpty() && !user_emailAddressText.isEmpty()
-                        && !user_passwordText.isEmpty() && !user_confirmPasswordText.isEmpty())
-                {
-                    returnWhich_DefaultBackground(1234);
+                Toast.makeText(requireActivity(), "Please enter a username.", Toast.LENGTH_SHORT).show();
+                //usernameText.setBackgroundResource(R.drawable.edittext_error);
+                usernameLayout.setError("This field cannot be empty.");
 
-                    if (user_passwordText.equals(user_confirmPasswordText)) {
+            } else {
 
-                        passwordText.setBackground(defaultBackground);
-                        confirmPasswordText.setBackground(defaultBackground);
+                if(username_valid(user_usernameText)) {
 
-                        signUpCredentials.set_credential_usernameText(user_usernameText);
-                        signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
-                        signUpCredentials.set_credential_passwordText(user_passwordText);
-                        signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
+                    // Check if username already exists.
+                    DatabaseReference users_usernamelist = FirebaseDatabase.getInstance().getReference("Users_UsernameList");
+                    users_usernamelist.child(user_usernameText).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        // Testing purposes - Logcat
-                        Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
-                        Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
-                        Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
-                        Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
+                            if (snapshot.exists()) {    // Username already exists.
 
-                        ((SignUpActivity) requireActivity()).navigateToStep(2);
+                                Toast.makeText(requireActivity(), "Username already taken! Please choose another.", Toast.LENGTH_LONG).show();
+                                //usernameText.setBackgroundResource(R.drawable.edittext_error);
+                                usernameLayout.setError("Username already taken");
 
-                    } else {
+                            } else {                    // Username available, proceed.
 
-                        Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
-                        passwordText.setBackgroundResource(R.drawable.edittext_error);
-                        confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
-                        returnWhich_DefaultBackground(12);
+                                if(user_emailAddressText.isEmpty()) {
 
-                    }
+                                    Toast.makeText(requireActivity(), "Please enter an email address.", Toast.LENGTH_SHORT).show();
+                                    //emailAddressText.setBackgroundResource(R.drawable.edittext_error);
+                                    emailLayout.setError("This field cannot be empty.");
+
+                                } else {
+
+                                    // Check if email already exists.
+                                    FirebaseAuth.getInstance().fetchSignInMethodsForEmail(user_emailAddressText)
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+
+                                                    List<String> signInMethods = task.getResult().getSignInMethods();
+
+                                                    if (signInMethods != null && !signInMethods.isEmpty()) {
+
+                                                        // Email already exists
+                                                        Toast.makeText(requireActivity(), "Email already exists. Please choose another.", Toast.LENGTH_SHORT).show();
+                                                        //emailAddressText.setBackgroundResource(R.drawable.edittext_error);
+                                                        emailLayout.setError("Email already exists.");
+
+                                                    } else {
+
+                                                        // Email is available
+                                                        if(user_passwordText.isEmpty() || user_confirmPasswordText.isEmpty()) {
+
+                                                            if(user_passwordText.isEmpty()) {
+                                                                //passwordText.setBackgroundResource(R.drawable.edittext_error);
+                                                                passwordLayout.setError("This field cannot be empty.");
+
+                                                                // Re-apply password icon
+                                                                /*passwordText.post(() -> {
+                                                                    Drawable lockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
+                                                                    Drawable eyeIcon = ContextCompat.getDrawable(requireContext(),
+                                                                            isPasswordVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+
+                                                                    if (lockIcon != null && eyeIcon != null) {
+                                                                        passwordText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+                                                                    } else {
+                                                                        Log.e("DrawableError", "Missing drawable resource: lockIcon or eyeIcon is null");
+                                                                    }
+                                                                });*/
+                                                                updatePasswordIcons(passwordText, isPasswordVisible);
+                                                            }
+
+                                                            if(user_confirmPasswordText.isEmpty()) {
+                                                                //confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
+                                                                confirmpasswordLayout.setError("This field cannot be empty.");
+
+                                                                // Re-apply confirm password icon
+                                                                /*confirmPasswordText.post(() -> {
+                                                                    Drawable confirmLockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
+                                                                    Drawable confirmEyeIcon = ContextCompat.getDrawable(requireContext(),
+                                                                            isConfirmPasswordVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+
+                                                                    if (confirmLockIcon != null && confirmEyeIcon != null) {
+                                                                        confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(confirmLockIcon, null, confirmEyeIcon, null);
+                                                                    } else {
+                                                                        Log.e("DrawableError", "Missing drawable resource: confirmLockIcon or confirmEyeIcon is null");
+                                                                    }
+                                                                });*/
+                                                                updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
+                                                            }
+
+                                                            Toast.makeText(requireActivity(), "Please fill in all the blanks.", Toast.LENGTH_SHORT).show();
+
+                                                        } else {
+
+                                                            if(user_passwordText.length() < 6 || user_confirmPasswordText.length() < 6) {
+
+                                                                if(user_passwordText.length() < 6) {
+                                                                    passwordLayout.setError("Minimum of 6 characters required.");
+                                                                    updatePasswordIcons(passwordText, isPasswordVisible);
+                                                                }
+
+                                                                if(user_confirmPasswordText.length() < 6) {
+                                                                    confirmpasswordLayout.setError("Minimum of 6 characters required.");
+                                                                    updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
+                                                                }
+
+
+                                                            } else {
+
+                                                                if (user_passwordText.equals(user_confirmPasswordText)) {
+
+                                                                    //passwordText.setBackground(defaultBackground);
+                                                                    //confirmPasswordText.setBackground(defaultBackground);
+                                                                    passwordLayout.setError(null);
+                                                                    passwordLayout.setErrorEnabled(false);
+
+                                                                    confirmpasswordLayout.setError(null);
+                                                                    confirmpasswordLayout.setErrorEnabled(false);
+
+
+                                                                    signUpCredentials.set_credential_usernameText(user_usernameText);
+                                                                    signUpCredentials.set_credential_emailAddressText(user_emailAddressText);
+                                                                    signUpCredentials.set_credential_passwordText(user_passwordText);
+                                                                    signUpCredentials.set_credential_confirmPasswordText(user_confirmPasswordText);
+
+                                                                    // Testing purposes - Logcat
+                                                                    Log.d("SignUpCredentials", "Username: " + signUpCredentials.get_credential_usernameText());
+                                                                    Log.d("SignUpCredentials", "Email Address: " + signUpCredentials.get_credential_emailAddressText());
+                                                                    Log.d("SignUpCredentials", "Password: " + signUpCredentials.get_credential_passwordText());
+                                                                    Log.d("SignUpCredentials", "Confirm Password: " + signUpCredentials.get_credential_confirmPasswordText());
+
+                                                                    ((SignUpActivity) requireActivity()).navigateToStep(2);
+
+                                                                } else {
+                                                                    //passwordText.setBackgroundResource(R.drawable.edittext_error);
+                                                                    //confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
+                                                                    passwordLayout.setError("Password do not match.");
+
+                                                                    // Re-apply password icon
+                                                                /*passwordText.post(() -> {
+                                                                    Drawable lockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
+                                                                    Drawable eyeIcon = ContextCompat.getDrawable(requireContext(),
+                                                                            isPasswordVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+
+                                                                    if (lockIcon != null && eyeIcon != null) {
+                                                                        passwordText.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeIcon, null);
+                                                                    } else {
+                                                                        Log.e("DrawableError", "Missing drawable resource: lockIcon or eyeIcon is null");
+                                                                    }
+                                                                });*/
+                                                                    updatePasswordIcons(passwordText, isPasswordVisible);
+
+
+                                                                    confirmpasswordLayout.setError("Password do not match.");
+
+                                                                    // Re-apply confirm password icon
+                                                                /*confirmPasswordText.post(() -> {
+                                                                    Drawable confirmLockIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock);
+                                                                    Drawable confirmEyeIcon = ContextCompat.getDrawable(requireContext(),
+                                                                            isConfirmPasswordVisible ? R.drawable.ic_eye : R.drawable.ic_eyehide);
+
+                                                                    if (confirmLockIcon != null && confirmEyeIcon != null) {
+                                                                        confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(confirmLockIcon, null, confirmEyeIcon, null);
+                                                                    } else {
+                                                                        Log.e("DrawableError", "Missing drawable resource: confirmLockIcon or confirmEyeIcon is null");
+                                                                    }
+                                                                });*/
+                                                                    updatePasswordIcons(confirmPasswordText, isConfirmPasswordVisible);
+
+                                                                    Toast.makeText(requireActivity(), "Passwords Do Not Match!", Toast.LENGTH_SHORT).show();
+                                                                }
+
+                                                            }
+
+                                                        }
+
+                                                    }
+
+                                                } else {
+
+                                                    Exception e = task.getException();
+                                                    Log.e("EMAIL_CHECK", "[FAILED] Cannot find email! ERROR: " + e.getMessage());
+                                                    //emailAddressText.setBackgroundResource(R.drawable.edittext_error);
+                                                    Toast.makeText(requireActivity(), "Please enter valid/correct email.", Toast.LENGTH_SHORT).show();
+                                                    emailLayout.setError("Invalid email address.");
+                                                }
+                                            });
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                            Log.d("[DATABASE ERROR]", error.getMessage());
+
+                        }
+                    });
+
                 } else {
 
-                    Toast.makeText(requireActivity(), "Please Fill Out All Fields!", Toast.LENGTH_SHORT).show();
-
-                    returnWhich_DefaultBackground(1234);
-                    if(usernameText.getText().toString().isEmpty()) {
-                        usernameText.setBackgroundResource(R.drawable.edittext_error);
-                    }
-                    if(emailAddressText.getText().toString().isEmpty()) {
-                        emailAddressText.setBackgroundResource(R.drawable.edittext_error);
-                    }
-                    if(passwordText.getText().toString().isEmpty()) {
-                        passwordText.setBackgroundResource(R.drawable.edittext_error);
-                    }
-                    if(confirmPasswordText.getText().toString().isEmpty()) {
-                        confirmPasswordText.setBackgroundResource(R.drawable.edittext_error);
-                    }
-
+                    Toast.makeText(requireActivity(), "Username invalid! Contains special characters.", Toast.LENGTH_SHORT).show();
+                    //usernameText.setBackgroundResource(R.drawable.edittext_error);
+                    usernameLayout.setError("Invalid username.");
                 }
-
-            } else {  // [KEY - CHILD_NAME] Username Contain Invalid Character(s)
-
-                Toast.makeText(requireActivity(), "Username Invalid! Remove [., $, #, [, ], /]", Toast.LENGTH_SHORT).show();
-                usernameText.setBackgroundResource(R.drawable.edittext_error);
-                returnWhich_DefaultBackground(234);
 
             }
 
@@ -246,25 +429,37 @@ public class SignUpStep1Fragment extends Fragment {
 
     }
 
-    private void returnWhich_DefaultBackground(int which) {
+    private void updatePasswordIcons(EditText editText, boolean isVisible) {
+        TextInputLayout layout = (TextInputLayout) editText.getParent().getParent();
 
-        switch (which) {
-            case (1234):
-                usernameText.setBackground(defaultBackground);
-                emailAddressText.setBackground(defaultBackground);
-                passwordText.setBackground(defaultBackground);
-                confirmPasswordText.setBackground(defaultBackground);
-                break;
-            case (234):
-                emailAddressText.setBackground(defaultBackground);
-                passwordText.setBackground(defaultBackground);
-                confirmPasswordText.setBackground(defaultBackground);
-                break;
-            case (12):
-                usernameText.setBackground(defaultBackground);
-                emailAddressText.setBackground(defaultBackground);
-                break;
-        }
+        // Set the start icon (lock icon)
+        layout.setStartIconDrawable(R.drawable.ic_lock);
+
+        // Enable default password toggle (eye icon)
+        layout.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+
+        // No need to manually set end icon drawable here — the toggle handles it.
+    }
+
+
+    private void return_AllDefaultBackground() {
+
+        usernameLayout.setError(null);
+        usernameLayout.setErrorEnabled(false);
+
+        emailLayout.setError(null);
+        emailLayout.setErrorEnabled(false);
+
+        passwordLayout.setError(null);
+        passwordLayout.setErrorEnabled(false);
+
+        confirmpasswordLayout.setError(null);
+        confirmpasswordLayout.setErrorEnabled(false);
+
+        //usernameText.setBackground(defaultBackground);
+        //emailAddressText.setBackground(defaultBackground);
+        //passwordText.setBackground(defaultBackground);
+        //confirmPasswordText.setBackground(defaultBackground);
 
     }
 
@@ -298,16 +493,14 @@ public class SignUpStep1Fragment extends Fragment {
     private boolean username_valid(String check_username) {
 
         String[] forbidden_keys = {".", "$", "#", "[", "]", "/"};
-        boolean the_result = false;
 
         for(String i : forbidden_keys) {
             if(check_username.contains(i)) {
-                the_result = true;
-                break;
+                return false;
             }
         }
 
-        return the_result;
+        return true;
 
     }
 

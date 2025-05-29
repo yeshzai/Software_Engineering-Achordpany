@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <!-- ✅ Header Layout with Back Button and Title -->
     <RelativeLayout
@@ -24,7 +25,7 @@
             android:text="@string/search_a_song"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:maxLines="1"
             android:ellipsize="end"/>
 
@@ -38,7 +39,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"/>
+            android:src="@drawable/ic_return1"/>
     </RelativeLayout>
 
     <!-- ✅ Main Content Below Header -->
@@ -57,7 +58,7 @@
             android:layout_marginBottom="10dp"
             android:text="@string/play_a_song"
             android:textSize="19sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:maxLines="1"
             android:ellipsize="end"
             android:visibility="gone" />
@@ -68,7 +69,7 @@
             android:layout_height="wrap_content"
             android:text="Time Remaining: 8s"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"/>
@@ -94,7 +95,7 @@
             android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:src="@drawable/ic_return_black_36dp"
+            android:src="@drawable/ic_return1"
             android:visibility="gone" />
 
         <!-- ✅ Placeholder for Action Buttons (Initially Hidden) -->
@@ -114,7 +115,7 @@
                 android:layout_marginEnd="100dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/restart"
-                android:src="@drawable/ic_undo_black_24dp"
+                android:src="@drawable/ic_undo"
                 android:visibility="gone"/>
 
             <ImageButton
@@ -123,7 +124,7 @@
                 android:layout_height="30dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/stop"
-                android:src="@drawable/ic_stop_black_24dp"
+                android:src="@drawable/ic_stop"
                 android:visibility="gone"/>
         </LinearLayout>
 
@@ -135,7 +136,7 @@
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/restart_listening"
-            android:src="@drawable/ic_undo_black_24dp"
+            android:src="@drawable/ic_undo"
             android:visibility="gone" />
 
         <ImageButton
@@ -146,7 +147,7 @@
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/stop_listening"
-            android:src="@drawable/ic_stop_black_24dp"
+            android:src="@drawable/ic_stop"
             android:visibility="gone" />
     </LinearLayout>
 
@@ -160,10 +161,11 @@
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:text="@string/search_a_song"
-            android:backgroundTint="@color/light_green"
-            android:textColor="@android:color/white"/>
+            android:textStyle="bold"
+            android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/black"/>
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

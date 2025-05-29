@@ -8,14 +8,14 @@
     android:layout_height="match_parent"
     android:padding="0dp"
     android:layout_marginTop="100dp"
-    android:background="#FAFAFA">
+    android:background="@color/backgroundColor">
 
     <!-- Main Container: Holds the Profile and Recommendations sections -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="560dp"
         android:orientation="vertical"
-        android:background="@color/white"
+        android:background="@color/backgroundColor"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBaseline_toBottomOf="parent"
         android:layout_marginTop="200dp">
@@ -68,7 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="USERNAME"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -85,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:text="Edit"
                             android:layout_marginEnd="25dp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
@@ -130,7 +130,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:text="EMAIL"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -142,7 +142,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:text="Edit"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textColor"
                             tools:ignore="HardcodedText" />
                     </RelativeLayout>
 
@@ -155,7 +155,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Email Placeholder"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
 
@@ -174,7 +174,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:text="GENRE"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -186,7 +186,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:text="Edit"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textColor"
                             tools:ignore="HardcodedText" />
                     </RelativeLayout>
 
@@ -199,7 +199,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Genre Placeholder 1"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
 
@@ -211,7 +211,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Genre Placeholder 2"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
 
@@ -223,7 +223,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Genre Placeholder 3"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
 
@@ -259,7 +259,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
                     android:text="Recommendations"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/textColor"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
@@ -301,7 +301,7 @@
                             android:text="Title"
                             android:maxLines="1"
                             android:ellipsize="end"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -311,7 +311,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="10sp"
                             tools:ignore="HardcodedText,SmallSp" />
 
@@ -320,13 +320,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="12sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_11_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -363,7 +364,7 @@
                             android:text="Title"
                             android:maxLines="1"
                             android:ellipsize="end"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -373,7 +374,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="10sp"
                             tools:ignore="HardcodedText,SmallSp" />
 
@@ -382,13 +383,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="12sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_12_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -435,7 +437,7 @@
                             android:text="Title"
                             android:maxLines="1"
                             android:ellipsize="end"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -445,7 +447,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="10sp"
                             tools:ignore="HardcodedText,SmallSp" />
 
@@ -454,13 +456,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="12sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_2_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -497,7 +500,7 @@
                             android:text="Title"
                             android:maxLines="1"
                             android:ellipsize="end"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
@@ -507,7 +510,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Artist"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="10sp"
                             tools:ignore="HardcodedText,SmallSp" />
 
@@ -516,13 +519,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Genre"
-                            android:textColor="#424242"
+                            android:textColor="@color/subText"
                             android:textSize="12sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Card Right: Recommendation Icon -->
                     <ImageView
+                        android:id="@+id/recommendations_3_ButtonOpen"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"

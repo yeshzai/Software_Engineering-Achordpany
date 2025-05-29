@@ -1,6 +1,7 @@
 package com.example.achordpany.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +24,13 @@ import com.chaquo.python.Python;
 import com.example.achordpany.ChordsBookmarks;
 import com.example.achordpany.ChordsRecommendations;
 import com.example.achordpany.ChordsSearchedHistory;
+import com.example.achordpany.ChordsWebView;
 import com.example.achordpany.Main_EverythingLocalDatabase;
 import com.example.achordpany.R;
 import com.example.achordpany.ui.SharedViewModel;
 import com.example.achordpany.databinding.FragmentHomeBinding;
 import com.example.achordpany.ui.history.HistoryFragment;
+import com.example.achordpany.ui.history.HistoryWebViewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -56,6 +59,19 @@ public class HomeFragment extends Fragment {
     ArrayList<String> bookmarkSite;
     ArrayList<String> bookmarkURL;
     ArrayList<String> bookmarkUID;
+
+    ArrayList<String> recommendationsTitle_1;
+    ArrayList<String> recommendationsArtist_1;
+    ArrayList<String> recommendationsURL_1;
+    String recommendationsGenre_1;
+    ArrayList<String> recommendationsTitle_2;
+    ArrayList<String> recommendationsArtist_2;
+    ArrayList<String> recommendationsURL_2;
+    String recommendationsGenre_2;
+    ArrayList<String> recommendationsTitle_3;
+    ArrayList<String> recommendationsArtist_3;
+    ArrayList<String> recommendationsURL_3;
+    String recommendationsGenre_3;
 
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -90,6 +106,19 @@ public class HomeFragment extends Fragment {
         bookmarkURL = chordsBookmarks.get_URL();
         bookmarkUID = chordsBookmarks.get_UID();
 
+        recommendationsTitle_1 = chordsRecommendations.get_RecommendationsGenre1Title();
+        recommendationsArtist_1 = chordsRecommendations.get_RecommendationsGenre1Artist();
+        recommendationsURL_1 = chordsRecommendations.get_RecommendationsGenre1URL();
+        recommendationsGenre_1 = chordsRecommendations.get_Genres().get(0);
+        recommendationsTitle_2 = chordsRecommendations.get_RecommendationsGenre2Title();
+        recommendationsArtist_2 = chordsRecommendations.get_RecommendationsGenre2Artist();
+        recommendationsURL_2 = chordsRecommendations.get_RecommendationsGenre2URL();
+        recommendationsGenre_2 = chordsRecommendations.get_Genres().get(1);
+        recommendationsTitle_3 = chordsRecommendations.get_RecommendationsGenre3Title();
+        recommendationsArtist_3 = chordsRecommendations.get_RecommendationsGenre3Artist();
+        recommendationsURL_3 = chordsRecommendations.get_RecommendationsGenre3URL();
+        recommendationsGenre_3 = chordsRecommendations.get_Genres().get(2);
+
         load_Bookmarks();
         load_RecentSearches();
         load_Recommendations();
@@ -98,23 +127,29 @@ public class HomeFragment extends Fragment {
         binding.recentSearch2BookmarkButton.setOnClickListener(v -> { historyBookmarks_Function(2, recentIsBookmarked.size() - 2); });
 
         // Open Button - Bookmarks
-        binding.bookmarkBoard1OpenButton.setOnClickListener(v -> {
-            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
-            // Open website gotoURL
-        });
-        binding.bookmarkBoard2OpenButton.setOnClickListener(v -> {
-            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
-            // Open website gotoURL
-        });
+        binding.bookmarkBoard1OpenButton.setOnClickListener(v -> open_Home_WebView( bookmarkURL.size() - 1,  1));
+        binding.bookmarkBoard2OpenButton.setOnClickListener(v -> open_Home_WebView( bookmarkURL.size() - 2,  1));
 
         // Open Button - Recent Searches
-        binding.recentSearch1OpenButton.setOnClickListener(v -> {
-            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
-            // Open website gotoURL
+        binding.recentSearch1OpenButton.setOnClickListener(v -> open_Home_WebView( recentURL.size() - 1,  2));
+        binding.recentSearch2OpenButton.setOnClickListener(v -> open_Home_WebView( recentURL.size() - 2,  2));
+
+        // Open Button - Recommendations
+        binding.recommendations1OpenButton.setOnClickListener(v -> {
+            open_Home_WebView_Recommendations(
+                    recommendationsTitle_1.get(0),
+                    recommendationsArtist_1.get(0),
+                    recommendationsGenre_1,
+                    recommendationsURL_1.get(0)
+            );
         });
-        binding.recentSearch2OpenButton.setOnClickListener(v -> {
-            String gotoURL = bookmarkURL.get(bookmarkURL.size() - 1);
-            // Open website gotoURL
+        binding.recommendations2OpenButton.setOnClickListener(v -> {
+            open_Home_WebView_Recommendations(
+                    recommendationsTitle_2.get(0),
+                    recommendationsArtist_2.get(0),
+                    recommendationsGenre_2,
+                    recommendationsURL_2.get(0)
+            );
         });
 
         // Home Page Functions
@@ -319,19 +354,21 @@ public class HomeFragment extends Fragment {
     public void load_Recommendations() {
 
         // Recommendation Title and Artist
-        if(chordsRecommendations.get_RecommendationsGenre1().isEmpty()) {
+        if(chordsRecommendations.get_RecommendationsGenre1Title().isEmpty()) {
 
             binding.recommendations1Board.setVisibility(View.INVISIBLE);
             binding.recommendations1Board.setVisibility(View.INVISIBLE);
 
-        } else if (chordsRecommendations.get_RecommendationsGenre1().size() == 1) {
+        } else if (chordsRecommendations.get_RecommendationsGenre1Title().size() == 1) {
 
             binding.recommendations1Board.setVisibility(View.VISIBLE);
             binding.recommendations2Board.setVisibility(View.INVISIBLE);
 
-            String[] recommendation_1 = chordsRecommendations.get_RecommendationsGenre1().get(0).split("\\|\\|\\|\\|\\|");
-            binding.recommendations1Title.setText(recommendation_1[0]);
-            binding.recommendations1Artist.setText(recommendation_1[1]);
+            String recommendation_1_Title = chordsRecommendations.get_RecommendationsGenre1Title().get(0);
+            String recommendation_1_Artist = chordsRecommendations.get_RecommendationsGenre1Artist().get(0);
+
+            binding.recommendations1Title.setText(recommendation_1_Title);
+            binding.recommendations1Artist.setText(recommendation_1_Artist);
             binding.recommendations1Genre.setText(chordsRecommendations.get_Genres().get(0));
 
         } else {
@@ -339,17 +376,67 @@ public class HomeFragment extends Fragment {
             binding.recommendations1Board.setVisibility(View.VISIBLE);
             binding.recommendations2Board.setVisibility(View.VISIBLE);
 
-            String[] recommendation_1 = chordsRecommendations.get_RecommendationsGenre1().get(0).split("\\|\\|\\|\\|\\|");
-            binding.recommendations1Title.setText(recommendation_1[0]);
-            binding.recommendations1Artist.setText(recommendation_1[1]);
+            String recommendation_1_Title = chordsRecommendations.get_RecommendationsGenre1Title().get(0);
+            String recommendation_1_Artist = chordsRecommendations.get_RecommendationsGenre1Artist().get(0);
+
+            binding.recommendations1Title.setText(recommendation_1_Title);
+            binding.recommendations1Artist.setText(recommendation_1_Artist);
             binding.recommendations1Genre.setText(chordsRecommendations.get_Genres().get(0));
 
-            String[] recommendation_2 = chordsRecommendations.get_RecommendationsGenre2().get(0).split("\\|\\|\\|\\|\\|");
-            binding.recommendations2Title.setText(recommendation_2[0]);
-            binding.recommendations2Artist.setText(recommendation_2[1]);
+            String recommendation_2_Title = chordsRecommendations.get_RecommendationsGenre2Title().get(0);
+            String recommendation_2_Artist = chordsRecommendations.get_RecommendationsGenre2Artist().get(0);
+
+            binding.recommendations2Title.setText(recommendation_2_Title);
+            binding.recommendations2Artist.setText(recommendation_2_Artist);
             binding.recommendations2Genre.setText(chordsRecommendations.get_Genres().get(1));
 
         }
+
+    }
+
+    private void open_Home_WebView(int whichIndex, int whichCategory) {
+
+        String use_Title = "";
+        String use_Artist = "";
+        String use_Genre = "";
+        String use_URL = "";
+
+        switch (whichCategory) {
+            case 1: // Bookmarks
+                use_Title = bookmarkTitle.get(whichIndex);
+                use_Artist = bookmarkArtist.get(whichIndex);
+                use_Genre = bookmarkGenre.get(whichIndex);
+                use_URL = bookmarkURL.get(whichIndex);
+                break;
+            case 2: // Recent Search
+                use_Title = recentTitle.get(whichIndex);
+                use_Artist = recentArtist.get(whichIndex);
+                use_Genre = recentGenre.get(whichIndex);
+                use_URL = recentURL.get(whichIndex);
+                break;
+        }
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        chordsWebView.set_Title(use_Title);
+        chordsWebView.set_Artist(use_Artist);
+        chordsWebView.set_Genre(use_Genre);
+        chordsWebView.set_Url(use_URL);
+
+        Intent intent = new Intent(requireActivity(), HomeWebViewActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void open_Home_WebView_Recommendations(String use_Title, String use_Artist, String use_Genre, String use_URL) {
+
+        ChordsWebView chordsWebView = ChordsWebView.getInstance();
+        chordsWebView.set_Title(use_Title);
+        chordsWebView.set_Artist(use_Artist);
+        chordsWebView.set_Genre(use_Genre);
+        chordsWebView.set_Url(use_URL);
+
+        Intent intent = new Intent(requireActivity(), HomeWebViewActivity.class);
+        startActivity(intent);
 
     }
 

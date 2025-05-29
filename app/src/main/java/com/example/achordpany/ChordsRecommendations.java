@@ -11,10 +11,20 @@ import java.util.List;
 public class ChordsRecommendations {
 
     public static ChordsRecommendations instance;
+
     private ArrayList<String> genres = new ArrayList<>();
-    private ArrayList<String> recommendations_genre1 = new ArrayList<>();
-    private ArrayList<String> recommendations_genre2 = new ArrayList<>();
-    private ArrayList<String> recommendations_genre3 = new ArrayList<>();
+
+    private ArrayList<String> recommendations_genre1_title = new ArrayList<>();
+    private ArrayList<String> recommendations_genre1_artist = new ArrayList<>();
+    private ArrayList<String> recommendations_genre1_url = new ArrayList<>();
+
+    private ArrayList<String> recommendations_genre2_title = new ArrayList<>();
+    private ArrayList<String> recommendations_genre2_artist = new ArrayList<>();
+    private ArrayList<String> recommendations_genre2_url = new ArrayList<>();
+
+    private ArrayList<String> recommendations_genre3_title = new ArrayList<>();
+    private ArrayList<String> recommendations_genre3_artist = new ArrayList<>();
+    private ArrayList<String> recommendations_genre3_url = new ArrayList<>();
 
     public static ChordsRecommendations getInstance() {
         if (instance == null) {
@@ -26,42 +36,77 @@ public class ChordsRecommendations {
     public void set_Genres(String genre) {
         this.genres.add(genre);
     }
-    public void set_RecommendationsGenre1(String genre1) {
-        this.recommendations_genre1.add(genre1);
+
+    public void set_RecommendationsGenre1(String title, String artist, String url) {
+        this.recommendations_genre1_title.add(title);
+        this.recommendations_genre1_artist.add(artist);
+        this.recommendations_genre1_url.add(url);
     }
-    public void set_RecommendationsGenre2(String genre2) {
-        this.recommendations_genre2.add(genre2);
+
+    public void set_RecommendationsGenre2(String title, String artist, String url) {
+        this.recommendations_genre2_title.add(title);
+        this.recommendations_genre2_artist.add(artist);
+        this.recommendations_genre2_url.add(url);
     }
-    public void set_RecommendationsGenre3(String genre3) {
-        this.recommendations_genre3.add(genre3);
+
+    public void set_RecommendationsGenre3(String title, String artist, String url) {
+        this.recommendations_genre3_title.add(title);
+        this.recommendations_genre3_artist.add(artist);
+        this.recommendations_genre3_url.add(url);
+
     }
 
     public ArrayList<String> get_Genres() {
         return genres;
     }
-    public ArrayList<String> get_RecommendationsGenre1() {
-        return recommendations_genre1;
+
+    public ArrayList<String> get_RecommendationsGenre1Title() {
+        return recommendations_genre1_title;
     }
-    public ArrayList<String> get_RecommendationsGenre2() {
-        return recommendations_genre2;
+    public ArrayList<String> get_RecommendationsGenre1Artist() {
+        return recommendations_genre1_artist;
     }
-    public ArrayList<String> get_RecommendationsGenre3() {
-        return recommendations_genre3;
+    public ArrayList<String> get_RecommendationsGenre1URL() {
+        return recommendations_genre1_url;
+    }
+
+    public ArrayList<String> get_RecommendationsGenre2Title() {
+        return recommendations_genre2_title;
+    }
+    public ArrayList<String> get_RecommendationsGenre2Artist() {
+        return recommendations_genre2_artist;
+    }
+    public ArrayList<String> get_RecommendationsGenre2URL() {
+        return recommendations_genre2_url;
+    }
+
+    public ArrayList<String> get_RecommendationsGenre3Title() {
+        return recommendations_genre3_title;
+    }
+    public ArrayList<String> get_RecommendationsGenre3Artist() {
+        return recommendations_genre3_artist;
+    }
+    public ArrayList<String> get_RecommendationsGenre3URL() {
+        return recommendations_genre3_url;
     }
 
     public void initialize_SongRecommendations(String genre1, String genre2, String genre3) {
 
         Python python = Python.getInstance();
 
-        PyObject pyModule = python.getModule("search_recommendations");
+        PyObject pyModule = python.getModule("recommendations_generator");
         if(pyModule == null) {
             Log.d("SONG RECOMMENDATIONS", "Python Module Not Found");
             return;
         }
 
-        PyObject pyObjectResultGenre1 = pyModule.callAttr("get_songs_by_genre", genre1);
-        PyObject pyObjectResultGenre2 = pyModule.callAttr("get_songs_by_genre", genre2);
-        PyObject pyObjectResultGenre3 = pyModule.callAttr("get_songs_by_genre", genre3);
+        genre1 = (genre1.toLowerCase().equals("pop")) ? "Pop Music" : genre1;
+        genre2 = (genre2.toLowerCase().equals("pop")) ? "Pop Music" : genre2;
+        genre3 = (genre3.toLowerCase().equals("pop")) ? "Pop Music" : genre3;
+
+        PyObject pyObjectResultGenre1 = pyModule.callAttr("generate_recommendations", genre1);
+        PyObject pyObjectResultGenre2 = pyModule.callAttr("generate_recommendations", genre2);
+        PyObject pyObjectResultGenre3 = pyModule.callAttr("generate_recommendations", genre3);
         if(pyObjectResultGenre1 == null || pyObjectResultGenre1.toString().equals("None")) {
             Log.d("SONG RECOMMENDATIONS [1]", "Python Module Not Found");
             return;
@@ -75,34 +120,45 @@ public class ChordsRecommendations {
             return;
         }
 
-        List<PyObject> pyListGenre1 = pyObjectResultGenre1.asList();
-        List<PyObject> pyListGenre2 = pyObjectResultGenre2.asList();
-        List<PyObject> pyListGenre3 = pyObjectResultGenre3.asList();
+        List<PyObject> generated_Genre1 = pyObjectResultGenre1.asList();
+        List<PyObject> generated_Genre2 = pyObjectResultGenre2.asList();
+        List<PyObject> generated_Genre3 = pyObjectResultGenre3.asList();
 
-        for(PyObject obj : pyListGenre1) {
+        // Debug Purposes
+        Log.d("GENERATED_GENRE1", generated_Genre1.toString());
+        Log.d("GENERATED_GENRE2", generated_Genre2.toString());
+        Log.d("GENERATED_GENRE3", generated_Genre3.toString());
 
-            List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            set_RecommendationsGenre1(songTitle + "|||||" + artist); // ||||| is the separator to be used later
+        for(PyObject obj : generated_Genre1) {
 
-        }
+            String[] song = obj.toString().split("<00>");
+            String title = song[0];
+            String artist = song[1];
+            String url = song[2];
 
-        for(PyObject obj : pyListGenre2) {
-
-            List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            set_RecommendationsGenre2(songTitle + "|||||" + artist); // ||||| is the separator to be used later
+            set_RecommendationsGenre1(title, artist, url);
 
         }
 
-        for(PyObject obj : pyListGenre3) {
+        for(PyObject obj : generated_Genre2) {
 
-            List<PyObject> tuple = obj.asList(); // Convert tuple to List
-            String songTitle = tuple.get(0).toString();
-            String artist = tuple.get(1).toString();
-            set_RecommendationsGenre3(songTitle + "|||||" + artist); // ||||| is the separator to be used later
+            String[] song = obj.toString().split("<00>");
+            String title = song[0];
+            String artist = song[1];
+            String url = song[2];
+
+            set_RecommendationsGenre2(title, artist, url);
+
+        }
+
+        for(PyObject obj : generated_Genre3) {
+
+            String[] song = obj.toString().split("<00>");
+            String title = song[0];
+            String artist = song[1];
+            String url = song[2];
+
+            set_RecommendationsGenre3(title, artist, url);
 
         }
 
@@ -117,9 +173,18 @@ public class ChordsRecommendations {
     public void reset_recommendations() {
 
         this.genres.removeAll(this.genres);
-        this.recommendations_genre1.removeAll(this.recommendations_genre1);
-        this.recommendations_genre2.removeAll(this.recommendations_genre2);
-        this.recommendations_genre3.removeAll(this.recommendations_genre3);
+
+        this.recommendations_genre1_title.removeAll(this.recommendations_genre1_title);
+        this.recommendations_genre1_artist.removeAll(this.recommendations_genre1_artist);
+        this.recommendations_genre1_url.removeAll(this.recommendations_genre1_url);
+
+        this.recommendations_genre2_title.removeAll(this.recommendations_genre2_title);
+        this.recommendations_genre2_artist.removeAll(this.recommendations_genre2_artist);
+        this.recommendations_genre2_url.removeAll(this.recommendations_genre2_url);
+
+        this.recommendations_genre3_title.removeAll(this.recommendations_genre3_title);
+        this.recommendations_genre3_artist.removeAll(this.recommendations_genre3_artist);
+        this.recommendations_genre3_url.removeAll(this.recommendations_genre3_url);
 
     }
 

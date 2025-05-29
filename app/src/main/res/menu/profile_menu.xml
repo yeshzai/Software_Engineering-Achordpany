@@ -4,10 +4,14 @@
         android:id="@+id/menu_general_settings"
         android:title="@string/title_settings"
         android:icon="@drawable/ic_settings_white_24dp" />
+
+    <!--
     <item
         android:id="@+id/menu_profile_settings"
         android:title="@string/title_profile_settings"
+        android:enabled="false"
         android:icon="@drawable/ic_profile_setting_white_24dp" />
+    -->
     <item
         android:id="@+id/menu_logout"
         android:title="@string/title_logout"

@@ -2,6 +2,7 @@ package com.example.achordpany.ui.search;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -31,6 +32,9 @@ import com.example.achordpany.MainActivity;
 import com.example.achordpany.ui.chords.ChordsDisplayActivity;
 import com.example.achordpany.ui.chords.SongTitleProcessing;
 
+import java.io.InputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class SongSearchActivity extends AppCompatActivity {
@@ -127,6 +131,9 @@ public class SongSearchActivity extends AppCompatActivity {
         txtAboveWave = findViewById(R.id.txtAboveWave);
         txtCountdown = findViewById(R.id.txtCountdown);
         waveAnimation = findViewById(R.id.waveAnimation);
+        String jsonFileName = getThemeJsonFilename();
+        int animationResId = getRawResourceIdByName(jsonFileName);
+        waveAnimation.setAnimation(animationResId);
         btnSearch = findViewById(R.id.btnSearch);
         btnBack = findViewById(R.id.btnBack);
         btnBackBottom = findViewById(R.id.btnBackBottom);
@@ -163,6 +170,37 @@ public class SongSearchActivity extends AppCompatActivity {
             stopListening();
         });
 
+    }
+
+    private int getRawResourceIdByName(String fileName) {
+        return getResources().getIdentifier(fileName, "raw", getPackageName());
+    }
+
+    private String getThemeJsonFilename() {
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                return "wave_animation_dark"; // without `.json`
+            case Configuration.UI_MODE_NIGHT_NO:
+            default:
+                return "wave_animation";
+        }
+    }
+
+    private String loadJsonFromRaw(String fileName) {
+        int resourceId = getResources().getIdentifier(fileName, "raw", getPackageName());
+        InputStream inputStream = getResources().openRawResource(resourceId);
+
+        try {
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+            return new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void cleanupAndExit() {
